@@ -4,6 +4,7 @@ import time
 from typing import List, Dict
 from requests.exceptions import RequestException
 from datetime import datetime, timedelta
+from urllib.parse import urlencode
 
 class SemanticScholarAPI:
     BASE_URL = "https://api.semanticscholar.org/graph/v1"
@@ -31,6 +32,14 @@ class SemanticScholarAPI:
         masked_headers = dict(self.session.headers)
         if 'x-api-key' in masked_headers:
             masked_headers['x-api-key'] = f"{masked_headers['x-api-key'][:4]}...{masked_headers['x-api-key'][-4:]}"
+        
+        # Construct and log the full URL
+        if 'params' in kwargs:
+            full_url = f"{url}?{urlencode(kwargs['params'])}"
+        else:
+            full_url = url
+        self.logger.debug(f"Full request URL: {full_url}")
+        
         self.logger.debug(f"Making request: {method} {url}")
         self.logger.debug(f"Headers: {masked_headers}")
         self.logger.debug(f"Params: {kwargs.get('params', {})}")
@@ -61,21 +70,31 @@ class SemanticScholarAPI:
                     time.sleep(wait_time)
                 else:
                     self.logger.error(f"Request failed: {e}")
+                    self.logger.error(f"Response status code: {response.status_code}")
+                    self.logger.error(f"Response content: {response.text}")
                     raise
 
         self.logger.error("Max retries reached. Unable to complete request.")
         raise Exception("Max retries reached")
 
-    def search_papers_bulk(self, query: str, limit: int = 1000) -> List[Dict]:
+    def search_papers(self, query: str, limit: int = 100, year_range: str = None) -> List[Dict]:
         self.logger.info(f"Searching papers with query: {query}")
         params = {
             "query": query,
             "limit": limit,
-            "fields": "paperId,title,authors,year,abstract,url,venue,publicationDate"
+            "fields": "paperId,title,authors,year,abstract,url,venue,publicationDate,tldr,embedding",
+            "fieldsOfStudy": "Computer Science"
         }
-        data = self._make_request("GET", "paper/search", params=params)  # Changed from "paper/search/bulk" to "paper/search"
-        self.logger.debug(f"Found {len(data.get('data', []))} papers")
-        return data.get("data", [])
+        if year_range:
+            params["year"] = year_range
+
+        data = self._make_request("GET", "paper/search", params=params)
+        self.logger.debug(f"Raw API response: {data}")  # Log the raw response
+        papers = data.get("data", [])
+        self.logger.debug(f"Found {len(papers)} papers")
+        if not papers:
+            self.logger.warning(f"No papers found. Full response: {data}")
+        return papers
 
     def fetch_paper_details_batch(self, paper_ids: List[str]) -> List[Dict]:
         self.logger.info(f"Fetching details for {len(paper_ids)} papers")
@@ -86,30 +105,29 @@ class SemanticScholarAPI:
         self.logger.debug(f"Successfully fetched details for {len(data)} papers")
         return data
 
-    def get_relevant_papers(self, keywords: List[str], days: int = 7, limit: int = 1000) -> List[Dict]:
-        self.logger.info(f"Fetching relevant papers for the last {days} days")
+    def get_relevant_papers(self, query: str, months: int = 1, limit: int = 100, ignore_date_range: bool = False) -> List[Dict]:
+        self.logger.info(f"Fetching relevant papers for the last {months} months (ignore_date_range: {ignore_date_range})")
         
-        query = " OR ".join(keywords)  # Remove quotes around keywords
         current_date = datetime.now().date()
-        start_date = current_date - timedelta(days=days)
+        start_date = current_date - timedelta(days=30*months)
+        year_range = f"{start_date.year}-{current_date.year}"
         
-        params = {
-            "query": query,
-            "limit": limit,
-            "fields": "paperId,title,authors,year,abstract,url,venue,publicationDate",
-            "year": f"{start_date.year}-{current_date.year}",
-            "sort": "relevance"
-        }
+        papers = self.search_papers(query, limit=limit, year_range=None if ignore_date_range else year_range)
         
-        self.logger.debug(f"Search parameters: {params}")
+        self.logger.debug(f"Total papers before filtering: {len(papers)}")
         
-        papers = self.search_papers_bulk(query, limit=limit)
+        if not ignore_date_range:
+            # Filter papers by date
+            filtered_papers = [
+                paper for paper in papers
+                if paper.get('publicationDate') and start_date <= datetime.fromisoformat(paper['publicationDate']).date() <= current_date
+            ]
+        else:
+            filtered_papers = papers
         
-        # Filter papers by date
-        filtered_papers = [
-            paper for paper in papers
-            if paper.get('publicationDate') and start_date <= datetime.fromisoformat(paper['publicationDate']).date() <= current_date
-        ]
+        # Add query as a field to each paper
+        for paper in filtered_papers:
+            paper['query'] = query
         
-        self.logger.debug(f"Found {len(filtered_papers)} relevant papers")
+        self.logger.debug(f"Found {len(filtered_papers)} relevant papers after {'date filtering' if not ignore_date_range else 'no date filtering'}")
         return filtered_papers
