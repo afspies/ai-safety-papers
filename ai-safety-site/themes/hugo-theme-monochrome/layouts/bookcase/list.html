@@ -1,0 +1,17 @@
+{{ define "content" }}
+
+{{ $list_sections := .Params.bookcase_list_sections | default true }}
+{{ $list_pages := .Params.bookcase_list_pages | default true }}
+
+{{ $res := default nil }}
+{{ if and $list_sections $list_pages }}
+    {{ $res = .Pages }}
+{{ else if $list_sections }}
+    {{ $res = .Sections }}
+{{ else if $list_pages }}
+    {{ $res = .RegularPages }}
+{{ end }}
+
+{{ partial "bookcase/layout.html" (dict "ctx" . "title" .Title "content" .Content "res" $res) }}
+
+{{ end }}

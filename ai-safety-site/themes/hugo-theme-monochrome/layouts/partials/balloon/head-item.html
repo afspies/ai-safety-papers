@@ -1,0 +1,29 @@
+{{ $img := .Params.balloon_img_src | default .Params.balloon_img_src_dark }}
+{{ $img_dark := .Params.balloon_img_src_dark | default .Params.balloon_img_src }}
+{{ $balloon_circle := .Params.balloon_circle | default true }}
+
+<div class="balloon-head-item">
+    {{/*  For desktop layout  */}}
+    <div class="balloon-head-item-desktop">
+        <div class="balloon-head-item-img-light">
+            {{ partial "balloon/head/desktop.html" (dict "img" $img "balloon_circle" $balloon_circle) }}
+        </div>
+        <div class="balloon-head-item-img-dark">
+            {{ partial "balloon/head/desktop.html" (dict "img" $img_dark "balloon_circle" $balloon_circle ) }}
+        </div>
+        {{ partial "balloon/line.html" false }}
+    </div>
+    {{/*  For mobile layout  */}}
+    <div class="balloon-head-item-mobile">
+        <div class="balloon-head-item-img-light">
+            {{ partial "balloon/head/mobile.html" (dict "img" $img "balloon_circle" $balloon_circle) }}
+        </div>
+        <div class="balloon-head-item-img-dark">
+            {{ partial "balloon/head/mobile.html" (dict "img" $img_dark "balloon_circle" $balloon_circle ) }}
+        </div>
+    </div>
+
+    <div class="balloon-head-item-content">
+        {{- partial "content.html" (dict "ctx" . "content" .Content) -}}
+    </div>
+</div>

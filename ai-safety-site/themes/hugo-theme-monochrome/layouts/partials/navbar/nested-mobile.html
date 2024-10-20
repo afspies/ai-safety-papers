@@ -1,0 +1,31 @@
+{{ with .Children }}
+    <ul>
+        {{ range . }}
+            {{- $name := .Name }}
+            {{- with .Identifier }}
+                {{- with T . }}
+                    {{- $name = . }}
+                {{- end }}
+            {{- end }}
+
+            {{ if .Children }}
+                <li>
+                    {{ if .URL }}
+                        <span><a href="{{ .URL }}">{{- $name -}}</a></span>
+                    {{ else }}
+                        <span>{{- $name -}}</span>
+                    {{ end }}
+                    {{- partial "navbar/nested-mobile.html" . -}}
+                </li>
+            {{ else }}
+                <li>
+                    {{ if .URL }}
+                        <a href="{{ .URL }}">{{- $name -}}</a>
+                    {{ else }}
+                        <div>{{- $name -}}</div>
+                    {{ end }}
+                </li>
+            {{ end }}
+        {{ end }}
+    </ul>
+{{ end }}

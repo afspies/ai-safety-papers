@@ -1,0 +1,7 @@
+{{ if .img }}
+    <div class="balloon-head-item-img">
+        <img alt="balloon_head" src='{{- .img | absURL -}}' {{ if .balloon_circle }}class="rounded"{{ end }}>
+    </div>
+{{ else }}
+    {{ partial "balloon/dot.html" }}
+{{ end }}

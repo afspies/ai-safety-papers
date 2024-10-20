@@ -1,0 +1,68 @@
+<head>
+    <meta charset="utf-8">
+    <link rel="shortcut icon" href='{{ "favicon.ico" | absURL }}' type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>
+        {{- if eq .Kind "home" -}}
+            {{- print .Site.Title -}}
+        {{- else if eq .Kind "section" -}}
+            {{- print .CurrentSection.Title " - " .Site.Title }}
+        {{- else -}}
+            {{- print .Title " - " .Site.Title -}}
+        {{- end -}}
+    </title>
+
+    {{ with .Description }}
+    <meta name="description" content="{{ . }}" />
+    {{ end }}
+
+    {{ with .Keywords }}
+    <meta name="keywords" content="{{ delimit . "," }}" />
+    {{ end }}
+
+    {{ with (.Scratch.Get "params").author }}
+    <meta name="author" content="{{ . }}" />
+    {{ end }}
+
+    {{ if (.Scratch.Get "params").enable_open_graph }}
+        {{ template "_internal/opengraph.html" . }}
+    {{ end }}
+
+    {{ if (.Scratch.Get "params").enable_twitter_cards }}
+        {{ template "_internal/twitter_cards.html" . }}
+    {{ end }}
+
+    {{- partial "resources/css.html" . -}}
+
+    {{ if (.Scratch.Get "params").ga_code }}
+        {{ template "_internal/google_analytics.html" . }}
+    {{ end }}
+
+    {{/*  Dark theme: inline in `head` to avoid FOUC  */}}
+    <script>
+        if (!('theme' in localStorage)) {
+            {{ $color_scheme := (.Scratch.Get "params").color_scheme -}}
+            {{- if eq $color_scheme "light" -}}
+            localStorage.theme = 'light';
+            {{- else if eq $color_scheme "dark" -}}
+            localStorage.theme = 'dark';
+            {{- end }}
+        }
+
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.setAttribute("data-theme", "dark");
+        } else {
+            document.documentElement.setAttribute("data-theme", "light");
+        }
+    </script>
+
+    {{- partial "resources/js.html" . -}}
+
+    {{ if fileExists "/static/user.css" -}}
+        <link rel="stylesheet" href="{{ urls.JoinPath .Site.BaseURL "user.css" }}">
+    {{- end }}
+
+    {{ if templates.Exists "partials/user_head.html" -}}
+        {{ partial "partials/user_head.html" . }}
+    {{- end }}
+</head>
