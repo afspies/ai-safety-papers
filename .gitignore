@@ -322,7 +322,10 @@ Temporary Items
 # End of https://www.toptal.com/developers/gitignore/api/macos
 
 # Ignore files generated from Hugo build
-/assets/jsconfig.json
-.hugo_build.lock
+ai-safety-site/assets/jsconfig.json
+ai-safety-site/.hugo_build.lock
+
+# ignore public folder
+ai-safety-site/public/
 
 .vscode
