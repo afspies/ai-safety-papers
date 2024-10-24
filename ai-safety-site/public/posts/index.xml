@@ -1,19 +1,28 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Posts on My New Hugo Site</title>
+    <title>Posts on AI Safety Papers</title>
     <link>http://localhost:1313/posts/</link>
-    <description>Recent content in Posts on My New Hugo Site</description>
+    <description>Recent content in Posts on AI Safety Papers</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
+    <language>en</language>
     <lastBuildDate>Sun, 20 Oct 2024 13:17:18 +0200</lastBuildDate><atom:link href="http://localhost:1313/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Mr First Post</title>
-      <link>http://localhost:1313/posts/mr-first-post/</link>
+      <title>My First Post</title>
+      <link>http://localhost:1313/posts/my_first_post/</link>
       <pubDate>Sun, 20 Oct 2024 13:17:18 +0200</pubDate>
       
-      <guid>http://localhost:1313/posts/mr-first-post/</guid>
+      <guid>http://localhost:1313/posts/my_first_post/</guid>
       <description>&lt;p&gt;sdasd&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>AI Alignment: A Comprehensive Overview</title>
+      <link>http://localhost:1313/posts/my_second_post/sample-paper-1/</link>
+      <pubDate>Sat, 15 Apr 2023 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/posts/my_second_post/sample-paper-1/</guid>
+      <description>&lt;p&gt;Content of the paper&amp;hellip;&lt;/p&gt;</description>
     </item>
     
   </channel>

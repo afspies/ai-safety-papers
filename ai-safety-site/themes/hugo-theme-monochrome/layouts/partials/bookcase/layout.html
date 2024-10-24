@@ -2,14 +2,17 @@
 {{ $title := .title }}
 {{ $content := .content }}
 {{ $res := .res }}
+{{ $show_title := .show_title | default true }}
 
 <div class="content-margin">
+    {{ if and $show_title $title }}
     <div class="my-8">
         <h1>{{ $title }}</h1>
         {{ if $content }}
             {{- partial "content.html" (dict "ctx" $ctx "content" $content) -}}
         {{ end }}
     </div>
+    {{ end }}
 
     {{ with $res }}
         <div class="bookcase-layout content-margin">

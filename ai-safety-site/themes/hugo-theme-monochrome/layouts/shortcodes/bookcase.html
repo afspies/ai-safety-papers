@@ -1,4 +1,6 @@
 {{ $section_name := .Get "section" }}
+{{ $show_title := .Get "show_title" | default true }}
+{{ $show_section_headers := .Get "show_section_headers" | default true }}
 
 {{ $section := .Site.GetPage $section_name }}
 {{ if not $section }}
@@ -21,5 +23,4 @@
     {{ $pages = $section.RegularPages }}
 {{ end }}
 
-{{ partial "bookcase/layout.html" (dict "ctx" . "title" $section.Title "content" $section.Content "res" $pages) }}
-
+{{ partial "bookcase/layout.html" (dict "ctx" . "title" $section.Title "content" $section.Content "res" $pages "show_title" $show_title "show_section_headers" $show_section_headers) }}

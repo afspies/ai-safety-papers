@@ -1,0 +1,16 @@
+baseURL = "http://127.0.0.1:1313/"
+languageCode = "en"
+title = "AI Safety Papers"
+theme = "hugo-theme-monochrome"
+defaultContentLanguage = "en"
+enableEmoji = true
+pagerSize = 5
+enableGitInfo = true
+
+[taxonomies]
+category = "categories"
+tag = "tags"
+series = "series"
+
+[outputs]
+home = ["HTML", "RSS", "JSON"]
