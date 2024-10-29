@@ -94,7 +94,7 @@ class SheetsDB:
             new_row[self.COLUMN_MAP['title']] = entry['title']
             new_row[self.COLUMN_MAP['submitted_date']] = self._format_date(entry['submitted_date']) if entry['submitted_date'] else ''
             new_row[self.COLUMN_MAP['tldr']] = entry.get('tldr', {}).get('text', '')
-            new_row[self.COLUMN_MAP['url']] = entry['url']
+            new_row[self.COLUMN_MAP['url']] = entry['url']  # Use the open access PDF URL
             new_row[self.COLUMN_MAP['authors']] = ', '.join(entry['authors'])
             new_row[self.COLUMN_MAP['abstract']] = entry['abstract']
             new_row[self.COLUMN_MAP['venue']] = entry['venue']

@@ -82,16 +82,23 @@ class SemanticScholarAPI:
         params = {
             "query": query,
             "limit": limit,
-            "fields": "paperId,title,authors,year,abstract,url,venue,publicationDate,tldr,embedding",
-            "fieldsOfStudy": "Computer Science"
+            "fields": "paperId,title,authors,year,abstract,url,venue,publicationDate,tldr,embedding,isOpenAccess,openAccessPdf",
+            "fieldsOfStudy": "Computer Science",
+            "openAccessPdf": "true"  # Restrict to papers with a public PDF
         }
         if year_range:
             params["year"] = year_range
 
         data = self._make_request("GET", "paper/search", params=params)
         self.logger.debug(f"Raw API response: {data}")  # Log the raw response
+
         papers = data.get("data", [])
         self.logger.debug(f"Found {len(papers)} papers")
+
+        # Log each paper's open access status and URL
+        for paper in papers:
+            self.logger.debug(f"Paper ID: {paper.get('paperId')}, Open Access: {paper.get('isOpenAccess')}, Open Access URL: {paper.get('openAccessPdf', {}).get('url')}")
+
         if not papers:
             self.logger.warning(f"No papers found. Full response: {data}")
         return papers
@@ -128,6 +135,8 @@ class SemanticScholarAPI:
         # Add query as a field to each paper
         for paper in filtered_papers:
             paper['query'] = query
+            # Ensure pdf_url is always set
+            paper['url'] = paper.get('openAccessPdf', {}).get('url', paper.get('url'))
         
         self.logger.debug(f"Found {len(filtered_papers)} relevant papers after {'date filtering' if not ignore_date_range else 'no date filtering'}")
         return filtered_papers
