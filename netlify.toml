@@ -3,8 +3,6 @@
   publish = "public"
   command = """
     pip install -r site-requirements.txt &&
-    chmod +x scripts/setup-theme.sh &&
-    ./scripts/setup-theme.sh &&
     hugo --themesDir themes
   """
 
@@ -19,16 +17,12 @@
 [context.deploy-preview]
   command = """
     pip install -r site-requirements.txt &&
-    chmod +x scripts/setup-theme.sh &&
-    ./scripts/setup-theme.sh &&
     hugo --buildFuture -b $DEPLOY_PRIME_URL --themesDir themes
   """
 
 [context.branch-deploy]
   command = """
     pip install -r site-requirements.txt &&
-    chmod +x scripts/setup-theme.sh &&
-    ./scripts/setup-theme.sh &&
     hugo --buildFuture -b $DEPLOY_PRIME_URL --themesDir themes
   """
 
