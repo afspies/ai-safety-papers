@@ -121,3 +121,4 @@ Contributions are welcome! Please feel free to submit a Pull Request. For major 
 - [Anthropic](https://www.anthropic.com/) for Claude API (unfortunately no free API key usage for us yet 😢)
 - [Hugo](https://gohugo.io/) for static site generation
 - [Netlify](https://www.netlify.com/) for hosting
+- [Monochrome](https://github.com/kaiiiz/hugo-theme-monochrome) - A clean, fast and responsive Hugo theme by [@kaiiiz](https://github.com/kaiiiz)
