@@ -4,7 +4,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Anthropic Claude](https://img.shields.io/badge/AI-Claude%203.5-green)](https://www.anthropic.com/)
 [![Hugo](https://img.shields.io/badge/Hugo-%5E0.123.0-ff4088)](https://gohugo.io/)
-[![Netlify Status](https://api.netlify.com/api/v1/badges/YOUR-NETLIFY-ID/deploy-status)](https://app.netlify.com/sites/YOUR-SITE/deploys)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/c4ffd274-3e6c-4243-b022-94c47e8a5442/deploy-status)](https://app.netlify.com/sites/aisafetypapers/deploys)
 
 > 🌐 **Live Site**: Check out the running instance at [pages.unsearch.org](https://pages.unsearch.org)
 
