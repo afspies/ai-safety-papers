@@ -6,6 +6,7 @@
   HUGO_VERSION = "0.121.1"
   HUGO_ENV = "production"
   HUGO_ENABLEGITINFO = "true"
+  REQUIREMENTS_FILE = "ai-safety-site/site-requirements.txt"
 
 [context.production.environment]
   HUGO_ENV = "production"
