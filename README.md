@@ -1,5 +1,13 @@
 # AI-Safety Reading List
 
+[![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Anthropic Claude](https://img.shields.io/badge/AI-Claude%203.5-green)](https://www.anthropic.com/)
+[![Hugo](https://img.shields.io/badge/Hugo-%5E0.123.0-ff4088)](https://gohugo.io/)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/YOUR-NETLIFY-ID/deploy-status)](https://app.netlify.com/sites/YOUR-SITE/deploys)
+
+> 🌐 **Live Site**: Check out the running instance at [pages.unsearch.org](https://pages.unsearch.org)
+
 An automated system that creates and maintains a curated list of AI safety research papers, including summaries and multi-channel distribution. The system automatically fetches papers from Semantic Scholar, generates summaries using Claude, and distributes content through a static website, with planned support for Telegram and Twitter distribution.
 
 ## Features
