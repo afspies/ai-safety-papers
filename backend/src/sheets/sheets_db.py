@@ -169,7 +169,7 @@ class SheetsDB:
                 submitted_date = datetime.strptime(row['Submitted Date'], "%d/%m/%Y").date()
                 if submitted_date > one_year_ago:
                     rows_to_keep.append(list(row.values()))
-            except (ValueError, TypeError):
+            except (ValueError, TypeError):    
                 continue
         
         self.worksheet.clear()

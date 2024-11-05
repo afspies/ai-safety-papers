@@ -1,4 +1,4 @@
-baseURL = "http://127.0.0.1:1313/"
+baseURL = "https://papers.unsearch.org/"
 languageCode = "en"
 title = "AI Safety Papers"
 themesDir = "themes"
