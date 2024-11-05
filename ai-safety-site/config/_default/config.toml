@@ -1,6 +1,7 @@
 baseURL = "http://127.0.0.1:1313/"
 languageCode = "en"
 title = "AI Safety Papers"
+themesDir = "themes"
 theme = "hugo-theme-monochrome"
 defaultContentLanguage = "en"
 enableEmoji = true

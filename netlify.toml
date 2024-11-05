@@ -3,7 +3,7 @@
   publish = "public"
   command = """
     pip install -r site-requirements.txt &&
-    hugo
+    hugo --themesDir themes
   """
 
 [build.environment]
@@ -17,13 +17,13 @@
 [context.deploy-preview]
   command = """
     pip install -r site-requirements.txt &&
-    hugo --buildFuture -b $DEPLOY_PRIME_URL
+    hugo --buildFuture -b $DEPLOY_PRIME_URL --themesDir themes
   """
 
 [context.branch-deploy]
   command = """
     pip install -r site-requirements.txt &&
-    hugo --buildFuture -b $DEPLOY_PRIME_URL
+    hugo --buildFuture -b $DEPLOY_PRIME_URL --themesDir themes
   """
 
 [[plugins]]
