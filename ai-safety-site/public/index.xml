@@ -7,6 +7,66 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language><atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>Detecting and Understanding Vulnerabilities in Language Models via Mechanistic Interpretability</title>
+      <link>http://localhost:1313/en/posts/paper_fa0cbfba4e41b9f2487df251fcc3b93c21381167/</link>
+      <pubDate>Tue, 05 Nov 2024 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/en/posts/paper_fa0cbfba4e41b9f2487df251fcc3b93c21381167/</guid>
+      <description>&lt;p&gt;This paper proposes a method to detect and understand vulnerabilities in large language models from a mechanistic interpretability perspective. The key steps are:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Define the task of interest and curate a dataset to elicit the desired behavior from the model. Define a metric to quantify the model&amp;rsquo;s performance on the task.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Use activation patching experiments to identify the subset of components (the &amp;ldquo;circuit&amp;rdquo;) in the model that is responsible for the task.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Detecting and Understanding Vulnerabilities in Language Models via Mechanistic Interpretability</title>
+      <link>http://localhost:1313/posts/paper_fa0cbfba4e41b9f2487df251fcc3b93c21381167/</link>
+      <pubDate>Tue, 05 Nov 2024 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/posts/paper_fa0cbfba4e41b9f2487df251fcc3b93c21381167/</guid>
+      <description>&lt;p&gt;This paper proposes a method to detect and understand vulnerabilities in large language models from a mechanistic interpretability perspective. The key steps are:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Define the task of interest and curate a dataset to elicit the desired behavior from the model. Define a metric to quantify the model&amp;rsquo;s performance on the task.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Use activation patching experiments to identify the subset of components (the &amp;ldquo;circuit&amp;rdquo;) in the model that is responsible for the task.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Dictionary Learning Improves Patch-Free Circuit Discovery in Mechanistic Interpretability: A Case Study on Othello-GPT</title>
+      <link>http://localhost:1313/en/posts/paper_1301ed763095097ff424c668e16a265b3ae2f231/</link>
+      <pubDate>Tue, 05 Nov 2024 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/en/posts/paper_1301ed763095097ff424c668e16a265b3ae2f231/</guid>
+      <description>&lt;p&gt;This paper proposes a novel framework for discovering interpretable circuits in Transformer models using sparse dictionary learning. The key ideas are:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Train sparse dictionaries to decompose the outputs of each module in the Transformer (word embeddings, attention outputs, and MLP outputs) into more interpretable, monosemantic features.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Exploit the linear structure of the Transformer to trace how higher-level dictionary features are composed from lower-level ones across layers, allowing circuits to be identified in a patch-free manner.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Dictionary Learning Improves Patch-Free Circuit Discovery in Mechanistic Interpretability: A Case Study on Othello-GPT</title>
+      <link>http://localhost:1313/posts/paper_1301ed763095097ff424c668e16a265b3ae2f231/</link>
+      <pubDate>Tue, 05 Nov 2024 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/posts/paper_1301ed763095097ff424c668e16a265b3ae2f231/</guid>
+      <description>&lt;p&gt;This paper proposes a novel framework for discovering interpretable circuits in Transformer models using sparse dictionary learning. The key ideas are:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Train sparse dictionaries to decompose the outputs of each module in the Transformer (word embeddings, attention outputs, and MLP outputs) into more interpretable, monosemantic features.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Exploit the linear structure of the Transformer to trace how higher-level dictionary features are composed from lower-level ones across layers, allowing circuits to be identified in a patch-free manner.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
       <title>Dynamic modelling of signalling pathways when ODEs are not feasible</title>
       <link>http://localhost:1313/en/posts/paper_acc3791d6241d168aa1cb932106f46769c05b26a/</link>
       <pubDate>Tue, 05 Nov 2024 00:00:00 +0000</pubDate>
@@ -49,39 +109,45 @@
     </item>
     
     <item>
-      <title>My First Post</title>
-      <link>http://localhost:1313/en/posts/my_first_post/</link>
-      <pubDate>Sun, 20 Oct 2024 13:17:18 +0200</pubDate>
+      <title>Using Degeneracy in the Loss Landscape for Mechanistic Interpretability</title>
+      <link>http://localhost:1313/en/posts/paper_c1bc03a045ea830894fe3b1799928c9f8c14923c/</link>
+      <pubDate>Tue, 05 Nov 2024 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/en/posts/my_first_post/</guid>
-      <description>&lt;p&gt;sdasd&lt;/p&gt;</description>
+      <guid>http://localhost:1313/en/posts/paper_c1bc03a045ea830894fe3b1799928c9f8c14923c/</guid>
+      <description>&lt;p&gt;The paper discusses the concept of degeneracy in neural network parameterizations and its impact on mechanistic interpretability. The key points are:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Neural networks tend to have many degenerate parameters that do not affect the computation, obfuscating the network&amp;rsquo;s internal structure and hindering interpretability.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Singular learning theory suggests that networks are biased towards more degenerate solutions that generalize better, with a lower local learning coefficient (LLC).&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;The paper identifies three sources of degeneracy in neural networks:
+a. Linear dependence between activations in a layer
+b. Linear dependence between gradients passed back to a layer
+c. Neurons firing on the same subset of data points (synchronized nonlinearities)&lt;/p&gt;</description>
     </item>
     
     <item>
-      <title>My First Post</title>
-      <link>http://localhost:1313/posts/my_first_post/</link>
-      <pubDate>Sun, 20 Oct 2024 13:17:18 +0200</pubDate>
+      <title>Using Degeneracy in the Loss Landscape for Mechanistic Interpretability</title>
+      <link>http://localhost:1313/posts/paper_c1bc03a045ea830894fe3b1799928c9f8c14923c/</link>
+      <pubDate>Tue, 05 Nov 2024 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/posts/my_first_post/</guid>
-      <description>&lt;p&gt;sdasd&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>AI Alignment: A Comprehensive Overview</title>
-      <link>http://localhost:1313/en/posts/my_second_post/sample-paper-1/</link>
-      <pubDate>Sat, 15 Apr 2023 00:00:00 +0000</pubDate>
-      
-      <guid>http://localhost:1313/en/posts/my_second_post/sample-paper-1/</guid>
-      <description>&lt;p&gt;Content of the paper&amp;hellip;&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>AI Alignment: A Comprehensive Overview</title>
-      <link>http://localhost:1313/posts/my_second_post/sample-paper-1/</link>
-      <pubDate>Sat, 15 Apr 2023 00:00:00 +0000</pubDate>
-      
-      <guid>http://localhost:1313/posts/my_second_post/sample-paper-1/</guid>
-      <description>&lt;p&gt;Content of the paper&amp;hellip;&lt;/p&gt;</description>
+      <guid>http://localhost:1313/posts/paper_c1bc03a045ea830894fe3b1799928c9f8c14923c/</guid>
+      <description>&lt;p&gt;The paper discusses the concept of degeneracy in neural network parameterizations and its impact on mechanistic interpretability. The key points are:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Neural networks tend to have many degenerate parameters that do not affect the computation, obfuscating the network&amp;rsquo;s internal structure and hindering interpretability.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Singular learning theory suggests that networks are biased towards more degenerate solutions that generalize better, with a lower local learning coefficient (LLC).&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;The paper identifies three sources of degeneracy in neural networks:
+a. Linear dependence between activations in a layer
+b. Linear dependence between gradients passed back to a layer
+c. Neurons firing on the same subset of data points (synchronized nonlinearities)&lt;/p&gt;</description>
     </item>
     
     <item>

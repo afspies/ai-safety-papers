@@ -8,6 +8,13 @@ enableEmoji = true
 pagerSize = 5
 enableGitInfo = true
 
+# Add explicit language configuration
+[languages]
+  [languages.en]
+    languageName = "English"
+    weight = 1
+    title = "AI Safety Papers"
+
 [taxonomies]
 category = "categories"
 tag = "tags"
