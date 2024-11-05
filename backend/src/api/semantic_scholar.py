@@ -60,9 +60,21 @@ class SemanticScholarAPI:
         for attempt in range(self.MAX_RETRIES):
             try:
                 response = self.session.request(method, url, **kwargs)
+                # Log the response details
+                self.logger.debug(f"Response status code: {response.status_code}")
+                self.logger.debug(f"Response headers: {dict(response.headers)}")
+                
+                # Check if the response is valid JSON before parsing
+                try:
+                    data = response.json()
+                except ValueError as e:
+                    self.logger.error(f"Failed to parse JSON response: {e}")
+                    self.logger.error(f"Response content: {response.text[:1000]}")  # Log first 1000 chars
+                    raise
+
                 response.raise_for_status()
                 self.last_request_time[endpoint] = time.time()
-                return response.json()
+                return data
             except RequestException as e:
                 if response.status_code == 429:  # Too Many Requests
                     wait_time = backoff * (2 ** attempt)
@@ -71,7 +83,12 @@ class SemanticScholarAPI:
                 else:
                     self.logger.error(f"Request failed: {e}")
                     self.logger.error(f"Response status code: {response.status_code}")
-                    self.logger.error(f"Response content: {response.text}")
+                    self.logger.error(f"Response content: {response.text[:1000]}")  # Log first 1000 chars
+                    if attempt < self.MAX_RETRIES - 1:
+                        wait_time = backoff * (2 ** attempt)
+                        self.logger.info(f"Retrying in {wait_time} seconds...")
+                        time.sleep(wait_time)
+                        continue
                     raise
 
         self.logger.error("Max retries reached. Unable to complete request.")
@@ -82,26 +99,60 @@ class SemanticScholarAPI:
         params = {
             "query": query,
             "limit": limit,
-            "fields": "paperId,title,authors,year,abstract,url,venue,publicationDate,tldr,embedding,isOpenAccess,openAccessPdf",
-            "fieldsOfStudy": "Computer Science",
-            "openAccessPdf": "true"  # Restrict to papers with a public PDF
+            "fields": "paperId,title,authors,year,abstract,url,venue,publicationDate,tldr,embedding,isOpenAccess,openAccessPdf,externalIds",
+            "fieldsOfStudy": "Computer Science"
         }
         if year_range:
             params["year"] = year_range
 
-        data = self._make_request("GET", "paper/search", params=params)
-        self.logger.debug(f"Raw API response: {data}")  # Log the raw response
-
-        papers = data.get("data", [])
-        self.logger.debug(f"Found {len(papers)} papers")
-
-        # Log each paper's open access status and URL
-        for paper in papers:
-            self.logger.debug(f"Paper ID: {paper.get('paperId')}, Open Access: {paper.get('isOpenAccess')}, Open Access URL: {paper.get('openAccessPdf', {}).get('url')}")
-
-        if not papers:
-            self.logger.warning(f"No papers found. Full response: {data}")
-        return papers
+        try:
+            data = self._make_request("GET", "paper/search", params=params)
+            
+            # Add debug logging for the response
+            self.logger.debug(f"Response data keys: {data.keys() if data else 'None'}")
+            
+            if not data:
+                self.logger.error("Received empty response from API")
+                return []
+                
+            papers = data.get("data", [])
+            if not papers:
+                self.logger.warning("No papers found in response")
+                return []
+                
+            self.logger.debug(f"Found {len(papers)} papers in response")
+            
+            # Process papers to ensure we have the best available URL
+            for paper in papers:
+                if paper is None:
+                    continue
+                # Start with the default URL
+                best_url = paper.get('url', '')
+                
+                # Check for open access PDF URL first
+                if paper.get('openAccessPdf', None) is not None and paper['openAccessPdf'].get('url'):
+                    best_url = paper['openAccessPdf']['url']
+                # Check for ArXiv ID regardless of isOpenAccess status
+                elif paper.get('externalIds', {}).get('ArXiv'):
+                    arxiv_id = paper['externalIds']['ArXiv']
+                    best_url = f"https://arxiv.org/pdf/{arxiv_id}.pdf"
+                # If no ArXiv, but paper is marked as open access, might have other sources
+                elif paper.get('isOpenAccess'):
+                    # Could add other open access sources here if needed
+                    pass
+                
+                # Update the paper URL and log the change
+                if best_url != paper.get('url'):
+                    self.logger.debug(f"Updated URL for paper {paper['paperId']}: {best_url}")
+                    if 'arxiv.org' in best_url:
+                        self.logger.debug(f"Using ArXiv URL for paper {paper['paperId']}")
+                paper['url'] = best_url
+            
+            return papers
+        except Exception as e:
+            self.logger.error(f"Error in search_papers: {str(e)}")
+            self.logger.exception("Full traceback:")
+            return []
 
     def fetch_paper_details_batch(self, paper_ids: List[str]) -> List[Dict]:
         self.logger.info(f"Fetching details for {len(paper_ids)} papers")
@@ -132,11 +183,12 @@ class SemanticScholarAPI:
         else:
             filtered_papers = papers
         
-        # Add query as a field to each paper
+        # Add query and ensure best URL is used
         for paper in filtered_papers:
             paper['query'] = query
-            # Ensure pdf_url is always set
-            paper['url'] = paper.get('openAccessPdf', {}).get('url', paper.get('url'))
+            # URL should already be the best available from search_papers()
+            if not paper.get('url'):
+                self.logger.warning(f"No URL found for paper {paper.get('paperId')}")
         
         self.logger.debug(f"Found {len(filtered_papers)} relevant papers after {'date filtering' if not ignore_date_range else 'no date filtering'}")
         return filtered_papers

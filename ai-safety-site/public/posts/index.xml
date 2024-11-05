@@ -6,7 +6,28 @@
     <description>Recent content in Posts on AI Safety Papers</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 20 Oct 2024 13:17:18 +0200</lastBuildDate><atom:link href="http://localhost:1313/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 05 Nov 2024 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Dynamic modelling of signalling pathways when ODEs are not feasible</title>
+      <link>http://localhost:1313/posts/paper_acc3791d6241d168aa1cb932106f46769c05b26a/</link>
+      <pubDate>Tue, 05 Nov 2024 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/posts/paper_acc3791d6241d168aa1cb932106f46769c05b26a/</guid>
+      <description>&lt;p&gt;The paper introduces an extension of the retarded transient function (RTF) approach to model dose-dependent dynamics of cellular signaling pathways. The key points are:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;The RTF is a phenomenological modeling approach that describes signaling dynamics using a sustained and transient component, avoiding the need for full mechanistic ordinary differential equation (ODE) models.&lt;/li&gt;
+&lt;li&gt;The original time-dependent RTF is extended to incorporate dose-dependencies using Hill equations, allowing it to capture both time- and dose-dependent behaviors.&lt;/li&gt;
+&lt;li&gt;The dose-dependent RTF requires fewer parameters than fitting individual RTFs to each dose, and far fewer than ODE models, while still accurately describing experimental data.&lt;/li&gt;
+&lt;li&gt;The approach enables statistically rigorous analysis of differences in pathway responses across biological conditions like wild-type and knockdown cells.&lt;/li&gt;
+&lt;li&gt;It is applied to model time- and dose-dependent inflammasome activation data in murine dendritic cells, demonstrating its ability to identify significant differences between wild-type and NEK7 knockdown conditions &lt;figure&gt;&lt;img src=&#34;http://localhost:1313/en/posts/paper_acc3791d6241d168aa1cb932106f46769c05b26a/fig_5_0_fig3.png&#34;&gt;
+&lt;/figure&gt;
+ &lt;em&gt;[See Figure 4 in the original paper]&lt;/em&gt;.&lt;/li&gt;
+&lt;li&gt;The dose-dependent RTF provides an interpretable, non-mechanistic modeling approach complementary to ODEs for studying cellular signaling dynamics when full mechanistic models are infeasible.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.biorxiv.org/content/biorxiv/early/2024/04/20/2024.04.18.590024.full.pdf&#34;&gt;Read the original paper&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+    
     <item>
       <title>My First Post</title>
       <link>http://localhost:1313/posts/my_first_post/</link>

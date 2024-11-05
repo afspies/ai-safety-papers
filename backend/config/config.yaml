@@ -1,0 +1,4 @@
+website:
+  content_path: "ai-safety-site/content/en"
+
+data_dir: "data"

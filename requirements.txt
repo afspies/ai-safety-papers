@@ -251,3 +251,4 @@ xattr==0.10.1
 xminigrid==0.9.0
 zipp==3.8.1
 papermage[dev,predictors,visualizers]
+gspread
