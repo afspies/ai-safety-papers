@@ -1,4 +1,5 @@
 anthropic
 PyMuPDF
 requests>=2.31.0
-
+gspread
+papermage[dev,predictors,visualizers]
