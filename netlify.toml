@@ -1,21 +1,29 @@
 [build]
   publish = "public"
-  command = "hugo"
+  command = """
+    pip install -r ai-safety-site/site-requirements.txt &&
+    hugo
+  """
 
 [build.environment]
   HUGO_VERSION = "0.121.1"
   HUGO_ENV = "production"
   HUGO_ENABLEGITINFO = "true"
-  REQUIREMENTS_FILE = "ai-safety-site/site-requirements.txt"
 
 [context.production.environment]
   HUGO_ENV = "production"
 
 [context.deploy-preview]
-  command = "hugo --buildFuture -b $DEPLOY_PRIME_URL"
+  command = """
+    pip install -r ai-safety-site/site-requirements.txt &&
+    hugo --buildFuture -b $DEPLOY_PRIME_URL
+  """
 
 [context.branch-deploy]
-  command = "hugo --buildFuture -b $DEPLOY_PRIME_URL"
+  command = """
+    pip install -r ai-safety-site/site-requirements.txt &&
+    hugo --buildFuture -b $DEPLOY_PRIME_URL
+  """
 
 [[plugins]]
   package = "@netlify/plugin-sitemap"
@@ -26,4 +34,4 @@
     X-Frame-Options = "DENY"
     X-XSS-Protection = "1; mode=block"
     X-Content-Type-Options = "nosniff"
-    Referrer-Policy = "strict-origin-when-cross-origin" 
+    Referrer-Policy = "strict-origin-when-cross-origin"
