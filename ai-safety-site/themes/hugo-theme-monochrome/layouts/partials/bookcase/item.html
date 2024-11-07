@@ -6,7 +6,15 @@
     <figure>
         <img src="{{ $cover_src | absURL }}" class="bookcase-item-img-light">
         <img src="{{ $cover_src_dark | absURL }}" class="bookcase-item-img-dark">
-        <a href="{{ .RelPermalink }}" class="bookcase-item-overlay"></a>
+        <a href="{{ .RelPermalink }}" 
+           class="bookcase-item-overlay"
+           data-authors="{{ .Params.authors }}"
+           data-abstract="{{ .Params.abstract }}"
+           data-venue="{{ .Params.venue }}"
+           data-publication-date="{{ .Params.publication_date }}"
+           data-added-date="{{ .Params.added_date }}"
+           data-paper-url="{{ .Params.paper_url }}">
+        </a>
     </figure>
     <figcaption>
         <a href="{{ .RelPermalink }}">{{ $cover_title }}</a>

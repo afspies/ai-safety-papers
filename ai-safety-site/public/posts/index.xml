@@ -28,13 +28,25 @@
       <pubDate>Tue, 05 Nov 2024 00:00:00 +0000</pubDate>
       
       <guid>http://localhost:1313/posts/paper_1301ed763095097ff424c668e16a265b3ae2f231/</guid>
-      <description>&lt;p&gt;This paper proposes a novel framework for discovering interpretable circuits in Transformer models using sparse dictionary learning. The key ideas are:&lt;/p&gt;
+      <description>&lt;h1 id=&#34;summary&#34; class=&#34;header-anchor-wrapper&#34;&gt;Summary
+  &lt;a href=&#34;#summary&#34; class=&#34;header-anchor-link&#34;&gt;
+    &lt;svg width=&#34;16px&#34; height=&#34;16px&#34; viewBox=&#34;0 0 24 24&#34;&gt;
+&lt;svg
+    xmlns=&#34;http://www.w3.org/2000/svg&#34;
+    width=&#34;24&#34; height=&#34;24&#34; viewBox=&#34;0 0 24 24&#34; fill=&#34;none&#34;
+    stroke=&#34;currentColor&#34; stroke-width=&#34;2&#34; stroke-linecap=&#34;round&#34;
+    stroke-linejoin=&#34;round&#34;&gt;
+    &lt;line x1=&#34;4&#34; y1=&#34;9&#34; x2=&#34;20&#34; y2=&#34;9&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;4&#34; y1=&#34;15&#34; x2=&#34;20&#34; y2=&#34;15&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;10&#34; y1=&#34;3&#34; x2=&#34;8&#34; y2=&#34;21&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;16&#34; y1=&#34;3&#34; x2=&#34;14&#34; y2=&#34;21&#34;&gt;&lt;/line&gt;
+&lt;/svg&gt;
+
+&lt;/svg&gt;
+  &lt;/a&gt;
+&lt;/h1&gt;
+
+&lt;p&gt;This paper proposes a novel framework for discovering interpretable circuits in Transformer models using sparse dictionary learning. The key ideas are:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;
-&lt;p&gt;Train sparse dictionaries to decompose the outputs of each module in the Transformer (word embeddings, attention outputs, and MLP outputs) into more interpretable, monosemantic features.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Exploit the linear structure of the Transformer to trace how higher-level dictionary features are composed from lower-level ones across layers, allowing circuits to be identified in a patch-free manner.&lt;/p&gt;</description>
+&lt;p&gt;Train sparse dictionaries to decompose the outputs of each module in the Transformer (word embeddings, attention outputs, and MLP outputs) into more interpretable, monosemantic features.&lt;/p&gt;</description>
     </item>
     
     <item>
