@@ -6,7 +6,7 @@
 [![Hugo](https://img.shields.io/badge/Hugo-%5E0.123.0-ff4088)](https://gohugo.io/)
 [![Netlify Status](https://api.netlify.com/api/v1/badges/c4ffd274-3e6c-4243-b022-94c47e8a5442/deploy-status)](https://app.netlify.com/sites/aisafetypapers/deploys)
 
-> 🌐 **Live Site**: Check out the running instance at [pages.unsearch.org](https://pages.unsearch.org)
+> 🌐 **Live Site**: Check out the running instance at [papers.unsearch.org](https://papers.unsearch.org)
 
 An automated system that creates and maintains a curated list of AI safety research papers, including summaries and multi-channel distribution. The system automatically fetches papers from Semantic Scholar, generates summaries using Claude, and distributes content through a static website, with planned support for Telegram and Twitter distribution.
 

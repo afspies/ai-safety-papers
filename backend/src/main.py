@@ -322,12 +322,7 @@ def create_website_post(article: Article, summary: str, posts_path: Path):
 
 def create_post_markdown(article: Article, summary: str, copied_figures: dict) -> str:
     """
-    Generate the markdown content for the post.
-    
-    Args:
-        article: Article instance
-        summary: Summary text with figure references
-        copied_figures: Dictionary mapping internal figure IDs to actual figure IDs
+    Generate the markdown content for the post with metadata in YAML frontmatter.
     """
     logger = logging.getLogger(__name__)
     
@@ -335,15 +330,21 @@ def create_post_markdown(article: Article, summary: str, copied_figures: dict) -
     author_list = article.authors if isinstance(article.authors, list) else []
     quoted_authors = [f'"{author.strip()}"' for author in author_list]
 
+    # Format the frontmatter with comprehensive metadata
     frontmatter = f"""---
 title: "{article.title}"
 description: "{article.abstract[:200] if hasattr(article, 'abstract') else ''}"
 authors: [{', '.join(quoted_authors)}]
 date: {datetime.now().strftime('%Y-%m-%d')}
+publication_date: {article.submitted_date.strftime('%Y-%m-%d') if hasattr(article, 'submitted_date') and article.submitted_date else 'Unknown'}
+venue: "{article.venue if hasattr(article, 'venue') else ''}"
+paper_url: "{article.url}"
+abstract: "{article.abstract if hasattr(article, 'abstract') else ''}"
+added_date: {datetime.now().strftime('%Y-%m-%d')}
 bookcase_cover_src: '/posts/paper_{article.uid}/thumbnail.png'
 weight: 1
 ---
-
+# Summary
 """
     
     # Process summary to include figure references
@@ -357,19 +358,16 @@ weight: 1
     for match in figure_matches:
         full_match = match.group(0)
         fig_num = match.group(1)
-        internal_fig_id = f"fig_0_{fig_num}"  # Assume page 0 for now
+        internal_fig_id = f"fig_0_{fig_num}"
         
         logger.debug(f"Processing figure reference: {internal_fig_id} (from {full_match})")
         
         actual_fig_id = copied_figures.get(internal_fig_id)
         if actual_fig_id and actual_fig_id in article.figures:
-            # Figure was successfully copied , insert Hugo shortcode with actual figure ID
             replacement = f'{{{{< figure src="{actual_fig_id}.png" >}}}}'
             logger.debug(f"Replacing {full_match} with Hugo shortcode using {actual_fig_id}")
         else:
-            # Extract figure number from the reference if possible
             if actual_fig_id:
-                # Try to extract the label part (e.g., "fig1" from "fig_0_1_fig1")
                 label_match = re.search(r'_(fig\d+|tab\d+|unk)$', actual_fig_id)
                 if label_match:
                     fig_label = label_match.group(1)
@@ -381,10 +379,6 @@ weight: 1
             logger.warning(f"Using text replacement for missing figure {internal_fig_id}")
         
         content = content.replace(full_match, replacement)
-    
-    # Add link to original paper if available
-    if hasattr(article, 'url') and article.url:
-        content += f"\n\n---\n\n[Read the original paper]({article.url})"
     
     return frontmatter + content
 
