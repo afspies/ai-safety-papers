@@ -34,9 +34,9 @@
     
         <meta property="og:url" content="http://localhost:1313/">
   <meta property="og:site_name" content="AI Safety Papers">
-  <meta property="og:title" content="AI Safety Papers">
-  <meta property="og:description" content="Welcome to AI Safety Papers Explore our curated collection of the latest research in AI safety. Each entry represents a recent paper with a summary and link to the original source.
-Detecting and Understanding Vulnerabilities in Language Models via Mechanistic Interpretability Dictionary Learning Improves Patch-Free Circuit Discovery in Mechanistic Interpretability: A Case Study on Othello-GPT Dynamic modelling of signalling pathways when ODEs are not feasible Using Degeneracy in the Loss Landscape for Mechanistic Interpretability">
+  <meta property="og:title" content="AI Safety Livefeed">
+  <meta property="og:description" content="Explore our curated collection of the latest research in AI safety. Each entry represents a recent paper with a summary and link to the original source.
+Bilinear MLPs enable weight-based mechanistic interpretability The results demonstrate that bilinear layers serve as an interpretable drop-in replacement for current activation functions and that weight-based interpretability is viable for understanding deep-learning models. Dictionary Learning Improves Patch-Free Circuit Discovery in Mechanistic Interpretability: A Case Study on Othello-GPT Sparse dictionary learning has been a rapidly growing technique in mechanistic interpretability to attack superposition and extract more human-understandable features from model activations. We ask a further question based on the extracted more monosemantic features: How do we recognize circuits connecting the enormous amount of dictionary features? We propose a circuit discovery framework alternative to activation patching. Our framework suffers less from out-of-distribution and proves to be more efficient in terms of asymptotic complexity. The basic unit in our framework is dictionary features decomposed from all modules writing to the residual stream, including embedding, attention output and MLP output. Starting from any logit, dictionary feature or attention score, we manage to trace down to lower-level dictionary features of all tokens and compute their contribution to these more interpretable and local model behaviors. We dig in a small transformer trained on a synthetic task named Othello and find a number of human-understandable fine-grained circuits inside of it. Extracting Finite State Machines from Transformers Fueled by the popularity of the transformer architecture in deep learning, several works have investigated what formal languages a transformer can learn. Nonetheless, existing results remain hard to compare and a fine-grained understanding of the trainability of transformers on regular languages is still lacking. We investigate transformers trained on regular languages from a mechanistic interpretability perspective. Using an extension of the $L^*$ algorithm, we extract Moore machines from transformers. We empirically find tighter lower bounds on the trainability of transformers, when a finite number of symbols determine the state. Additionally, our mechanistic insight allows us to characterise the regular languages a one-layer transformer can learn with good length generalisation. However, we also identify failure cases where the determining symbols get misrecognised due to saturation of the attention mechanism. How to use and interpret activation patching What evidence patching experiments provide about circuits, and on the choice of metric and associated pitfalls, are focused on. Identifying Functionally Important Features with End-to-End Sparse Dictionary Learning End-to-end (e2e) sparse dictionary learning is proposed, a method for training SAEs that ensures the features learned are functionally important by minimizing the KL divergence between the output distributions of the original model and the model with SAE activations inserted. Interpreting Attention Layer Outputs with Sparse Autoencoders The mystery of why models have so many seemingly redundant induction heads is explored, SAEs are used to motivate the hypothesis that some are long-prefix whereas others are short-prefix, and SAEs find a sparse, interpretable decomposition are shown. Llama Scope: Extracting Millions of Features from Llama-3.1-8B with Sparse Autoencoders Sparse Autoencoders (SAEs) have emerged as a powerful unsupervised method for extracting sparse representations from language models, yet scalable training remains a significant challenge. We introduce a suite of 256 SAEs, trained on each layer and sublayer of the Llama-3.1-8B-Base model, with 32K and 128K features. Modifications to a state-of-the-art SAE variant, Top-K SAEs, are evaluated across multiple dimensions. In particular, we assess the generalizability of SAEs trained on base models to longer contexts and fine-tuned models. Additionally, we analyze the geometry of learned SAE latents, confirming that \emph{feature splitting} enables the discovery of new features. The Llama Scope SAE checkpoints are publicly available at~\url{https://huggingface.co/fnlp/Llama-Scope}, alongside our scalable training, interpretation, and visualization tools at \url{https://github.com/OpenMOSS/Language-Model-SAEs}. These contributions aim to advance the open-source Sparse Autoencoder ecosystem and support mechanistic interpretability research by reducing the need for redundant SAE training. Mechanistic Interpretability for AI Safety - A Review This review explores mechanistic interpretability: reverse engineering the computational mechanisms and representations learned by neural networks into human-understandable algorithms and concepts to provide a granular, causal understanding of AI systems&#39; inner workings. Mechanistic Interpretability of Reinforcement Learning Agents This paper explores the mechanistic interpretability of reinforcement learning (RL) agents through an analysis of a neural network trained on procedural maze environments. By dissecting the network&#39;s inner workings, we identified fundamental features like maze walls and pathways, forming the basis of the model&#39;s decision-making process. A significant observation was the goal misgeneralization, where the RL agent developed biases towards certain navigation strategies, such as consistently moving towards the top right corner, even in the absence of explicit goals. Using techniques like saliency mapping and feature mapping, we visualized these biases. We furthered this exploration with the development of novel tools for interactively exploring layer activations. Mechanistic Understanding and Mitigation of Language Model Non-Factual Hallucinations A novel hallucination mitigation method is proposed through targeted restoration of the LM&#39;s internal fact recall pipeline, demonstrating superior performance compared to baselines. Mechanistic Unlearning: Robust Knowledge Unlearning and Editing via Mechanistic Localization Methods for knowledge editing and unlearning in large language models seek to edit or remove undesirable knowledge or capabilities without compromising general language modeling performance. This work investigates how mechanistic interpretability -- which, in part, aims to identify model components (circuits) associated to specific interpretable mechanisms that make up a model capability -- can improve the precision and effectiveness of editing and unlearning. We find a stark difference in unlearning and edit robustness when training components localized by different methods. We highlight an important distinction between methods that localize components based primarily on preserving outputs, and those finding high level mechanisms with predictable intermediate states. In particular, localizing edits/unlearning to components associated with the lookup-table mechanism for factual recall 1) leads to more robust edits/unlearning across different input/output formats, and 2) resists attempts to relearn the unwanted information, while also reducing unintended side effects compared to baselines, on both a sports facts dataset and the CounterFact dataset across multiple models. We also find that certain localized edits disrupt the latent knowledge in the model more than any other baselines, making unlearning more robust to various attacks. Scalable Mechanistic Neural Networks We propose Scalable Mechanistic Neural Network (S-MNN), an enhanced neural network framework designed for scientific machine learning applications involving long temporal sequences. By reformulating the original Mechanistic Neural Network (MNN) (Pervez et al., 2024), we reduce the computational time and space complexities from cubic and quadratic with respect to the sequence length, respectively, to linear. This significant improvement enables efficient modeling of long-term dynamics without sacrificing accuracy or interpretability. Extensive experiments demonstrate that S-MNN matches the original MNN in precision while substantially reducing computational resources. Consequently, S-MNN can drop-in replace the original MNN in applications, providing a practical and efficient tool for integrating mechanistic bottlenecks into neural network models of complex dynamical systems. Transcoders Find Interpretable LLM Feature Circuits This work introduces a novel method for using transcoders to perform weights-based circuit analysis through MLP sublayers, and suggests that transcoders can prove effective in decomposing model computations involving MLPs into interpretable circuits. Unlocking the Future: Exploring Look-Ahead Planning Mechanistic Interpretability in Large Language Models This research analyzes the look-ahead planning mechanisms of LLMs, facilitating future research on LLMs performing planning tasks and finding that the output of MHSA in the middle layers at the last token can directly decode the decision to some extent. Using Degeneracy in the Loss Landscape for Mechanistic Interpretability Mechanistic Interpretability aims to reverse engineer the algorithms implemented by neural networks by studying their weights and activations. An obstacle to reverse engineering neural networks is that many of the parameters inside a network are not involved in the computation being implemented by the network. These degenerate parameters may obfuscate internal structure. Singular learning theory teaches us that neural network parameterizations are biased towards being more degenerate, and parameterizations with more degeneracy are likely to generalize further. We identify 3 ways that network parameters can be degenerate: linear dependence between activations in a layer; linear dependence between gradients passed back to a layer; ReLUs which fire on the same subset of datapoints. We also present a heuristic argument that modular networks are likely to be more degenerate, and we develop a metric for identifying modules in a network that is based on this argument. We propose that if we can represent a neural network in a way that is invariant to reparameterizations that exploit the degeneracies, then this representation is likely to be more interpretable, and we provide some evidence that such a representation is likely to have sparser interactions. We introduce the Interaction Basis, a tractable technique to obtain a representation that is invariant to degeneracies from linear dependence of activations or Jacobians.">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="website">
 
@@ -45,10 +45,30 @@ Detecting and Understanding Vulnerabilities in Language Models via Mechanistic I
     
         
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="AI Safety Papers">
-  <meta name="twitter:description" content="Welcome to AI Safety Papers Explore our curated collection of the latest research in AI safety. Each entry represents a recent paper with a summary and link to the original source.
-Detecting and Understanding Vulnerabilities in Language Models via Mechanistic Interpretability Dictionary Learning Improves Patch-Free Circuit Discovery in Mechanistic Interpretability: A Case Study on Othello-GPT Dynamic modelling of signalling pathways when ODEs are not feasible Using Degeneracy in the Loss Landscape for Mechanistic Interpretability">
+  <meta name="twitter:title" content="AI Safety Livefeed">
+  <meta name="twitter:description" content="Explore our curated collection of the latest research in AI safety. Each entry represents a recent paper with a summary and link to the original source.
+Bilinear MLPs enable weight-based mechanistic interpretability The results demonstrate that bilinear layers serve as an interpretable drop-in replacement for current activation functions and that weight-based interpretability is viable for understanding deep-learning models. Dictionary Learning Improves Patch-Free Circuit Discovery in Mechanistic Interpretability: A Case Study on Othello-GPT Sparse dictionary learning has been a rapidly growing technique in mechanistic interpretability to attack superposition and extract more human-understandable features from model activations. We ask a further question based on the extracted more monosemantic features: How do we recognize circuits connecting the enormous amount of dictionary features? We propose a circuit discovery framework alternative to activation patching. Our framework suffers less from out-of-distribution and proves to be more efficient in terms of asymptotic complexity. The basic unit in our framework is dictionary features decomposed from all modules writing to the residual stream, including embedding, attention output and MLP output. Starting from any logit, dictionary feature or attention score, we manage to trace down to lower-level dictionary features of all tokens and compute their contribution to these more interpretable and local model behaviors. We dig in a small transformer trained on a synthetic task named Othello and find a number of human-understandable fine-grained circuits inside of it. Extracting Finite State Machines from Transformers Fueled by the popularity of the transformer architecture in deep learning, several works have investigated what formal languages a transformer can learn. Nonetheless, existing results remain hard to compare and a fine-grained understanding of the trainability of transformers on regular languages is still lacking. We investigate transformers trained on regular languages from a mechanistic interpretability perspective. Using an extension of the $L^*$ algorithm, we extract Moore machines from transformers. We empirically find tighter lower bounds on the trainability of transformers, when a finite number of symbols determine the state. Additionally, our mechanistic insight allows us to characterise the regular languages a one-layer transformer can learn with good length generalisation. However, we also identify failure cases where the determining symbols get misrecognised due to saturation of the attention mechanism. How to use and interpret activation patching What evidence patching experiments provide about circuits, and on the choice of metric and associated pitfalls, are focused on. Identifying Functionally Important Features with End-to-End Sparse Dictionary Learning End-to-end (e2e) sparse dictionary learning is proposed, a method for training SAEs that ensures the features learned are functionally important by minimizing the KL divergence between the output distributions of the original model and the model with SAE activations inserted. Interpreting Attention Layer Outputs with Sparse Autoencoders The mystery of why models have so many seemingly redundant induction heads is explored, SAEs are used to motivate the hypothesis that some are long-prefix whereas others are short-prefix, and SAEs find a sparse, interpretable decomposition are shown. Llama Scope: Extracting Millions of Features from Llama-3.1-8B with Sparse Autoencoders Sparse Autoencoders (SAEs) have emerged as a powerful unsupervised method for extracting sparse representations from language models, yet scalable training remains a significant challenge. We introduce a suite of 256 SAEs, trained on each layer and sublayer of the Llama-3.1-8B-Base model, with 32K and 128K features. Modifications to a state-of-the-art SAE variant, Top-K SAEs, are evaluated across multiple dimensions. In particular, we assess the generalizability of SAEs trained on base models to longer contexts and fine-tuned models. Additionally, we analyze the geometry of learned SAE latents, confirming that \emph{feature splitting} enables the discovery of new features. The Llama Scope SAE checkpoints are publicly available at~\url{https://huggingface.co/fnlp/Llama-Scope}, alongside our scalable training, interpretation, and visualization tools at \url{https://github.com/OpenMOSS/Language-Model-SAEs}. These contributions aim to advance the open-source Sparse Autoencoder ecosystem and support mechanistic interpretability research by reducing the need for redundant SAE training. Mechanistic Interpretability for AI Safety - A Review This review explores mechanistic interpretability: reverse engineering the computational mechanisms and representations learned by neural networks into human-understandable algorithms and concepts to provide a granular, causal understanding of AI systems&#39; inner workings. Mechanistic Interpretability of Reinforcement Learning Agents This paper explores the mechanistic interpretability of reinforcement learning (RL) agents through an analysis of a neural network trained on procedural maze environments. By dissecting the network&#39;s inner workings, we identified fundamental features like maze walls and pathways, forming the basis of the model&#39;s decision-making process. A significant observation was the goal misgeneralization, where the RL agent developed biases towards certain navigation strategies, such as consistently moving towards the top right corner, even in the absence of explicit goals. Using techniques like saliency mapping and feature mapping, we visualized these biases. We furthered this exploration with the development of novel tools for interactively exploring layer activations. Mechanistic Understanding and Mitigation of Language Model Non-Factual Hallucinations A novel hallucination mitigation method is proposed through targeted restoration of the LM&#39;s internal fact recall pipeline, demonstrating superior performance compared to baselines. Mechanistic Unlearning: Robust Knowledge Unlearning and Editing via Mechanistic Localization Methods for knowledge editing and unlearning in large language models seek to edit or remove undesirable knowledge or capabilities without compromising general language modeling performance. This work investigates how mechanistic interpretability -- which, in part, aims to identify model components (circuits) associated to specific interpretable mechanisms that make up a model capability -- can improve the precision and effectiveness of editing and unlearning. We find a stark difference in unlearning and edit robustness when training components localized by different methods. We highlight an important distinction between methods that localize components based primarily on preserving outputs, and those finding high level mechanisms with predictable intermediate states. In particular, localizing edits/unlearning to components associated with the lookup-table mechanism for factual recall 1) leads to more robust edits/unlearning across different input/output formats, and 2) resists attempts to relearn the unwanted information, while also reducing unintended side effects compared to baselines, on both a sports facts dataset and the CounterFact dataset across multiple models. We also find that certain localized edits disrupt the latent knowledge in the model more than any other baselines, making unlearning more robust to various attacks. Scalable Mechanistic Neural Networks We propose Scalable Mechanistic Neural Network (S-MNN), an enhanced neural network framework designed for scientific machine learning applications involving long temporal sequences. By reformulating the original Mechanistic Neural Network (MNN) (Pervez et al., 2024), we reduce the computational time and space complexities from cubic and quadratic with respect to the sequence length, respectively, to linear. This significant improvement enables efficient modeling of long-term dynamics without sacrificing accuracy or interpretability. Extensive experiments demonstrate that S-MNN matches the original MNN in precision while substantially reducing computational resources. Consequently, S-MNN can drop-in replace the original MNN in applications, providing a practical and efficient tool for integrating mechanistic bottlenecks into neural network models of complex dynamical systems. Transcoders Find Interpretable LLM Feature Circuits This work introduces a novel method for using transcoders to perform weights-based circuit analysis through MLP sublayers, and suggests that transcoders can prove effective in decomposing model computations involving MLPs into interpretable circuits. Unlocking the Future: Exploring Look-Ahead Planning Mechanistic Interpretability in Large Language Models This research analyzes the look-ahead planning mechanisms of LLMs, facilitating future research on LLMs performing planning tasks and finding that the output of MHSA in the middle layers at the last token can directly decode the decision to some extent. Using Degeneracy in the Loss Landscape for Mechanistic Interpretability Mechanistic Interpretability aims to reverse engineer the algorithms implemented by neural networks by studying their weights and activations. An obstacle to reverse engineering neural networks is that many of the parameters inside a network are not involved in the computation being implemented by the network. These degenerate parameters may obfuscate internal structure. Singular learning theory teaches us that neural network parameterizations are biased towards being more degenerate, and parameterizations with more degeneracy are likely to generalize further. We identify 3 ways that network parameters can be degenerate: linear dependence between activations in a layer; linear dependence between gradients passed back to a layer; ReLUs which fire on the same subset of datapoints. We also present a heuristic argument that modular networks are likely to be more degenerate, and we develop a metric for identifying modules in a network that is based on this argument. We propose that if we can represent a neural network in a way that is invariant to reparameterizations that exploit the degeneracies, then this representation is likely to be more interpretable, and we provide some evidence that such a representation is likely to have sparser interactions. We introduce the Interaction Basis, a tractable technique to obtain a representation that is invariant to degeneracies from linear dependence of activations or Jacobians.">
 
+    
+
+    
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css" integrity="sha384-GvrOXuhMATgEsSwCs4smul74iXGOixntILdUW9XmUC6+HX0sLNAK3q71HotJqlAn" crossorigin="anonymous">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js" integrity="sha384-cpW21h6RZv/phavutF+AuVYrr+dA8xD9zs6FwLpaCct6O9ctzYFfFr4dgmgccOTx" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            renderMathInElement(document.body, {
+                delimiters: [
+                    {left: '$$', right: '$$', display: true},
+                    {left: '$', right: '$', display: false},
+                    {left: '\\(', right: '\\)', display: false},
+                    {left: '\\[', right: '\\]', display: true}
+                ],
+                throwOnError : false
+            });
+        });
+    </script>
     <link rel="stylesheet" href="/style.css" integrity="">
 
 
@@ -75,6 +95,9 @@ Detecting and Understanding Vulnerabilities in Language Models via Mechanistic I
 
 
 
+
+    <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@4.0.0-beta.3/tex-mml-chtml.js"></script>
+    <script defer src="/js/math.js" integrity=""></script>
 
 
 
@@ -251,7 +274,7 @@ Detecting and Understanding Vulnerabilities in Language Models via Mechanistic I
 <div class="content-margin">
     
     <div class="my-8">
-        <h1>AI Safety Papers</h1>
+        <h1>AI Safety Livefeed</h1>
         
 
 
@@ -262,23 +285,7 @@ Detecting and Understanding Vulnerabilities in Language Models via Mechanistic I
         
         
     
-    
-<h1 id="welcome-to-ai-safety-papers" class="header-anchor-wrapper">Welcome to AI Safety Papers
-  <a href="#welcome-to-ai-safety-papers" class="header-anchor-link">
-    <svg width="16px" height="16px" viewBox="0 0 24 24">
-<svg
-    xmlns="http://www.w3.org/2000/svg"
-    width="24" height="24" viewBox="0 0 24 24" fill="none"
-    stroke="currentColor" stroke-width="2" stroke-linecap="round"
-    stroke-linejoin="round">
-    <line x1="4" y1="9" x2="20" y2="9"></line><line x1="4" y1="15" x2="20" y2="15"></line><line x1="10" y1="3" x2="8" y2="21"></line><line x1="16" y1="3" x2="14" y2="21"></line>
-</svg>
-
-</svg>
-  </a>
-</h1>
-
-<p>Explore our curated collection of the latest research in AI safety. Each entry represents a recent paper with a summary and link to the original source.</p>
+    <p>Explore our curated collection of the latest research in AI safety. Each entry represents a recent paper with a summary and link to the original source.</p>
 
 
 
@@ -313,24 +320,34 @@ Detecting and Understanding Vulnerabilities in Language Models via Mechanistic I
 
 
 
-<div class="bookcase-item">
-    <figure>
-        <img src="http://localhost:1313/posts/paper_fa0cbfba4e41b9f2487df251fcc3b93c21381167/thumbnail.png" class="bookcase-item-img-light">
-        <img src="http://localhost:1313/posts/paper_fa0cbfba4e41b9f2487df251fcc3b93c21381167/thumbnail.png" class="bookcase-item-img-dark">
-        <a href="/posts/paper_fa0cbfba4e41b9f2487df251fcc3b93c21381167/" 
-           class="bookcase-item-overlay"
-           data-authors="[Jorge García-Carrasco A. Maté Juan Trujillo]"
-           data-abstract=""
-           data-venue=""
-           data-publication-date=""
-           data-added-date=""
-           data-paper-url="">
-        </a>
-    </figure>
-    <figcaption>
-        <a href="/posts/paper_fa0cbfba4e41b9f2487df251fcc3b93c21381167/">Detecting and Understanding Vulnerabilities in Language Models via Mechanistic Interpretability</a>
+<a href="/posts/paper_1ac2d6f203b3bdd3503357b0839c24a485d6ce1d/" class="bookcase-item">
+    <figcaption class="title-measure">
+        Bilinear MLPs enable weight-based mechanistic interpretability
     </figcaption>
-</div>
+    <figure>
+        <img src="http://localhost:1313/posts/paper_1ac2d6f203b3bdd3503357b0839c24a485d6ce1d/thumbnail.png" class="bookcase-item-img-light">
+        <img src="http://localhost:1313/posts/paper_1ac2d6f203b3bdd3503357b0839c24a485d6ce1d/thumbnail.png" class="bookcase-item-img-dark">
+    </figure>
+    <div class="bookcase-item-hover">
+        <div class="hover-text">
+            
+                
+                    The results demonstrate that bilinear layers serve as an interpretable drop-in replacement for current activation functions and that weight-based interpretability is viable for understanding deep-learning models.
+                
+            
+        </div>
+    </div>
+</a>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.bookcase-item').forEach(item => {
+        const title = item.querySelector('.title-measure');
+        const hover = item.querySelector('.bookcase-item-hover');
+        hover.style.setProperty('--title-height', title.offsetHeight + 'px');
+    });
+});
+</script>
 
             
                 
@@ -338,24 +355,32 @@ Detecting and Understanding Vulnerabilities in Language Models via Mechanistic I
 
 
 
-<div class="bookcase-item">
+<a href="/posts/paper_1301ed763095097ff424c668e16a265b3ae2f231/" class="bookcase-item">
+    <figcaption class="title-measure">
+        Dictionary Learning Improves Patch-Free Circuit Discovery in Mechanistic Interpretability: A Case Study on Othello-GPT
+    </figcaption>
     <figure>
         <img src="http://localhost:1313/posts/paper_1301ed763095097ff424c668e16a265b3ae2f231/thumbnail.png" class="bookcase-item-img-light">
         <img src="http://localhost:1313/posts/paper_1301ed763095097ff424c668e16a265b3ae2f231/thumbnail.png" class="bookcase-item-img-dark">
-        <a href="/posts/paper_1301ed763095097ff424c668e16a265b3ae2f231/" 
-           class="bookcase-item-overlay"
-           data-authors="[Zhengfu He Xuyang Ge Qiong Tang Tianxiang Sun Qinyuan Cheng Xipeng Qiu]"
-           data-abstract="Sparse dictionary learning has been a rapidly growing technique in mechanistic interpretability to attack superposition and extract more human-understandable features from model activations. We ask a simple question: can we improve the performance of circuit discovery by using dictionary learning?"
-           data-venue="arXiv"
-           data-publication-date="2024-02-25"
-           data-added-date="2024-11-05"
-           data-paper-url="https://arxiv.org/pdf/2402.12201.pdf">
-        </a>
     </figure>
-    <figcaption>
-        <a href="/posts/paper_1301ed763095097ff424c668e16a265b3ae2f231/">Dictionary Learning Improves Patch-Free Circuit Discovery in Mechanistic Interpretability: A Case Study on Othello-GPT</a>
-    </figcaption>
-</div>
+    <div class="bookcase-item-hover">
+        <div class="hover-text">
+            
+                Sparse dictionary learning has been a rapidly growing technique in mechanistic interpretability to attack superposition and extract more human-understandable features from model activations. We ask a further question based on the extracted more monosemantic features: How do we recognize circuits connecting the enormous amount of dictionary features? We propose a circuit discovery framework alternative to activation patching. Our framework suffers less from out-of-distribution and proves to be more efficient in terms of asymptotic complexity. The basic unit in our framework is dictionary features decomposed from all modules writing to the residual stream, including embedding, attention output and MLP output. Starting from any logit, dictionary feature or attention score, we manage to trace down to lower-level dictionary features of all tokens and compute their contribution to these more interpretable and local model behaviors. We dig in a small transformer trained on a synthetic task named Othello and find a number of human-understandable fine-grained circuits inside of it.
+            
+        </div>
+    </div>
+</a>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.bookcase-item').forEach(item => {
+        const title = item.querySelector('.title-measure');
+        const hover = item.querySelector('.bookcase-item-hover');
+        hover.style.setProperty('--title-height', title.offsetHeight + 'px');
+    });
+});
+</script>
 
             
                 
@@ -363,24 +388,32 @@ Detecting and Understanding Vulnerabilities in Language Models via Mechanistic I
 
 
 
-<div class="bookcase-item">
+<a href="/posts/paper_914ec7e316370cc23ae5cbd0031960151de4e43d/" class="bookcase-item">
+    <figcaption class="title-measure">
+        Extracting Finite State Machines from Transformers
+    </figcaption>
     <figure>
-        <img src="http://localhost:1313/posts/paper_acc3791d6241d168aa1cb932106f46769c05b26a/thumbnail.png" class="bookcase-item-img-light">
-        <img src="http://localhost:1313/posts/paper_acc3791d6241d168aa1cb932106f46769c05b26a/thumbnail.png" class="bookcase-item-img-dark">
-        <a href="/posts/paper_acc3791d6241d168aa1cb932106f46769c05b26a/" 
-           class="bookcase-item-overlay"
-           data-authors="[]"
-           data-abstract=""
-           data-venue=""
-           data-publication-date=""
-           data-added-date=""
-           data-paper-url="">
-        </a>
+        <img src="http://localhost:1313/posts/paper_914ec7e316370cc23ae5cbd0031960151de4e43d/thumbnail.png" class="bookcase-item-img-light">
+        <img src="http://localhost:1313/posts/paper_914ec7e316370cc23ae5cbd0031960151de4e43d/thumbnail.png" class="bookcase-item-img-dark">
     </figure>
-    <figcaption>
-        <a href="/posts/paper_acc3791d6241d168aa1cb932106f46769c05b26a/">Dynamic modelling of signalling pathways when ODEs are not feasible</a>
-    </figcaption>
-</div>
+    <div class="bookcase-item-hover">
+        <div class="hover-text">
+            
+                Fueled by the popularity of the transformer architecture in deep learning, several works have investigated what formal languages a transformer can learn. Nonetheless, existing results remain hard to compare and a fine-grained understanding of the trainability of transformers on regular languages is still lacking. We investigate transformers trained on regular languages from a mechanistic interpretability perspective. Using an extension of the $L^*$ algorithm, we extract Moore machines from transformers. We empirically find tighter lower bounds on the trainability of transformers, when a finite number of symbols determine the state. Additionally, our mechanistic insight allows us to characterise the regular languages a one-layer transformer can learn with good length generalisation. However, we also identify failure cases where the determining symbols get misrecognised due to saturation of the attention mechanism.
+            
+        </div>
+    </div>
+</a>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.bookcase-item').forEach(item => {
+        const title = item.querySelector('.title-measure');
+        const hover = item.querySelector('.bookcase-item-hover');
+        hover.style.setProperty('--title-height', title.offsetHeight + 'px');
+    });
+});
+</script>
 
             
                 
@@ -388,24 +421,409 @@ Detecting and Understanding Vulnerabilities in Language Models via Mechanistic I
 
 
 
-<div class="bookcase-item">
+<a href="/posts/paper_a0b775b9ff82ce1fb7dd34d53a7d09f70b171895/" class="bookcase-item">
+    <figcaption class="title-measure">
+        How to use and interpret activation patching
+    </figcaption>
+    <figure>
+        <img src="http://localhost:1313/posts/paper_a0b775b9ff82ce1fb7dd34d53a7d09f70b171895/thumbnail.png" class="bookcase-item-img-light">
+        <img src="http://localhost:1313/posts/paper_a0b775b9ff82ce1fb7dd34d53a7d09f70b171895/thumbnail.png" class="bookcase-item-img-dark">
+    </figure>
+    <div class="bookcase-item-hover">
+        <div class="hover-text">
+            
+                
+                    What evidence patching experiments provide about circuits, and on the choice of metric and associated pitfalls, are focused on.
+                
+            
+        </div>
+    </div>
+</a>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.bookcase-item').forEach(item => {
+        const title = item.querySelector('.title-measure');
+        const hover = item.querySelector('.bookcase-item-hover');
+        hover.style.setProperty('--title-height', title.offsetHeight + 'px');
+    });
+});
+</script>
+
+            
+                
+                
+
+
+
+<a href="/posts/paper_02ad427b0d20fb976741e332f69c2fd00c751164/" class="bookcase-item">
+    <figcaption class="title-measure">
+        Identifying Functionally Important Features with End-to-End Sparse Dictionary Learning
+    </figcaption>
+    <figure>
+        <img src="http://localhost:1313/posts/paper_02ad427b0d20fb976741e332f69c2fd00c751164/thumbnail.png" class="bookcase-item-img-light">
+        <img src="http://localhost:1313/posts/paper_02ad427b0d20fb976741e332f69c2fd00c751164/thumbnail.png" class="bookcase-item-img-dark">
+    </figure>
+    <div class="bookcase-item-hover">
+        <div class="hover-text">
+            
+                
+                    End-to-end (e2e) sparse dictionary learning is proposed, a method for training SAEs that ensures the features learned are functionally important by minimizing the KL divergence between the output distributions of the original model and the model with SAE activations inserted.
+                
+            
+        </div>
+    </div>
+</a>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.bookcase-item').forEach(item => {
+        const title = item.querySelector('.title-measure');
+        const hover = item.querySelector('.bookcase-item-hover');
+        hover.style.setProperty('--title-height', title.offsetHeight + 'px');
+    });
+});
+</script>
+
+            
+                
+                
+
+
+
+<a href="/posts/paper_efbe48e4c17a097f4feaec8cf9dec40218a27a87/" class="bookcase-item">
+    <figcaption class="title-measure">
+        Interpreting Attention Layer Outputs with Sparse Autoencoders
+    </figcaption>
+    <figure>
+        <img src="http://localhost:1313/posts/paper_efbe48e4c17a097f4feaec8cf9dec40218a27a87/thumbnail.png" class="bookcase-item-img-light">
+        <img src="http://localhost:1313/posts/paper_efbe48e4c17a097f4feaec8cf9dec40218a27a87/thumbnail.png" class="bookcase-item-img-dark">
+    </figure>
+    <div class="bookcase-item-hover">
+        <div class="hover-text">
+            
+                
+                    The mystery of why models have so many seemingly redundant induction heads is explored, SAEs are used to motivate the hypothesis that some are long-prefix whereas others are short-prefix, and SAEs find a sparse, interpretable decomposition are shown.
+                
+            
+        </div>
+    </div>
+</a>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.bookcase-item').forEach(item => {
+        const title = item.querySelector('.title-measure');
+        const hover = item.querySelector('.bookcase-item-hover');
+        hover.style.setProperty('--title-height', title.offsetHeight + 'px');
+    });
+});
+</script>
+
+            
+                
+                
+
+
+
+<a href="/posts/paper_2454c15f9708dc337a2ed849e897f99c43b8f6cb/" class="bookcase-item">
+    <figcaption class="title-measure">
+        Llama Scope: Extracting Millions of Features from Llama-3.1-8B with Sparse Autoencoders
+    </figcaption>
+    <figure>
+        <img src="http://localhost:1313/posts/paper_2454c15f9708dc337a2ed849e897f99c43b8f6cb/thumbnail.png" class="bookcase-item-img-light">
+        <img src="http://localhost:1313/posts/paper_2454c15f9708dc337a2ed849e897f99c43b8f6cb/thumbnail.png" class="bookcase-item-img-dark">
+    </figure>
+    <div class="bookcase-item-hover">
+        <div class="hover-text">
+            
+                Sparse Autoencoders (SAEs) have emerged as a powerful unsupervised method for extracting sparse representations from language models, yet scalable training remains a significant challenge. We introduce a suite of 256 SAEs, trained on each layer and sublayer of the Llama-3.1-8B-Base model, with 32K and 128K features. Modifications to a state-of-the-art SAE variant, Top-K SAEs, are evaluated across multiple dimensions. In particular, we assess the generalizability of SAEs trained on base models to longer contexts and fine-tuned models. Additionally, we analyze the geometry of learned SAE latents, confirming that \emph{feature splitting} enables the discovery of new features. The Llama Scope SAE checkpoints are publicly available at~\url{https://huggingface.co/fnlp/Llama-Scope}, alongside our scalable training, interpretation, and visualization tools at \url{https://github.com/OpenMOSS/Language-Model-SAEs}. These contributions aim to advance the open-source Sparse Autoencoder ecosystem and support mechanistic interpretability research by reducing the need for redundant SAE training.
+            
+        </div>
+    </div>
+</a>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.bookcase-item').forEach(item => {
+        const title = item.querySelector('.title-measure');
+        const hover = item.querySelector('.bookcase-item-hover');
+        hover.style.setProperty('--title-height', title.offsetHeight + 'px');
+    });
+});
+</script>
+
+            
+                
+                
+
+
+
+<a href="/posts/paper_8b750488d139f9beba0815ff8f46ebe15ebb3e58/" class="bookcase-item">
+    <figcaption class="title-measure">
+        Mechanistic Interpretability for AI Safety - A Review
+    </figcaption>
+    <figure>
+        <img src="http://localhost:1313/posts/paper_8b750488d139f9beba0815ff8f46ebe15ebb3e58/thumbnail.png" class="bookcase-item-img-light">
+        <img src="http://localhost:1313/posts/paper_8b750488d139f9beba0815ff8f46ebe15ebb3e58/thumbnail.png" class="bookcase-item-img-dark">
+    </figure>
+    <div class="bookcase-item-hover">
+        <div class="hover-text">
+            
+                
+                    This review explores mechanistic interpretability: reverse engineering the computational mechanisms and representations learned by neural networks into human-understandable algorithms and concepts to provide a granular, causal understanding of AI systems&#39; inner workings.
+                
+            
+        </div>
+    </div>
+</a>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.bookcase-item').forEach(item => {
+        const title = item.querySelector('.title-measure');
+        const hover = item.querySelector('.bookcase-item-hover');
+        hover.style.setProperty('--title-height', title.offsetHeight + 'px');
+    });
+});
+</script>
+
+            
+                
+                
+
+
+
+<a href="/posts/paper_a800bac1609408eb955625b7ce0df234d48d3845/" class="bookcase-item">
+    <figcaption class="title-measure">
+        Mechanistic Interpretability of Reinforcement Learning Agents
+    </figcaption>
+    <figure>
+        <img src="http://localhost:1313/posts/paper_a800bac1609408eb955625b7ce0df234d48d3845/thumbnail.png" class="bookcase-item-img-light">
+        <img src="http://localhost:1313/posts/paper_a800bac1609408eb955625b7ce0df234d48d3845/thumbnail.png" class="bookcase-item-img-dark">
+    </figure>
+    <div class="bookcase-item-hover">
+        <div class="hover-text">
+            
+                This paper explores the mechanistic interpretability of reinforcement learning (RL) agents through an analysis of a neural network trained on procedural maze environments. By dissecting the network&#39;s inner workings, we identified fundamental features like maze walls and pathways, forming the basis of the model&#39;s decision-making process. A significant observation was the goal misgeneralization, where the RL agent developed biases towards certain navigation strategies, such as consistently moving towards the top right corner, even in the absence of explicit goals. Using techniques like saliency mapping and feature mapping, we visualized these biases. We furthered this exploration with the development of novel tools for interactively exploring layer activations.
+            
+        </div>
+    </div>
+</a>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.bookcase-item').forEach(item => {
+        const title = item.querySelector('.title-measure');
+        const hover = item.querySelector('.bookcase-item-hover');
+        hover.style.setProperty('--title-height', title.offsetHeight + 'px');
+    });
+});
+</script>
+
+            
+                
+                
+
+
+
+<a href="/posts/paper_01b4977937966694c00f6c7b55e712eef50603a4/" class="bookcase-item">
+    <figcaption class="title-measure">
+        Mechanistic Understanding and Mitigation of Language Model Non-Factual Hallucinations
+    </figcaption>
+    <figure>
+        <img src="http://localhost:1313/posts/paper_01b4977937966694c00f6c7b55e712eef50603a4/thumbnail.png" class="bookcase-item-img-light">
+        <img src="http://localhost:1313/posts/paper_01b4977937966694c00f6c7b55e712eef50603a4/thumbnail.png" class="bookcase-item-img-dark">
+    </figure>
+    <div class="bookcase-item-hover">
+        <div class="hover-text">
+            
+                
+                    A novel hallucination mitigation method is proposed through targeted restoration of the LM&#39;s internal fact recall pipeline, demonstrating superior performance compared to baselines.
+                
+            
+        </div>
+    </div>
+</a>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.bookcase-item').forEach(item => {
+        const title = item.querySelector('.title-measure');
+        const hover = item.querySelector('.bookcase-item-hover');
+        hover.style.setProperty('--title-height', title.offsetHeight + 'px');
+    });
+});
+</script>
+
+            
+                
+                
+
+
+
+<a href="/posts/paper_23a921483746b8b3c828bd601f54d485bec32014/" class="bookcase-item">
+    <figcaption class="title-measure">
+        Mechanistic Unlearning: Robust Knowledge Unlearning and Editing via Mechanistic Localization
+    </figcaption>
+    <figure>
+        <img src="http://localhost:1313/posts/paper_23a921483746b8b3c828bd601f54d485bec32014/thumbnail.png" class="bookcase-item-img-light">
+        <img src="http://localhost:1313/posts/paper_23a921483746b8b3c828bd601f54d485bec32014/thumbnail.png" class="bookcase-item-img-dark">
+    </figure>
+    <div class="bookcase-item-hover">
+        <div class="hover-text">
+            
+                Methods for knowledge editing and unlearning in large language models seek to edit or remove undesirable knowledge or capabilities without compromising general language modeling performance. This work investigates how mechanistic interpretability -- which, in part, aims to identify model components (circuits) associated to specific interpretable mechanisms that make up a model capability -- can improve the precision and effectiveness of editing and unlearning. We find a stark difference in unlearning and edit robustness when training components localized by different methods. We highlight an important distinction between methods that localize components based primarily on preserving outputs, and those finding high level mechanisms with predictable intermediate states. In particular, localizing edits/unlearning to components associated with the lookup-table mechanism for factual recall 1) leads to more robust edits/unlearning across different input/output formats, and 2) resists attempts to relearn the unwanted information, while also reducing unintended side effects compared to baselines, on both a sports facts dataset and the CounterFact dataset across multiple models. We also find that certain localized edits disrupt the latent knowledge in the model more than any other baselines, making unlearning more robust to various attacks.
+            
+        </div>
+    </div>
+</a>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.bookcase-item').forEach(item => {
+        const title = item.querySelector('.title-measure');
+        const hover = item.querySelector('.bookcase-item-hover');
+        hover.style.setProperty('--title-height', title.offsetHeight + 'px');
+    });
+});
+</script>
+
+            
+                
+                
+
+
+
+<a href="/posts/paper_8d42985327b6d112134d96cdd6def5ff9edee92a/" class="bookcase-item">
+    <figcaption class="title-measure">
+        Scalable Mechanistic Neural Networks
+    </figcaption>
+    <figure>
+        <img src="http://localhost:1313/posts/paper_8d42985327b6d112134d96cdd6def5ff9edee92a/thumbnail.png" class="bookcase-item-img-light">
+        <img src="http://localhost:1313/posts/paper_8d42985327b6d112134d96cdd6def5ff9edee92a/thumbnail.png" class="bookcase-item-img-dark">
+    </figure>
+    <div class="bookcase-item-hover">
+        <div class="hover-text">
+            
+                We propose Scalable Mechanistic Neural Network (S-MNN), an enhanced neural network framework designed for scientific machine learning applications involving long temporal sequences. By reformulating the original Mechanistic Neural Network (MNN) (Pervez et al., 2024), we reduce the computational time and space complexities from cubic and quadratic with respect to the sequence length, respectively, to linear. This significant improvement enables efficient modeling of long-term dynamics without sacrificing accuracy or interpretability. Extensive experiments demonstrate that S-MNN matches the original MNN in precision while substantially reducing computational resources. Consequently, S-MNN can drop-in replace the original MNN in applications, providing a practical and efficient tool for integrating mechanistic bottlenecks into neural network models of complex dynamical systems.
+            
+        </div>
+    </div>
+</a>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.bookcase-item').forEach(item => {
+        const title = item.querySelector('.title-measure');
+        const hover = item.querySelector('.bookcase-item-hover');
+        hover.style.setProperty('--title-height', title.offsetHeight + 'px');
+    });
+});
+</script>
+
+            
+                
+                
+
+
+
+<a href="/posts/paper_3c6da6f1601aee99b8e5b8dcf2d21c42d9252b04/" class="bookcase-item">
+    <figcaption class="title-measure">
+        Transcoders Find Interpretable LLM Feature Circuits
+    </figcaption>
+    <figure>
+        <img src="http://localhost:1313/posts/paper_3c6da6f1601aee99b8e5b8dcf2d21c42d9252b04/thumbnail.png" class="bookcase-item-img-light">
+        <img src="http://localhost:1313/posts/paper_3c6da6f1601aee99b8e5b8dcf2d21c42d9252b04/thumbnail.png" class="bookcase-item-img-dark">
+    </figure>
+    <div class="bookcase-item-hover">
+        <div class="hover-text">
+            
+                
+                    This work introduces a novel method for using transcoders to perform weights-based circuit analysis through MLP sublayers, and suggests that transcoders can prove effective in decomposing model computations involving MLPs into interpretable circuits.
+                
+            
+        </div>
+    </div>
+</a>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.bookcase-item').forEach(item => {
+        const title = item.querySelector('.title-measure');
+        const hover = item.querySelector('.bookcase-item-hover');
+        hover.style.setProperty('--title-height', title.offsetHeight + 'px');
+    });
+});
+</script>
+
+            
+                
+                
+
+
+
+<a href="/posts/paper_cfbdf67fc11977637d4cb13ed7e1abce75623796/" class="bookcase-item">
+    <figcaption class="title-measure">
+        Unlocking the Future: Exploring Look-Ahead Planning Mechanistic Interpretability in Large Language Models
+    </figcaption>
+    <figure>
+        <img src="http://localhost:1313/posts/paper_cfbdf67fc11977637d4cb13ed7e1abce75623796/thumbnail.png" class="bookcase-item-img-light">
+        <img src="http://localhost:1313/posts/paper_cfbdf67fc11977637d4cb13ed7e1abce75623796/thumbnail.png" class="bookcase-item-img-dark">
+    </figure>
+    <div class="bookcase-item-hover">
+        <div class="hover-text">
+            
+                
+                    This research analyzes the look-ahead planning mechanisms of LLMs, facilitating future research on LLMs performing planning tasks and finding that the output of MHSA in the middle layers at the last token can directly decode the decision to some extent.
+                
+            
+        </div>
+    </div>
+</a>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.bookcase-item').forEach(item => {
+        const title = item.querySelector('.title-measure');
+        const hover = item.querySelector('.bookcase-item-hover');
+        hover.style.setProperty('--title-height', title.offsetHeight + 'px');
+    });
+});
+</script>
+
+            
+                
+                
+
+
+
+<a href="/posts/paper_c1bc03a045ea830894fe3b1799928c9f8c14923c/" class="bookcase-item">
+    <figcaption class="title-measure">
+        Using Degeneracy in the Loss Landscape for Mechanistic Interpretability
+    </figcaption>
     <figure>
         <img src="http://localhost:1313/posts/paper_c1bc03a045ea830894fe3b1799928c9f8c14923c/thumbnail.png" class="bookcase-item-img-light">
         <img src="http://localhost:1313/posts/paper_c1bc03a045ea830894fe3b1799928c9f8c14923c/thumbnail.png" class="bookcase-item-img-dark">
-        <a href="/posts/paper_c1bc03a045ea830894fe3b1799928c9f8c14923c/" 
-           class="bookcase-item-overlay"
-           data-authors="[Lucius Bushnaq Jake Mendel Stefan Heimersheim Dan Braun Nicholas Goldowsky-Dill Kaarel Hänni Cindy Wu Marius Hobbhahn]"
-           data-abstract=""
-           data-venue=""
-           data-publication-date=""
-           data-added-date=""
-           data-paper-url="">
-        </a>
     </figure>
-    <figcaption>
-        <a href="/posts/paper_c1bc03a045ea830894fe3b1799928c9f8c14923c/">Using Degeneracy in the Loss Landscape for Mechanistic Interpretability</a>
-    </figcaption>
-</div>
+    <div class="bookcase-item-hover">
+        <div class="hover-text">
+            
+                Mechanistic Interpretability aims to reverse engineer the algorithms implemented by neural networks by studying their weights and activations. An obstacle to reverse engineering neural networks is that many of the parameters inside a network are not involved in the computation being implemented by the network. These degenerate parameters may obfuscate internal structure. Singular learning theory teaches us that neural network parameterizations are biased towards being more degenerate, and parameterizations with more degeneracy are likely to generalize further. We identify 3 ways that network parameters can be degenerate: linear dependence between activations in a layer; linear dependence between gradients passed back to a layer; ReLUs which fire on the same subset of datapoints. We also present a heuristic argument that modular networks are likely to be more degenerate, and we develop a metric for identifying modules in a network that is based on this argument. We propose that if we can represent a neural network in a way that is invariant to reparameterizations that exploit the degeneracies, then this representation is likely to be more interpretable, and we provide some evidence that such a representation is likely to have sparser interactions. We introduce the Interaction Basis, a tractable technique to obtain a representation that is invariant to degeneracies from linear dependence of activations or Jacobians.
+            
+        </div>
+    </div>
+</a>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.bookcase-item').forEach(item => {
+        const title = item.querySelector('.title-measure');
+        const hover = item.querySelector('.bookcase-item-hover');
+        hover.style.setProperty('--title-height', title.offsetHeight + 'px');
+    });
+});
+</script>
 
             
         </div>

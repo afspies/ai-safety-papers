@@ -3,7 +3,7 @@ import sys
 import logging
 from datetime import datetime, timedelta
 import gspread
-from typing import List, Dict, Any
+from typing import List, Dict, Any, Optional
 import json
 
 # Add the project root to the Python path
@@ -136,7 +136,8 @@ class SheetsDB:
                         'abstract': row['Abstract'],
                         'url': row['URL'],
                         'venue': row['Venue'],
-                        'tldr': row['TLDR'],
+                        # Structure TLDR like the Semantic Scholar API response
+                        'tldr': {'text': row['TLDR']} if row['TLDR'] else None,
                         'embedding_model': row['Embedding Model'],
                         'embedding_vector': json.loads(row['Embedding Vector']) if row['Embedding Vector'] else []
                     }
@@ -189,3 +190,64 @@ class SheetsDB:
         
         self.worksheet.clear()
         self.worksheet.update('A1', unique_rows)
+
+    def _record_to_paper(self, record: Dict[str, Any]) -> Dict[str, Any]:
+        """Convert a spreadsheet record to a paper dictionary."""
+        try:
+            return {
+                'id': record['Paper ID'],
+                'title': record['Title'],
+                'authors': record['Authors'].split(', ') if record['Authors'] else [],
+                'year': record['Year'],
+                'abstract': record['Abstract'],
+                'url': record['URL'],
+                'venue': record['Venue'],
+                'tldr': {'text': record['TLDR']} if record['TLDR'] else None,
+                'submitted_date': datetime.strptime(record['Submitted Date'], "%d/%m/%Y").date() if record['Submitted Date'] else None
+            }
+        except Exception as e:
+            self.logger.error(f"Error converting record to paper: {e}")
+            return None
+
+    def get_paper_by_id(self, paper_id: str) -> Optional[Dict]:
+        """Get a specific paper by its ID."""
+        try:
+            all_records = self.worksheet.get_all_records()
+            for record in all_records:
+                if record.get('Paper ID') == paper_id:
+                    return self._record_to_paper(record)
+            return None
+        except Exception as e:
+            self.logger.error(f"Error getting paper by ID {paper_id}: {e}")
+            return None
+
+    def update_entry(self, entry: Dict[str, Any]):
+        """Update an existing entry with new information."""
+        try:
+            cell = self.worksheet.find(entry['id'])
+            if not cell:
+                self.logger.warning(f"Could not find paper {entry['id']} to update")
+                return
+                
+            row = cell.row
+            
+            # Update basic fields
+            updates = {
+                'Title': entry.get('title', ''),
+                'Authors': ', '.join(entry.get('authors', [])),
+                'Year': entry.get('year', ''),
+                'Abstract': entry.get('abstract', ''),
+                'URL': entry.get('url', ''),
+                'Venue': entry.get('venue', ''),
+                'TLDR': entry.get('tldr', {}).get('text', '') if isinstance(entry.get('tldr'), dict) else entry.get('tldr', ''),
+            }
+            
+            # Update each field
+            for col_name, value in updates.items():
+                col_index = self.COLUMN_MAP[col_name.lower().replace(' ', '_')] + 1
+                self.worksheet.update_cell(row, col_index, value)
+                
+            self.logger.debug(f"Updated entry for paper {entry['id']}")
+            
+        except Exception as e:
+            self.logger.error(f"Error updating entry {entry.get('id', 'unknown')}: {e}")

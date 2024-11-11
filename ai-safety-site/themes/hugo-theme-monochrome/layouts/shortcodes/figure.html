@@ -1,0 +1,59 @@
+<figure class="paper-figure">
+  <div class="figure-wrapper">
+    <div class="figure-container" onclick="toggleExpand(this)">
+      <div class="image-wrapper">
+        <img src="{{ .Get "src" }}" {{ with .Get "alt" }}alt="{{ . }}"{{ end }}>
+      </div>
+      {{ with .Get "caption" }}
+      <figcaption>{{ . | markdownify }}</figcaption>
+      {{ end }}
+    </div>
+    <!-- Static clone that maintains space -->
+    <div class="static-clone">
+      <div class="image-wrapper">
+        <img src="{{ .Get "src" }}" {{ with .Get "alt" }}alt="{{ . }}"{{ end }}>
+      </div>
+      {{ with .Get "caption" }}
+      <figcaption>{{ . | markdownify }}</figcaption>
+      {{ end }}
+    </div>
+  </div>
+</figure>
+
+<script>
+function toggleExpand(element) {
+    const figure = element.closest('.paper-figure');
+    const body = document.body;
+    
+    figure.classList.toggle('expanded');
+    
+    if (figure.classList.contains('expanded')) {
+        body.classList.add('has-expanded-figure');
+    } else {
+        body.classList.remove('has-expanded-figure');
+    }
+    
+    // Close on escape key
+    const handleEscape = (e) => {
+        if (e.key === 'Escape' && figure.classList.contains('expanded')) {
+            toggleExpand(element);
+            document.removeEventListener('keydown', handleEscape);
+        }
+    };
+    
+    // Close on click outside
+    const handleClickOutside = (e) => {
+        if (figure.classList.contains('expanded') && !element.contains(e.target)) {
+            toggleExpand(element);
+            document.removeEventListener('click', handleClickOutside);
+        }
+    };
+    
+    if (figure.classList.contains('expanded')) {
+        document.addEventListener('keydown', handleEscape);
+        setTimeout(() => {
+            document.addEventListener('click', handleClickOutside);
+        }, 100);
+    }
+}
+</script> 

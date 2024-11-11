@@ -19,6 +19,11 @@ $gray-850: #1f1f1f;
 $gray-900: #171717;
 $gray-1000: #000;
 
+:root {
+  --color-text-secondary: #666666;
+  --color-background-secondary: #2a2a2a;
+}
+
 html[data-theme="light"] {
   --color-text: #{$gray-900};
   --color-text-secondary: #{$gray-500};
@@ -55,6 +60,8 @@ html[data-theme="dark"] {
   --color-navbar-item-inactive: #{$gray-400};
   --color-navbar-item-active: #{$gray-100};
   --color-navbar-item-in-section: #{$gray-250};
+  --color-text-secondary: #{$gray-450};
+  --color-background-secondary: #{$gray-750};
 }
 
 // Default color settings

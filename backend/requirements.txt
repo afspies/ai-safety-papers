@@ -3,3 +3,7 @@ PyMuPDF
 requests>=2.31.0
 gspread
 papermage[dev,predictors,visualizers]
+beautifulsoup4
+svglib
+reportlab
+rlpycairo

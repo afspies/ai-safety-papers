@@ -122,10 +122,17 @@ class SemanticScholarAPI:
                 
             self.logger.debug(f"Found {len(papers)} papers in response")
             
-            # Process papers to ensure we have the best available URL
+            # Process papers to ensure we have the best available URL and log TLDRs
             for paper in papers:
                 if paper is None:
                     continue
+                
+                # Log TLDR information for debugging
+                if 'tldr' in paper:
+                    self.logger.debug(f"Found TLDR for paper {paper.get('paperId')}: {paper['tldr']}")
+                else:
+                    self.logger.debug(f"No TLDR found for paper {paper.get('paperId')}")
+                
                 # Start with the default URL
                 best_url = paper.get('url', '')
                 

@@ -5,6 +5,7 @@ import logging
 from utils.figure_processor import extract_figures, create_thumbnail, load_or_parse_document
 import requests
 import os
+from utils.ar5iv_figure_processor import Ar5ivFigureProcessor
 
 logger = logging.getLogger(__name__)
 
@@ -20,6 +21,7 @@ class Article:
         self.data_dir: Optional[Path] = None  # Directory for all article data
         self.pdf_path: Optional[Path] = None
         self.abstract: Optional[str] = None
+        self.tldr: Optional[str] = None  # Add TLDR field
         
     def set_authors(self, authors: List[str]):
         """Set the authors list."""
@@ -37,9 +39,9 @@ class Article:
         self.pdf_path = pdf_path
         
     def process_figures(self) -> bool:
-        """Extract figures from the PDF."""
-        if not self.pdf_path or not self.data_dir:
-            logger.error("PDF path or data directory not set")
+        """Extract figures from the paper."""
+        if not self.data_dir:
+            logger.error("Data directory not set")
             return False
             
         try:
@@ -47,12 +49,9 @@ class Article:
             figures_dir = self.data_dir / "figures"
             figures_dir.mkdir(parents=True, exist_ok=True)
             
-            # Load document and store it
-            doc, pdf_path = load_or_parse_document(self.pdf_path, self.data_dir)
-            self.set_parsed_doc(doc)  # Set the parsed document
-            
-            # Extract figures
-            self.figures = extract_figures(doc, figures_dir, pdf_path)
+            # Extract figures using ar5iv
+            processor = Ar5ivFigureProcessor()
+            self.figures = processor.process_paper(self.url, figures_dir)
             logger.info(f"Extracted {len(self.figures)} figures")
             return True
             
@@ -174,3 +173,7 @@ class Article:
         except Exception as e:
             logger.error(f"Error extracting text from document: {e}")
             return ""
+
+    def set_tldr(self, tldr: str):
+        """Set the TLDR summary."""
+        self.tldr = tldr
