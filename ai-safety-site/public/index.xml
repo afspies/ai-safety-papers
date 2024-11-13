@@ -7,6 +7,1500 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language><atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>AI Safety: A Climb To Armageddon?</title>
+      <link>http://localhost:1313/en/posts/paper_14d97aae72f493900b0de0044431e4f596d69120/</link>
+      <pubDate>Wed, 13 Nov 2024 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/en/posts/paper_14d97aae72f493900b0de0044431e4f596d69120/</guid>
+      <description>&lt;h1 id=&#34;summary&#34; class=&#34;header-anchor-wrapper&#34;&gt;Summary
+  &lt;a href=&#34;#summary&#34; class=&#34;header-anchor-link&#34;&gt;
+    &lt;svg width=&#34;16px&#34; height=&#34;16px&#34; viewBox=&#34;0 0 24 24&#34;&gt;
+&lt;svg
+    xmlns=&#34;http://www.w3.org/2000/svg&#34;
+    width=&#34;24&#34; height=&#34;24&#34; viewBox=&#34;0 0 24 24&#34; fill=&#34;none&#34;
+    stroke=&#34;currentColor&#34; stroke-width=&#34;2&#34; stroke-linecap=&#34;round&#34;
+    stroke-linejoin=&#34;round&#34;&gt;
+    &lt;line x1=&#34;4&#34; y1=&#34;9&#34; x2=&#34;20&#34; y2=&#34;9&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;4&#34; y1=&#34;15&#34; x2=&#34;20&#34; y2=&#34;15&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;10&#34; y1=&#34;3&#34; x2=&#34;8&#34; y2=&#34;21&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;16&#34; y1=&#34;3&#34; x2=&#34;14&#34; y2=&#34;21&#34;&gt;&lt;/line&gt;
+&lt;/svg&gt;
+
+&lt;/svg&gt;
+  &lt;/a&gt;
+&lt;/h1&gt;
+
+&lt;p&gt;This fascinating paper presents a counterintuitive argument against AI safety measures, suggesting that such measures might actually increase rather than decrease existential risks from AI. The authors (Cappelen, Dever, and Hawthorne) develop what they call the &amp;ldquo;non-deterministic argument&amp;rdquo; through an analogy with rock climbing.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>AI Safety: A Climb To Armageddon?</title>
+      <link>http://localhost:1313/posts/paper_14d97aae72f493900b0de0044431e4f596d69120/</link>
+      <pubDate>Wed, 13 Nov 2024 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/posts/paper_14d97aae72f493900b0de0044431e4f596d69120/</guid>
+      <description>&lt;h1 id=&#34;summary&#34; class=&#34;header-anchor-wrapper&#34;&gt;Summary
+  &lt;a href=&#34;#summary&#34; class=&#34;header-anchor-link&#34;&gt;
+    &lt;svg width=&#34;16px&#34; height=&#34;16px&#34; viewBox=&#34;0 0 24 24&#34;&gt;
+&lt;svg
+    xmlns=&#34;http://www.w3.org/2000/svg&#34;
+    width=&#34;24&#34; height=&#34;24&#34; viewBox=&#34;0 0 24 24&#34; fill=&#34;none&#34;
+    stroke=&#34;currentColor&#34; stroke-width=&#34;2&#34; stroke-linecap=&#34;round&#34;
+    stroke-linejoin=&#34;round&#34;&gt;
+    &lt;line x1=&#34;4&#34; y1=&#34;9&#34; x2=&#34;20&#34; y2=&#34;9&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;4&#34; y1=&#34;15&#34; x2=&#34;20&#34; y2=&#34;15&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;10&#34; y1=&#34;3&#34; x2=&#34;8&#34; y2=&#34;21&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;16&#34; y1=&#34;3&#34; x2=&#34;14&#34; y2=&#34;21&#34;&gt;&lt;/line&gt;
+&lt;/svg&gt;
+
+&lt;/svg&gt;
+  &lt;/a&gt;
+&lt;/h1&gt;
+
+&lt;p&gt;This fascinating paper presents a counterintuitive argument against AI safety measures, suggesting that such measures might actually increase rather than decrease existential risks from AI. The authors (Cappelen, Dever, and Hawthorne) develop what they call the &amp;ldquo;non-deterministic argument&amp;rdquo; through an analogy with rock climbing.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Interpreting Attention Layer Outputs with Sparse Autoencoders</title>
+      <link>http://localhost:1313/en/posts/paper_efbe48e4c17a097f4feaec8cf9dec40218a27a87/</link>
+      <pubDate>Wed, 13 Nov 2024 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/en/posts/paper_efbe48e4c17a097f4feaec8cf9dec40218a27a87/</guid>
+      <description>&lt;h1 id=&#34;summary&#34; class=&#34;header-anchor-wrapper&#34;&gt;Summary
+  &lt;a href=&#34;#summary&#34; class=&#34;header-anchor-link&#34;&gt;
+    &lt;svg width=&#34;16px&#34; height=&#34;16px&#34; viewBox=&#34;0 0 24 24&#34;&gt;
+&lt;svg
+    xmlns=&#34;http://www.w3.org/2000/svg&#34;
+    width=&#34;24&#34; height=&#34;24&#34; viewBox=&#34;0 0 24 24&#34; fill=&#34;none&#34;
+    stroke=&#34;currentColor&#34; stroke-width=&#34;2&#34; stroke-linecap=&#34;round&#34;
+    stroke-linejoin=&#34;round&#34;&gt;
+    &lt;line x1=&#34;4&#34; y1=&#34;9&#34; x2=&#34;20&#34; y2=&#34;9&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;4&#34; y1=&#34;15&#34; x2=&#34;20&#34; y2=&#34;15&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;10&#34; y1=&#34;3&#34; x2=&#34;8&#34; y2=&#34;21&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;16&#34; y1=&#34;3&#34; x2=&#34;14&#34; y2=&#34;21&#34;&gt;&lt;/line&gt;
+&lt;/svg&gt;
+
+&lt;/svg&gt;
+  &lt;/a&gt;
+&lt;/h1&gt;
+
+&lt;p&gt;This paper presents a novel approach to interpreting attention mechanisms in transformer models using Sparse Autoencoders (SAEs). The authors demonstrate that SAEs can effectively decompose attention layer outputs into interpretable features, providing new insights into how attention layers process information.&lt;/p&gt;
+&lt;p&gt;&lt;figure class=&#34;paper-figure&#34;&gt;
+  &lt;div class=&#34;figure-wrapper&#34;&gt;
+    &lt;div class=&#34;figure-container&#34; onclick=&#34;toggleExpand(this)&#34;&gt;
+      &lt;div class=&#34;image-wrapper&#34;&gt;
+        &lt;img src=&#34;fig1.png&#34; &gt;
+      &lt;/div&gt;
+      
+      &lt;figcaption&gt;Overview. We train Sparse Autoencoders (SAEs) on $\textbf{z}_{\text{cat}}$ , the attention layer outputs pre-linear, concatenated across all heads. The SAEs extract linear directions that correspond to concepts in the model, giving us insight into what attention layers learn in practice. Further, we uncover what information was used to compute these features with direct feature attribution (DFA, Section 2).&lt;/figcaption&gt;
+      
+    &lt;/div&gt;
+    
+    &lt;div class=&#34;static-clone&#34;&gt;
+      &lt;div class=&#34;image-wrapper&#34;&gt;
+        &lt;img src=&#34;fig1.png&#34; &gt;
+      &lt;/div&gt;
+      
+      &lt;figcaption&gt;Overview. We train Sparse Autoencoders (SAEs) on $\textbf{z}_{\text{cat}}$ , the attention layer outputs pre-linear, concatenated across all heads. The SAEs extract linear directions that correspond to concepts in the model, giving us insight into what attention layers learn in practice. Further, we uncover what information was used to compute these features with direct feature attribution (DFA, Section 2).&lt;/figcaption&gt;
+      
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/figure&gt;
+
+&lt;script&gt;
+function toggleExpand(element) {
+    const figure = element.closest(&#39;.paper-figure&#39;);
+    const body = document.body;
+    
+    
+    if (figure.classList.contains(&#39;subfigure-content&#39;)) {
+        return;
+    }
+    
+    figure.classList.toggle(&#39;expanded&#39;);
+    
+    if (figure.classList.contains(&#39;expanded&#39;)) {
+        body.classList.add(&#39;has-expanded-figure&#39;);
+    } else {
+        body.classList.remove(&#39;has-expanded-figure&#39;);
+    }
+    
+    
+    const handleEscape = (e) =&gt; {
+        if (e.key === &#39;Escape&#39; &amp;&amp; figure.classList.contains(&#39;expanded&#39;)) {
+            toggleExpand(element);
+            document.removeEventListener(&#39;keydown&#39;, handleEscape);
+        }
+    };
+    
+    
+    const handleClickOutside = (e) =&gt; {
+        if (figure.classList.contains(&#39;expanded&#39;) &amp;&amp; !element.contains(e.target)) {
+            toggleExpand(element);
+            document.removeEventListener(&#39;click&#39;, handleClickOutside);
+        }
+    };
+    
+    if (figure.classList.contains(&#39;expanded&#39;)) {
+        document.addEventListener(&#39;keydown&#39;, handleEscape);
+        setTimeout(() =&gt; {
+            document.addEventListener(&#39;click&#39;, handleClickOutside);
+        }, 100);
+    }
+}
+
+
+document.addEventListener(&#39;DOMContentLoaded&#39;, () =&gt; {
+    const subfigureGroups = document.querySelectorAll(&#39;.subfigures&#39;);
+    subfigureGroups.forEach(group =&gt; {
+        group.addEventListener(&#39;click&#39;, (e) =&gt; {
+            if (e.target.closest(&#39;.subfigure-content&#39;)) {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                
+                const expandedView = document.createElement(&#39;div&#39;);
+                expandedView.className = &#39;subfigures-expanded&#39;;
+                expandedView.innerHTML = group.innerHTML;
+                
+                
+                const closeBtn = document.createElement(&#39;button&#39;);
+                closeBtn.className = &#39;close-expanded&#39;;
+                closeBtn.innerHTML = &#39;×&#39;;
+                closeBtn.onclick = () =&gt; {
+                    expandedView.remove();
+                    document.body.classList.remove(&#39;has-expanded-figure&#39;);
+                };
+                expandedView.appendChild(closeBtn);
+                
+                document.body.appendChild(expandedView);
+                document.body.classList.add(&#39;has-expanded-figure&#39;);
+                
+                
+                const handleEscape = (e) =&gt; {
+                    if (e.key === &#39;Escape&#39;) {
+                        expandedView.remove();
+                        document.body.classList.remove(&#39;has-expanded-figure&#39;);
+                        document.removeEventListener(&#39;keydown&#39;, handleEscape);
+                    }
+                };
+                document.addEventListener(&#39;keydown&#39;, handleEscape);
+            }
+        });
+    });
+});
+&lt;/script&gt; 
+Figure 1&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Interpreting Attention Layer Outputs with Sparse Autoencoders</title>
+      <link>http://localhost:1313/posts/paper_efbe48e4c17a097f4feaec8cf9dec40218a27a87/</link>
+      <pubDate>Wed, 13 Nov 2024 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/posts/paper_efbe48e4c17a097f4feaec8cf9dec40218a27a87/</guid>
+      <description>&lt;h1 id=&#34;summary&#34; class=&#34;header-anchor-wrapper&#34;&gt;Summary
+  &lt;a href=&#34;#summary&#34; class=&#34;header-anchor-link&#34;&gt;
+    &lt;svg width=&#34;16px&#34; height=&#34;16px&#34; viewBox=&#34;0 0 24 24&#34;&gt;
+&lt;svg
+    xmlns=&#34;http://www.w3.org/2000/svg&#34;
+    width=&#34;24&#34; height=&#34;24&#34; viewBox=&#34;0 0 24 24&#34; fill=&#34;none&#34;
+    stroke=&#34;currentColor&#34; stroke-width=&#34;2&#34; stroke-linecap=&#34;round&#34;
+    stroke-linejoin=&#34;round&#34;&gt;
+    &lt;line x1=&#34;4&#34; y1=&#34;9&#34; x2=&#34;20&#34; y2=&#34;9&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;4&#34; y1=&#34;15&#34; x2=&#34;20&#34; y2=&#34;15&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;10&#34; y1=&#34;3&#34; x2=&#34;8&#34; y2=&#34;21&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;16&#34; y1=&#34;3&#34; x2=&#34;14&#34; y2=&#34;21&#34;&gt;&lt;/line&gt;
+&lt;/svg&gt;
+
+&lt;/svg&gt;
+  &lt;/a&gt;
+&lt;/h1&gt;
+
+&lt;p&gt;This paper presents a novel approach to interpreting attention mechanisms in transformer models using Sparse Autoencoders (SAEs). The authors demonstrate that SAEs can effectively decompose attention layer outputs into interpretable features, providing new insights into how attention layers process information.&lt;/p&gt;
+&lt;p&gt;&lt;figure class=&#34;paper-figure&#34;&gt;
+  &lt;div class=&#34;figure-wrapper&#34;&gt;
+    &lt;div class=&#34;figure-container&#34; onclick=&#34;toggleExpand(this)&#34;&gt;
+      &lt;div class=&#34;image-wrapper&#34;&gt;
+        &lt;img src=&#34;fig1.png&#34; &gt;
+      &lt;/div&gt;
+      
+      &lt;figcaption&gt;Overview. We train Sparse Autoencoders (SAEs) on $\textbf{z}_{\text{cat}}$ , the attention layer outputs pre-linear, concatenated across all heads. The SAEs extract linear directions that correspond to concepts in the model, giving us insight into what attention layers learn in practice. Further, we uncover what information was used to compute these features with direct feature attribution (DFA, Section 2).&lt;/figcaption&gt;
+      
+    &lt;/div&gt;
+    
+    &lt;div class=&#34;static-clone&#34;&gt;
+      &lt;div class=&#34;image-wrapper&#34;&gt;
+        &lt;img src=&#34;fig1.png&#34; &gt;
+      &lt;/div&gt;
+      
+      &lt;figcaption&gt;Overview. We train Sparse Autoencoders (SAEs) on $\textbf{z}_{\text{cat}}$ , the attention layer outputs pre-linear, concatenated across all heads. The SAEs extract linear directions that correspond to concepts in the model, giving us insight into what attention layers learn in practice. Further, we uncover what information was used to compute these features with direct feature attribution (DFA, Section 2).&lt;/figcaption&gt;
+      
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/figure&gt;
+
+&lt;script&gt;
+function toggleExpand(element) {
+    const figure = element.closest(&#39;.paper-figure&#39;);
+    const body = document.body;
+    
+    
+    if (figure.classList.contains(&#39;subfigure-content&#39;)) {
+        return;
+    }
+    
+    figure.classList.toggle(&#39;expanded&#39;);
+    
+    if (figure.classList.contains(&#39;expanded&#39;)) {
+        body.classList.add(&#39;has-expanded-figure&#39;);
+    } else {
+        body.classList.remove(&#39;has-expanded-figure&#39;);
+    }
+    
+    
+    const handleEscape = (e) =&gt; {
+        if (e.key === &#39;Escape&#39; &amp;&amp; figure.classList.contains(&#39;expanded&#39;)) {
+            toggleExpand(element);
+            document.removeEventListener(&#39;keydown&#39;, handleEscape);
+        }
+    };
+    
+    
+    const handleClickOutside = (e) =&gt; {
+        if (figure.classList.contains(&#39;expanded&#39;) &amp;&amp; !element.contains(e.target)) {
+            toggleExpand(element);
+            document.removeEventListener(&#39;click&#39;, handleClickOutside);
+        }
+    };
+    
+    if (figure.classList.contains(&#39;expanded&#39;)) {
+        document.addEventListener(&#39;keydown&#39;, handleEscape);
+        setTimeout(() =&gt; {
+            document.addEventListener(&#39;click&#39;, handleClickOutside);
+        }, 100);
+    }
+}
+
+
+document.addEventListener(&#39;DOMContentLoaded&#39;, () =&gt; {
+    const subfigureGroups = document.querySelectorAll(&#39;.subfigures&#39;);
+    subfigureGroups.forEach(group =&gt; {
+        group.addEventListener(&#39;click&#39;, (e) =&gt; {
+            if (e.target.closest(&#39;.subfigure-content&#39;)) {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                
+                const expandedView = document.createElement(&#39;div&#39;);
+                expandedView.className = &#39;subfigures-expanded&#39;;
+                expandedView.innerHTML = group.innerHTML;
+                
+                
+                const closeBtn = document.createElement(&#39;button&#39;);
+                closeBtn.className = &#39;close-expanded&#39;;
+                closeBtn.innerHTML = &#39;×&#39;;
+                closeBtn.onclick = () =&gt; {
+                    expandedView.remove();
+                    document.body.classList.remove(&#39;has-expanded-figure&#39;);
+                };
+                expandedView.appendChild(closeBtn);
+                
+                document.body.appendChild(expandedView);
+                document.body.classList.add(&#39;has-expanded-figure&#39;);
+                
+                
+                const handleEscape = (e) =&gt; {
+                    if (e.key === &#39;Escape&#39;) {
+                        expandedView.remove();
+                        document.body.classList.remove(&#39;has-expanded-figure&#39;);
+                        document.removeEventListener(&#39;keydown&#39;, handleEscape);
+                    }
+                };
+                document.addEventListener(&#39;keydown&#39;, handleEscape);
+            }
+        });
+    });
+});
+&lt;/script&gt; 
+Figure 1&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Mechanistically Interpreting a Transformer-based 2-SAT Solver: An Axiomatic Approach</title>
+      <link>http://localhost:1313/en/posts/paper_432a829987174ae1da3350c32f9b9c1d502bd0de/</link>
+      <pubDate>Wed, 13 Nov 2024 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/en/posts/paper_432a829987174ae1da3350c32f9b9c1d502bd0de/</guid>
+      <description>&lt;h1 id=&#34;summary&#34; class=&#34;header-anchor-wrapper&#34;&gt;Summary
+  &lt;a href=&#34;#summary&#34; class=&#34;header-anchor-link&#34;&gt;
+    &lt;svg width=&#34;16px&#34; height=&#34;16px&#34; viewBox=&#34;0 0 24 24&#34;&gt;
+&lt;svg
+    xmlns=&#34;http://www.w3.org/2000/svg&#34;
+    width=&#34;24&#34; height=&#34;24&#34; viewBox=&#34;0 0 24 24&#34; fill=&#34;none&#34;
+    stroke=&#34;currentColor&#34; stroke-width=&#34;2&#34; stroke-linecap=&#34;round&#34;
+    stroke-linejoin=&#34;round&#34;&gt;
+    &lt;line x1=&#34;4&#34; y1=&#34;9&#34; x2=&#34;20&#34; y2=&#34;9&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;4&#34; y1=&#34;15&#34; x2=&#34;20&#34; y2=&#34;15&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;10&#34; y1=&#34;3&#34; x2=&#34;8&#34; y2=&#34;21&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;16&#34; y1=&#34;3&#34; x2=&#34;14&#34; y2=&#34;21&#34;&gt;&lt;/line&gt;
+&lt;/svg&gt;
+
+&lt;/svg&gt;
+  &lt;/a&gt;
+&lt;/h1&gt;
+
+&lt;p&gt;This paper presents an important theoretical framework for mechanistic interpretability of neural networks, introducing formal axioms to characterize what constitutes a valid mechanistic interpretation. The authors demonstrate their approach through a detailed case study of a Transformer model trained to solve 2-SAT problems.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Mechanistically Interpreting a Transformer-based 2-SAT Solver: An Axiomatic Approach</title>
+      <link>http://localhost:1313/posts/paper_432a829987174ae1da3350c32f9b9c1d502bd0de/</link>
+      <pubDate>Wed, 13 Nov 2024 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/posts/paper_432a829987174ae1da3350c32f9b9c1d502bd0de/</guid>
+      <description>&lt;h1 id=&#34;summary&#34; class=&#34;header-anchor-wrapper&#34;&gt;Summary
+  &lt;a href=&#34;#summary&#34; class=&#34;header-anchor-link&#34;&gt;
+    &lt;svg width=&#34;16px&#34; height=&#34;16px&#34; viewBox=&#34;0 0 24 24&#34;&gt;
+&lt;svg
+    xmlns=&#34;http://www.w3.org/2000/svg&#34;
+    width=&#34;24&#34; height=&#34;24&#34; viewBox=&#34;0 0 24 24&#34; fill=&#34;none&#34;
+    stroke=&#34;currentColor&#34; stroke-width=&#34;2&#34; stroke-linecap=&#34;round&#34;
+    stroke-linejoin=&#34;round&#34;&gt;
+    &lt;line x1=&#34;4&#34; y1=&#34;9&#34; x2=&#34;20&#34; y2=&#34;9&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;4&#34; y1=&#34;15&#34; x2=&#34;20&#34; y2=&#34;15&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;10&#34; y1=&#34;3&#34; x2=&#34;8&#34; y2=&#34;21&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;16&#34; y1=&#34;3&#34; x2=&#34;14&#34; y2=&#34;21&#34;&gt;&lt;/line&gt;
+&lt;/svg&gt;
+
+&lt;/svg&gt;
+  &lt;/a&gt;
+&lt;/h1&gt;
+
+&lt;p&gt;This paper presents an important theoretical framework for mechanistic interpretability of neural networks, introducing formal axioms to characterize what constitutes a valid mechanistic interpretation. The authors demonstrate their approach through a detailed case study of a Transformer model trained to solve 2-SAT problems.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Safety Cases: How to Justify the Safety of Advanced AI Systems</title>
+      <link>http://localhost:1313/en/posts/paper_26839456e694aa593a2cdea9c0442f2e8861aed3/</link>
+      <pubDate>Wed, 13 Nov 2024 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/en/posts/paper_26839456e694aa593a2cdea9c0442f2e8861aed3/</guid>
+      <description>&lt;h1 id=&#34;summary&#34; class=&#34;header-anchor-wrapper&#34;&gt;Summary
+  &lt;a href=&#34;#summary&#34; class=&#34;header-anchor-link&#34;&gt;
+    &lt;svg width=&#34;16px&#34; height=&#34;16px&#34; viewBox=&#34;0 0 24 24&#34;&gt;
+&lt;svg
+    xmlns=&#34;http://www.w3.org/2000/svg&#34;
+    width=&#34;24&#34; height=&#34;24&#34; viewBox=&#34;0 0 24 24&#34; fill=&#34;none&#34;
+    stroke=&#34;currentColor&#34; stroke-width=&#34;2&#34; stroke-linecap=&#34;round&#34;
+    stroke-linejoin=&#34;round&#34;&gt;
+    &lt;line x1=&#34;4&#34; y1=&#34;9&#34; x2=&#34;20&#34; y2=&#34;9&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;4&#34; y1=&#34;15&#34; x2=&#34;20&#34; y2=&#34;15&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;10&#34; y1=&#34;3&#34; x2=&#34;8&#34; y2=&#34;21&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;16&#34; y1=&#34;3&#34; x2=&#34;14&#34; y2=&#34;21&#34;&gt;&lt;/line&gt;
+&lt;/svg&gt;
+
+&lt;/svg&gt;
+  &lt;/a&gt;
+&lt;/h1&gt;
+
+&lt;p&gt;This comprehensive paper presents a framework for developing and evaluating safety cases for advanced AI systems. The authors propose a structured approach to justify that AI systems are unlikely to cause catastrophic outcomes during deployment.&lt;/p&gt;
+&lt;p&gt;Key Contributions:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Framework Structure
+The paper outlines a six-step framework for constructing AI safety cases:&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;Define the AI macrosystem and deployment decision&lt;/li&gt;
+&lt;li&gt;Specify unacceptable outcomes&lt;/li&gt;
+&lt;li&gt;Justify deployment assumptions&lt;/li&gt;
+&lt;li&gt;Decompose the macrosystem into subsystems&lt;/li&gt;
+&lt;li&gt;Assess subsystem risk&lt;/li&gt;
+&lt;li&gt;Assess macrosystem risk&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;Safety Argument Categories
+The authors identify four main categories of safety arguments (
+&lt;figure class=&#34;paper-figure&#34;&gt;
+  &lt;div class=&#34;figure-wrapper&#34;&gt;
+    &lt;div class=&#34;figure-container&#34; onclick=&#34;toggleExpand(this)&#34;&gt;
+      &lt;div class=&#34;image-wrapper&#34;&gt;
+        &lt;img src=&#34;fig2.png&#34; &gt;
+      &lt;/div&gt;
+      
+      &lt;figcaption&gt;&lt;strong&gt;Figure 2:&lt;/strong&gt; As AI systems become more powerful, developers will likely increasingly rely on arguments toward the right in the plot above.&lt;/figcaption&gt;
+      
+    &lt;/div&gt;
+    
+    &lt;div class=&#34;static-clone&#34;&gt;
+      &lt;div class=&#34;image-wrapper&#34;&gt;
+        &lt;img src=&#34;fig2.png&#34; &gt;
+      &lt;/div&gt;
+      
+      &lt;figcaption&gt;&lt;strong&gt;Figure 2:&lt;/strong&gt; As AI systems become more powerful, developers will likely increasingly rely on arguments toward the right in the plot above.&lt;/figcaption&gt;
+      
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/figure&gt;
+
+&lt;script&gt;
+function toggleExpand(element) {
+    const figure = element.closest(&#39;.paper-figure&#39;);
+    const body = document.body;
+    
+    
+    if (figure.classList.contains(&#39;subfigure-content&#39;)) {
+        return;
+    }
+    
+    figure.classList.toggle(&#39;expanded&#39;);
+    
+    if (figure.classList.contains(&#39;expanded&#39;)) {
+        body.classList.add(&#39;has-expanded-figure&#39;);
+    } else {
+        body.classList.remove(&#39;has-expanded-figure&#39;);
+    }
+    
+    
+    const handleEscape = (e) =&gt; {
+        if (e.key === &#39;Escape&#39; &amp;&amp; figure.classList.contains(&#39;expanded&#39;)) {
+            toggleExpand(element);
+            document.removeEventListener(&#39;keydown&#39;, handleEscape);
+        }
+    };
+    
+    
+    const handleClickOutside = (e) =&gt; {
+        if (figure.classList.contains(&#39;expanded&#39;) &amp;&amp; !element.contains(e.target)) {
+            toggleExpand(element);
+            document.removeEventListener(&#39;click&#39;, handleClickOutside);
+        }
+    };
+    
+    if (figure.classList.contains(&#39;expanded&#39;)) {
+        document.addEventListener(&#39;keydown&#39;, handleEscape);
+        setTimeout(() =&gt; {
+            document.addEventListener(&#39;click&#39;, handleClickOutside);
+        }, 100);
+    }
+}
+
+
+document.addEventListener(&#39;DOMContentLoaded&#39;, () =&gt; {
+    const subfigureGroups = document.querySelectorAll(&#39;.subfigures&#39;);
+    subfigureGroups.forEach(group =&gt; {
+        group.addEventListener(&#39;click&#39;, (e) =&gt; {
+            if (e.target.closest(&#39;.subfigure-content&#39;)) {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                
+                const expandedView = document.createElement(&#39;div&#39;);
+                expandedView.className = &#39;subfigures-expanded&#39;;
+                expandedView.innerHTML = group.innerHTML;
+                
+                
+                const closeBtn = document.createElement(&#39;button&#39;);
+                closeBtn.className = &#39;close-expanded&#39;;
+                closeBtn.innerHTML = &#39;×&#39;;
+                closeBtn.onclick = () =&gt; {
+                    expandedView.remove();
+                    document.body.classList.remove(&#39;has-expanded-figure&#39;);
+                };
+                expandedView.appendChild(closeBtn);
+                
+                document.body.appendChild(expandedView);
+                document.body.classList.add(&#39;has-expanded-figure&#39;);
+                
+                
+                const handleEscape = (e) =&gt; {
+                    if (e.key === &#39;Escape&#39;) {
+                        expandedView.remove();
+                        document.body.classList.remove(&#39;has-expanded-figure&#39;);
+                        document.removeEventListener(&#39;keydown&#39;, handleEscape);
+                    }
+                };
+                document.addEventListener(&#39;keydown&#39;, handleEscape);
+            }
+        });
+    });
+});
+&lt;/script&gt; 
+Figure 2):&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;Inability: Demonstrating AI systems cannot cause catastrophes&lt;/li&gt;
+&lt;li&gt;Control: Showing control measures prevent catastrophic outcomes&lt;/li&gt;
+&lt;li&gt;Trustworthiness: Proving AI systems behave reliably despite capabilities&lt;/li&gt;
+&lt;li&gt;Deference: Relying on credible AI advisors&amp;rsquo; safety assessments&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;Building Block Arguments
+The paper presents a detailed analysis of specific arguments within each category (
+&lt;figure class=&#34;paper-figure&#34;&gt;
+  &lt;div class=&#34;figure-wrapper&#34;&gt;
+    &lt;div class=&#34;figure-container&#34; onclick=&#34;toggleExpand(this)&#34;&gt;
+      &lt;div class=&#34;image-wrapper&#34;&gt;
+        &lt;img src=&#34;fig3.png&#34; &gt;
+      &lt;/div&gt;
+      
+      &lt;figcaption&gt;&lt;strong&gt;Figure 3:&lt;/strong&gt; building block arguments for making safety cases. See section 5 for detailed descriptions of each building block argument and justifications for their labels. The arguments that rank highest on practicality, strength, and scalability are monitoring, externalized reasoning, and testbeds.&lt;/figcaption&gt;
+      
+    &lt;/div&gt;
+    
+    &lt;div class=&#34;static-clone&#34;&gt;
+      &lt;div class=&#34;image-wrapper&#34;&gt;
+        &lt;img src=&#34;fig3.png&#34; &gt;
+      &lt;/div&gt;
+      
+      &lt;figcaption&gt;&lt;strong&gt;Figure 3:&lt;/strong&gt; building block arguments for making safety cases. See section 5 for detailed descriptions of each building block argument and justifications for their labels. The arguments that rank highest on practicality, strength, and scalability are monitoring, externalized reasoning, and testbeds.&lt;/figcaption&gt;
+      
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/figure&gt;
+
+&lt;script&gt;
+function toggleExpand(element) {
+    const figure = element.closest(&#39;.paper-figure&#39;);
+    const body = document.body;
+    
+    
+    if (figure.classList.contains(&#39;subfigure-content&#39;)) {
+        return;
+    }
+    
+    figure.classList.toggle(&#39;expanded&#39;);
+    
+    if (figure.classList.contains(&#39;expanded&#39;)) {
+        body.classList.add(&#39;has-expanded-figure&#39;);
+    } else {
+        body.classList.remove(&#39;has-expanded-figure&#39;);
+    }
+    
+    
+    const handleEscape = (e) =&gt; {
+        if (e.key === &#39;Escape&#39; &amp;&amp; figure.classList.contains(&#39;expanded&#39;)) {
+            toggleExpand(element);
+            document.removeEventListener(&#39;keydown&#39;, handleEscape);
+        }
+    };
+    
+    
+    const handleClickOutside = (e) =&gt; {
+        if (figure.classList.contains(&#39;expanded&#39;) &amp;&amp; !element.contains(e.target)) {
+            toggleExpand(element);
+            document.removeEventListener(&#39;click&#39;, handleClickOutside);
+        }
+    };
+    
+    if (figure.classList.contains(&#39;expanded&#39;)) {
+        document.addEventListener(&#39;keydown&#39;, handleEscape);
+        setTimeout(() =&gt; {
+            document.addEventListener(&#39;click&#39;, handleClickOutside);
+        }, 100);
+    }
+}
+
+
+document.addEventListener(&#39;DOMContentLoaded&#39;, () =&gt; {
+    const subfigureGroups = document.querySelectorAll(&#39;.subfigures&#39;);
+    subfigureGroups.forEach(group =&gt; {
+        group.addEventListener(&#39;click&#39;, (e) =&gt; {
+            if (e.target.closest(&#39;.subfigure-content&#39;)) {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                
+                const expandedView = document.createElement(&#39;div&#39;);
+                expandedView.className = &#39;subfigures-expanded&#39;;
+                expandedView.innerHTML = group.innerHTML;
+                
+                
+                const closeBtn = document.createElement(&#39;button&#39;);
+                closeBtn.className = &#39;close-expanded&#39;;
+                closeBtn.innerHTML = &#39;×&#39;;
+                closeBtn.onclick = () =&gt; {
+                    expandedView.remove();
+                    document.body.classList.remove(&#39;has-expanded-figure&#39;);
+                };
+                expandedView.appendChild(closeBtn);
+                
+                document.body.appendChild(expandedView);
+                document.body.classList.add(&#39;has-expanded-figure&#39;);
+                
+                
+                const handleEscape = (e) =&gt; {
+                    if (e.key === &#39;Escape&#39;) {
+                        expandedView.remove();
+                        document.body.classList.remove(&#39;has-expanded-figure&#39;);
+                        document.removeEventListener(&#39;keydown&#39;, handleEscape);
+                    }
+                };
+                document.addEventListener(&#39;keydown&#39;, handleEscape);
+            }
+        });
+    });
+});
+&lt;/script&gt; 
+Figure 3), rating them on:&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;Practicality: How soon they could be implemented&lt;/li&gt;
+&lt;li&gt;Maximum strength: Potential confidence in safety&lt;/li&gt;
+&lt;li&gt;Scalability: Applicability to more advanced AI systems&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol start=&#34;4&#34;&gt;
+&lt;li&gt;
+&lt;p&gt;Holistic Safety Case Construction
+The authors demonstrate how to combine these arguments into a complete safety case using Goal Structuring Notation (GSN) (
+&lt;figure class=&#34;paper-figure&#34;&gt;
+  &lt;div class=&#34;figure-wrapper&#34;&gt;
+    &lt;div class=&#34;figure-container&#34; onclick=&#34;toggleExpand(this)&#34;&gt;
+      &lt;div class=&#34;image-wrapper&#34;&gt;
+        &lt;img src=&#34;fig8.png&#34; &gt;
+      &lt;/div&gt;
+      
+      &lt;figcaption&gt;&lt;strong&gt;Figure 8:&lt;/strong&gt; Caption: The diagram above illustrates an example monitoring scheme where a watchdog model (right) monitors the agent model (left). In this setup, a control argument could be constructed by conservatively assuming that the agent and its users are pursuing their best strategy for causing a catastrophe (untrustworthy). The watchdog is assumed to be reliable, which must be justified with a trustworthiness argument.&lt;/figcaption&gt;
+      
+    &lt;/div&gt;
+    
+    &lt;div class=&#34;static-clone&#34;&gt;
+      &lt;div class=&#34;image-wrapper&#34;&gt;
+        &lt;img src=&#34;fig8.png&#34; &gt;
+      &lt;/div&gt;
+      
+      &lt;figcaption&gt;&lt;strong&gt;Figure 8:&lt;/strong&gt; Caption: The diagram above illustrates an example monitoring scheme where a watchdog model (right) monitors the agent model (left). In this setup, a control argument could be constructed by conservatively assuming that the agent and its users are pursuing their best strategy for causing a catastrophe (untrustworthy). The watchdog is assumed to be reliable, which must be justified with a trustworthiness argument.&lt;/figcaption&gt;
+      
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/figure&gt;
+
+&lt;script&gt;
+function toggleExpand(element) {
+    const figure = element.closest(&#39;.paper-figure&#39;);
+    const body = document.body;
+    
+    
+    if (figure.classList.contains(&#39;subfigure-content&#39;)) {
+        return;
+    }
+    
+    figure.classList.toggle(&#39;expanded&#39;);
+    
+    if (figure.classList.contains(&#39;expanded&#39;)) {
+        body.classList.add(&#39;has-expanded-figure&#39;);
+    } else {
+        body.classList.remove(&#39;has-expanded-figure&#39;);
+    }
+    
+    
+    const handleEscape = (e) =&gt; {
+        if (e.key === &#39;Escape&#39; &amp;&amp; figure.classList.contains(&#39;expanded&#39;)) {
+            toggleExpand(element);
+            document.removeEventListener(&#39;keydown&#39;, handleEscape);
+        }
+    };
+    
+    
+    const handleClickOutside = (e) =&gt; {
+        if (figure.classList.contains(&#39;expanded&#39;) &amp;&amp; !element.contains(e.target)) {
+            toggleExpand(element);
+            document.removeEventListener(&#39;click&#39;, handleClickOutside);
+        }
+    };
+    
+    if (figure.classList.contains(&#39;expanded&#39;)) {
+        document.addEventListener(&#39;keydown&#39;, handleEscape);
+        setTimeout(() =&gt; {
+            document.addEventListener(&#39;click&#39;, handleClickOutside);
+        }, 100);
+    }
+}
+
+
+document.addEventListener(&#39;DOMContentLoaded&#39;, () =&gt; {
+    const subfigureGroups = document.querySelectorAll(&#39;.subfigures&#39;);
+    subfigureGroups.forEach(group =&gt; {
+        group.addEventListener(&#39;click&#39;, (e) =&gt; {
+            if (e.target.closest(&#39;.subfigure-content&#39;)) {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                
+                const expandedView = document.createElement(&#39;div&#39;);
+                expandedView.className = &#39;subfigures-expanded&#39;;
+                expandedView.innerHTML = group.innerHTML;
+                
+                
+                const closeBtn = document.createElement(&#39;button&#39;);
+                closeBtn.className = &#39;close-expanded&#39;;
+                closeBtn.innerHTML = &#39;×&#39;;
+                closeBtn.onclick = () =&gt; {
+                    expandedView.remove();
+                    document.body.classList.remove(&#39;has-expanded-figure&#39;);
+                };
+                expandedView.appendChild(closeBtn);
+                
+                document.body.appendChild(expandedView);
+                document.body.classList.add(&#39;has-expanded-figure&#39;);
+                
+                
+                const handleEscape = (e) =&gt; {
+                    if (e.key === &#39;Escape&#39;) {
+                        expandedView.remove();
+                        document.body.classList.remove(&#39;has-expanded-figure&#39;);
+                        document.removeEventListener(&#39;keydown&#39;, handleEscape);
+                    }
+                };
+                document.addEventListener(&#39;keydown&#39;, handleEscape);
+            }
+        });
+    });
+});
+&lt;/script&gt; 
+Figure 8,
+&lt;figure class=&#34;paper-figure&#34;&gt;
+  &lt;div class=&#34;figure-wrapper&#34;&gt;
+    &lt;div class=&#34;figure-container&#34; onclick=&#34;toggleExpand(this)&#34;&gt;
+      &lt;div class=&#34;image-wrapper&#34;&gt;
+        &lt;img src=&#34;fig9.png&#34; &gt;
+      &lt;/div&gt;
+      
+      &lt;figcaption&gt;&lt;strong&gt;Figure 9:&lt;/strong&gt; the diagram above depicts a potential setup where three different models would need to behave badly to cause a catastrophe.&lt;/figcaption&gt;
+      
+    &lt;/div&gt;
+    
+    &lt;div class=&#34;static-clone&#34;&gt;
+      &lt;div class=&#34;image-wrapper&#34;&gt;
+        &lt;img src=&#34;fig9.png&#34; &gt;
+      &lt;/div&gt;
+      
+      &lt;figcaption&gt;&lt;strong&gt;Figure 9:&lt;/strong&gt; the diagram above depicts a potential setup where three different models would need to behave badly to cause a catastrophe.&lt;/figcaption&gt;
+      
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/figure&gt;
+
+&lt;script&gt;
+function toggleExpand(element) {
+    const figure = element.closest(&#39;.paper-figure&#39;);
+    const body = document.body;
+    
+    
+    if (figure.classList.contains(&#39;subfigure-content&#39;)) {
+        return;
+    }
+    
+    figure.classList.toggle(&#39;expanded&#39;);
+    
+    if (figure.classList.contains(&#39;expanded&#39;)) {
+        body.classList.add(&#39;has-expanded-figure&#39;);
+    } else {
+        body.classList.remove(&#39;has-expanded-figure&#39;);
+    }
+    
+    
+    const handleEscape = (e) =&gt; {
+        if (e.key === &#39;Escape&#39; &amp;&amp; figure.classList.contains(&#39;expanded&#39;)) {
+            toggleExpand(element);
+            document.removeEventListener(&#39;keydown&#39;, handleEscape);
+        }
+    };
+    
+    
+    const handleClickOutside = (e) =&gt; {
+        if (figure.classList.contains(&#39;expanded&#39;) &amp;&amp; !element.contains(e.target)) {
+            toggleExpand(element);
+            document.removeEventListener(&#39;click&#39;, handleClickOutside);
+        }
+    };
+    
+    if (figure.classList.contains(&#39;expanded&#39;)) {
+        document.addEventListener(&#39;keydown&#39;, handleEscape);
+        setTimeout(() =&gt; {
+            document.addEventListener(&#39;click&#39;, handleClickOutside);
+        }, 100);
+    }
+}
+
+
+document.addEventListener(&#39;DOMContentLoaded&#39;, () =&gt; {
+    const subfigureGroups = document.querySelectorAll(&#39;.subfigures&#39;);
+    subfigureGroups.forEach(group =&gt; {
+        group.addEventListener(&#39;click&#39;, (e) =&gt; {
+            if (e.target.closest(&#39;.subfigure-content&#39;)) {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                
+                const expandedView = document.createElement(&#39;div&#39;);
+                expandedView.className = &#39;subfigures-expanded&#39;;
+                expandedView.innerHTML = group.innerHTML;
+                
+                
+                const closeBtn = document.createElement(&#39;button&#39;);
+                closeBtn.className = &#39;close-expanded&#39;;
+                closeBtn.innerHTML = &#39;×&#39;;
+                closeBtn.onclick = () =&gt; {
+                    expandedView.remove();
+                    document.body.classList.remove(&#39;has-expanded-figure&#39;);
+                };
+                expandedView.appendChild(closeBtn);
+                
+                document.body.appendChild(expandedView);
+                document.body.classList.add(&#39;has-expanded-figure&#39;);
+                
+                
+                const handleEscape = (e) =&gt; {
+                    if (e.key === &#39;Escape&#39;) {
+                        expandedView.remove();
+                        document.body.classList.remove(&#39;has-expanded-figure&#39;);
+                        document.removeEventListener(&#39;keydown&#39;, handleEscape);
+                    }
+                };
+                document.addEventListener(&#39;keydown&#39;, handleEscape);
+            }
+        });
+    });
+});
+&lt;/script&gt; 
+Figure 9).&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Safety Cases: How to Justify the Safety of Advanced AI Systems</title>
+      <link>http://localhost:1313/posts/paper_26839456e694aa593a2cdea9c0442f2e8861aed3/</link>
+      <pubDate>Wed, 13 Nov 2024 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/posts/paper_26839456e694aa593a2cdea9c0442f2e8861aed3/</guid>
+      <description>&lt;h1 id=&#34;summary&#34; class=&#34;header-anchor-wrapper&#34;&gt;Summary
+  &lt;a href=&#34;#summary&#34; class=&#34;header-anchor-link&#34;&gt;
+    &lt;svg width=&#34;16px&#34; height=&#34;16px&#34; viewBox=&#34;0 0 24 24&#34;&gt;
+&lt;svg
+    xmlns=&#34;http://www.w3.org/2000/svg&#34;
+    width=&#34;24&#34; height=&#34;24&#34; viewBox=&#34;0 0 24 24&#34; fill=&#34;none&#34;
+    stroke=&#34;currentColor&#34; stroke-width=&#34;2&#34; stroke-linecap=&#34;round&#34;
+    stroke-linejoin=&#34;round&#34;&gt;
+    &lt;line x1=&#34;4&#34; y1=&#34;9&#34; x2=&#34;20&#34; y2=&#34;9&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;4&#34; y1=&#34;15&#34; x2=&#34;20&#34; y2=&#34;15&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;10&#34; y1=&#34;3&#34; x2=&#34;8&#34; y2=&#34;21&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;16&#34; y1=&#34;3&#34; x2=&#34;14&#34; y2=&#34;21&#34;&gt;&lt;/line&gt;
+&lt;/svg&gt;
+
+&lt;/svg&gt;
+  &lt;/a&gt;
+&lt;/h1&gt;
+
+&lt;p&gt;This comprehensive paper presents a framework for developing and evaluating safety cases for advanced AI systems. The authors propose a structured approach to justify that AI systems are unlikely to cause catastrophic outcomes during deployment.&lt;/p&gt;
+&lt;p&gt;Key Contributions:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Framework Structure
+The paper outlines a six-step framework for constructing AI safety cases:&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;Define the AI macrosystem and deployment decision&lt;/li&gt;
+&lt;li&gt;Specify unacceptable outcomes&lt;/li&gt;
+&lt;li&gt;Justify deployment assumptions&lt;/li&gt;
+&lt;li&gt;Decompose the macrosystem into subsystems&lt;/li&gt;
+&lt;li&gt;Assess subsystem risk&lt;/li&gt;
+&lt;li&gt;Assess macrosystem risk&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;Safety Argument Categories
+The authors identify four main categories of safety arguments (
+&lt;figure class=&#34;paper-figure&#34;&gt;
+  &lt;div class=&#34;figure-wrapper&#34;&gt;
+    &lt;div class=&#34;figure-container&#34; onclick=&#34;toggleExpand(this)&#34;&gt;
+      &lt;div class=&#34;image-wrapper&#34;&gt;
+        &lt;img src=&#34;fig2.png&#34; &gt;
+      &lt;/div&gt;
+      
+      &lt;figcaption&gt;&lt;strong&gt;Figure 2:&lt;/strong&gt; As AI systems become more powerful, developers will likely increasingly rely on arguments toward the right in the plot above.&lt;/figcaption&gt;
+      
+    &lt;/div&gt;
+    
+    &lt;div class=&#34;static-clone&#34;&gt;
+      &lt;div class=&#34;image-wrapper&#34;&gt;
+        &lt;img src=&#34;fig2.png&#34; &gt;
+      &lt;/div&gt;
+      
+      &lt;figcaption&gt;&lt;strong&gt;Figure 2:&lt;/strong&gt; As AI systems become more powerful, developers will likely increasingly rely on arguments toward the right in the plot above.&lt;/figcaption&gt;
+      
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/figure&gt;
+
+&lt;script&gt;
+function toggleExpand(element) {
+    const figure = element.closest(&#39;.paper-figure&#39;);
+    const body = document.body;
+    
+    
+    if (figure.classList.contains(&#39;subfigure-content&#39;)) {
+        return;
+    }
+    
+    figure.classList.toggle(&#39;expanded&#39;);
+    
+    if (figure.classList.contains(&#39;expanded&#39;)) {
+        body.classList.add(&#39;has-expanded-figure&#39;);
+    } else {
+        body.classList.remove(&#39;has-expanded-figure&#39;);
+    }
+    
+    
+    const handleEscape = (e) =&gt; {
+        if (e.key === &#39;Escape&#39; &amp;&amp; figure.classList.contains(&#39;expanded&#39;)) {
+            toggleExpand(element);
+            document.removeEventListener(&#39;keydown&#39;, handleEscape);
+        }
+    };
+    
+    
+    const handleClickOutside = (e) =&gt; {
+        if (figure.classList.contains(&#39;expanded&#39;) &amp;&amp; !element.contains(e.target)) {
+            toggleExpand(element);
+            document.removeEventListener(&#39;click&#39;, handleClickOutside);
+        }
+    };
+    
+    if (figure.classList.contains(&#39;expanded&#39;)) {
+        document.addEventListener(&#39;keydown&#39;, handleEscape);
+        setTimeout(() =&gt; {
+            document.addEventListener(&#39;click&#39;, handleClickOutside);
+        }, 100);
+    }
+}
+
+
+document.addEventListener(&#39;DOMContentLoaded&#39;, () =&gt; {
+    const subfigureGroups = document.querySelectorAll(&#39;.subfigures&#39;);
+    subfigureGroups.forEach(group =&gt; {
+        group.addEventListener(&#39;click&#39;, (e) =&gt; {
+            if (e.target.closest(&#39;.subfigure-content&#39;)) {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                
+                const expandedView = document.createElement(&#39;div&#39;);
+                expandedView.className = &#39;subfigures-expanded&#39;;
+                expandedView.innerHTML = group.innerHTML;
+                
+                
+                const closeBtn = document.createElement(&#39;button&#39;);
+                closeBtn.className = &#39;close-expanded&#39;;
+                closeBtn.innerHTML = &#39;×&#39;;
+                closeBtn.onclick = () =&gt; {
+                    expandedView.remove();
+                    document.body.classList.remove(&#39;has-expanded-figure&#39;);
+                };
+                expandedView.appendChild(closeBtn);
+                
+                document.body.appendChild(expandedView);
+                document.body.classList.add(&#39;has-expanded-figure&#39;);
+                
+                
+                const handleEscape = (e) =&gt; {
+                    if (e.key === &#39;Escape&#39;) {
+                        expandedView.remove();
+                        document.body.classList.remove(&#39;has-expanded-figure&#39;);
+                        document.removeEventListener(&#39;keydown&#39;, handleEscape);
+                    }
+                };
+                document.addEventListener(&#39;keydown&#39;, handleEscape);
+            }
+        });
+    });
+});
+&lt;/script&gt; 
+Figure 2):&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;Inability: Demonstrating AI systems cannot cause catastrophes&lt;/li&gt;
+&lt;li&gt;Control: Showing control measures prevent catastrophic outcomes&lt;/li&gt;
+&lt;li&gt;Trustworthiness: Proving AI systems behave reliably despite capabilities&lt;/li&gt;
+&lt;li&gt;Deference: Relying on credible AI advisors&amp;rsquo; safety assessments&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;Building Block Arguments
+The paper presents a detailed analysis of specific arguments within each category (
+&lt;figure class=&#34;paper-figure&#34;&gt;
+  &lt;div class=&#34;figure-wrapper&#34;&gt;
+    &lt;div class=&#34;figure-container&#34; onclick=&#34;toggleExpand(this)&#34;&gt;
+      &lt;div class=&#34;image-wrapper&#34;&gt;
+        &lt;img src=&#34;fig3.png&#34; &gt;
+      &lt;/div&gt;
+      
+      &lt;figcaption&gt;&lt;strong&gt;Figure 3:&lt;/strong&gt; building block arguments for making safety cases. See section 5 for detailed descriptions of each building block argument and justifications for their labels. The arguments that rank highest on practicality, strength, and scalability are monitoring, externalized reasoning, and testbeds.&lt;/figcaption&gt;
+      
+    &lt;/div&gt;
+    
+    &lt;div class=&#34;static-clone&#34;&gt;
+      &lt;div class=&#34;image-wrapper&#34;&gt;
+        &lt;img src=&#34;fig3.png&#34; &gt;
+      &lt;/div&gt;
+      
+      &lt;figcaption&gt;&lt;strong&gt;Figure 3:&lt;/strong&gt; building block arguments for making safety cases. See section 5 for detailed descriptions of each building block argument and justifications for their labels. The arguments that rank highest on practicality, strength, and scalability are monitoring, externalized reasoning, and testbeds.&lt;/figcaption&gt;
+      
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/figure&gt;
+
+&lt;script&gt;
+function toggleExpand(element) {
+    const figure = element.closest(&#39;.paper-figure&#39;);
+    const body = document.body;
+    
+    
+    if (figure.classList.contains(&#39;subfigure-content&#39;)) {
+        return;
+    }
+    
+    figure.classList.toggle(&#39;expanded&#39;);
+    
+    if (figure.classList.contains(&#39;expanded&#39;)) {
+        body.classList.add(&#39;has-expanded-figure&#39;);
+    } else {
+        body.classList.remove(&#39;has-expanded-figure&#39;);
+    }
+    
+    
+    const handleEscape = (e) =&gt; {
+        if (e.key === &#39;Escape&#39; &amp;&amp; figure.classList.contains(&#39;expanded&#39;)) {
+            toggleExpand(element);
+            document.removeEventListener(&#39;keydown&#39;, handleEscape);
+        }
+    };
+    
+    
+    const handleClickOutside = (e) =&gt; {
+        if (figure.classList.contains(&#39;expanded&#39;) &amp;&amp; !element.contains(e.target)) {
+            toggleExpand(element);
+            document.removeEventListener(&#39;click&#39;, handleClickOutside);
+        }
+    };
+    
+    if (figure.classList.contains(&#39;expanded&#39;)) {
+        document.addEventListener(&#39;keydown&#39;, handleEscape);
+        setTimeout(() =&gt; {
+            document.addEventListener(&#39;click&#39;, handleClickOutside);
+        }, 100);
+    }
+}
+
+
+document.addEventListener(&#39;DOMContentLoaded&#39;, () =&gt; {
+    const subfigureGroups = document.querySelectorAll(&#39;.subfigures&#39;);
+    subfigureGroups.forEach(group =&gt; {
+        group.addEventListener(&#39;click&#39;, (e) =&gt; {
+            if (e.target.closest(&#39;.subfigure-content&#39;)) {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                
+                const expandedView = document.createElement(&#39;div&#39;);
+                expandedView.className = &#39;subfigures-expanded&#39;;
+                expandedView.innerHTML = group.innerHTML;
+                
+                
+                const closeBtn = document.createElement(&#39;button&#39;);
+                closeBtn.className = &#39;close-expanded&#39;;
+                closeBtn.innerHTML = &#39;×&#39;;
+                closeBtn.onclick = () =&gt; {
+                    expandedView.remove();
+                    document.body.classList.remove(&#39;has-expanded-figure&#39;);
+                };
+                expandedView.appendChild(closeBtn);
+                
+                document.body.appendChild(expandedView);
+                document.body.classList.add(&#39;has-expanded-figure&#39;);
+                
+                
+                const handleEscape = (e) =&gt; {
+                    if (e.key === &#39;Escape&#39;) {
+                        expandedView.remove();
+                        document.body.classList.remove(&#39;has-expanded-figure&#39;);
+                        document.removeEventListener(&#39;keydown&#39;, handleEscape);
+                    }
+                };
+                document.addEventListener(&#39;keydown&#39;, handleEscape);
+            }
+        });
+    });
+});
+&lt;/script&gt; 
+Figure 3), rating them on:&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;Practicality: How soon they could be implemented&lt;/li&gt;
+&lt;li&gt;Maximum strength: Potential confidence in safety&lt;/li&gt;
+&lt;li&gt;Scalability: Applicability to more advanced AI systems&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol start=&#34;4&#34;&gt;
+&lt;li&gt;
+&lt;p&gt;Holistic Safety Case Construction
+The authors demonstrate how to combine these arguments into a complete safety case using Goal Structuring Notation (GSN) (
+&lt;figure class=&#34;paper-figure&#34;&gt;
+  &lt;div class=&#34;figure-wrapper&#34;&gt;
+    &lt;div class=&#34;figure-container&#34; onclick=&#34;toggleExpand(this)&#34;&gt;
+      &lt;div class=&#34;image-wrapper&#34;&gt;
+        &lt;img src=&#34;fig8.png&#34; &gt;
+      &lt;/div&gt;
+      
+      &lt;figcaption&gt;&lt;strong&gt;Figure 8:&lt;/strong&gt; Caption: The diagram above illustrates an example monitoring scheme where a watchdog model (right) monitors the agent model (left). In this setup, a control argument could be constructed by conservatively assuming that the agent and its users are pursuing their best strategy for causing a catastrophe (untrustworthy). The watchdog is assumed to be reliable, which must be justified with a trustworthiness argument.&lt;/figcaption&gt;
+      
+    &lt;/div&gt;
+    
+    &lt;div class=&#34;static-clone&#34;&gt;
+      &lt;div class=&#34;image-wrapper&#34;&gt;
+        &lt;img src=&#34;fig8.png&#34; &gt;
+      &lt;/div&gt;
+      
+      &lt;figcaption&gt;&lt;strong&gt;Figure 8:&lt;/strong&gt; Caption: The diagram above illustrates an example monitoring scheme where a watchdog model (right) monitors the agent model (left). In this setup, a control argument could be constructed by conservatively assuming that the agent and its users are pursuing their best strategy for causing a catastrophe (untrustworthy). The watchdog is assumed to be reliable, which must be justified with a trustworthiness argument.&lt;/figcaption&gt;
+      
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/figure&gt;
+
+&lt;script&gt;
+function toggleExpand(element) {
+    const figure = element.closest(&#39;.paper-figure&#39;);
+    const body = document.body;
+    
+    
+    if (figure.classList.contains(&#39;subfigure-content&#39;)) {
+        return;
+    }
+    
+    figure.classList.toggle(&#39;expanded&#39;);
+    
+    if (figure.classList.contains(&#39;expanded&#39;)) {
+        body.classList.add(&#39;has-expanded-figure&#39;);
+    } else {
+        body.classList.remove(&#39;has-expanded-figure&#39;);
+    }
+    
+    
+    const handleEscape = (e) =&gt; {
+        if (e.key === &#39;Escape&#39; &amp;&amp; figure.classList.contains(&#39;expanded&#39;)) {
+            toggleExpand(element);
+            document.removeEventListener(&#39;keydown&#39;, handleEscape);
+        }
+    };
+    
+    
+    const handleClickOutside = (e) =&gt; {
+        if (figure.classList.contains(&#39;expanded&#39;) &amp;&amp; !element.contains(e.target)) {
+            toggleExpand(element);
+            document.removeEventListener(&#39;click&#39;, handleClickOutside);
+        }
+    };
+    
+    if (figure.classList.contains(&#39;expanded&#39;)) {
+        document.addEventListener(&#39;keydown&#39;, handleEscape);
+        setTimeout(() =&gt; {
+            document.addEventListener(&#39;click&#39;, handleClickOutside);
+        }, 100);
+    }
+}
+
+
+document.addEventListener(&#39;DOMContentLoaded&#39;, () =&gt; {
+    const subfigureGroups = document.querySelectorAll(&#39;.subfigures&#39;);
+    subfigureGroups.forEach(group =&gt; {
+        group.addEventListener(&#39;click&#39;, (e) =&gt; {
+            if (e.target.closest(&#39;.subfigure-content&#39;)) {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                
+                const expandedView = document.createElement(&#39;div&#39;);
+                expandedView.className = &#39;subfigures-expanded&#39;;
+                expandedView.innerHTML = group.innerHTML;
+                
+                
+                const closeBtn = document.createElement(&#39;button&#39;);
+                closeBtn.className = &#39;close-expanded&#39;;
+                closeBtn.innerHTML = &#39;×&#39;;
+                closeBtn.onclick = () =&gt; {
+                    expandedView.remove();
+                    document.body.classList.remove(&#39;has-expanded-figure&#39;);
+                };
+                expandedView.appendChild(closeBtn);
+                
+                document.body.appendChild(expandedView);
+                document.body.classList.add(&#39;has-expanded-figure&#39;);
+                
+                
+                const handleEscape = (e) =&gt; {
+                    if (e.key === &#39;Escape&#39;) {
+                        expandedView.remove();
+                        document.body.classList.remove(&#39;has-expanded-figure&#39;);
+                        document.removeEventListener(&#39;keydown&#39;, handleEscape);
+                    }
+                };
+                document.addEventListener(&#39;keydown&#39;, handleEscape);
+            }
+        });
+    });
+});
+&lt;/script&gt; 
+Figure 8,
+&lt;figure class=&#34;paper-figure&#34;&gt;
+  &lt;div class=&#34;figure-wrapper&#34;&gt;
+    &lt;div class=&#34;figure-container&#34; onclick=&#34;toggleExpand(this)&#34;&gt;
+      &lt;div class=&#34;image-wrapper&#34;&gt;
+        &lt;img src=&#34;fig9.png&#34; &gt;
+      &lt;/div&gt;
+      
+      &lt;figcaption&gt;&lt;strong&gt;Figure 9:&lt;/strong&gt; the diagram above depicts a potential setup where three different models would need to behave badly to cause a catastrophe.&lt;/figcaption&gt;
+      
+    &lt;/div&gt;
+    
+    &lt;div class=&#34;static-clone&#34;&gt;
+      &lt;div class=&#34;image-wrapper&#34;&gt;
+        &lt;img src=&#34;fig9.png&#34; &gt;
+      &lt;/div&gt;
+      
+      &lt;figcaption&gt;&lt;strong&gt;Figure 9:&lt;/strong&gt; the diagram above depicts a potential setup where three different models would need to behave badly to cause a catastrophe.&lt;/figcaption&gt;
+      
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/figure&gt;
+
+&lt;script&gt;
+function toggleExpand(element) {
+    const figure = element.closest(&#39;.paper-figure&#39;);
+    const body = document.body;
+    
+    
+    if (figure.classList.contains(&#39;subfigure-content&#39;)) {
+        return;
+    }
+    
+    figure.classList.toggle(&#39;expanded&#39;);
+    
+    if (figure.classList.contains(&#39;expanded&#39;)) {
+        body.classList.add(&#39;has-expanded-figure&#39;);
+    } else {
+        body.classList.remove(&#39;has-expanded-figure&#39;);
+    }
+    
+    
+    const handleEscape = (e) =&gt; {
+        if (e.key === &#39;Escape&#39; &amp;&amp; figure.classList.contains(&#39;expanded&#39;)) {
+            toggleExpand(element);
+            document.removeEventListener(&#39;keydown&#39;, handleEscape);
+        }
+    };
+    
+    
+    const handleClickOutside = (e) =&gt; {
+        if (figure.classList.contains(&#39;expanded&#39;) &amp;&amp; !element.contains(e.target)) {
+            toggleExpand(element);
+            document.removeEventListener(&#39;click&#39;, handleClickOutside);
+        }
+    };
+    
+    if (figure.classList.contains(&#39;expanded&#39;)) {
+        document.addEventListener(&#39;keydown&#39;, handleEscape);
+        setTimeout(() =&gt; {
+            document.addEventListener(&#39;click&#39;, handleClickOutside);
+        }, 100);
+    }
+}
+
+
+document.addEventListener(&#39;DOMContentLoaded&#39;, () =&gt; {
+    const subfigureGroups = document.querySelectorAll(&#39;.subfigures&#39;);
+    subfigureGroups.forEach(group =&gt; {
+        group.addEventListener(&#39;click&#39;, (e) =&gt; {
+            if (e.target.closest(&#39;.subfigure-content&#39;)) {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                
+                const expandedView = document.createElement(&#39;div&#39;);
+                expandedView.className = &#39;subfigures-expanded&#39;;
+                expandedView.innerHTML = group.innerHTML;
+                
+                
+                const closeBtn = document.createElement(&#39;button&#39;);
+                closeBtn.className = &#39;close-expanded&#39;;
+                closeBtn.innerHTML = &#39;×&#39;;
+                closeBtn.onclick = () =&gt; {
+                    expandedView.remove();
+                    document.body.classList.remove(&#39;has-expanded-figure&#39;);
+                };
+                expandedView.appendChild(closeBtn);
+                
+                document.body.appendChild(expandedView);
+                document.body.classList.add(&#39;has-expanded-figure&#39;);
+                
+                
+                const handleEscape = (e) =&gt; {
+                    if (e.key === &#39;Escape&#39;) {
+                        expandedView.remove();
+                        document.body.classList.remove(&#39;has-expanded-figure&#39;);
+                        document.removeEventListener(&#39;keydown&#39;, handleEscape);
+                    }
+                };
+                document.addEventListener(&#39;keydown&#39;, handleEscape);
+            }
+        });
+    });
+});
+&lt;/script&gt; 
+Figure 9).&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Safetywashing: Do AI Safety Benchmarks Actually Measure Safety Progress?</title>
+      <link>http://localhost:1313/en/posts/paper_50c337cb047be63614342f5d2e9e492762b7cc5c/</link>
+      <pubDate>Wed, 13 Nov 2024 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/en/posts/paper_50c337cb047be63614342f5d2e9e492762b7cc5c/</guid>
+      <description>&lt;h1 id=&#34;summary&#34; class=&#34;header-anchor-wrapper&#34;&gt;Summary
+  &lt;a href=&#34;#summary&#34; class=&#34;header-anchor-link&#34;&gt;
+    &lt;svg width=&#34;16px&#34; height=&#34;16px&#34; viewBox=&#34;0 0 24 24&#34;&gt;
+&lt;svg
+    xmlns=&#34;http://www.w3.org/2000/svg&#34;
+    width=&#34;24&#34; height=&#34;24&#34; viewBox=&#34;0 0 24 24&#34; fill=&#34;none&#34;
+    stroke=&#34;currentColor&#34; stroke-width=&#34;2&#34; stroke-linecap=&#34;round&#34;
+    stroke-linejoin=&#34;round&#34;&gt;
+    &lt;line x1=&#34;4&#34; y1=&#34;9&#34; x2=&#34;20&#34; y2=&#34;9&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;4&#34; y1=&#34;15&#34; x2=&#34;20&#34; y2=&#34;15&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;10&#34; y1=&#34;3&#34; x2=&#34;8&#34; y2=&#34;21&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;16&#34; y1=&#34;3&#34; x2=&#34;14&#34; y2=&#34;21&#34;&gt;&lt;/line&gt;
+&lt;/svg&gt;
+
+&lt;/svg&gt;
+  &lt;/a&gt;
+&lt;/h1&gt;
+
+&lt;p&gt;This comprehensive paper examines the relationship between AI safety benchmarks and general model capabilities, introducing the concept of &amp;ldquo;safetywashing&amp;rdquo; - where capability improvements are misrepresented as safety advancements. The authors conduct an extensive meta-analysis across multiple safety domains and dozens of models to determine whether common safety benchmarks actually measure properties distinct from general capabilities.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Safetywashing: Do AI Safety Benchmarks Actually Measure Safety Progress?</title>
+      <link>http://localhost:1313/posts/paper_50c337cb047be63614342f5d2e9e492762b7cc5c/</link>
+      <pubDate>Wed, 13 Nov 2024 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/posts/paper_50c337cb047be63614342f5d2e9e492762b7cc5c/</guid>
+      <description>&lt;h1 id=&#34;summary&#34; class=&#34;header-anchor-wrapper&#34;&gt;Summary
+  &lt;a href=&#34;#summary&#34; class=&#34;header-anchor-link&#34;&gt;
+    &lt;svg width=&#34;16px&#34; height=&#34;16px&#34; viewBox=&#34;0 0 24 24&#34;&gt;
+&lt;svg
+    xmlns=&#34;http://www.w3.org/2000/svg&#34;
+    width=&#34;24&#34; height=&#34;24&#34; viewBox=&#34;0 0 24 24&#34; fill=&#34;none&#34;
+    stroke=&#34;currentColor&#34; stroke-width=&#34;2&#34; stroke-linecap=&#34;round&#34;
+    stroke-linejoin=&#34;round&#34;&gt;
+    &lt;line x1=&#34;4&#34; y1=&#34;9&#34; x2=&#34;20&#34; y2=&#34;9&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;4&#34; y1=&#34;15&#34; x2=&#34;20&#34; y2=&#34;15&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;10&#34; y1=&#34;3&#34; x2=&#34;8&#34; y2=&#34;21&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;16&#34; y1=&#34;3&#34; x2=&#34;14&#34; y2=&#34;21&#34;&gt;&lt;/line&gt;
+&lt;/svg&gt;
+
+&lt;/svg&gt;
+  &lt;/a&gt;
+&lt;/h1&gt;
+
+&lt;p&gt;This comprehensive paper examines the relationship between AI safety benchmarks and general model capabilities, introducing the concept of &amp;ldquo;safetywashing&amp;rdquo; - where capability improvements are misrepresented as safety advancements. The authors conduct an extensive meta-analysis across multiple safety domains and dozens of models to determine whether common safety benchmarks actually measure properties distinct from general capabilities.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>The Elephant in the Room - Why AI Safety Demands Diverse Teams</title>
+      <link>http://localhost:1313/en/posts/paper_ce2bfded08db31acfb92a82625fe353fdf9549be/</link>
+      <pubDate>Wed, 13 Nov 2024 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/en/posts/paper_ce2bfded08db31acfb92a82625fe353fdf9549be/</guid>
+      <description>&lt;h1 id=&#34;summary&#34; class=&#34;header-anchor-wrapper&#34;&gt;Summary
+  &lt;a href=&#34;#summary&#34; class=&#34;header-anchor-link&#34;&gt;
+    &lt;svg width=&#34;16px&#34; height=&#34;16px&#34; viewBox=&#34;0 0 24 24&#34;&gt;
+&lt;svg
+    xmlns=&#34;http://www.w3.org/2000/svg&#34;
+    width=&#34;24&#34; height=&#34;24&#34; viewBox=&#34;0 0 24 24&#34; fill=&#34;none&#34;
+    stroke=&#34;currentColor&#34; stroke-width=&#34;2&#34; stroke-linecap=&#34;round&#34;
+    stroke-linejoin=&#34;round&#34;&gt;
+    &lt;line x1=&#34;4&#34; y1=&#34;9&#34; x2=&#34;20&#34; y2=&#34;9&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;4&#34; y1=&#34;15&#34; x2=&#34;20&#34; y2=&#34;15&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;10&#34; y1=&#34;3&#34; x2=&#34;8&#34; y2=&#34;21&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;16&#34; y1=&#34;3&#34; x2=&#34;14&#34; y2=&#34;21&#34;&gt;&lt;/line&gt;
+&lt;/svg&gt;
+
+&lt;/svg&gt;
+  &lt;/a&gt;
+&lt;/h1&gt;
+
+&lt;p&gt;This paper, &amp;ldquo;The Elephant in the Room - Why AI Safety Demands Diverse Teams&amp;rdquo; by David Rostcheck and Lara Scheibling, presents a compelling argument for treating AI alignment as a social science problem rather than purely a technical one. Here are the key points:&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>The Elephant in the Room - Why AI Safety Demands Diverse Teams</title>
+      <link>http://localhost:1313/posts/paper_ce2bfded08db31acfb92a82625fe353fdf9549be/</link>
+      <pubDate>Wed, 13 Nov 2024 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/posts/paper_ce2bfded08db31acfb92a82625fe353fdf9549be/</guid>
+      <description>&lt;h1 id=&#34;summary&#34; class=&#34;header-anchor-wrapper&#34;&gt;Summary
+  &lt;a href=&#34;#summary&#34; class=&#34;header-anchor-link&#34;&gt;
+    &lt;svg width=&#34;16px&#34; height=&#34;16px&#34; viewBox=&#34;0 0 24 24&#34;&gt;
+&lt;svg
+    xmlns=&#34;http://www.w3.org/2000/svg&#34;
+    width=&#34;24&#34; height=&#34;24&#34; viewBox=&#34;0 0 24 24&#34; fill=&#34;none&#34;
+    stroke=&#34;currentColor&#34; stroke-width=&#34;2&#34; stroke-linecap=&#34;round&#34;
+    stroke-linejoin=&#34;round&#34;&gt;
+    &lt;line x1=&#34;4&#34; y1=&#34;9&#34; x2=&#34;20&#34; y2=&#34;9&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;4&#34; y1=&#34;15&#34; x2=&#34;20&#34; y2=&#34;15&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;10&#34; y1=&#34;3&#34; x2=&#34;8&#34; y2=&#34;21&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;16&#34; y1=&#34;3&#34; x2=&#34;14&#34; y2=&#34;21&#34;&gt;&lt;/line&gt;
+&lt;/svg&gt;
+
+&lt;/svg&gt;
+  &lt;/a&gt;
+&lt;/h1&gt;
+
+&lt;p&gt;This paper, &amp;ldquo;The Elephant in the Room - Why AI Safety Demands Diverse Teams&amp;rdquo; by David Rostcheck and Lara Scheibling, presents a compelling argument for treating AI alignment as a social science problem rather than purely a technical one. Here are the key points:&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>The Role of AI Safety Institutes in Contributing to International Standards for Frontier AI Safety</title>
+      <link>http://localhost:1313/en/posts/paper_cf54ca4ea0e1899ddb2d0ee3e0f21c8097f44bbc/</link>
+      <pubDate>Wed, 13 Nov 2024 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/en/posts/paper_cf54ca4ea0e1899ddb2d0ee3e0f21c8097f44bbc/</guid>
+      <description>&lt;h1 id=&#34;summary&#34; class=&#34;header-anchor-wrapper&#34;&gt;Summary
+  &lt;a href=&#34;#summary&#34; class=&#34;header-anchor-link&#34;&gt;
+    &lt;svg width=&#34;16px&#34; height=&#34;16px&#34; viewBox=&#34;0 0 24 24&#34;&gt;
+&lt;svg
+    xmlns=&#34;http://www.w3.org/2000/svg&#34;
+    width=&#34;24&#34; height=&#34;24&#34; viewBox=&#34;0 0 24 24&#34; fill=&#34;none&#34;
+    stroke=&#34;currentColor&#34; stroke-width=&#34;2&#34; stroke-linecap=&#34;round&#34;
+    stroke-linejoin=&#34;round&#34;&gt;
+    &lt;line x1=&#34;4&#34; y1=&#34;9&#34; x2=&#34;20&#34; y2=&#34;9&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;4&#34; y1=&#34;15&#34; x2=&#34;20&#34; y2=&#34;15&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;10&#34; y1=&#34;3&#34; x2=&#34;8&#34; y2=&#34;21&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;16&#34; y1=&#34;3&#34; x2=&#34;14&#34; y2=&#34;21&#34;&gt;&lt;/line&gt;
+&lt;/svg&gt;
+
+&lt;/svg&gt;
+  &lt;/a&gt;
+&lt;/h1&gt;
+
+&lt;p&gt;This paper examines the potential role of AI Safety Institutes (AISIs) in developing international standards for frontier AI safety. The authors propose three distinct but complementary models for AISI involvement in standard-setting processes, analyzing their respective strengths and limitations.&lt;/p&gt;
+&lt;p&gt;Key Points:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;Context and Motivation&lt;/strong&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;International standards are crucial for ensuring safe development and deployment of frontier AI systems&lt;/li&gt;
+&lt;li&gt;AISIs are well-positioned to contribute due to their technical expertise, international engagement mandate, and convening power&lt;/li&gt;
+&lt;li&gt;Current standardization processes face challenges in keeping pace with rapid AI development&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;&lt;strong&gt;Three Proposed Models&lt;/strong&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;The paper presents three models for AISI involvement in standard-setting:&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>The Role of AI Safety Institutes in Contributing to International Standards for Frontier AI Safety</title>
+      <link>http://localhost:1313/posts/paper_cf54ca4ea0e1899ddb2d0ee3e0f21c8097f44bbc/</link>
+      <pubDate>Wed, 13 Nov 2024 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/posts/paper_cf54ca4ea0e1899ddb2d0ee3e0f21c8097f44bbc/</guid>
+      <description>&lt;h1 id=&#34;summary&#34; class=&#34;header-anchor-wrapper&#34;&gt;Summary
+  &lt;a href=&#34;#summary&#34; class=&#34;header-anchor-link&#34;&gt;
+    &lt;svg width=&#34;16px&#34; height=&#34;16px&#34; viewBox=&#34;0 0 24 24&#34;&gt;
+&lt;svg
+    xmlns=&#34;http://www.w3.org/2000/svg&#34;
+    width=&#34;24&#34; height=&#34;24&#34; viewBox=&#34;0 0 24 24&#34; fill=&#34;none&#34;
+    stroke=&#34;currentColor&#34; stroke-width=&#34;2&#34; stroke-linecap=&#34;round&#34;
+    stroke-linejoin=&#34;round&#34;&gt;
+    &lt;line x1=&#34;4&#34; y1=&#34;9&#34; x2=&#34;20&#34; y2=&#34;9&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;4&#34; y1=&#34;15&#34; x2=&#34;20&#34; y2=&#34;15&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;10&#34; y1=&#34;3&#34; x2=&#34;8&#34; y2=&#34;21&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;16&#34; y1=&#34;3&#34; x2=&#34;14&#34; y2=&#34;21&#34;&gt;&lt;/line&gt;
+&lt;/svg&gt;
+
+&lt;/svg&gt;
+  &lt;/a&gt;
+&lt;/h1&gt;
+
+&lt;p&gt;This paper examines the potential role of AI Safety Institutes (AISIs) in developing international standards for frontier AI safety. The authors propose three distinct but complementary models for AISI involvement in standard-setting processes, analyzing their respective strengths and limitations.&lt;/p&gt;
+&lt;p&gt;Key Points:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;Context and Motivation&lt;/strong&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;International standards are crucial for ensuring safe development and deployment of frontier AI systems&lt;/li&gt;
+&lt;li&gt;AISIs are well-positioned to contribute due to their technical expertise, international engagement mandate, and convening power&lt;/li&gt;
+&lt;li&gt;Current standardization processes face challenges in keeping pace with rapid AI development&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;&lt;strong&gt;Three Proposed Models&lt;/strong&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;The paper presents three models for AISI involvement in standard-setting:&lt;/p&gt;</description>
+    </item>
+    
+    <item>
       <title>Bilinear MLPs enable weight-based mechanistic interpretability</title>
       <link>http://localhost:1313/en/posts/paper_1ac2d6f203b3bdd3503357b0839c24a485d6ce1d/</link>
       <pubDate>Mon, 11 Nov 2024 00:00:00 +0000</pubDate>
@@ -60,18 +1554,25 @@
       <pubDate>Mon, 11 Nov 2024 00:00:00 +0000</pubDate>
       
       <guid>http://localhost:1313/en/posts/paper_1301ed763095097ff424c668e16a265b3ae2f231/</guid>
-      <description>&lt;h1&gt;Summary&lt;/h1&gt;
+      <description>&lt;h1 id=&#34;summary&#34; class=&#34;header-anchor-wrapper&#34;&gt;Summary
+  &lt;a href=&#34;#summary&#34; class=&#34;header-anchor-link&#34;&gt;
+    &lt;svg width=&#34;16px&#34; height=&#34;16px&#34; viewBox=&#34;0 0 24 24&#34;&gt;
+&lt;svg
+    xmlns=&#34;http://www.w3.org/2000/svg&#34;
+    width=&#34;24&#34; height=&#34;24&#34; viewBox=&#34;0 0 24 24&#34; fill=&#34;none&#34;
+    stroke=&#34;currentColor&#34; stroke-width=&#34;2&#34; stroke-linecap=&#34;round&#34;
+    stroke-linejoin=&#34;round&#34;&gt;
+    &lt;line x1=&#34;4&#34; y1=&#34;9&#34; x2=&#34;20&#34; y2=&#34;9&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;4&#34; y1=&#34;15&#34; x2=&#34;20&#34; y2=&#34;15&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;10&#34; y1=&#34;3&#34; x2=&#34;8&#34; y2=&#34;21&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;16&#34; y1=&#34;3&#34; x2=&#34;14&#34; y2=&#34;21&#34;&gt;&lt;/line&gt;
+&lt;/svg&gt;
+
+&lt;/svg&gt;
+  &lt;/a&gt;
+&lt;/h1&gt;
 
 &lt;p&gt;This paper presents a novel approach to discovering interpretable circuits in transformer models using dictionary learning, focusing on a case study of Othello-GPT. The work advances mechanistic interpretability by providing a patch-free alternative to traditional circuit discovery methods. Key Contributions:&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;
-&lt;p&gt;A new framework for circuit discovery that avoids activation patching and offers better computational efficiency&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;A comprehensive analysis of where to apply dictionary learning in transformer architectures&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Detailed case studies showing how the method reveals interpretable circuits in Othello-GPT The authors propose decomposing three key components: - Word embeddings - Attention layer outputs - MLP layer outputs&lt;/p&gt;</description>
+&lt;p&gt;A new framework for circuit discovery that avoids activation patching and offers better computational efficiency&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -80,18 +1581,25 @@
       <pubDate>Mon, 11 Nov 2024 00:00:00 +0000</pubDate>
       
       <guid>http://localhost:1313/posts/paper_1301ed763095097ff424c668e16a265b3ae2f231/</guid>
-      <description>&lt;h1&gt;Summary&lt;/h1&gt;
+      <description>&lt;h1 id=&#34;summary&#34; class=&#34;header-anchor-wrapper&#34;&gt;Summary
+  &lt;a href=&#34;#summary&#34; class=&#34;header-anchor-link&#34;&gt;
+    &lt;svg width=&#34;16px&#34; height=&#34;16px&#34; viewBox=&#34;0 0 24 24&#34;&gt;
+&lt;svg
+    xmlns=&#34;http://www.w3.org/2000/svg&#34;
+    width=&#34;24&#34; height=&#34;24&#34; viewBox=&#34;0 0 24 24&#34; fill=&#34;none&#34;
+    stroke=&#34;currentColor&#34; stroke-width=&#34;2&#34; stroke-linecap=&#34;round&#34;
+    stroke-linejoin=&#34;round&#34;&gt;
+    &lt;line x1=&#34;4&#34; y1=&#34;9&#34; x2=&#34;20&#34; y2=&#34;9&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;4&#34; y1=&#34;15&#34; x2=&#34;20&#34; y2=&#34;15&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;10&#34; y1=&#34;3&#34; x2=&#34;8&#34; y2=&#34;21&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;16&#34; y1=&#34;3&#34; x2=&#34;14&#34; y2=&#34;21&#34;&gt;&lt;/line&gt;
+&lt;/svg&gt;
+
+&lt;/svg&gt;
+  &lt;/a&gt;
+&lt;/h1&gt;
 
 &lt;p&gt;This paper presents a novel approach to discovering interpretable circuits in transformer models using dictionary learning, focusing on a case study of Othello-GPT. The work advances mechanistic interpretability by providing a patch-free alternative to traditional circuit discovery methods. Key Contributions:&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;
-&lt;p&gt;A new framework for circuit discovery that avoids activation patching and offers better computational efficiency&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;A comprehensive analysis of where to apply dictionary learning in transformer architectures&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Detailed case studies showing how the method reveals interpretable circuits in Othello-GPT The authors propose decomposing three key components: - Word embeddings - Attention layer outputs - MLP layer outputs&lt;/p&gt;</description>
+&lt;p&gt;A new framework for circuit discovery that avoids activation patching and offers better computational efficiency&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -100,7 +1608,20 @@
       <pubDate>Mon, 11 Nov 2024 00:00:00 +0000</pubDate>
       
       <guid>http://localhost:1313/en/posts/paper_914ec7e316370cc23ae5cbd0031960151de4e43d/</guid>
-      <description>&lt;h1&gt;Summary&lt;/h1&gt;
+      <description>&lt;h1 id=&#34;summary&#34; class=&#34;header-anchor-wrapper&#34;&gt;Summary
+  &lt;a href=&#34;#summary&#34; class=&#34;header-anchor-link&#34;&gt;
+    &lt;svg width=&#34;16px&#34; height=&#34;16px&#34; viewBox=&#34;0 0 24 24&#34;&gt;
+&lt;svg
+    xmlns=&#34;http://www.w3.org/2000/svg&#34;
+    width=&#34;24&#34; height=&#34;24&#34; viewBox=&#34;0 0 24 24&#34; fill=&#34;none&#34;
+    stroke=&#34;currentColor&#34; stroke-width=&#34;2&#34; stroke-linecap=&#34;round&#34;
+    stroke-linejoin=&#34;round&#34;&gt;
+    &lt;line x1=&#34;4&#34; y1=&#34;9&#34; x2=&#34;20&#34; y2=&#34;9&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;4&#34; y1=&#34;15&#34; x2=&#34;20&#34; y2=&#34;15&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;10&#34; y1=&#34;3&#34; x2=&#34;8&#34; y2=&#34;21&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;16&#34; y1=&#34;3&#34; x2=&#34;14&#34; y2=&#34;21&#34;&gt;&lt;/line&gt;
+&lt;/svg&gt;
+
+&lt;/svg&gt;
+  &lt;/a&gt;
+&lt;/h1&gt;
 
 &lt;p&gt;This paper investigates how transformers learn regular languages from a mechanistic interpretability perspective. The authors develop a method to extract finite state machines (Moore machines) from trained transformers and analyze how these models internally represent different states. Key contributions: - Extension of the L* algorithm to extract Moore machines from transformers - Analysis of how transformers represent states in their activation space - Characterization of which regular languages one-layer transformers can learn with good generalization - Identification of failure modes due to attention saturation The authors begin by examining different training tasks for regular languages:&lt;/p&gt;</description>
     </item>
@@ -111,7 +1632,20 @@
       <pubDate>Mon, 11 Nov 2024 00:00:00 +0000</pubDate>
       
       <guid>http://localhost:1313/posts/paper_914ec7e316370cc23ae5cbd0031960151de4e43d/</guid>
-      <description>&lt;h1&gt;Summary&lt;/h1&gt;
+      <description>&lt;h1 id=&#34;summary&#34; class=&#34;header-anchor-wrapper&#34;&gt;Summary
+  &lt;a href=&#34;#summary&#34; class=&#34;header-anchor-link&#34;&gt;
+    &lt;svg width=&#34;16px&#34; height=&#34;16px&#34; viewBox=&#34;0 0 24 24&#34;&gt;
+&lt;svg
+    xmlns=&#34;http://www.w3.org/2000/svg&#34;
+    width=&#34;24&#34; height=&#34;24&#34; viewBox=&#34;0 0 24 24&#34; fill=&#34;none&#34;
+    stroke=&#34;currentColor&#34; stroke-width=&#34;2&#34; stroke-linecap=&#34;round&#34;
+    stroke-linejoin=&#34;round&#34;&gt;
+    &lt;line x1=&#34;4&#34; y1=&#34;9&#34; x2=&#34;20&#34; y2=&#34;9&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;4&#34; y1=&#34;15&#34; x2=&#34;20&#34; y2=&#34;15&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;10&#34; y1=&#34;3&#34; x2=&#34;8&#34; y2=&#34;21&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;16&#34; y1=&#34;3&#34; x2=&#34;14&#34; y2=&#34;21&#34;&gt;&lt;/line&gt;
+&lt;/svg&gt;
+
+&lt;/svg&gt;
+  &lt;/a&gt;
+&lt;/h1&gt;
 
 &lt;p&gt;This paper investigates how transformers learn regular languages from a mechanistic interpretability perspective. The authors develop a method to extract finite state machines (Moore machines) from trained transformers and analyze how these models internally represent different states. Key contributions: - Extension of the L* algorithm to extract Moore machines from transformers - Analysis of how transformers represent states in their activation space - Characterization of which regular languages one-layer transformers can learn with good generalization - Identification of failure modes due to attention saturation The authors begin by examining different training tasks for regular languages:&lt;/p&gt;</description>
     </item>
@@ -176,7 +1710,20 @@
       <pubDate>Mon, 11 Nov 2024 00:00:00 +0000</pubDate>
       
       <guid>http://localhost:1313/en/posts/paper_02ad427b0d20fb976741e332f69c2fd00c751164/</guid>
-      <description>&lt;h1&gt;Summary&lt;/h1&gt;
+      <description>&lt;h1 id=&#34;summary&#34; class=&#34;header-anchor-wrapper&#34;&gt;Summary
+  &lt;a href=&#34;#summary&#34; class=&#34;header-anchor-link&#34;&gt;
+    &lt;svg width=&#34;16px&#34; height=&#34;16px&#34; viewBox=&#34;0 0 24 24&#34;&gt;
+&lt;svg
+    xmlns=&#34;http://www.w3.org/2000/svg&#34;
+    width=&#34;24&#34; height=&#34;24&#34; viewBox=&#34;0 0 24 24&#34; fill=&#34;none&#34;
+    stroke=&#34;currentColor&#34; stroke-width=&#34;2&#34; stroke-linecap=&#34;round&#34;
+    stroke-linejoin=&#34;round&#34;&gt;
+    &lt;line x1=&#34;4&#34; y1=&#34;9&#34; x2=&#34;20&#34; y2=&#34;9&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;4&#34; y1=&#34;15&#34; x2=&#34;20&#34; y2=&#34;15&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;10&#34; y1=&#34;3&#34; x2=&#34;8&#34; y2=&#34;21&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;16&#34; y1=&#34;3&#34; x2=&#34;14&#34; y2=&#34;21&#34;&gt;&lt;/line&gt;
+&lt;/svg&gt;
+
+&lt;/svg&gt;
+  &lt;/a&gt;
+&lt;/h1&gt;
 
 &lt;p&gt;This paper introduces end-to-end sparse dictionary learning (e2e SAE), a novel method for training sparse autoencoders (SAEs) that improves their ability to identify functionally important features in neural networks. &lt;strong&gt;Key Innovation:&lt;/strong&gt; Traditional SAEs are trained to minimize reconstruction error of network activations, but this approach may learn features that aren&amp;rsquo;t maximally relevant for the network&amp;rsquo;s actual computation. The authors propose training SAEs by minimizing the KL divergence between the output distributions of:&lt;/p&gt;</description>
     </item>
@@ -187,151 +1734,22 @@
       <pubDate>Mon, 11 Nov 2024 00:00:00 +0000</pubDate>
       
       <guid>http://localhost:1313/posts/paper_02ad427b0d20fb976741e332f69c2fd00c751164/</guid>
-      <description>&lt;h1&gt;Summary&lt;/h1&gt;
+      <description>&lt;h1 id=&#34;summary&#34; class=&#34;header-anchor-wrapper&#34;&gt;Summary
+  &lt;a href=&#34;#summary&#34; class=&#34;header-anchor-link&#34;&gt;
+    &lt;svg width=&#34;16px&#34; height=&#34;16px&#34; viewBox=&#34;0 0 24 24&#34;&gt;
+&lt;svg
+    xmlns=&#34;http://www.w3.org/2000/svg&#34;
+    width=&#34;24&#34; height=&#34;24&#34; viewBox=&#34;0 0 24 24&#34; fill=&#34;none&#34;
+    stroke=&#34;currentColor&#34; stroke-width=&#34;2&#34; stroke-linecap=&#34;round&#34;
+    stroke-linejoin=&#34;round&#34;&gt;
+    &lt;line x1=&#34;4&#34; y1=&#34;9&#34; x2=&#34;20&#34; y2=&#34;9&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;4&#34; y1=&#34;15&#34; x2=&#34;20&#34; y2=&#34;15&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;10&#34; y1=&#34;3&#34; x2=&#34;8&#34; y2=&#34;21&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;16&#34; y1=&#34;3&#34; x2=&#34;14&#34; y2=&#34;21&#34;&gt;&lt;/line&gt;
+&lt;/svg&gt;
+
+&lt;/svg&gt;
+  &lt;/a&gt;
+&lt;/h1&gt;
 
 &lt;p&gt;This paper introduces end-to-end sparse dictionary learning (e2e SAE), a novel method for training sparse autoencoders (SAEs) that improves their ability to identify functionally important features in neural networks. &lt;strong&gt;Key Innovation:&lt;/strong&gt; Traditional SAEs are trained to minimize reconstruction error of network activations, but this approach may learn features that aren&amp;rsquo;t maximally relevant for the network&amp;rsquo;s actual computation. The authors propose training SAEs by minimizing the KL divergence between the output distributions of:&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Interpreting Attention Layer Outputs with Sparse Autoencoders</title>
-      <link>http://localhost:1313/en/posts/paper_efbe48e4c17a097f4feaec8cf9dec40218a27a87/</link>
-      <pubDate>Mon, 11 Nov 2024 00:00:00 +0000</pubDate>
-      
-      <guid>http://localhost:1313/en/posts/paper_efbe48e4c17a097f4feaec8cf9dec40218a27a87/</guid>
-      <description>&lt;h1&gt;Summary&lt;/h1&gt;
-
-&lt;p&gt;This paper presents a novel approach to interpreting attention mechanisms in transformer models using Sparse Autoencoders (SAEs). The authors demonstrate that SAEs can effectively decompose attention layer outputs into interpretable features, providing new insights into how attention layers process information.&lt;/p&gt;
-&lt;figure class=&#34;paper-figure&#34;&gt;
-  &lt;div class=&#34;figure-wrapper&#34;&gt;
-    &lt;div class=&#34;figure-container&#34; onclick=&#34;toggleExpand(this)&#34;&gt;
-      &lt;div class=&#34;image-wrapper&#34;&gt;
-        &lt;img src=&#34;fig1.png&#34; &gt;
-      &lt;/div&gt;
-      
-      &lt;figcaption&gt;&lt;strong&gt;Figure 1:&lt;/strong&gt; Overview. We train Sparse Autoencoders (SAEs) on \ $\textbf{z}_{\text{cat}}\ $ , the attention layer outputs pre-linear, concatenated across all heads. The SAEs extract linear directions that correspond to concepts in the model, giving us insight into what attention layers learn in practice. Further, we uncover what information was used to compute these features with direct feature attribution (DFA, Section 2).&lt;/figcaption&gt;
-      
-    &lt;/div&gt;
-    
-    &lt;div class=&#34;static-clone&#34;&gt;
-      &lt;div class=&#34;image-wrapper&#34;&gt;
-        &lt;img src=&#34;fig1.png&#34; &gt;
-      &lt;/div&gt;
-      
-      &lt;figcaption&gt;&lt;strong&gt;Figure 1:&lt;/strong&gt; Overview. We train Sparse Autoencoders (SAEs) on \ $\textbf{z}_{\text{cat}}\ $ , the attention layer outputs pre-linear, concatenated across all heads. The SAEs extract linear directions that correspond to concepts in the model, giving us insight into what attention layers learn in practice. Further, we uncover what information was used to compute these features with direct feature attribution (DFA, Section 2).&lt;/figcaption&gt;
-      
-    &lt;/div&gt;
-  &lt;/div&gt;
-&lt;/figure&gt;
-
-&lt;script&gt;
-function toggleExpand(element) {
-    const figure = element.closest(&#39;.paper-figure&#39;);
-    const body = document.body;
-    
-    figure.classList.toggle(&#39;expanded&#39;);
-    
-    if (figure.classList.contains(&#39;expanded&#39;)) {
-        body.classList.add(&#39;has-expanded-figure&#39;);
-    } else {
-        body.classList.remove(&#39;has-expanded-figure&#39;);
-    }
-    
-    
-    const handleEscape = (e) =&gt; {
-        if (e.key === &#39;Escape&#39; &amp;&amp; figure.classList.contains(&#39;expanded&#39;)) {
-            toggleExpand(element);
-            document.removeEventListener(&#39;keydown&#39;, handleEscape);
-        }
-    };
-    
-    
-    const handleClickOutside = (e) =&gt; {
-        if (figure.classList.contains(&#39;expanded&#39;) &amp;&amp; !element.contains(e.target)) {
-            toggleExpand(element);
-            document.removeEventListener(&#39;click&#39;, handleClickOutside);
-        }
-    };
-    
-    if (figure.classList.contains(&#39;expanded&#39;)) {
-        document.addEventListener(&#39;keydown&#39;, handleEscape);
-        setTimeout(() =&gt; {
-            document.addEventListener(&#39;click&#39;, handleClickOutside);
-        }, 100);
-    }
-}
-&lt;/script&gt; 
-&lt;p&gt;Figure 1 The key contributions include:&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Interpreting Attention Layer Outputs with Sparse Autoencoders</title>
-      <link>http://localhost:1313/posts/paper_efbe48e4c17a097f4feaec8cf9dec40218a27a87/</link>
-      <pubDate>Mon, 11 Nov 2024 00:00:00 +0000</pubDate>
-      
-      <guid>http://localhost:1313/posts/paper_efbe48e4c17a097f4feaec8cf9dec40218a27a87/</guid>
-      <description>&lt;h1&gt;Summary&lt;/h1&gt;
-
-&lt;p&gt;This paper presents a novel approach to interpreting attention mechanisms in transformer models using Sparse Autoencoders (SAEs). The authors demonstrate that SAEs can effectively decompose attention layer outputs into interpretable features, providing new insights into how attention layers process information.&lt;/p&gt;
-&lt;figure class=&#34;paper-figure&#34;&gt;
-  &lt;div class=&#34;figure-wrapper&#34;&gt;
-    &lt;div class=&#34;figure-container&#34; onclick=&#34;toggleExpand(this)&#34;&gt;
-      &lt;div class=&#34;image-wrapper&#34;&gt;
-        &lt;img src=&#34;fig1.png&#34; &gt;
-      &lt;/div&gt;
-      
-      &lt;figcaption&gt;&lt;strong&gt;Figure 1:&lt;/strong&gt; Overview. We train Sparse Autoencoders (SAEs) on \ $\textbf{z}_{\text{cat}}\ $ , the attention layer outputs pre-linear, concatenated across all heads. The SAEs extract linear directions that correspond to concepts in the model, giving us insight into what attention layers learn in practice. Further, we uncover what information was used to compute these features with direct feature attribution (DFA, Section 2).&lt;/figcaption&gt;
-      
-    &lt;/div&gt;
-    
-    &lt;div class=&#34;static-clone&#34;&gt;
-      &lt;div class=&#34;image-wrapper&#34;&gt;
-        &lt;img src=&#34;fig1.png&#34; &gt;
-      &lt;/div&gt;
-      
-      &lt;figcaption&gt;&lt;strong&gt;Figure 1:&lt;/strong&gt; Overview. We train Sparse Autoencoders (SAEs) on \ $\textbf{z}_{\text{cat}}\ $ , the attention layer outputs pre-linear, concatenated across all heads. The SAEs extract linear directions that correspond to concepts in the model, giving us insight into what attention layers learn in practice. Further, we uncover what information was used to compute these features with direct feature attribution (DFA, Section 2).&lt;/figcaption&gt;
-      
-    &lt;/div&gt;
-  &lt;/div&gt;
-&lt;/figure&gt;
-
-&lt;script&gt;
-function toggleExpand(element) {
-    const figure = element.closest(&#39;.paper-figure&#39;);
-    const body = document.body;
-    
-    figure.classList.toggle(&#39;expanded&#39;);
-    
-    if (figure.classList.contains(&#39;expanded&#39;)) {
-        body.classList.add(&#39;has-expanded-figure&#39;);
-    } else {
-        body.classList.remove(&#39;has-expanded-figure&#39;);
-    }
-    
-    
-    const handleEscape = (e) =&gt; {
-        if (e.key === &#39;Escape&#39; &amp;&amp; figure.classList.contains(&#39;expanded&#39;)) {
-            toggleExpand(element);
-            document.removeEventListener(&#39;keydown&#39;, handleEscape);
-        }
-    };
-    
-    
-    const handleClickOutside = (e) =&gt; {
-        if (figure.classList.contains(&#39;expanded&#39;) &amp;&amp; !element.contains(e.target)) {
-            toggleExpand(element);
-            document.removeEventListener(&#39;click&#39;, handleClickOutside);
-        }
-    };
-    
-    if (figure.classList.contains(&#39;expanded&#39;)) {
-        document.addEventListener(&#39;keydown&#39;, handleEscape);
-        setTimeout(() =&gt; {
-            document.addEventListener(&#39;click&#39;, handleClickOutside);
-        }, 100);
-    }
-}
-&lt;/script&gt; 
-&lt;p&gt;Figure 1 The key contributions include:&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -340,72 +1758,22 @@ function toggleExpand(element) {
       <pubDate>Mon, 11 Nov 2024 00:00:00 +0000</pubDate>
       
       <guid>http://localhost:1313/en/posts/paper_2454c15f9708dc337a2ed849e897f99c43b8f6cb/</guid>
-      <description>&lt;h1&gt;Summary&lt;/h1&gt;
+      <description>&lt;h1 id=&#34;summary&#34; class=&#34;header-anchor-wrapper&#34;&gt;Summary
+  &lt;a href=&#34;#summary&#34; class=&#34;header-anchor-link&#34;&gt;
+    &lt;svg width=&#34;16px&#34; height=&#34;16px&#34; viewBox=&#34;0 0 24 24&#34;&gt;
+&lt;svg
+    xmlns=&#34;http://www.w3.org/2000/svg&#34;
+    width=&#34;24&#34; height=&#34;24&#34; viewBox=&#34;0 0 24 24&#34; fill=&#34;none&#34;
+    stroke=&#34;currentColor&#34; stroke-width=&#34;2&#34; stroke-linecap=&#34;round&#34;
+    stroke-linejoin=&#34;round&#34;&gt;
+    &lt;line x1=&#34;4&#34; y1=&#34;9&#34; x2=&#34;20&#34; y2=&#34;9&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;4&#34; y1=&#34;15&#34; x2=&#34;20&#34; y2=&#34;15&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;10&#34; y1=&#34;3&#34; x2=&#34;8&#34; y2=&#34;21&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;16&#34; y1=&#34;3&#34; x2=&#34;14&#34; y2=&#34;21&#34;&gt;&lt;/line&gt;
+&lt;/svg&gt;
 
-&lt;p&gt;This paper introduces Llama Scope, a comprehensive suite of 256 Sparse Autoencoders (SAEs) trained on the Llama-3.1-8B language model. The work represents a significant advancement in mechanistic interpretability research by providing ready-to-use, open-source SAE models that can help researchers understand the internal representations of large language models. Key aspects of the work include:&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;strong&gt;Architecture and Training Position&lt;/strong&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;figure class=&#34;paper-figure&#34;&gt;
-  &lt;div class=&#34;figure-wrapper&#34;&gt;
-    &lt;div class=&#34;figure-container&#34; onclick=&#34;toggleExpand(this)&#34;&gt;
-      &lt;div class=&#34;image-wrapper&#34;&gt;
-        &lt;img src=&#34;fig1.png&#34; &gt;
-      &lt;/div&gt;
-      
-      &lt;figcaption&gt;&lt;strong&gt;Figure 1:&lt;/strong&gt; Four potential training positions in one Transformer Block.&lt;/figcaption&gt;
-      
-    &lt;/div&gt;
-    
-    &lt;div class=&#34;static-clone&#34;&gt;
-      &lt;div class=&#34;image-wrapper&#34;&gt;
-        &lt;img src=&#34;fig1.png&#34; &gt;
-      &lt;/div&gt;
-      
-      &lt;figcaption&gt;&lt;strong&gt;Figure 1:&lt;/strong&gt; Four potential training positions in one Transformer Block.&lt;/figcaption&gt;
-      
-    &lt;/div&gt;
-  &lt;/div&gt;
-&lt;/figure&gt;
+&lt;/svg&gt;
+  &lt;/a&gt;
+&lt;/h1&gt;
 
-&lt;script&gt;
-function toggleExpand(element) {
-    const figure = element.closest(&#39;.paper-figure&#39;);
-    const body = document.body;
-    
-    figure.classList.toggle(&#39;expanded&#39;);
-    
-    if (figure.classList.contains(&#39;expanded&#39;)) {
-        body.classList.add(&#39;has-expanded-figure&#39;);
-    } else {
-        body.classList.remove(&#39;has-expanded-figure&#39;);
-    }
-    
-    
-    const handleEscape = (e) =&gt; {
-        if (e.key === &#39;Escape&#39; &amp;&amp; figure.classList.contains(&#39;expanded&#39;)) {
-            toggleExpand(element);
-            document.removeEventListener(&#39;keydown&#39;, handleEscape);
-        }
-    };
-    
-    
-    const handleClickOutside = (e) =&gt; {
-        if (figure.classList.contains(&#39;expanded&#39;) &amp;&amp; !element.contains(e.target)) {
-            toggleExpand(element);
-            document.removeEventListener(&#39;click&#39;, handleClickOutside);
-        }
-    };
-    
-    if (figure.classList.contains(&#39;expanded&#39;)) {
-        document.addEventListener(&#39;keydown&#39;, handleEscape);
-        setTimeout(() =&gt; {
-            document.addEventListener(&#39;click&#39;, handleClickOutside);
-        }, 100);
-    }
-}
-&lt;/script&gt; 
-&lt;p&gt;Figure 1 The authors train SAEs at four different positions within each transformer block: - Post-MLP Residual Stream (R) - Attention Output (A) - MLP Output (M) - Transcoder (TC)&lt;/p&gt;</description>
+&lt;p&gt;This paper introduces Llama Scope, a comprehensive suite of 256 Sparse Autoencoders (SAEs) trained on the Llama-3.1-8B language model. The work represents a significant advancement in mechanistic interpretability research by providing ready-to-use, open-source SAE models that can help researchers understand the internal representations of large language models. Key aspects of the work include:&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -414,72 +1782,22 @@ function toggleExpand(element) {
       <pubDate>Mon, 11 Nov 2024 00:00:00 +0000</pubDate>
       
       <guid>http://localhost:1313/posts/paper_2454c15f9708dc337a2ed849e897f99c43b8f6cb/</guid>
-      <description>&lt;h1&gt;Summary&lt;/h1&gt;
+      <description>&lt;h1 id=&#34;summary&#34; class=&#34;header-anchor-wrapper&#34;&gt;Summary
+  &lt;a href=&#34;#summary&#34; class=&#34;header-anchor-link&#34;&gt;
+    &lt;svg width=&#34;16px&#34; height=&#34;16px&#34; viewBox=&#34;0 0 24 24&#34;&gt;
+&lt;svg
+    xmlns=&#34;http://www.w3.org/2000/svg&#34;
+    width=&#34;24&#34; height=&#34;24&#34; viewBox=&#34;0 0 24 24&#34; fill=&#34;none&#34;
+    stroke=&#34;currentColor&#34; stroke-width=&#34;2&#34; stroke-linecap=&#34;round&#34;
+    stroke-linejoin=&#34;round&#34;&gt;
+    &lt;line x1=&#34;4&#34; y1=&#34;9&#34; x2=&#34;20&#34; y2=&#34;9&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;4&#34; y1=&#34;15&#34; x2=&#34;20&#34; y2=&#34;15&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;10&#34; y1=&#34;3&#34; x2=&#34;8&#34; y2=&#34;21&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;16&#34; y1=&#34;3&#34; x2=&#34;14&#34; y2=&#34;21&#34;&gt;&lt;/line&gt;
+&lt;/svg&gt;
 
-&lt;p&gt;This paper introduces Llama Scope, a comprehensive suite of 256 Sparse Autoencoders (SAEs) trained on the Llama-3.1-8B language model. The work represents a significant advancement in mechanistic interpretability research by providing ready-to-use, open-source SAE models that can help researchers understand the internal representations of large language models. Key aspects of the work include:&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;strong&gt;Architecture and Training Position&lt;/strong&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;figure class=&#34;paper-figure&#34;&gt;
-  &lt;div class=&#34;figure-wrapper&#34;&gt;
-    &lt;div class=&#34;figure-container&#34; onclick=&#34;toggleExpand(this)&#34;&gt;
-      &lt;div class=&#34;image-wrapper&#34;&gt;
-        &lt;img src=&#34;fig1.png&#34; &gt;
-      &lt;/div&gt;
-      
-      &lt;figcaption&gt;&lt;strong&gt;Figure 1:&lt;/strong&gt; Four potential training positions in one Transformer Block.&lt;/figcaption&gt;
-      
-    &lt;/div&gt;
-    
-    &lt;div class=&#34;static-clone&#34;&gt;
-      &lt;div class=&#34;image-wrapper&#34;&gt;
-        &lt;img src=&#34;fig1.png&#34; &gt;
-      &lt;/div&gt;
-      
-      &lt;figcaption&gt;&lt;strong&gt;Figure 1:&lt;/strong&gt; Four potential training positions in one Transformer Block.&lt;/figcaption&gt;
-      
-    &lt;/div&gt;
-  &lt;/div&gt;
-&lt;/figure&gt;
+&lt;/svg&gt;
+  &lt;/a&gt;
+&lt;/h1&gt;
 
-&lt;script&gt;
-function toggleExpand(element) {
-    const figure = element.closest(&#39;.paper-figure&#39;);
-    const body = document.body;
-    
-    figure.classList.toggle(&#39;expanded&#39;);
-    
-    if (figure.classList.contains(&#39;expanded&#39;)) {
-        body.classList.add(&#39;has-expanded-figure&#39;);
-    } else {
-        body.classList.remove(&#39;has-expanded-figure&#39;);
-    }
-    
-    
-    const handleEscape = (e) =&gt; {
-        if (e.key === &#39;Escape&#39; &amp;&amp; figure.classList.contains(&#39;expanded&#39;)) {
-            toggleExpand(element);
-            document.removeEventListener(&#39;keydown&#39;, handleEscape);
-        }
-    };
-    
-    
-    const handleClickOutside = (e) =&gt; {
-        if (figure.classList.contains(&#39;expanded&#39;) &amp;&amp; !element.contains(e.target)) {
-            toggleExpand(element);
-            document.removeEventListener(&#39;click&#39;, handleClickOutside);
-        }
-    };
-    
-    if (figure.classList.contains(&#39;expanded&#39;)) {
-        document.addEventListener(&#39;keydown&#39;, handleEscape);
-        setTimeout(() =&gt; {
-            document.addEventListener(&#39;click&#39;, handleClickOutside);
-        }, 100);
-    }
-}
-&lt;/script&gt; 
-&lt;p&gt;Figure 1 The authors train SAEs at four different positions within each transformer block: - Post-MLP Residual Stream (R) - Attention Output (A) - MLP Output (M) - Transcoder (TC)&lt;/p&gt;</description>
+&lt;p&gt;This paper introduces Llama Scope, a comprehensive suite of 256 Sparse Autoencoders (SAEs) trained on the Llama-3.1-8B language model. The work represents a significant advancement in mechanistic interpretability research by providing ready-to-use, open-source SAE models that can help researchers understand the internal representations of large language models. Key aspects of the work include:&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -488,7 +1806,20 @@ function toggleExpand(element) {
       <pubDate>Mon, 11 Nov 2024 00:00:00 +0000</pubDate>
       
       <guid>http://localhost:1313/en/posts/paper_8b750488d139f9beba0815ff8f46ebe15ebb3e58/</guid>
-      <description>&lt;h1&gt;Summary&lt;/h1&gt;
+      <description>&lt;h1 id=&#34;summary&#34; class=&#34;header-anchor-wrapper&#34;&gt;Summary
+  &lt;a href=&#34;#summary&#34; class=&#34;header-anchor-link&#34;&gt;
+    &lt;svg width=&#34;16px&#34; height=&#34;16px&#34; viewBox=&#34;0 0 24 24&#34;&gt;
+&lt;svg
+    xmlns=&#34;http://www.w3.org/2000/svg&#34;
+    width=&#34;24&#34; height=&#34;24&#34; viewBox=&#34;0 0 24 24&#34; fill=&#34;none&#34;
+    stroke=&#34;currentColor&#34; stroke-width=&#34;2&#34; stroke-linecap=&#34;round&#34;
+    stroke-linejoin=&#34;round&#34;&gt;
+    &lt;line x1=&#34;4&#34; y1=&#34;9&#34; x2=&#34;20&#34; y2=&#34;9&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;4&#34; y1=&#34;15&#34; x2=&#34;20&#34; y2=&#34;15&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;10&#34; y1=&#34;3&#34; x2=&#34;8&#34; y2=&#34;21&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;16&#34; y1=&#34;3&#34; x2=&#34;14&#34; y2=&#34;21&#34;&gt;&lt;/line&gt;
+&lt;/svg&gt;
+
+&lt;/svg&gt;
+  &lt;/a&gt;
+&lt;/h1&gt;
 
 &lt;p&gt;This comprehensive review paper examines mechanistic interpretability, an emerging approach to understanding the inner workings of AI systems that aims to reverse engineer neural networks into human-understandable algorithms and concepts.&lt;/p&gt;
 &lt;figure class=&#34;paper-figure&#34;&gt;
@@ -518,6 +1849,11 @@ function toggleExpand(element) {
     const figure = element.closest(&#39;.paper-figure&#39;);
     const body = document.body;
     
+    
+    if (figure.classList.contains(&#39;subfigure-content&#39;)) {
+        return;
+    }
+    
     figure.classList.toggle(&#39;expanded&#39;);
     
     if (figure.classList.contains(&#39;expanded&#39;)) {
@@ -549,6 +1885,47 @@ function toggleExpand(element) {
         }, 100);
     }
 }
+
+
+document.addEventListener(&#39;DOMContentLoaded&#39;, () =&gt; {
+    const subfigureGroups = document.querySelectorAll(&#39;.subfigures&#39;);
+    subfigureGroups.forEach(group =&gt; {
+        group.addEventListener(&#39;click&#39;, (e) =&gt; {
+            if (e.target.closest(&#39;.subfigure-content&#39;)) {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                
+                const expandedView = document.createElement(&#39;div&#39;);
+                expandedView.className = &#39;subfigures-expanded&#39;;
+                expandedView.innerHTML = group.innerHTML;
+                
+                
+                const closeBtn = document.createElement(&#39;button&#39;);
+                closeBtn.className = &#39;close-expanded&#39;;
+                closeBtn.innerHTML = &#39;×&#39;;
+                closeBtn.onclick = () =&gt; {
+                    expandedView.remove();
+                    document.body.classList.remove(&#39;has-expanded-figure&#39;);
+                };
+                expandedView.appendChild(closeBtn);
+                
+                document.body.appendChild(expandedView);
+                document.body.classList.add(&#39;has-expanded-figure&#39;);
+                
+                
+                const handleEscape = (e) =&gt; {
+                    if (e.key === &#39;Escape&#39;) {
+                        expandedView.remove();
+                        document.body.classList.remove(&#39;has-expanded-figure&#39;);
+                        document.removeEventListener(&#39;keydown&#39;, handleEscape);
+                    }
+                };
+                document.addEventListener(&#39;keydown&#39;, handleEscape);
+            }
+        });
+    });
+});
 &lt;/script&gt; 
 &lt;p&gt;Figure 1 The paper begins by contrasting mechanistic interpretability with other interpretability paradigms: - Behavioral: Analyzes input-output relationships - Attributional: Quantifies individual input feature influences - Concept-based: Identifies high-level representations - Mechanistic: Uncovers precise causal mechanisms from inputs to outputs The authors establish several core concepts and hypotheses:&lt;/p&gt;</description>
     </item>
@@ -559,7 +1936,20 @@ function toggleExpand(element) {
       <pubDate>Mon, 11 Nov 2024 00:00:00 +0000</pubDate>
       
       <guid>http://localhost:1313/posts/paper_8b750488d139f9beba0815ff8f46ebe15ebb3e58/</guid>
-      <description>&lt;h1&gt;Summary&lt;/h1&gt;
+      <description>&lt;h1 id=&#34;summary&#34; class=&#34;header-anchor-wrapper&#34;&gt;Summary
+  &lt;a href=&#34;#summary&#34; class=&#34;header-anchor-link&#34;&gt;
+    &lt;svg width=&#34;16px&#34; height=&#34;16px&#34; viewBox=&#34;0 0 24 24&#34;&gt;
+&lt;svg
+    xmlns=&#34;http://www.w3.org/2000/svg&#34;
+    width=&#34;24&#34; height=&#34;24&#34; viewBox=&#34;0 0 24 24&#34; fill=&#34;none&#34;
+    stroke=&#34;currentColor&#34; stroke-width=&#34;2&#34; stroke-linecap=&#34;round&#34;
+    stroke-linejoin=&#34;round&#34;&gt;
+    &lt;line x1=&#34;4&#34; y1=&#34;9&#34; x2=&#34;20&#34; y2=&#34;9&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;4&#34; y1=&#34;15&#34; x2=&#34;20&#34; y2=&#34;15&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;10&#34; y1=&#34;3&#34; x2=&#34;8&#34; y2=&#34;21&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;16&#34; y1=&#34;3&#34; x2=&#34;14&#34; y2=&#34;21&#34;&gt;&lt;/line&gt;
+&lt;/svg&gt;
+
+&lt;/svg&gt;
+  &lt;/a&gt;
+&lt;/h1&gt;
 
 &lt;p&gt;This comprehensive review paper examines mechanistic interpretability, an emerging approach to understanding the inner workings of AI systems that aims to reverse engineer neural networks into human-understandable algorithms and concepts.&lt;/p&gt;
 &lt;figure class=&#34;paper-figure&#34;&gt;
@@ -589,6 +1979,11 @@ function toggleExpand(element) {
     const figure = element.closest(&#39;.paper-figure&#39;);
     const body = document.body;
     
+    
+    if (figure.classList.contains(&#39;subfigure-content&#39;)) {
+        return;
+    }
+    
     figure.classList.toggle(&#39;expanded&#39;);
     
     if (figure.classList.contains(&#39;expanded&#39;)) {
@@ -620,6 +2015,47 @@ function toggleExpand(element) {
         }, 100);
     }
 }
+
+
+document.addEventListener(&#39;DOMContentLoaded&#39;, () =&gt; {
+    const subfigureGroups = document.querySelectorAll(&#39;.subfigures&#39;);
+    subfigureGroups.forEach(group =&gt; {
+        group.addEventListener(&#39;click&#39;, (e) =&gt; {
+            if (e.target.closest(&#39;.subfigure-content&#39;)) {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                
+                const expandedView = document.createElement(&#39;div&#39;);
+                expandedView.className = &#39;subfigures-expanded&#39;;
+                expandedView.innerHTML = group.innerHTML;
+                
+                
+                const closeBtn = document.createElement(&#39;button&#39;);
+                closeBtn.className = &#39;close-expanded&#39;;
+                closeBtn.innerHTML = &#39;×&#39;;
+                closeBtn.onclick = () =&gt; {
+                    expandedView.remove();
+                    document.body.classList.remove(&#39;has-expanded-figure&#39;);
+                };
+                expandedView.appendChild(closeBtn);
+                
+                document.body.appendChild(expandedView);
+                document.body.classList.add(&#39;has-expanded-figure&#39;);
+                
+                
+                const handleEscape = (e) =&gt; {
+                    if (e.key === &#39;Escape&#39;) {
+                        expandedView.remove();
+                        document.body.classList.remove(&#39;has-expanded-figure&#39;);
+                        document.removeEventListener(&#39;keydown&#39;, handleEscape);
+                    }
+                };
+                document.addEventListener(&#39;keydown&#39;, handleEscape);
+            }
+        });
+    });
+});
 &lt;/script&gt; 
 &lt;p&gt;Figure 1 The paper begins by contrasting mechanistic interpretability with other interpretability paradigms: - Behavioral: Analyzes input-output relationships - Attributional: Quantifies individual input feature influences - Concept-based: Identifies high-level representations - Mechanistic: Uncovers precise causal mechanisms from inputs to outputs The authors establish several core concepts and hypotheses:&lt;/p&gt;</description>
     </item>
@@ -630,14 +2066,22 @@ function toggleExpand(element) {
       <pubDate>Mon, 11 Nov 2024 00:00:00 +0000</pubDate>
       
       <guid>http://localhost:1313/en/posts/paper_a800bac1609408eb955625b7ce0df234d48d3845/</guid>
-      <description>&lt;h1&gt;Summary&lt;/h1&gt;
+      <description>&lt;h1 id=&#34;summary&#34; class=&#34;header-anchor-wrapper&#34;&gt;Summary
+  &lt;a href=&#34;#summary&#34; class=&#34;header-anchor-link&#34;&gt;
+    &lt;svg width=&#34;16px&#34; height=&#34;16px&#34; viewBox=&#34;0 0 24 24&#34;&gt;
+&lt;svg
+    xmlns=&#34;http://www.w3.org/2000/svg&#34;
+    width=&#34;24&#34; height=&#34;24&#34; viewBox=&#34;0 0 24 24&#34; fill=&#34;none&#34;
+    stroke=&#34;currentColor&#34; stroke-width=&#34;2&#34; stroke-linecap=&#34;round&#34;
+    stroke-linejoin=&#34;round&#34;&gt;
+    &lt;line x1=&#34;4&#34; y1=&#34;9&#34; x2=&#34;20&#34; y2=&#34;9&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;4&#34; y1=&#34;15&#34; x2=&#34;20&#34; y2=&#34;15&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;10&#34; y1=&#34;3&#34; x2=&#34;8&#34; y2=&#34;21&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;16&#34; y1=&#34;3&#34; x2=&#34;14&#34; y2=&#34;21&#34;&gt;&lt;/line&gt;
+&lt;/svg&gt;
 
-&lt;p&gt;This paper explores the mechanistic interpretability of reinforcement learning (RL) agents by analyzing a neural network trained on procedural maze environments. The research focuses on understanding how the network processes information and makes decisions, with particular attention to goal misgeneralization. Key aspects of the study:&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;strong&gt;Goal Misgeneralization Analysis&lt;/strong&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;&lt;em&gt;[See Figure 1 in the original paper]&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;The researchers examined how RL agents can develop biases in their navigation strategies, particularly the tendency to move toward the top-right corner even when the goal is elsewhere. This figure effectively illustrates different scenarios of goal misgeneralization and robust agent behavior.&lt;/p&gt;</description>
+&lt;/svg&gt;
+  &lt;/a&gt;
+&lt;/h1&gt;
+
+&lt;p&gt;This paper explores the mechanistic interpretability of reinforcement learning (RL) agents by analyzing a neural network trained on procedural maze environments. The research focuses on understanding how the network processes information and makes decisions, with particular attention to goal misgeneralization. Key aspects of the study:&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -646,14 +2090,22 @@ function toggleExpand(element) {
       <pubDate>Mon, 11 Nov 2024 00:00:00 +0000</pubDate>
       
       <guid>http://localhost:1313/posts/paper_a800bac1609408eb955625b7ce0df234d48d3845/</guid>
-      <description>&lt;h1&gt;Summary&lt;/h1&gt;
+      <description>&lt;h1 id=&#34;summary&#34; class=&#34;header-anchor-wrapper&#34;&gt;Summary
+  &lt;a href=&#34;#summary&#34; class=&#34;header-anchor-link&#34;&gt;
+    &lt;svg width=&#34;16px&#34; height=&#34;16px&#34; viewBox=&#34;0 0 24 24&#34;&gt;
+&lt;svg
+    xmlns=&#34;http://www.w3.org/2000/svg&#34;
+    width=&#34;24&#34; height=&#34;24&#34; viewBox=&#34;0 0 24 24&#34; fill=&#34;none&#34;
+    stroke=&#34;currentColor&#34; stroke-width=&#34;2&#34; stroke-linecap=&#34;round&#34;
+    stroke-linejoin=&#34;round&#34;&gt;
+    &lt;line x1=&#34;4&#34; y1=&#34;9&#34; x2=&#34;20&#34; y2=&#34;9&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;4&#34; y1=&#34;15&#34; x2=&#34;20&#34; y2=&#34;15&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;10&#34; y1=&#34;3&#34; x2=&#34;8&#34; y2=&#34;21&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;16&#34; y1=&#34;3&#34; x2=&#34;14&#34; y2=&#34;21&#34;&gt;&lt;/line&gt;
+&lt;/svg&gt;
 
-&lt;p&gt;This paper explores the mechanistic interpretability of reinforcement learning (RL) agents by analyzing a neural network trained on procedural maze environments. The research focuses on understanding how the network processes information and makes decisions, with particular attention to goal misgeneralization. Key aspects of the study:&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;strong&gt;Goal Misgeneralization Analysis&lt;/strong&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;&lt;em&gt;[See Figure 1 in the original paper]&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;The researchers examined how RL agents can develop biases in their navigation strategies, particularly the tendency to move toward the top-right corner even when the goal is elsewhere. This figure effectively illustrates different scenarios of goal misgeneralization and robust agent behavior.&lt;/p&gt;</description>
+&lt;/svg&gt;
+  &lt;/a&gt;
+&lt;/h1&gt;
+
+&lt;p&gt;This paper explores the mechanistic interpretability of reinforcement learning (RL) agents by analyzing a neural network trained on procedural maze environments. The research focuses on understanding how the network processes information and makes decisions, with particular attention to goal misgeneralization. Key aspects of the study:&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -662,7 +2114,20 @@ function toggleExpand(element) {
       <pubDate>Mon, 11 Nov 2024 00:00:00 +0000</pubDate>
       
       <guid>http://localhost:1313/en/posts/paper_01b4977937966694c00f6c7b55e712eef50603a4/</guid>
-      <description>&lt;h1&gt;Summary&lt;/h1&gt;
+      <description>&lt;h1 id=&#34;summary&#34; class=&#34;header-anchor-wrapper&#34;&gt;Summary
+  &lt;a href=&#34;#summary&#34; class=&#34;header-anchor-link&#34;&gt;
+    &lt;svg width=&#34;16px&#34; height=&#34;16px&#34; viewBox=&#34;0 0 24 24&#34;&gt;
+&lt;svg
+    xmlns=&#34;http://www.w3.org/2000/svg&#34;
+    width=&#34;24&#34; height=&#34;24&#34; viewBox=&#34;0 0 24 24&#34; fill=&#34;none&#34;
+    stroke=&#34;currentColor&#34; stroke-width=&#34;2&#34; stroke-linecap=&#34;round&#34;
+    stroke-linejoin=&#34;round&#34;&gt;
+    &lt;line x1=&#34;4&#34; y1=&#34;9&#34; x2=&#34;20&#34; y2=&#34;9&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;4&#34; y1=&#34;15&#34; x2=&#34;20&#34; y2=&#34;15&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;10&#34; y1=&#34;3&#34; x2=&#34;8&#34; y2=&#34;21&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;16&#34; y1=&#34;3&#34; x2=&#34;14&#34; y2=&#34;21&#34;&gt;&lt;/line&gt;
+&lt;/svg&gt;
+
+&lt;/svg&gt;
+  &lt;/a&gt;
+&lt;/h1&gt;
 
 &lt;p&gt;This paper presents a comprehensive analysis of non-factual hallucinations in large language models (LMs), identifying two distinct mechanisms through which these errors occur and proposing a novel method for mitigating them. Key Contributions:&lt;/p&gt;
 &lt;ol&gt;
@@ -695,6 +2160,11 @@ function toggleExpand(element) {
     const figure = element.closest(&#39;.paper-figure&#39;);
     const body = document.body;
     
+    
+    if (figure.classList.contains(&#39;subfigure-content&#39;)) {
+        return;
+    }
+    
     figure.classList.toggle(&#39;expanded&#39;);
     
     if (figure.classList.contains(&#39;expanded&#39;)) {
@@ -726,6 +2196,47 @@ function toggleExpand(element) {
         }, 100);
     }
 }
+
+
+document.addEventListener(&#39;DOMContentLoaded&#39;, () =&gt; {
+    const subfigureGroups = document.querySelectorAll(&#39;.subfigures&#39;);
+    subfigureGroups.forEach(group =&gt; {
+        group.addEventListener(&#39;click&#39;, (e) =&gt; {
+            if (e.target.closest(&#39;.subfigure-content&#39;)) {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                
+                const expandedView = document.createElement(&#39;div&#39;);
+                expandedView.className = &#39;subfigures-expanded&#39;;
+                expandedView.innerHTML = group.innerHTML;
+                
+                
+                const closeBtn = document.createElement(&#39;button&#39;);
+                closeBtn.className = &#39;close-expanded&#39;;
+                closeBtn.innerHTML = &#39;×&#39;;
+                closeBtn.onclick = () =&gt; {
+                    expandedView.remove();
+                    document.body.classList.remove(&#39;has-expanded-figure&#39;);
+                };
+                expandedView.appendChild(closeBtn);
+                
+                document.body.appendChild(expandedView);
+                document.body.classList.add(&#39;has-expanded-figure&#39;);
+                
+                
+                const handleEscape = (e) =&gt; {
+                    if (e.key === &#39;Escape&#39;) {
+                        expandedView.remove();
+                        document.body.classList.remove(&#39;has-expanded-figure&#39;);
+                        document.removeEventListener(&#39;keydown&#39;, handleEscape);
+                    }
+                };
+                document.addEventListener(&#39;keydown&#39;, handleEscape);
+            }
+        });
+    });
+});
 &lt;/script&gt; 
 &lt;p&gt;Figure 1 - Knowledge Enrichment Hallucinations: Occur when lower-layer MLPs fail to retrieve sufficient subject attribute knowledge - Answer Extraction Hallucinations: Happen when upper-layer attention heads fail to select the correct object attribute&lt;/p&gt;</description>
     </item>
@@ -736,7 +2247,20 @@ function toggleExpand(element) {
       <pubDate>Mon, 11 Nov 2024 00:00:00 +0000</pubDate>
       
       <guid>http://localhost:1313/posts/paper_01b4977937966694c00f6c7b55e712eef50603a4/</guid>
-      <description>&lt;h1&gt;Summary&lt;/h1&gt;
+      <description>&lt;h1 id=&#34;summary&#34; class=&#34;header-anchor-wrapper&#34;&gt;Summary
+  &lt;a href=&#34;#summary&#34; class=&#34;header-anchor-link&#34;&gt;
+    &lt;svg width=&#34;16px&#34; height=&#34;16px&#34; viewBox=&#34;0 0 24 24&#34;&gt;
+&lt;svg
+    xmlns=&#34;http://www.w3.org/2000/svg&#34;
+    width=&#34;24&#34; height=&#34;24&#34; viewBox=&#34;0 0 24 24&#34; fill=&#34;none&#34;
+    stroke=&#34;currentColor&#34; stroke-width=&#34;2&#34; stroke-linecap=&#34;round&#34;
+    stroke-linejoin=&#34;round&#34;&gt;
+    &lt;line x1=&#34;4&#34; y1=&#34;9&#34; x2=&#34;20&#34; y2=&#34;9&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;4&#34; y1=&#34;15&#34; x2=&#34;20&#34; y2=&#34;15&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;10&#34; y1=&#34;3&#34; x2=&#34;8&#34; y2=&#34;21&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;16&#34; y1=&#34;3&#34; x2=&#34;14&#34; y2=&#34;21&#34;&gt;&lt;/line&gt;
+&lt;/svg&gt;
+
+&lt;/svg&gt;
+  &lt;/a&gt;
+&lt;/h1&gt;
 
 &lt;p&gt;This paper presents a comprehensive analysis of non-factual hallucinations in large language models (LMs), identifying two distinct mechanisms through which these errors occur and proposing a novel method for mitigating them. Key Contributions:&lt;/p&gt;
 &lt;ol&gt;
@@ -769,6 +2293,11 @@ function toggleExpand(element) {
     const figure = element.closest(&#39;.paper-figure&#39;);
     const body = document.body;
     
+    
+    if (figure.classList.contains(&#39;subfigure-content&#39;)) {
+        return;
+    }
+    
     figure.classList.toggle(&#39;expanded&#39;);
     
     if (figure.classList.contains(&#39;expanded&#39;)) {
@@ -800,6 +2329,47 @@ function toggleExpand(element) {
         }, 100);
     }
 }
+
+
+document.addEventListener(&#39;DOMContentLoaded&#39;, () =&gt; {
+    const subfigureGroups = document.querySelectorAll(&#39;.subfigures&#39;);
+    subfigureGroups.forEach(group =&gt; {
+        group.addEventListener(&#39;click&#39;, (e) =&gt; {
+            if (e.target.closest(&#39;.subfigure-content&#39;)) {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                
+                const expandedView = document.createElement(&#39;div&#39;);
+                expandedView.className = &#39;subfigures-expanded&#39;;
+                expandedView.innerHTML = group.innerHTML;
+                
+                
+                const closeBtn = document.createElement(&#39;button&#39;);
+                closeBtn.className = &#39;close-expanded&#39;;
+                closeBtn.innerHTML = &#39;×&#39;;
+                closeBtn.onclick = () =&gt; {
+                    expandedView.remove();
+                    document.body.classList.remove(&#39;has-expanded-figure&#39;);
+                };
+                expandedView.appendChild(closeBtn);
+                
+                document.body.appendChild(expandedView);
+                document.body.classList.add(&#39;has-expanded-figure&#39;);
+                
+                
+                const handleEscape = (e) =&gt; {
+                    if (e.key === &#39;Escape&#39;) {
+                        expandedView.remove();
+                        document.body.classList.remove(&#39;has-expanded-figure&#39;);
+                        document.removeEventListener(&#39;keydown&#39;, handleEscape);
+                    }
+                };
+                document.addEventListener(&#39;keydown&#39;, handleEscape);
+            }
+        });
+    });
+});
 &lt;/script&gt; 
 &lt;p&gt;Figure 1 - Knowledge Enrichment Hallucinations: Occur when lower-layer MLPs fail to retrieve sufficient subject attribute knowledge - Answer Extraction Hallucinations: Happen when upper-layer attention heads fail to select the correct object attribute&lt;/p&gt;</description>
     </item>
@@ -810,7 +2380,20 @@ function toggleExpand(element) {
       <pubDate>Mon, 11 Nov 2024 00:00:00 +0000</pubDate>
       
       <guid>http://localhost:1313/en/posts/paper_23a921483746b8b3c828bd601f54d485bec32014/</guid>
-      <description>&lt;h1&gt;Summary&lt;/h1&gt;
+      <description>&lt;h1 id=&#34;summary&#34; class=&#34;header-anchor-wrapper&#34;&gt;Summary
+  &lt;a href=&#34;#summary&#34; class=&#34;header-anchor-link&#34;&gt;
+    &lt;svg width=&#34;16px&#34; height=&#34;16px&#34; viewBox=&#34;0 0 24 24&#34;&gt;
+&lt;svg
+    xmlns=&#34;http://www.w3.org/2000/svg&#34;
+    width=&#34;24&#34; height=&#34;24&#34; viewBox=&#34;0 0 24 24&#34; fill=&#34;none&#34;
+    stroke=&#34;currentColor&#34; stroke-width=&#34;2&#34; stroke-linecap=&#34;round&#34;
+    stroke-linejoin=&#34;round&#34;&gt;
+    &lt;line x1=&#34;4&#34; y1=&#34;9&#34; x2=&#34;20&#34; y2=&#34;9&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;4&#34; y1=&#34;15&#34; x2=&#34;20&#34; y2=&#34;15&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;10&#34; y1=&#34;3&#34; x2=&#34;8&#34; y2=&#34;21&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;16&#34; y1=&#34;3&#34; x2=&#34;14&#34; y2=&#34;21&#34;&gt;&lt;/line&gt;
+&lt;/svg&gt;
+
+&lt;/svg&gt;
+  &lt;/a&gt;
+&lt;/h1&gt;
 
 &lt;p&gt;This paper presents &amp;ldquo;mechanistic unlearning,&amp;rdquo; a novel approach for robustly removing or editing knowledge in large language models (LLMs) by targeting specific model components identified through mechanistic interpretability. Key Contributions: - Introduces a more precise and effective method for knowledge editing/unlearning that focuses on modifying the &amp;ldquo;fact lookup&amp;rdquo; (FLU) mechanism rather than just output-focused components - Demonstrates superior robustness against prompt variations and relearning attempts compared to existing methods - Provides evidence that targeting FLU mechanisms leads to better disruption of latent knowledge while maintaining general model capabilities&lt;/p&gt;</description>
     </item>
@@ -821,7 +2404,20 @@ function toggleExpand(element) {
       <pubDate>Mon, 11 Nov 2024 00:00:00 +0000</pubDate>
       
       <guid>http://localhost:1313/posts/paper_23a921483746b8b3c828bd601f54d485bec32014/</guid>
-      <description>&lt;h1&gt;Summary&lt;/h1&gt;
+      <description>&lt;h1 id=&#34;summary&#34; class=&#34;header-anchor-wrapper&#34;&gt;Summary
+  &lt;a href=&#34;#summary&#34; class=&#34;header-anchor-link&#34;&gt;
+    &lt;svg width=&#34;16px&#34; height=&#34;16px&#34; viewBox=&#34;0 0 24 24&#34;&gt;
+&lt;svg
+    xmlns=&#34;http://www.w3.org/2000/svg&#34;
+    width=&#34;24&#34; height=&#34;24&#34; viewBox=&#34;0 0 24 24&#34; fill=&#34;none&#34;
+    stroke=&#34;currentColor&#34; stroke-width=&#34;2&#34; stroke-linecap=&#34;round&#34;
+    stroke-linejoin=&#34;round&#34;&gt;
+    &lt;line x1=&#34;4&#34; y1=&#34;9&#34; x2=&#34;20&#34; y2=&#34;9&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;4&#34; y1=&#34;15&#34; x2=&#34;20&#34; y2=&#34;15&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;10&#34; y1=&#34;3&#34; x2=&#34;8&#34; y2=&#34;21&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;16&#34; y1=&#34;3&#34; x2=&#34;14&#34; y2=&#34;21&#34;&gt;&lt;/line&gt;
+&lt;/svg&gt;
+
+&lt;/svg&gt;
+  &lt;/a&gt;
+&lt;/h1&gt;
 
 &lt;p&gt;This paper presents &amp;ldquo;mechanistic unlearning,&amp;rdquo; a novel approach for robustly removing or editing knowledge in large language models (LLMs) by targeting specific model components identified through mechanistic interpretability. Key Contributions: - Introduces a more precise and effective method for knowledge editing/unlearning that focuses on modifying the &amp;ldquo;fact lookup&amp;rdquo; (FLU) mechanism rather than just output-focused components - Demonstrates superior robustness against prompt variations and relearning attempts compared to existing methods - Provides evidence that targeting FLU mechanisms leads to better disruption of latent knowledge while maintaining general model capabilities&lt;/p&gt;</description>
     </item>
@@ -832,12 +2428,22 @@ function toggleExpand(element) {
       <pubDate>Mon, 11 Nov 2024 00:00:00 +0000</pubDate>
       
       <guid>http://localhost:1313/en/posts/paper_8d42985327b6d112134d96cdd6def5ff9edee92a/</guid>
-      <description>&lt;h1&gt;Summary&lt;/h1&gt;
+      <description>&lt;h1 id=&#34;summary&#34; class=&#34;header-anchor-wrapper&#34;&gt;Summary
+  &lt;a href=&#34;#summary&#34; class=&#34;header-anchor-link&#34;&gt;
+    &lt;svg width=&#34;16px&#34; height=&#34;16px&#34; viewBox=&#34;0 0 24 24&#34;&gt;
+&lt;svg
+    xmlns=&#34;http://www.w3.org/2000/svg&#34;
+    width=&#34;24&#34; height=&#34;24&#34; viewBox=&#34;0 0 24 24&#34; fill=&#34;none&#34;
+    stroke=&#34;currentColor&#34; stroke-width=&#34;2&#34; stroke-linecap=&#34;round&#34;
+    stroke-linejoin=&#34;round&#34;&gt;
+    &lt;line x1=&#34;4&#34; y1=&#34;9&#34; x2=&#34;20&#34; y2=&#34;9&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;4&#34; y1=&#34;15&#34; x2=&#34;20&#34; y2=&#34;15&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;10&#34; y1=&#34;3&#34; x2=&#34;8&#34; y2=&#34;21&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;16&#34; y1=&#34;3&#34; x2=&#34;14&#34; y2=&#34;21&#34;&gt;&lt;/line&gt;
+&lt;/svg&gt;
 
-&lt;p&gt;This paper introduces the Scalable Mechanistic Neural Network (S-MNN), an enhanced version of the original Mechanistic Neural Network (MNN) that significantly improves computational efficiency while maintaining accuracy. The key innovation is reducing both time and space complexities from cubic/quadratic to linear with respect to sequence length. &lt;strong&gt;Key Contributions:&lt;/strong&gt;&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;Complexity Reduction&lt;/strong&gt; - Reformulated the original MNN&amp;rsquo;s underlying linear system by eliminating slack variables and central difference constraints - Reduced quadratic programming to least squares regression - Achieved linear time and space complexities through efficient banded matrix structures&lt;/p&gt;</description>
+&lt;/svg&gt;
+  &lt;/a&gt;
+&lt;/h1&gt;
+
+&lt;p&gt;This paper introduces the Scalable Mechanistic Neural Network (S-MNN), an enhanced version of the original Mechanistic Neural Network (MNN) that significantly improves computational efficiency while maintaining accuracy. The key innovation is reducing both time and space complexities from cubic/quadratic to linear with respect to sequence length. &lt;strong&gt;Key Contributions:&lt;/strong&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -846,12 +2452,22 @@ function toggleExpand(element) {
       <pubDate>Mon, 11 Nov 2024 00:00:00 +0000</pubDate>
       
       <guid>http://localhost:1313/posts/paper_8d42985327b6d112134d96cdd6def5ff9edee92a/</guid>
-      <description>&lt;h1&gt;Summary&lt;/h1&gt;
+      <description>&lt;h1 id=&#34;summary&#34; class=&#34;header-anchor-wrapper&#34;&gt;Summary
+  &lt;a href=&#34;#summary&#34; class=&#34;header-anchor-link&#34;&gt;
+    &lt;svg width=&#34;16px&#34; height=&#34;16px&#34; viewBox=&#34;0 0 24 24&#34;&gt;
+&lt;svg
+    xmlns=&#34;http://www.w3.org/2000/svg&#34;
+    width=&#34;24&#34; height=&#34;24&#34; viewBox=&#34;0 0 24 24&#34; fill=&#34;none&#34;
+    stroke=&#34;currentColor&#34; stroke-width=&#34;2&#34; stroke-linecap=&#34;round&#34;
+    stroke-linejoin=&#34;round&#34;&gt;
+    &lt;line x1=&#34;4&#34; y1=&#34;9&#34; x2=&#34;20&#34; y2=&#34;9&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;4&#34; y1=&#34;15&#34; x2=&#34;20&#34; y2=&#34;15&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;10&#34; y1=&#34;3&#34; x2=&#34;8&#34; y2=&#34;21&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;16&#34; y1=&#34;3&#34; x2=&#34;14&#34; y2=&#34;21&#34;&gt;&lt;/line&gt;
+&lt;/svg&gt;
 
-&lt;p&gt;This paper introduces the Scalable Mechanistic Neural Network (S-MNN), an enhanced version of the original Mechanistic Neural Network (MNN) that significantly improves computational efficiency while maintaining accuracy. The key innovation is reducing both time and space complexities from cubic/quadratic to linear with respect to sequence length. &lt;strong&gt;Key Contributions:&lt;/strong&gt;&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;Complexity Reduction&lt;/strong&gt; - Reformulated the original MNN&amp;rsquo;s underlying linear system by eliminating slack variables and central difference constraints - Reduced quadratic programming to least squares regression - Achieved linear time and space complexities through efficient banded matrix structures&lt;/p&gt;</description>
+&lt;/svg&gt;
+  &lt;/a&gt;
+&lt;/h1&gt;
+
+&lt;p&gt;This paper introduces the Scalable Mechanistic Neural Network (S-MNN), an enhanced version of the original Mechanistic Neural Network (MNN) that significantly improves computational efficiency while maintaining accuracy. The key innovation is reducing both time and space complexities from cubic/quadratic to linear with respect to sequence length. &lt;strong&gt;Key Contributions:&lt;/strong&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -860,7 +2476,20 @@ function toggleExpand(element) {
       <pubDate>Mon, 11 Nov 2024 00:00:00 +0000</pubDate>
       
       <guid>http://localhost:1313/en/posts/paper_3c6da6f1601aee99b8e5b8dcf2d21c42d9252b04/</guid>
-      <description>&lt;h1&gt;Summary&lt;/h1&gt;
+      <description>&lt;h1 id=&#34;summary&#34; class=&#34;header-anchor-wrapper&#34;&gt;Summary
+  &lt;a href=&#34;#summary&#34; class=&#34;header-anchor-link&#34;&gt;
+    &lt;svg width=&#34;16px&#34; height=&#34;16px&#34; viewBox=&#34;0 0 24 24&#34;&gt;
+&lt;svg
+    xmlns=&#34;http://www.w3.org/2000/svg&#34;
+    width=&#34;24&#34; height=&#34;24&#34; viewBox=&#34;0 0 24 24&#34; fill=&#34;none&#34;
+    stroke=&#34;currentColor&#34; stroke-width=&#34;2&#34; stroke-linecap=&#34;round&#34;
+    stroke-linejoin=&#34;round&#34;&gt;
+    &lt;line x1=&#34;4&#34; y1=&#34;9&#34; x2=&#34;20&#34; y2=&#34;9&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;4&#34; y1=&#34;15&#34; x2=&#34;20&#34; y2=&#34;15&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;10&#34; y1=&#34;3&#34; x2=&#34;8&#34; y2=&#34;21&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;16&#34; y1=&#34;3&#34; x2=&#34;14&#34; y2=&#34;21&#34;&gt;&lt;/line&gt;
+&lt;/svg&gt;
+
+&lt;/svg&gt;
+  &lt;/a&gt;
+&lt;/h1&gt;
 
 &lt;p&gt;This paper introduces &amp;ldquo;transcoders&amp;rdquo; - a novel approach for analyzing neural network circuits in large language models (LLMs). The key innovation is that transcoders enable interpretable analysis of MLP (Multi-Layer Perceptron) layers while cleanly separating input-dependent and input-invariant behaviors. Key Points:&lt;/p&gt;
 &lt;ol&gt;
@@ -874,7 +2503,20 @@ function toggleExpand(element) {
       <pubDate>Mon, 11 Nov 2024 00:00:00 +0000</pubDate>
       
       <guid>http://localhost:1313/posts/paper_3c6da6f1601aee99b8e5b8dcf2d21c42d9252b04/</guid>
-      <description>&lt;h1&gt;Summary&lt;/h1&gt;
+      <description>&lt;h1 id=&#34;summary&#34; class=&#34;header-anchor-wrapper&#34;&gt;Summary
+  &lt;a href=&#34;#summary&#34; class=&#34;header-anchor-link&#34;&gt;
+    &lt;svg width=&#34;16px&#34; height=&#34;16px&#34; viewBox=&#34;0 0 24 24&#34;&gt;
+&lt;svg
+    xmlns=&#34;http://www.w3.org/2000/svg&#34;
+    width=&#34;24&#34; height=&#34;24&#34; viewBox=&#34;0 0 24 24&#34; fill=&#34;none&#34;
+    stroke=&#34;currentColor&#34; stroke-width=&#34;2&#34; stroke-linecap=&#34;round&#34;
+    stroke-linejoin=&#34;round&#34;&gt;
+    &lt;line x1=&#34;4&#34; y1=&#34;9&#34; x2=&#34;20&#34; y2=&#34;9&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;4&#34; y1=&#34;15&#34; x2=&#34;20&#34; y2=&#34;15&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;10&#34; y1=&#34;3&#34; x2=&#34;8&#34; y2=&#34;21&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;16&#34; y1=&#34;3&#34; x2=&#34;14&#34; y2=&#34;21&#34;&gt;&lt;/line&gt;
+&lt;/svg&gt;
+
+&lt;/svg&gt;
+  &lt;/a&gt;
+&lt;/h1&gt;
 
 &lt;p&gt;This paper introduces &amp;ldquo;transcoders&amp;rdquo; - a novel approach for analyzing neural network circuits in large language models (LLMs). The key innovation is that transcoders enable interpretable analysis of MLP (Multi-Layer Perceptron) layers while cleanly separating input-dependent and input-invariant behaviors. Key Points:&lt;/p&gt;
 &lt;ol&gt;
@@ -888,18 +2530,22 @@ function toggleExpand(element) {
       <pubDate>Mon, 11 Nov 2024 00:00:00 +0000</pubDate>
       
       <guid>http://localhost:1313/en/posts/paper_cfbdf67fc11977637d4cb13ed7e1abce75623796/</guid>
-      <description>&lt;h1&gt;Summary&lt;/h1&gt;
+      <description>&lt;h1 id=&#34;summary&#34; class=&#34;header-anchor-wrapper&#34;&gt;Summary
+  &lt;a href=&#34;#summary&#34; class=&#34;header-anchor-link&#34;&gt;
+    &lt;svg width=&#34;16px&#34; height=&#34;16px&#34; viewBox=&#34;0 0 24 24&#34;&gt;
+&lt;svg
+    xmlns=&#34;http://www.w3.org/2000/svg&#34;
+    width=&#34;24&#34; height=&#34;24&#34; viewBox=&#34;0 0 24 24&#34; fill=&#34;none&#34;
+    stroke=&#34;currentColor&#34; stroke-width=&#34;2&#34; stroke-linecap=&#34;round&#34;
+    stroke-linejoin=&#34;round&#34;&gt;
+    &lt;line x1=&#34;4&#34; y1=&#34;9&#34; x2=&#34;20&#34; y2=&#34;9&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;4&#34; y1=&#34;15&#34; x2=&#34;20&#34; y2=&#34;15&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;10&#34; y1=&#34;3&#34; x2=&#34;8&#34; y2=&#34;21&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;16&#34; y1=&#34;3&#34; x2=&#34;14&#34; y2=&#34;21&#34;&gt;&lt;/line&gt;
+&lt;/svg&gt;
 
-&lt;p&gt;This paper investigates how large language models (LLMs) perform look-ahead planning, focusing on their internal mechanisms and ability to consider future steps when making decisions. The research provides important insights into whether LLMs plan greedily (one step at a time) or can look ahead multiple steps. Key Contributions:&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;
-&lt;p&gt;First comprehensive study of planning interpretability mechanisms in LLMs&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Demonstration of the &amp;ldquo;Look-Ahead Planning Decisions Existence Hypothesis&amp;rdquo;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Analysis of how internal representations encode future decisions&lt;/p&gt;</description>
+&lt;/svg&gt;
+  &lt;/a&gt;
+&lt;/h1&gt;
+
+&lt;p&gt;This paper investigates how large language models (LLMs) perform look-ahead planning, focusing on their internal mechanisms and ability to consider future steps when making decisions. The research provides important insights into whether LLMs plan greedily (one step at a time) or can look ahead multiple steps. Key Contributions:&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -908,18 +2554,22 @@ function toggleExpand(element) {
       <pubDate>Mon, 11 Nov 2024 00:00:00 +0000</pubDate>
       
       <guid>http://localhost:1313/posts/paper_cfbdf67fc11977637d4cb13ed7e1abce75623796/</guid>
-      <description>&lt;h1&gt;Summary&lt;/h1&gt;
+      <description>&lt;h1 id=&#34;summary&#34; class=&#34;header-anchor-wrapper&#34;&gt;Summary
+  &lt;a href=&#34;#summary&#34; class=&#34;header-anchor-link&#34;&gt;
+    &lt;svg width=&#34;16px&#34; height=&#34;16px&#34; viewBox=&#34;0 0 24 24&#34;&gt;
+&lt;svg
+    xmlns=&#34;http://www.w3.org/2000/svg&#34;
+    width=&#34;24&#34; height=&#34;24&#34; viewBox=&#34;0 0 24 24&#34; fill=&#34;none&#34;
+    stroke=&#34;currentColor&#34; stroke-width=&#34;2&#34; stroke-linecap=&#34;round&#34;
+    stroke-linejoin=&#34;round&#34;&gt;
+    &lt;line x1=&#34;4&#34; y1=&#34;9&#34; x2=&#34;20&#34; y2=&#34;9&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;4&#34; y1=&#34;15&#34; x2=&#34;20&#34; y2=&#34;15&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;10&#34; y1=&#34;3&#34; x2=&#34;8&#34; y2=&#34;21&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;16&#34; y1=&#34;3&#34; x2=&#34;14&#34; y2=&#34;21&#34;&gt;&lt;/line&gt;
+&lt;/svg&gt;
 
-&lt;p&gt;This paper investigates how large language models (LLMs) perform look-ahead planning, focusing on their internal mechanisms and ability to consider future steps when making decisions. The research provides important insights into whether LLMs plan greedily (one step at a time) or can look ahead multiple steps. Key Contributions:&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;
-&lt;p&gt;First comprehensive study of planning interpretability mechanisms in LLMs&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Demonstration of the &amp;ldquo;Look-Ahead Planning Decisions Existence Hypothesis&amp;rdquo;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Analysis of how internal representations encode future decisions&lt;/p&gt;</description>
+&lt;/svg&gt;
+  &lt;/a&gt;
+&lt;/h1&gt;
+
+&lt;p&gt;This paper investigates how large language models (LLMs) perform look-ahead planning, focusing on their internal mechanisms and ability to consider future steps when making decisions. The research provides important insights into whether LLMs plan greedily (one step at a time) or can look ahead multiple steps. Key Contributions:&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -928,7 +2578,20 @@ function toggleExpand(element) {
       <pubDate>Mon, 11 Nov 2024 00:00:00 +0000</pubDate>
       
       <guid>http://localhost:1313/en/posts/paper_c1bc03a045ea830894fe3b1799928c9f8c14923c/</guid>
-      <description>&lt;h1&gt;Summary&lt;/h1&gt;
+      <description>&lt;h1 id=&#34;summary&#34; class=&#34;header-anchor-wrapper&#34;&gt;Summary
+  &lt;a href=&#34;#summary&#34; class=&#34;header-anchor-link&#34;&gt;
+    &lt;svg width=&#34;16px&#34; height=&#34;16px&#34; viewBox=&#34;0 0 24 24&#34;&gt;
+&lt;svg
+    xmlns=&#34;http://www.w3.org/2000/svg&#34;
+    width=&#34;24&#34; height=&#34;24&#34; viewBox=&#34;0 0 24 24&#34; fill=&#34;none&#34;
+    stroke=&#34;currentColor&#34; stroke-width=&#34;2&#34; stroke-linecap=&#34;round&#34;
+    stroke-linejoin=&#34;round&#34;&gt;
+    &lt;line x1=&#34;4&#34; y1=&#34;9&#34; x2=&#34;20&#34; y2=&#34;9&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;4&#34; y1=&#34;15&#34; x2=&#34;20&#34; y2=&#34;15&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;10&#34; y1=&#34;3&#34; x2=&#34;8&#34; y2=&#34;21&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;16&#34; y1=&#34;3&#34; x2=&#34;14&#34; y2=&#34;21&#34;&gt;&lt;/line&gt;
+&lt;/svg&gt;
+
+&lt;/svg&gt;
+  &lt;/a&gt;
+&lt;/h1&gt;
 
 &lt;p&gt;This paper explores how degeneracy in neural networks&amp;rsquo; parameter space affects mechanistic interpretability and proposes methods to address this challenge. Here are the key points: &lt;strong&gt;Core Concept: Degeneracy in Neural Networks&lt;/strong&gt; The authors argue that a major obstacle to reverse engineering neural networks is that many parameters don&amp;rsquo;t meaningfully contribute to the network&amp;rsquo;s computation. These &amp;ldquo;degenerate&amp;rdquo; parameters can obscure the network&amp;rsquo;s internal structure. The paper identifies three main types of degeneracy:&lt;/p&gt;</description>
     </item>
@@ -939,7 +2602,20 @@ function toggleExpand(element) {
       <pubDate>Mon, 11 Nov 2024 00:00:00 +0000</pubDate>
       
       <guid>http://localhost:1313/posts/paper_c1bc03a045ea830894fe3b1799928c9f8c14923c/</guid>
-      <description>&lt;h1&gt;Summary&lt;/h1&gt;
+      <description>&lt;h1 id=&#34;summary&#34; class=&#34;header-anchor-wrapper&#34;&gt;Summary
+  &lt;a href=&#34;#summary&#34; class=&#34;header-anchor-link&#34;&gt;
+    &lt;svg width=&#34;16px&#34; height=&#34;16px&#34; viewBox=&#34;0 0 24 24&#34;&gt;
+&lt;svg
+    xmlns=&#34;http://www.w3.org/2000/svg&#34;
+    width=&#34;24&#34; height=&#34;24&#34; viewBox=&#34;0 0 24 24&#34; fill=&#34;none&#34;
+    stroke=&#34;currentColor&#34; stroke-width=&#34;2&#34; stroke-linecap=&#34;round&#34;
+    stroke-linejoin=&#34;round&#34;&gt;
+    &lt;line x1=&#34;4&#34; y1=&#34;9&#34; x2=&#34;20&#34; y2=&#34;9&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;4&#34; y1=&#34;15&#34; x2=&#34;20&#34; y2=&#34;15&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;10&#34; y1=&#34;3&#34; x2=&#34;8&#34; y2=&#34;21&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;16&#34; y1=&#34;3&#34; x2=&#34;14&#34; y2=&#34;21&#34;&gt;&lt;/line&gt;
+&lt;/svg&gt;
+
+&lt;/svg&gt;
+  &lt;/a&gt;
+&lt;/h1&gt;
 
 &lt;p&gt;This paper explores how degeneracy in neural networks&amp;rsquo; parameter space affects mechanistic interpretability and proposes methods to address this challenge. Here are the key points: &lt;strong&gt;Core Concept: Degeneracy in Neural Networks&lt;/strong&gt; The authors argue that a major obstacle to reverse engineering neural networks is that many parameters don&amp;rsquo;t meaningfully contribute to the network&amp;rsquo;s computation. These &amp;ldquo;degenerate&amp;rdquo; parameters can obscure the network&amp;rsquo;s internal structure. The paper identifies three main types of degeneracy:&lt;/p&gt;</description>
     </item>
@@ -950,11 +2626,37 @@ function toggleExpand(element) {
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>http://localhost:1313/about/</guid>
-      <description>&lt;h1&gt;About AI Safety Papers&lt;/h1&gt;
+      <description>&lt;h1 id=&#34;about-ai-safety-papers&#34; class=&#34;header-anchor-wrapper&#34;&gt;About AI Safety Papers
+  &lt;a href=&#34;#about-ai-safety-papers&#34; class=&#34;header-anchor-link&#34;&gt;
+    &lt;svg width=&#34;16px&#34; height=&#34;16px&#34; viewBox=&#34;0 0 24 24&#34;&gt;
+&lt;svg
+    xmlns=&#34;http://www.w3.org/2000/svg&#34;
+    width=&#34;24&#34; height=&#34;24&#34; viewBox=&#34;0 0 24 24&#34; fill=&#34;none&#34;
+    stroke=&#34;currentColor&#34; stroke-width=&#34;2&#34; stroke-linecap=&#34;round&#34;
+    stroke-linejoin=&#34;round&#34;&gt;
+    &lt;line x1=&#34;4&#34; y1=&#34;9&#34; x2=&#34;20&#34; y2=&#34;9&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;4&#34; y1=&#34;15&#34; x2=&#34;20&#34; y2=&#34;15&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;10&#34; y1=&#34;3&#34; x2=&#34;8&#34; y2=&#34;21&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;16&#34; y1=&#34;3&#34; x2=&#34;14&#34; y2=&#34;21&#34;&gt;&lt;/line&gt;
+&lt;/svg&gt;
+
+&lt;/svg&gt;
+  &lt;/a&gt;
+&lt;/h1&gt;
 
 &lt;p&gt;Welcome to AI Safety Papers, a curated collection of the latest research in AI safety. Our mission is to make cutting-edge AI safety research more accessible to researchers, practitioners, and enthusiasts.&lt;/p&gt;
 
-&lt;h2&gt;What We Do&lt;/h2&gt;
+&lt;h2 id=&#34;what-we-do&#34; class=&#34;header-anchor-wrapper&#34;&gt;What We Do
+  &lt;a href=&#34;#what-we-do&#34; class=&#34;header-anchor-link&#34;&gt;
+    &lt;svg width=&#34;16px&#34; height=&#34;16px&#34; viewBox=&#34;0 0 24 24&#34;&gt;
+&lt;svg
+    xmlns=&#34;http://www.w3.org/2000/svg&#34;
+    width=&#34;24&#34; height=&#34;24&#34; viewBox=&#34;0 0 24 24&#34; fill=&#34;none&#34;
+    stroke=&#34;currentColor&#34; stroke-width=&#34;2&#34; stroke-linecap=&#34;round&#34;
+    stroke-linejoin=&#34;round&#34;&gt;
+    &lt;line x1=&#34;4&#34; y1=&#34;9&#34; x2=&#34;20&#34; y2=&#34;9&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;4&#34; y1=&#34;15&#34; x2=&#34;20&#34; y2=&#34;15&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;10&#34; y1=&#34;3&#34; x2=&#34;8&#34; y2=&#34;21&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;16&#34; y1=&#34;3&#34; x2=&#34;14&#34; y2=&#34;21&#34;&gt;&lt;/line&gt;
+&lt;/svg&gt;
+
+&lt;/svg&gt;
+  &lt;/a&gt;
+&lt;/h2&gt;
 
 &lt;ul&gt;
 &lt;li&gt;We aggregate recent papers from various sources, including arXiv and Semantic Scholar.&lt;/li&gt;
@@ -962,7 +2664,20 @@ function toggleExpand(element) {
 &lt;li&gt;We present these summaries along with links to the original papers for easy access.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2&gt;Why AI Safety?&lt;/h2&gt;
+&lt;h2 id=&#34;why-ai-safety&#34; class=&#34;header-anchor-wrapper&#34;&gt;Why AI Safety?
+  &lt;a href=&#34;#why-ai-safety&#34; class=&#34;header-anchor-link&#34;&gt;
+    &lt;svg width=&#34;16px&#34; height=&#34;16px&#34; viewBox=&#34;0 0 24 24&#34;&gt;
+&lt;svg
+    xmlns=&#34;http://www.w3.org/2000/svg&#34;
+    width=&#34;24&#34; height=&#34;24&#34; viewBox=&#34;0 0 24 24&#34; fill=&#34;none&#34;
+    stroke=&#34;currentColor&#34; stroke-width=&#34;2&#34; stroke-linecap=&#34;round&#34;
+    stroke-linejoin=&#34;round&#34;&gt;
+    &lt;line x1=&#34;4&#34; y1=&#34;9&#34; x2=&#34;20&#34; y2=&#34;9&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;4&#34; y1=&#34;15&#34; x2=&#34;20&#34; y2=&#34;15&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;10&#34; y1=&#34;3&#34; x2=&#34;8&#34; y2=&#34;21&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;16&#34; y1=&#34;3&#34; x2=&#34;14&#34; y2=&#34;21&#34;&gt;&lt;/line&gt;
+&lt;/svg&gt;
+
+&lt;/svg&gt;
+  &lt;/a&gt;
+&lt;/h2&gt;
 
 &lt;p&gt;As artificial intelligence continues to advance rapidly, ensuring its safe and beneficial development becomes increasingly crucial. AI safety research aims to address potential risks and challenges associated with AI systems, working towards creating AI that is aligned with human values and interests.&lt;/p&gt;</description>
     </item>
@@ -973,11 +2688,37 @@ function toggleExpand(element) {
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>http://localhost:1313/en/about/</guid>
-      <description>&lt;h1&gt;About AI Safety Papers&lt;/h1&gt;
+      <description>&lt;h1 id=&#34;about-ai-safety-papers&#34; class=&#34;header-anchor-wrapper&#34;&gt;About AI Safety Papers
+  &lt;a href=&#34;#about-ai-safety-papers&#34; class=&#34;header-anchor-link&#34;&gt;
+    &lt;svg width=&#34;16px&#34; height=&#34;16px&#34; viewBox=&#34;0 0 24 24&#34;&gt;
+&lt;svg
+    xmlns=&#34;http://www.w3.org/2000/svg&#34;
+    width=&#34;24&#34; height=&#34;24&#34; viewBox=&#34;0 0 24 24&#34; fill=&#34;none&#34;
+    stroke=&#34;currentColor&#34; stroke-width=&#34;2&#34; stroke-linecap=&#34;round&#34;
+    stroke-linejoin=&#34;round&#34;&gt;
+    &lt;line x1=&#34;4&#34; y1=&#34;9&#34; x2=&#34;20&#34; y2=&#34;9&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;4&#34; y1=&#34;15&#34; x2=&#34;20&#34; y2=&#34;15&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;10&#34; y1=&#34;3&#34; x2=&#34;8&#34; y2=&#34;21&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;16&#34; y1=&#34;3&#34; x2=&#34;14&#34; y2=&#34;21&#34;&gt;&lt;/line&gt;
+&lt;/svg&gt;
+
+&lt;/svg&gt;
+  &lt;/a&gt;
+&lt;/h1&gt;
 
 &lt;p&gt;Welcome to AI Safety Papers, a curated collection of the latest research in AI safety. Our mission is to make cutting-edge AI safety research more accessible to researchers, practitioners, and enthusiasts.&lt;/p&gt;
 
-&lt;h2&gt;What We Do&lt;/h2&gt;
+&lt;h2 id=&#34;what-we-do&#34; class=&#34;header-anchor-wrapper&#34;&gt;What We Do
+  &lt;a href=&#34;#what-we-do&#34; class=&#34;header-anchor-link&#34;&gt;
+    &lt;svg width=&#34;16px&#34; height=&#34;16px&#34; viewBox=&#34;0 0 24 24&#34;&gt;
+&lt;svg
+    xmlns=&#34;http://www.w3.org/2000/svg&#34;
+    width=&#34;24&#34; height=&#34;24&#34; viewBox=&#34;0 0 24 24&#34; fill=&#34;none&#34;
+    stroke=&#34;currentColor&#34; stroke-width=&#34;2&#34; stroke-linecap=&#34;round&#34;
+    stroke-linejoin=&#34;round&#34;&gt;
+    &lt;line x1=&#34;4&#34; y1=&#34;9&#34; x2=&#34;20&#34; y2=&#34;9&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;4&#34; y1=&#34;15&#34; x2=&#34;20&#34; y2=&#34;15&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;10&#34; y1=&#34;3&#34; x2=&#34;8&#34; y2=&#34;21&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;16&#34; y1=&#34;3&#34; x2=&#34;14&#34; y2=&#34;21&#34;&gt;&lt;/line&gt;
+&lt;/svg&gt;
+
+&lt;/svg&gt;
+  &lt;/a&gt;
+&lt;/h2&gt;
 
 &lt;ul&gt;
 &lt;li&gt;We aggregate recent papers from various sources, including arXiv and Semantic Scholar.&lt;/li&gt;
@@ -985,7 +2726,20 @@ function toggleExpand(element) {
 &lt;li&gt;We present these summaries along with links to the original papers for easy access.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2&gt;Why AI Safety?&lt;/h2&gt;
+&lt;h2 id=&#34;why-ai-safety&#34; class=&#34;header-anchor-wrapper&#34;&gt;Why AI Safety?
+  &lt;a href=&#34;#why-ai-safety&#34; class=&#34;header-anchor-link&#34;&gt;
+    &lt;svg width=&#34;16px&#34; height=&#34;16px&#34; viewBox=&#34;0 0 24 24&#34;&gt;
+&lt;svg
+    xmlns=&#34;http://www.w3.org/2000/svg&#34;
+    width=&#34;24&#34; height=&#34;24&#34; viewBox=&#34;0 0 24 24&#34; fill=&#34;none&#34;
+    stroke=&#34;currentColor&#34; stroke-width=&#34;2&#34; stroke-linecap=&#34;round&#34;
+    stroke-linejoin=&#34;round&#34;&gt;
+    &lt;line x1=&#34;4&#34; y1=&#34;9&#34; x2=&#34;20&#34; y2=&#34;9&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;4&#34; y1=&#34;15&#34; x2=&#34;20&#34; y2=&#34;15&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;10&#34; y1=&#34;3&#34; x2=&#34;8&#34; y2=&#34;21&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;16&#34; y1=&#34;3&#34; x2=&#34;14&#34; y2=&#34;21&#34;&gt;&lt;/line&gt;
+&lt;/svg&gt;
+
+&lt;/svg&gt;
+  &lt;/a&gt;
+&lt;/h2&gt;
 
 &lt;p&gt;As artificial intelligence continues to advance rapidly, ensuring its safe and beneficial development becomes increasingly crucial. AI safety research aims to address potential risks and challenges associated with AI systems, working towards creating AI that is aligned with human values and interests.&lt;/p&gt;</description>
     </item>

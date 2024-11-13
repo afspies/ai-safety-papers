@@ -1,7 +1,7 @@
 import logging
 import requests
 from pathlib import Path
-from typing import Dict, Optional, Tuple, NamedTuple
+from typing import Dict, Optional, Tuple, NamedTuple, List, Union
 from bs4 import BeautifulSoup
 import re
 import base64
@@ -14,59 +14,213 @@ from dataclasses import dataclass
 from bs4.element import Tag
 
 @dataclass
-class FigureData:
+class ElementData:
+    """Base class for figure and table data"""
     path: Path
     caption: str
-    type: str  # 'figure' or 'table'
-    content: Optional[str] = None  # For tables, stores markdown content
+    type: str
+    element_id: str  # Store the original ar5iv ID
+
+@dataclass
+class FigureData(ElementData):
+    has_subfigures: bool = False
+    subfigures: List[Dict[str, str]] = None
+
+@dataclass
+class TableData(ElementData):
+    content: str = None  # Markdown content
 
 class Ar5ivFigureProcessor:
     def __init__(self):
         self.logger = logging.getLogger(__name__)
+        self.logger.setLevel(logging.DEBUG)
+        if not self.logger.handlers:
+            handler = logging.StreamHandler()
+            handler.setFormatter(logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s'))
+            self.logger.addHandler(handler)
         self.headers = {
             'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
         }
         self.current_base_url = None
 
-    def process_paper(self, arxiv_url: str, output_dir: Path) -> Dict[str, FigureData]:
-        """Extract figures and tables from an ar5iv HTML version of a paper."""
+    def process_paper(self, arxiv_url: str, output_dir: Path) -> Dict[str, Union[FigureData, TableData]]:
+        """Process all figures and tables from the paper."""
         try:
             arxiv_html_url = self._get_ar5iv_url(arxiv_url)
             self.logger.info(f"Processing paper from ar5iv URL: {arxiv_html_url}")
 
             output_dir.mkdir(parents=True, exist_ok=True)
-
-            # Fetch and parse HTML
             response = self._fetch_with_retry(arxiv_html_url)
             
-            # Set base URL for image downloads - ar5iv uses a specific structure
             arxiv_id = arxiv_html_url.split('/')[-1]
             self.current_base_url = f"https://ar5iv.labs.arxiv.org/html/{arxiv_id}"
-            self.logger.debug(f"Set base URL to: {self.current_base_url}")
-
-            soup = BeautifulSoup(response.text, 'html.parser')
-            figures = {}
             
+            soup = BeautifulSoup(response.text, 'html.parser')
+            elements = {}
+
             # Process all figures and tables
-            for fig_num, element in enumerate(soup.find_all(['figure', 'table'])):
+            for element in soup.find_all(['figure', 'table']):
                 try:
-                    result = self._process_element(element, fig_num, output_dir)
+                    result = self._process_element(element, len(elements), output_dir)
                     if result:
-                        fig_id, figure_data = result
-                        figures[fig_id] = figure_data
+                        elem_id, elem_data = result
+                        elements[elem_id] = elem_data
                 except Exception as e:
-                    self.logger.warning(f"Error processing element {fig_num}: {e}")
+                    self.logger.warning(f"Error processing element: {e}")
                     continue
 
-            # Save metadata
-            self._save_metadata(figures, output_dir)
-            
-            self.logger.info(f"Successfully extracted {len(figures)} elements")
-            return figures
+            self._save_metadata(elements, output_dir)
+            return elements
 
         except Exception as e:
             self.logger.error(f"Error processing paper: {e}")
             raise
+
+    def _process_element(self, element: BeautifulSoup, num: int, output_dir: Path) -> Optional[Tuple[str, Union[FigureData, TableData]]]:
+        """Process a figure or table element."""
+        try:
+            # Skip if this is a subfigure - we'll process these with their parent
+            if 'ltx_figure_panel' in element.get('class', []):
+                return None
+
+            # Get element ID and type
+            element_id = element.get('id', '')
+            is_table = bool(element.name == 'table' or element.find('table'))
+            
+            # Extract figure/table number from ID (e.g., "S3.F2" -> "2", "A4.T1" -> "1")
+            id_match = re.search(r'[SF](\d+)\.([FT])(\d+)', element_id)
+            if id_match:
+                section_num, elem_type, elem_num = id_match.groups()
+                is_appendix = section_num.startswith('A')
+                elem_type = 'tab' if elem_type == 'T' else 'fig'
+                elem_id = f"{'appendix_' if is_appendix else ''}{elem_type}{elem_num}"
+                self.logger.debug(f"Extracted element ID {elem_id} from HTML ID {element_id}")
+            else:
+                # Fallback to old numbering if ID doesn't match expected format
+                is_appendix = element_id and element_id.startswith('A')
+                elem_type = 'tab' if is_table else 'fig'
+                elem_id = f"{'appendix_' if is_appendix else ''}{elem_type}{num}"
+                self.logger.debug(f"Using fallback element ID {elem_id} for HTML ID {element_id}")
+
+            if is_table:
+                return self._process_table(element, elem_id, output_dir, element_id)
+
+            # Check if this is a figure with subfigures
+            subfigures = element.find_all('figure', class_='ltx_figure_panel')
+            
+            if subfigures:
+                self.logger.info(f"Found figure with {len(subfigures)} subfigures")
+                # Get main caption - look for the caption that's not inside a subfigure
+                main_caption = None
+                for caption in element.find_all('figcaption', class_='ltx_caption ltx_centering'):
+                    # Skip captions that are inside subfigures
+                    if not caption.find_parent('figure', class_='ltx_figure_panel'):
+                        main_caption = caption
+                        break
+                
+                # Extract caption text without formatting
+                main_caption_text = self._clean_latex_from_html(main_caption) if main_caption else ""
+                
+                self.logger.debug(f"Extracted main caption: {main_caption_text}")
+                
+                # Process each subfigure
+                subfigures_data = []
+                for idx, subfig in enumerate(subfigures):
+                    try:
+                        # Get subfigure letter from ID
+                        subfig_id = subfig.get('id', '')
+                        self.logger.debug(f"Processing subfigure {idx+1}/{len(subfigures)} with ID: {subfig_id}")
+                        
+                        match = re.search(r'\.sf(\d+)$', subfig_id)
+                        letter = chr(96 + int(match.group(1))) if match else chr(97 + len(subfigures_data))
+                        
+                        # Process subfigure using the helper method
+                        subfig_path = output_dir / f"{elem_id}_{letter}.png"
+                        self.logger.debug(f"Attempting to save subfigure to: {subfig_path}")
+                        
+                        subfig_data = self._process_figure_element(subfig, subfig_path)
+                        
+                        if subfig_data:
+                            self.logger.info(f"Successfully processed subfigure {letter}")
+                            subfigures_data.append({
+                                'id': letter,
+                                'path': subfig_path,
+                                'caption': ""  # Raw caption without formatting
+                            })
+                        else:
+                            self.logger.warning(f"Failed to process subfigure {letter}")
+                    
+                    except Exception as e:
+                        self.logger.exception(f"Error processing subfigure {idx+1}: {e}")
+                        continue
+
+                if subfigures_data:
+                    self.logger.info(f"Successfully processed {len(subfigures_data)} subfigures")
+                    figure_data = FigureData(
+                        path=output_dir / elem_id,
+                        caption=main_caption_text,  # Raw caption without formatting
+                        type='figure',
+                        element_id=element_id,
+                        has_subfigures=True,
+                        subfigures=subfigures_data
+                    )
+                    return elem_id, figure_data
+                else:
+                    self.logger.warning("No subfigures were successfully processed")
+
+            else:
+                # Process as single figure using the same helper method
+                figure_path = output_dir / f"{elem_id}.png"
+                figure_data = self._process_figure_element(element, figure_path)
+                
+                if figure_data:
+                    return elem_id, FigureData(
+                        path=figure_path,
+                        caption=figure_data['caption'],
+                        type='figure',
+                        element_id=element_id,
+                        has_subfigures=False
+                    )
+
+        except Exception as e:
+            self.logger.exception(f"Error processing element: {e}")
+            return None
+
+    def _process_table(self, element: BeautifulSoup, elem_id: str, output_dir: Path, original_id: str) -> Optional[Tuple[str, TableData]]:
+        """Process a table element."""
+        try:
+            # Find the actual table element
+            table = element if element.name == 'table' else element.find('table')
+            if not table:
+                return None
+
+            # Get caption
+            caption = element.find('figcaption', class_='ltx_caption ltx_centering')
+            caption_text = self._clean_latex_from_html(caption) if caption else ""
+
+            # Convert table to markdown
+            table_md = self._table_to_markdown(table)
+            if not table_md:
+                return None
+
+            # Save table markdown
+            output_path = output_dir / f"{elem_id}.md"
+            with open(output_path, 'w', encoding='utf-8') as f:
+                f.write(table_md)   
+
+            table_data = TableData(
+                path=output_path,
+                caption=caption_text,
+                type='table',
+                element_id=original_id,
+                content=table_md
+            )
+
+            return elem_id, table_data
+
+        except Exception as e:
+            self.logger.error(f"Error processing table: {e}")
+            return None
 
     def _fetch_with_retry(self, url: str, max_retries: int = 3) -> requests.Response:
         """Fetch URL with retry logic."""
@@ -80,91 +234,49 @@ class Ar5ivFigureProcessor:
                     raise
                 time.sleep(2 ** attempt)
 
-    def _process_element(self, element: BeautifulSoup, num: int, output_dir: Path) -> Optional[Tuple[str, FigureData]]:
-        """Process a figure or table element."""
-        try:
-            is_table = element.name == 'table'
-            elem_type = 'tab' if is_table else 'fig'
-            
-            # Extract caption with proper LaTeX handling
-            caption = element.find(['figcaption', 'caption'])
-            caption_text = self._clean_latex_from_html(caption) if caption else ""
-            
-            # Get element ID
-            number_match = re.search(rf'{elem_type}(?:ure)?\.?\s*(\d+)', caption_text.lower())
-            fig_id = f"{elem_type}{number_match.group(1)}" if number_match else f"{elem_type}_{num}"
-
-            # Clean up the caption - remove the original figure/table label and format our own
-            if caption_text:
-                # Remove the original figure/table label
-                caption_text = re.sub(rf'^{elem_type}(?:ure)?\.?\s*\d+:?\s*', '', caption_text, flags=re.IGNORECASE)
-                # Add our formatted label
-                label_text = "Figure" if elem_type == "fig" else "Table"
-                number = number_match.group(1) if number_match else num
-                caption_text = f"**{label_text} {number}:** {caption_text}"
-
-            if is_table:
-                # Convert table to markdown
-                table_md = self._table_to_markdown(element)
-                if not table_md:
-                    return None
-                    
-                figure_data = FigureData(
-                    path=output_dir / f"{fig_id}.md",
-                    caption=caption_text,
-                    type='table',
-                    content=table_md
-                )
-                
-                # Save table markdown
-                with open(figure_data.path, 'w', encoding='utf-8') as f:
-                    f.write(table_md)
-                
-            else:
-                # Process figure image
-                img_data = self._process_figure_image(element)
-                if not img_data:
-                    return None
-                
-                output_path = output_dir / f"{fig_id}.png"
-                img_data.save(output_path, format='PNG')
-                
-                figure_data = FigureData(
-                    path=output_path,
-                    caption=caption_text,
-                    type='figure'
-                )
-
-            return fig_id, figure_data
-
-        except Exception as e:
-            self.logger.exception(f"Error processing element")
-            return None
-
     def _process_figure_image(self, figure_elem: BeautifulSoup) -> Optional[Image.Image]:
         """Extract image from figure element."""
-        # First try SVG
-        svg = figure_elem.find('svg')
-        if svg:
-            return self._process_svg(svg)
+        try:
+            # First try SVG
+            svg = figure_elem.find('svg')
+            if svg:
+                self.logger.debug("Found SVG element")
+                return self._process_svg(svg)
 
-        # Then try regular image
-        img = figure_elem.find('img')
-        if not img:
+            # Then try regular image
+            img = figure_elem.find('img')
+            if not img:
+                self.logger.warning("No img element found in figure")
+                return None
+            
+            src = img.get('src') or img.get('data-src')
+            if not src:
+                self.logger.warning("No src attribute found in img element")
+                return None
+            
+            self.logger.debug(f"Original image src: {src}")
+            
+            # Make relative URLs absolute
+            if not src.startswith(('http://', 'https://', 'data:')):
+                # Extract arxiv ID from src path if possible
+                arxiv_id_match = re.search(r'/html/([^/]+)/', src)
+                if arxiv_id_match:
+                    arxiv_id = arxiv_id_match.group(1)
+                    self.current_base_url = f"https://ar5iv.labs.arxiv.org/html/{arxiv_id}"
+                    self.logger.debug(f"Extracted arxiv ID: {arxiv_id}")
+                
+                src = urljoin(self.current_base_url, src)
+                self.logger.debug(f"Converted to absolute URL: {src}")
+            
+            if src.startswith('data:'):
+                self.logger.debug("Processing base64 encoded image")
+                return self._decode_base64_image(src)
+            else:
+                return self._download_image(src)
+            
+        except Exception as e:
+            self.logger.exception(f"Error processing figure image: {e}")
             return None
-        
-        src = img.get('src') or img.get('data-src')
-        if not src:
-            return None
-        
-        # Make relative URLs absolute
-        if not src.startswith(('http://', 'https://', 'data:')):
-            src = urljoin(self.current_base_url, src)
-        
-        if src.startswith('data:'):
-            return self._decode_base64_image(src)
-        else:
-            return self._download_image(src)
 
     def _table_to_markdown(self, table_elem: BeautifulSoup) -> Optional[str]:
         """Convert HTML table to markdown format."""
@@ -203,20 +315,50 @@ class Ar5ivFigureProcessor:
             self.logger.warning(f"Error converting table to markdown: {e}")
             return None
 
-    def _save_metadata(self, figures: Dict[str, FigureData], output_dir: Path):
+    def _save_metadata(self, elements: Dict[str, Union[FigureData, TableData]], output_dir: Path):
         """Save figure/table metadata to JSON file."""
-        metadata = {
-            fig_id: {
-                'path': str(data.path.relative_to(output_dir)),
-                'caption': data.caption,
-                'type': data.type,
-                'content': data.content if data.type == 'table' else None
-            }
-            for fig_id, data in figures.items()
-        }
+        metadata = {}
+        for elem_id, data in elements.items():
+            try:
+                # Convert paths to relative paths
+                if isinstance(data.path, Path):
+                    rel_path = data.path.relative_to(output_dir)
+                else:
+                    rel_path = str(data.path)  # Fallback if path is already a string
+
+                meta_entry = {
+                    'path': str(rel_path),
+                    'caption': data.caption,
+                    'type': data.type,
+                    'element_id': data.element_id,
+                }
+                
+                if data.type == 'table':
+                    meta_entry['content'] = data.content
+                elif data.has_subfigures and data.subfigures:
+                    # Ensure subfigures are properly included
+                    meta_entry['subfigures'] = [
+                        {
+                            'id': subfig['id'],
+                            'path': str(Path(subfig['path']).relative_to(output_dir)),
+                            'caption': subfig['caption']
+                        }
+                        for subfig in data.subfigures
+                    ]
+                    self.logger.debug(f"Added {len(data.subfigures)} subfigures to metadata for {elem_id}")
+                    
+                metadata[elem_id] = meta_entry
+                
+            except Exception as e:
+                self.logger.error(f"Error processing metadata for element {elem_id}: {e}")
+                continue
         
-        with open(output_dir / 'figures_metadata.json', 'w', encoding='utf-8') as f:
-            json.dump(metadata, f, indent=2, ensure_ascii=False)
+        try:
+            with open(output_dir / 'figures_metadata.json', 'w', encoding='utf-8') as f:
+                json.dump(metadata, f, indent=2, ensure_ascii=False)
+            self.logger.info(f"Successfully saved metadata with {len(metadata)} elements")
+        except Exception as e:
+            self.logger.error(f"Error saving metadata file: {e}")
 
     def _process_svg(self, svg_elem: BeautifulSoup) -> Optional[Image.Image]:
         """Convert SVG element to PIL Image using cairosvg."""
@@ -328,30 +470,117 @@ class Ar5ivFigureProcessor:
         if not element:
             return ""
         
+        # Get raw text first
         text = ""
         for child in element.children:
             if isinstance(child, Tag):
                 if child.name == 'math':
-                    # Get the LaTeX directly from alttext
                     latex = child.get('alttext', '')
                     if latex:
-                        # Add inline math delimiters if not already present
                         if not latex.startswith('$') and not latex.endswith('$'):
                             text += f" ${latex}$ "
                         else:
                             text += f" {latex} "
                     else:
-                        # Fallback to text content if no alttext
                         text += child.get_text()
                 else:
                     text += self._clean_latex_from_html(child)
             else:
-                # For text nodes, preserve them as-is
                 text += str(child)
         
         # Clean up spacing around math delimiters
         text = re.sub(r'\s+\$', ' $', text)
         text = re.sub(r'\$\s+', '$ ', text)
         text = re.sub(r'\s+', ' ', text)
+        text = text.strip()
+        
+        # Format figure and table labels with proper spacing
+        # Match main figure/table labels
+        label_match = re.match(r'^(Figure|Table)\s*(\d+):\s*(.+)$', text, re.IGNORECASE)
+        if label_match:
+            label_type, number, content = label_match.groups()
+            return content.strip()
+        
+        # Match subfigure labels (e.g., "(a)")
+        subfig_match = re.match(r'^\(([a-z])\)\s*(.*)$', text, re.IGNORECASE)
+        if subfig_match:
+            letter, content = subfig_match.groups()
+            return content.strip() if content else ""
         
         return text.strip()
+
+    # Add new function to handle subfigures
+    def process_subfigures(self, figure_element):
+        """
+        Process a figure element that contains subfigures.
+        Returns a list of (subfigure_id, image_url, subcaption) tuples.
+        """
+        subfigures = []
+        for subfig in figure_element.find_all('figure', class_='ltx_figure_panel'):
+            subfig_id = subfig.get('id', '')
+            img = subfig.find('img')
+            if img:
+                image_url = img.get('src', '')
+                subcaption = subfig.find('figcaption')
+                subcaption_text = subcaption.get_text() if subcaption else ''
+                subfigures.append((subfig_id, image_url, subcaption_text))
+        return subfigures
+
+    # Modify process_figure to handle subfigures
+    def process_figure(self, figure_element):
+        """
+        Enhanced figure processing to handle both regular figures and subfigures.
+        """
+        figure_id = figure_element.get('id', '')
+        main_caption = figure_element.find('figcaption', class_='ltx_caption')
+        main_caption_text = main_caption.get_text() if main_caption else ''
+        
+        # Check if this is a figure with subfigures
+        has_subfigures = bool(figure_element.find_all('figure', class_='ltx_figure_panel'))
+        
+        if has_subfigures:
+            subfigures = self.process_subfigures(figure_element)
+            return {
+                'id': figure_id,
+                'caption': main_caption_text,
+                'has_subfigures': True,
+                'subfigures': subfigures
+            }
+        else:
+            # Handle regular figure as before
+            img = figure_element.find('img')
+            if img:
+                image_url = img.get('src', '')
+                return {
+                    'id': figure_id,
+                    'image_url': image_url,
+                    'caption': main_caption_text,
+                    'has_subfigures': False
+                }
+        return None
+
+    def _process_figure_element(self, figure_elem: BeautifulSoup, output_path: Path) -> Optional[Dict]:
+        """Process any figure element (both single figures and subfigures)."""
+        try:
+            # Get figure ID and caption
+            figure_id = figure_elem.get('id', '')
+            caption = figure_elem.find('figcaption', class_='ltx_caption')
+            caption_text = self._clean_latex_from_html(caption) if caption else ""
+            
+            # Process image
+            img = self._process_figure_image(figure_elem)
+            if not img:
+                return None
+            
+            # Save image
+            img.save(output_path, format='PNG')
+            
+            return {
+                'id': figure_id,
+                'path': output_path,
+                'caption': caption_text
+            }
+            
+        except Exception as e:
+            self.logger.warning(f"Error processing figure element: {e}")
+            return None

@@ -13,6 +13,7 @@ import shutil
 from pathlib import Path
 import re
 import json
+from markdown.post_generator import create_post_markdown
 
 # Add the project root to the Python path
 project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
@@ -334,49 +335,8 @@ def create_website_post(article: Article, summary: str, posts_path: Path):
     else:
         logger.warning(f"No thumbnail found for article {article.uid}")
     
-    # Create a lookup dictionary for faster figure matching
-    figure_lookup = {}
-    for fig_id, figure_data in article.figures.items():
-        if figure_data.type == 'figure':  # Only handle image figures here
-            # Extract the label part (e.g., "fig1" from the fig_id)
-            label_match = re.search(r'(fig\d+|tab\d+)', fig_id)
-            if label_match:
-                label = label_match.group(1)
-                # Only store the first occurrence of each label
-                if label not in figure_lookup:
-                    figure_lookup[label] = (fig_id, figure_data)
-    
-    # Copy displayed figures and track which ones were successfully copied
-    logger.debug(f"Processing {len(article.displayed_figures)} displayed figures")
-    copied_figures = {}
-    
-    for internal_fig_id in article.displayed_figures:
-        # Extract the figure number from internal ID (e.g., "3" from "fig_0_3")
-        fig_num_match = re.search(r'fig_\d+_(\d+)', internal_fig_id)
-        if fig_num_match:
-            fig_num = fig_num_match.group(1)
-            # Look for matching figure with this number
-            fig_label = f"fig{fig_num}"
-            
-            if fig_label in figure_lookup:
-                fig_id, figure_data = figure_lookup[fig_label]
-                try:
-                    # Copy the figure
-                    dest_path = post_dir / f"{fig_id}.png"
-                    shutil.copy2(figure_data.path, dest_path)
-                    copied_figures[internal_fig_id] = fig_id
-                    logger.debug(f"Copied figure {fig_id} to {dest_path}")
-                except Exception as e:
-                    logger.error(f"Failed to copy figure {fig_id}: {e}")
-            else:
-                logger.warning(f"No matching figure found for {fig_label}")
-                copied_figures[internal_fig_id] = None
-        else:
-            logger.warning(f"Invalid internal figure ID format: {internal_fig_id}")
-            copied_figures[internal_fig_id] = None
-    
     # Create markdown post with updated figure references
-    post_content = create_post_markdown(article, summary, copied_figures)
+    post_content = create_post_markdown(article, summary, post_dir)
     markdown_path = post_dir / "index.md"
     logger.debug(f"Writing markdown content to {markdown_path}")
     with open(markdown_path, "w", encoding="utf-8") as f:
@@ -422,132 +382,6 @@ def escape_yaml(text: str) -> str:
     text = text.replace('\\\\\\', '\\\\')
     
     return text
-
-def create_post_markdown(article: Article, summary: str, copied_figures: dict) -> str:
-    """Generate the markdown content for the post."""
-    logger = logging.getLogger(__name__)
-    
-    def escape_caption(caption: str) -> str:
-        """
-        Escape caption text for Hugo shortcode.
-        Handles quotation marks, backticks, and other special characters.
-        """
-        if not caption:
-            return ""
-            
-        # Replace newlines with spaces
-        caption = ' '.join(caption.splitlines())
-        
-        # Handle nested quotes by replacing them with single quotes
-        # This preserves any existing escaped quotes
-        caption = re.sub(r'(?<!\\)"', "'", caption)
-        
-        # Escape any remaining unescaped quotes
-        caption = caption.replace('\\"', '"').replace('"', '\\"')
-        
-        # Escape backticks that might interfere with markdown
-        caption = caption.replace('`', '\\`')
-        
-        # Handle other special characters that might cause issues
-        caption = caption.replace('\\', '\\\\')  # Must come first
-        caption = caption.replace('$', '\\$')    # For math expressions
-        
-        return caption
-    
-    # Format frontmatter with proper escaping
-    author_list = article.authors if isinstance(article.authors, list) else []
-    quoted_authors = [f'"{author.strip()}"' for author in author_list]
-
-    # Get description and abstract, ensuring they're properly escaped
-    description = article.abstract[:200] if hasattr(article, 'abstract') else ''
-    abstract = article.abstract if hasattr(article, 'abstract') else ''
-    
-    # Add TLDR to frontmatter
-    tldr = article.tldr if hasattr(article, 'tldr') and article.tldr else ''
-
-    # Update the frontmatter with proper escaping and TLDR
-    frontmatter = f"""---
-title: "{escape_yaml(article.title)}"
-description: "{escape_yaml(description)}"
-authors: [{', '.join(quoted_authors)}]
-date: {datetime.now().strftime('%Y-%m-%d')}
-publication_date: {article.submitted_date.strftime('%Y-%m-%d') if hasattr(article, 'submitted_date') and article.submitted_date else 'Unknown'}
-venue: "{escape_yaml(article.venue if hasattr(article, 'venue') else '')}"
-paper_url: "{article.url}"
-abstract: "{escape_yaml(abstract)}"
-tldr: "{escape_yaml(tldr)}"
-added_date: {datetime.now().strftime('%Y-%m-%d')}
-bookcase_cover_src: '/posts/paper_{article.uid}/thumbnail.png'
-math: true
-katex: true
-weight: 1
----
-
-# Summary
-
-"""
-    
-    # Clean LaTeX in content before processing figures
-    content = clean_latex(summary)
-    
-    # Load figure metadata
-    figures_metadata = {}
-    metadata_path = article.data_folder / "figures" / "figures_metadata.json"
-    try:
-        if metadata_path.exists():
-            with open(metadata_path, 'r', encoding='utf-8') as f:
-                figures_metadata = json.load(f)
-            logger.debug(f"Loaded figures metadata from {metadata_path}")
-        else:
-            logger.warning(f"No figures metadata found at {metadata_path}")
-    except Exception as e:
-        logger.error(f"Error loading figures metadata: {e}")
-    
-    # Process summary to include figures and tables with captions
-    figure_pattern = r'<FIGURE_ID>(\d+)</FIGURE_ID>'
-    
-    for match in re.finditer(figure_pattern, content):
-        full_match = match.group(0)
-        fig_num = match.group(1)
-        
-        # Try to find the figure in metadata using different possible IDs
-        fig_id = f"fig{fig_num}"
-        
-        if fig_id in figures_metadata:
-            metadata = figures_metadata[fig_id]
-            
-            if metadata['type'] == 'figure':
-                escaped_caption = escape_caption(metadata['caption'])
-                escaped_caption = clean_latex(escaped_caption)
-                replacement = f"""
-
-{{{{< figure src="{fig_id}.png" caption="{escaped_caption}" >}}}}
-
-Figure {fig_num}"""
-            else:  # table
-                table_caption = clean_latex(metadata['caption'])
-                table_content = metadata['content']  # Don't clean LaTeX in table content
-                replacement = f"""
-
-**Table {fig_num}:** {table_caption}
-
-{table_content}
-
-"""
-        else:
-            logger.debug(f"Available figures in metadata: {list(figures_metadata.keys())}")
-            logger.debug(f"Looking for figure {fig_id}")
-            replacement = f'\n\n*[See Figure {fig_num} in the original paper]*\n\n'
-        
-        content = content.replace(full_match, replacement)
-    
-    # Clean up any multiple consecutive blank lines
-    content = re.sub(r'\n{3,}', '\n\n', content)
-    
-    # Ensure proper spacing between sections (numbered points)
-    content = re.sub(r'(\d+\.) ', r'\n\n\1 ', content)
-    
-    return frontmatter + content
 
 if __name__ == "__main__":
     main()

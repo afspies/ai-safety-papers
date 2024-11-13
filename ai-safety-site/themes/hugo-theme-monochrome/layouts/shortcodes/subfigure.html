@@ -1,0 +1,10 @@
+<div class="subfigure">
+  {{- $src := .Get "src" -}}
+  {{- $caption := .Get "caption" -}}
+  <div class="image-wrapper">
+    <img src="{{ $src }}" alt="{{ $caption }}">
+  </div>
+  {{ with $caption }}
+  <figcaption>{{ . | markdownify }}</figcaption>
+  {{ end }}
+</div> 

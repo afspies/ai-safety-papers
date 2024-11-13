@@ -1,0 +1,42 @@
+.subfigures {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    justify-content: center;
+    margin: 2rem 0;
+}
+
+.subfigure {
+    flex: 1 1 300px;
+    min-width: 0;  /* Allow shrinking below min-content */
+    max-width: 100%;
+    margin: 0;
+}
+
+.subfigure figure {
+    margin: 0;
+    width: 100%;
+}
+
+.subfigure img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+}
+
+.figure-caption {
+    text-align: center;
+    margin: 1rem 0 2rem;
+    font-weight: 500;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .subfigures {
+        gap: 1rem;
+    }
+    
+    .subfigure {
+        flex-basis: 100%;  /* Stack vertically on mobile */
+    }
+} 
