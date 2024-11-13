@@ -1,11 +1,11 @@
 from pathlib import Path
-from typing import Dict, List, Optional
+from typing import Dict, List, Optional, Union
 import shutil
 import logging
 from utils.figure_processor import extract_figures, create_thumbnail, load_or_parse_document
 import requests
 import os
-from utils.ar5iv_figure_processor import Ar5ivFigureProcessor
+from utils.ar5iv_figure_processor import Ar5ivFigureProcessor, FigureData, TableData
 
 logger = logging.getLogger(__name__)
 
@@ -21,7 +21,8 @@ class Article:
         self.data_dir: Optional[Path] = None  # Directory for all article data
         self.pdf_path: Optional[Path] = None
         self.abstract: Optional[str] = None
-        self.tldr: Optional[str] = None  # Add TLDR field
+        self.tldr: Optional[str] = None
+        self.raw_figures: List[Dict] = []  # Store raw figure data from processor
         
     def set_authors(self, authors: List[str]):
         """Set the authors list."""
@@ -34,31 +35,51 @@ class Article:
     def set_data_paths(self, data_dir: Path, pdf_path: Path):
         """Set the data directory and PDF path."""
         self.data_dir = data_dir
-        # For backward compatibility with code that uses data_folder
-        self.data_folder = data_dir  
+        self.data_folder = data_dir  # For backward compatibility
         self.pdf_path = pdf_path
         
     def process_figures(self) -> bool:
-        """Extract figures from the paper."""
-        if not self.data_dir:
-            logger.error("Data directory not set")
-            return False
-            
+        """Process figures from PDF or HTML, including subfigures."""
         try:
-            # Create figures directory
-            figures_dir = self.data_dir / "figures"
+            figures_dir = self.data_folder / "figures"
             figures_dir.mkdir(parents=True, exist_ok=True)
             
-            # Extract figures using ar5iv
+            # Initialize figure processor
             processor = Ar5ivFigureProcessor()
-            self.figures = processor.process_paper(self.url, figures_dir)
-            logger.info(f"Extracted {len(self.figures)} figures")
+            
+            # Process figures and get metadata
+            elements = processor.process_paper(self.url, figures_dir)
+            if not elements:
+                logger.warning(f"No figures/tables found for article {self.uid}")
+                return False
+                
+            # Store raw figure data for later use
+            self.raw_figures = list(elements.values())
+            
+            # Update figures dictionary
+            for elem_id, element_data in elements.items():
+                if isinstance(element_data, FigureData):
+                    if element_data.has_subfigures:
+                        # Store main figure directory
+                        self.figures[elem_id] = element_data.path
+                        # Store individual subfigures
+                        for subfig in element_data.subfigures:
+                            subfig_id = f"{elem_id}_{subfig['id']}"  # e.g., fig1_a
+                            self.figures[subfig_id] = Path(subfig['path'])
+                    else:
+                        self.figures[elem_id] = element_data.path
+                elif isinstance(element_data, TableData):
+                    # Handle tables
+                    self.figures[elem_id] = element_data.path
+            
+            logger.info(f"Successfully processed {len(elements)} elements for article {self.uid}")
             return True
             
         except Exception as e:
-            logger.error(f"Error processing figures: {e}")
+            logger.error(f"Error processing figures for article {self.uid}: {e}")
+            logger.exception("Full traceback:")
             return False
-            
+        
     def set_displayed_figures(self, figure_ids: List[str]):
         """Set which figures should be displayed in the post."""
         self.displayed_figures = figure_ids
@@ -68,13 +89,13 @@ class Article:
         Set the thumbnail source.
         
         Args:
-            source: Either 'full', 'abstract', or a figure ID (e.g., 'fig1')
+            source: Either 'full', 'abstract', or a figure ID (e.g., 'fig1', 'fig1_a')
         """
         self.thumbnail_source = source
         
     def find_figure_by_label(self, label: str) -> Optional[str]:
         """
-        Find a figure ID by its label (e.g., 'fig1', 'tab2').
+        Find a figure ID by its label (e.g., 'fig1', 'fig1_a').
         
         Args:
             label: The label to search for
@@ -82,6 +103,11 @@ class Article:
         Returns:
             The full figure ID if found, None otherwise
         """
+        # First try exact match
+        if label in self.figures:
+            return label
+            
+        # Then try suffix match for backward compatibility
         for fig_id in self.figures.keys():
             if fig_id.endswith(f"_{label}"):
                 return fig_id
@@ -117,32 +143,22 @@ class Article:
             return None
 
     def download_pdf(self) -> bool:
-        """
-        Download the PDF from the article URL.
-        
-        Returns:
-            bool: True if successful, False otherwise
-        """
+        """Download the PDF from the article URL."""
         if not self.url or not self.pdf_path:
             logger.error("URL or PDF path not set")
             return False
 
         try:
-            # Create parent directory if it doesn't exist
             os.makedirs(self.pdf_path.parent, exist_ok=True)
-
-            # Download the PDF
             logger.debug(f"Downloading PDF from {self.url}")
+            
             response = requests.get(self.url, stream=True)
             response.raise_for_status()
 
-            # Check if it's actually a PDF
-            content_type = response.headers.get('content-type', '').lower()
-            if 'pdf' not in content_type:
-                logger.error(f"URL does not point to a PDF (content-type: {content_type})")
+            if 'pdf' not in response.headers.get('content-type', '').lower():
+                logger.error(f"URL does not point to a PDF (content-type: {response.headers.get('content-type')})")
                 return False
 
-            # Save the PDF
             with open(self.pdf_path, 'wb') as f:
                 for chunk in response.iter_content(chunk_size=8192):
                     f.write(chunk)
@@ -165,7 +181,6 @@ class Article:
             return ""
             
         try:
-            # Extract text from all pages
             text = ""
             for page in self.parsed_doc.pages:
                 text += page.text + "\n"

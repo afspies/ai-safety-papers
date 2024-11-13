@@ -6,7 +6,754 @@
     <description>Recent content in Posts on AI Safety Papers</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 11 Nov 2024 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 13 Nov 2024 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>AI Safety: A Climb To Armageddon?</title>
+      <link>http://localhost:1313/posts/paper_14d97aae72f493900b0de0044431e4f596d69120/</link>
+      <pubDate>Wed, 13 Nov 2024 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/posts/paper_14d97aae72f493900b0de0044431e4f596d69120/</guid>
+      <description>&lt;h1 id=&#34;summary&#34; class=&#34;header-anchor-wrapper&#34;&gt;Summary
+  &lt;a href=&#34;#summary&#34; class=&#34;header-anchor-link&#34;&gt;
+    &lt;svg width=&#34;16px&#34; height=&#34;16px&#34; viewBox=&#34;0 0 24 24&#34;&gt;
+&lt;svg
+    xmlns=&#34;http://www.w3.org/2000/svg&#34;
+    width=&#34;24&#34; height=&#34;24&#34; viewBox=&#34;0 0 24 24&#34; fill=&#34;none&#34;
+    stroke=&#34;currentColor&#34; stroke-width=&#34;2&#34; stroke-linecap=&#34;round&#34;
+    stroke-linejoin=&#34;round&#34;&gt;
+    &lt;line x1=&#34;4&#34; y1=&#34;9&#34; x2=&#34;20&#34; y2=&#34;9&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;4&#34; y1=&#34;15&#34; x2=&#34;20&#34; y2=&#34;15&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;10&#34; y1=&#34;3&#34; x2=&#34;8&#34; y2=&#34;21&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;16&#34; y1=&#34;3&#34; x2=&#34;14&#34; y2=&#34;21&#34;&gt;&lt;/line&gt;
+&lt;/svg&gt;
+
+&lt;/svg&gt;
+  &lt;/a&gt;
+&lt;/h1&gt;
+
+&lt;p&gt;This fascinating paper presents a counterintuitive argument against AI safety measures, suggesting that such measures might actually increase rather than decrease existential risks from AI. The authors (Cappelen, Dever, and Hawthorne) develop what they call the &amp;ldquo;non-deterministic argument&amp;rdquo; through an analogy with rock climbing.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Interpreting Attention Layer Outputs with Sparse Autoencoders</title>
+      <link>http://localhost:1313/posts/paper_efbe48e4c17a097f4feaec8cf9dec40218a27a87/</link>
+      <pubDate>Wed, 13 Nov 2024 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/posts/paper_efbe48e4c17a097f4feaec8cf9dec40218a27a87/</guid>
+      <description>&lt;h1 id=&#34;summary&#34; class=&#34;header-anchor-wrapper&#34;&gt;Summary
+  &lt;a href=&#34;#summary&#34; class=&#34;header-anchor-link&#34;&gt;
+    &lt;svg width=&#34;16px&#34; height=&#34;16px&#34; viewBox=&#34;0 0 24 24&#34;&gt;
+&lt;svg
+    xmlns=&#34;http://www.w3.org/2000/svg&#34;
+    width=&#34;24&#34; height=&#34;24&#34; viewBox=&#34;0 0 24 24&#34; fill=&#34;none&#34;
+    stroke=&#34;currentColor&#34; stroke-width=&#34;2&#34; stroke-linecap=&#34;round&#34;
+    stroke-linejoin=&#34;round&#34;&gt;
+    &lt;line x1=&#34;4&#34; y1=&#34;9&#34; x2=&#34;20&#34; y2=&#34;9&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;4&#34; y1=&#34;15&#34; x2=&#34;20&#34; y2=&#34;15&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;10&#34; y1=&#34;3&#34; x2=&#34;8&#34; y2=&#34;21&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;16&#34; y1=&#34;3&#34; x2=&#34;14&#34; y2=&#34;21&#34;&gt;&lt;/line&gt;
+&lt;/svg&gt;
+
+&lt;/svg&gt;
+  &lt;/a&gt;
+&lt;/h1&gt;
+
+&lt;p&gt;This paper presents a novel approach to interpreting attention mechanisms in transformer models using Sparse Autoencoders (SAEs). The authors demonstrate that SAEs can effectively decompose attention layer outputs into interpretable features, providing new insights into how attention layers process information.&lt;/p&gt;
+&lt;p&gt;&lt;figure class=&#34;paper-figure&#34;&gt;
+  &lt;div class=&#34;figure-wrapper&#34;&gt;
+    &lt;div class=&#34;figure-container&#34; onclick=&#34;toggleExpand(this)&#34;&gt;
+      &lt;div class=&#34;image-wrapper&#34;&gt;
+        &lt;img src=&#34;fig1.png&#34; &gt;
+      &lt;/div&gt;
+      
+      &lt;figcaption&gt;Overview. We train Sparse Autoencoders (SAEs) on $\textbf{z}_{\text{cat}}$ , the attention layer outputs pre-linear, concatenated across all heads. The SAEs extract linear directions that correspond to concepts in the model, giving us insight into what attention layers learn in practice. Further, we uncover what information was used to compute these features with direct feature attribution (DFA, Section 2).&lt;/figcaption&gt;
+      
+    &lt;/div&gt;
+    
+    &lt;div class=&#34;static-clone&#34;&gt;
+      &lt;div class=&#34;image-wrapper&#34;&gt;
+        &lt;img src=&#34;fig1.png&#34; &gt;
+      &lt;/div&gt;
+      
+      &lt;figcaption&gt;Overview. We train Sparse Autoencoders (SAEs) on $\textbf{z}_{\text{cat}}$ , the attention layer outputs pre-linear, concatenated across all heads. The SAEs extract linear directions that correspond to concepts in the model, giving us insight into what attention layers learn in practice. Further, we uncover what information was used to compute these features with direct feature attribution (DFA, Section 2).&lt;/figcaption&gt;
+      
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/figure&gt;
+
+&lt;script&gt;
+function toggleExpand(element) {
+    const figure = element.closest(&#39;.paper-figure&#39;);
+    const body = document.body;
+    
+    
+    if (figure.classList.contains(&#39;subfigure-content&#39;)) {
+        return;
+    }
+    
+    figure.classList.toggle(&#39;expanded&#39;);
+    
+    if (figure.classList.contains(&#39;expanded&#39;)) {
+        body.classList.add(&#39;has-expanded-figure&#39;);
+    } else {
+        body.classList.remove(&#39;has-expanded-figure&#39;);
+    }
+    
+    
+    const handleEscape = (e) =&gt; {
+        if (e.key === &#39;Escape&#39; &amp;&amp; figure.classList.contains(&#39;expanded&#39;)) {
+            toggleExpand(element);
+            document.removeEventListener(&#39;keydown&#39;, handleEscape);
+        }
+    };
+    
+    
+    const handleClickOutside = (e) =&gt; {
+        if (figure.classList.contains(&#39;expanded&#39;) &amp;&amp; !element.contains(e.target)) {
+            toggleExpand(element);
+            document.removeEventListener(&#39;click&#39;, handleClickOutside);
+        }
+    };
+    
+    if (figure.classList.contains(&#39;expanded&#39;)) {
+        document.addEventListener(&#39;keydown&#39;, handleEscape);
+        setTimeout(() =&gt; {
+            document.addEventListener(&#39;click&#39;, handleClickOutside);
+        }, 100);
+    }
+}
+
+
+document.addEventListener(&#39;DOMContentLoaded&#39;, () =&gt; {
+    const subfigureGroups = document.querySelectorAll(&#39;.subfigures&#39;);
+    subfigureGroups.forEach(group =&gt; {
+        group.addEventListener(&#39;click&#39;, (e) =&gt; {
+            if (e.target.closest(&#39;.subfigure-content&#39;)) {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                
+                const expandedView = document.createElement(&#39;div&#39;);
+                expandedView.className = &#39;subfigures-expanded&#39;;
+                expandedView.innerHTML = group.innerHTML;
+                
+                
+                const closeBtn = document.createElement(&#39;button&#39;);
+                closeBtn.className = &#39;close-expanded&#39;;
+                closeBtn.innerHTML = &#39;×&#39;;
+                closeBtn.onclick = () =&gt; {
+                    expandedView.remove();
+                    document.body.classList.remove(&#39;has-expanded-figure&#39;);
+                };
+                expandedView.appendChild(closeBtn);
+                
+                document.body.appendChild(expandedView);
+                document.body.classList.add(&#39;has-expanded-figure&#39;);
+                
+                
+                const handleEscape = (e) =&gt; {
+                    if (e.key === &#39;Escape&#39;) {
+                        expandedView.remove();
+                        document.body.classList.remove(&#39;has-expanded-figure&#39;);
+                        document.removeEventListener(&#39;keydown&#39;, handleEscape);
+                    }
+                };
+                document.addEventListener(&#39;keydown&#39;, handleEscape);
+            }
+        });
+    });
+});
+&lt;/script&gt; 
+Figure 1&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Mechanistically Interpreting a Transformer-based 2-SAT Solver: An Axiomatic Approach</title>
+      <link>http://localhost:1313/posts/paper_432a829987174ae1da3350c32f9b9c1d502bd0de/</link>
+      <pubDate>Wed, 13 Nov 2024 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/posts/paper_432a829987174ae1da3350c32f9b9c1d502bd0de/</guid>
+      <description>&lt;h1 id=&#34;summary&#34; class=&#34;header-anchor-wrapper&#34;&gt;Summary
+  &lt;a href=&#34;#summary&#34; class=&#34;header-anchor-link&#34;&gt;
+    &lt;svg width=&#34;16px&#34; height=&#34;16px&#34; viewBox=&#34;0 0 24 24&#34;&gt;
+&lt;svg
+    xmlns=&#34;http://www.w3.org/2000/svg&#34;
+    width=&#34;24&#34; height=&#34;24&#34; viewBox=&#34;0 0 24 24&#34; fill=&#34;none&#34;
+    stroke=&#34;currentColor&#34; stroke-width=&#34;2&#34; stroke-linecap=&#34;round&#34;
+    stroke-linejoin=&#34;round&#34;&gt;
+    &lt;line x1=&#34;4&#34; y1=&#34;9&#34; x2=&#34;20&#34; y2=&#34;9&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;4&#34; y1=&#34;15&#34; x2=&#34;20&#34; y2=&#34;15&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;10&#34; y1=&#34;3&#34; x2=&#34;8&#34; y2=&#34;21&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;16&#34; y1=&#34;3&#34; x2=&#34;14&#34; y2=&#34;21&#34;&gt;&lt;/line&gt;
+&lt;/svg&gt;
+
+&lt;/svg&gt;
+  &lt;/a&gt;
+&lt;/h1&gt;
+
+&lt;p&gt;This paper presents an important theoretical framework for mechanistic interpretability of neural networks, introducing formal axioms to characterize what constitutes a valid mechanistic interpretation. The authors demonstrate their approach through a detailed case study of a Transformer model trained to solve 2-SAT problems.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Safety Cases: How to Justify the Safety of Advanced AI Systems</title>
+      <link>http://localhost:1313/posts/paper_26839456e694aa593a2cdea9c0442f2e8861aed3/</link>
+      <pubDate>Wed, 13 Nov 2024 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/posts/paper_26839456e694aa593a2cdea9c0442f2e8861aed3/</guid>
+      <description>&lt;h1 id=&#34;summary&#34; class=&#34;header-anchor-wrapper&#34;&gt;Summary
+  &lt;a href=&#34;#summary&#34; class=&#34;header-anchor-link&#34;&gt;
+    &lt;svg width=&#34;16px&#34; height=&#34;16px&#34; viewBox=&#34;0 0 24 24&#34;&gt;
+&lt;svg
+    xmlns=&#34;http://www.w3.org/2000/svg&#34;
+    width=&#34;24&#34; height=&#34;24&#34; viewBox=&#34;0 0 24 24&#34; fill=&#34;none&#34;
+    stroke=&#34;currentColor&#34; stroke-width=&#34;2&#34; stroke-linecap=&#34;round&#34;
+    stroke-linejoin=&#34;round&#34;&gt;
+    &lt;line x1=&#34;4&#34; y1=&#34;9&#34; x2=&#34;20&#34; y2=&#34;9&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;4&#34; y1=&#34;15&#34; x2=&#34;20&#34; y2=&#34;15&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;10&#34; y1=&#34;3&#34; x2=&#34;8&#34; y2=&#34;21&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;16&#34; y1=&#34;3&#34; x2=&#34;14&#34; y2=&#34;21&#34;&gt;&lt;/line&gt;
+&lt;/svg&gt;
+
+&lt;/svg&gt;
+  &lt;/a&gt;
+&lt;/h1&gt;
+
+&lt;p&gt;This comprehensive paper presents a framework for developing and evaluating safety cases for advanced AI systems. The authors propose a structured approach to justify that AI systems are unlikely to cause catastrophic outcomes during deployment.&lt;/p&gt;
+&lt;p&gt;Key Contributions:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Framework Structure
+The paper outlines a six-step framework for constructing AI safety cases:&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;Define the AI macrosystem and deployment decision&lt;/li&gt;
+&lt;li&gt;Specify unacceptable outcomes&lt;/li&gt;
+&lt;li&gt;Justify deployment assumptions&lt;/li&gt;
+&lt;li&gt;Decompose the macrosystem into subsystems&lt;/li&gt;
+&lt;li&gt;Assess subsystem risk&lt;/li&gt;
+&lt;li&gt;Assess macrosystem risk&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;Safety Argument Categories
+The authors identify four main categories of safety arguments (
+&lt;figure class=&#34;paper-figure&#34;&gt;
+  &lt;div class=&#34;figure-wrapper&#34;&gt;
+    &lt;div class=&#34;figure-container&#34; onclick=&#34;toggleExpand(this)&#34;&gt;
+      &lt;div class=&#34;image-wrapper&#34;&gt;
+        &lt;img src=&#34;fig2.png&#34; &gt;
+      &lt;/div&gt;
+      
+      &lt;figcaption&gt;&lt;strong&gt;Figure 2:&lt;/strong&gt; As AI systems become more powerful, developers will likely increasingly rely on arguments toward the right in the plot above.&lt;/figcaption&gt;
+      
+    &lt;/div&gt;
+    
+    &lt;div class=&#34;static-clone&#34;&gt;
+      &lt;div class=&#34;image-wrapper&#34;&gt;
+        &lt;img src=&#34;fig2.png&#34; &gt;
+      &lt;/div&gt;
+      
+      &lt;figcaption&gt;&lt;strong&gt;Figure 2:&lt;/strong&gt; As AI systems become more powerful, developers will likely increasingly rely on arguments toward the right in the plot above.&lt;/figcaption&gt;
+      
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/figure&gt;
+
+&lt;script&gt;
+function toggleExpand(element) {
+    const figure = element.closest(&#39;.paper-figure&#39;);
+    const body = document.body;
+    
+    
+    if (figure.classList.contains(&#39;subfigure-content&#39;)) {
+        return;
+    }
+    
+    figure.classList.toggle(&#39;expanded&#39;);
+    
+    if (figure.classList.contains(&#39;expanded&#39;)) {
+        body.classList.add(&#39;has-expanded-figure&#39;);
+    } else {
+        body.classList.remove(&#39;has-expanded-figure&#39;);
+    }
+    
+    
+    const handleEscape = (e) =&gt; {
+        if (e.key === &#39;Escape&#39; &amp;&amp; figure.classList.contains(&#39;expanded&#39;)) {
+            toggleExpand(element);
+            document.removeEventListener(&#39;keydown&#39;, handleEscape);
+        }
+    };
+    
+    
+    const handleClickOutside = (e) =&gt; {
+        if (figure.classList.contains(&#39;expanded&#39;) &amp;&amp; !element.contains(e.target)) {
+            toggleExpand(element);
+            document.removeEventListener(&#39;click&#39;, handleClickOutside);
+        }
+    };
+    
+    if (figure.classList.contains(&#39;expanded&#39;)) {
+        document.addEventListener(&#39;keydown&#39;, handleEscape);
+        setTimeout(() =&gt; {
+            document.addEventListener(&#39;click&#39;, handleClickOutside);
+        }, 100);
+    }
+}
+
+
+document.addEventListener(&#39;DOMContentLoaded&#39;, () =&gt; {
+    const subfigureGroups = document.querySelectorAll(&#39;.subfigures&#39;);
+    subfigureGroups.forEach(group =&gt; {
+        group.addEventListener(&#39;click&#39;, (e) =&gt; {
+            if (e.target.closest(&#39;.subfigure-content&#39;)) {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                
+                const expandedView = document.createElement(&#39;div&#39;);
+                expandedView.className = &#39;subfigures-expanded&#39;;
+                expandedView.innerHTML = group.innerHTML;
+                
+                
+                const closeBtn = document.createElement(&#39;button&#39;);
+                closeBtn.className = &#39;close-expanded&#39;;
+                closeBtn.innerHTML = &#39;×&#39;;
+                closeBtn.onclick = () =&gt; {
+                    expandedView.remove();
+                    document.body.classList.remove(&#39;has-expanded-figure&#39;);
+                };
+                expandedView.appendChild(closeBtn);
+                
+                document.body.appendChild(expandedView);
+                document.body.classList.add(&#39;has-expanded-figure&#39;);
+                
+                
+                const handleEscape = (e) =&gt; {
+                    if (e.key === &#39;Escape&#39;) {
+                        expandedView.remove();
+                        document.body.classList.remove(&#39;has-expanded-figure&#39;);
+                        document.removeEventListener(&#39;keydown&#39;, handleEscape);
+                    }
+                };
+                document.addEventListener(&#39;keydown&#39;, handleEscape);
+            }
+        });
+    });
+});
+&lt;/script&gt; 
+Figure 2):&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;Inability: Demonstrating AI systems cannot cause catastrophes&lt;/li&gt;
+&lt;li&gt;Control: Showing control measures prevent catastrophic outcomes&lt;/li&gt;
+&lt;li&gt;Trustworthiness: Proving AI systems behave reliably despite capabilities&lt;/li&gt;
+&lt;li&gt;Deference: Relying on credible AI advisors&amp;rsquo; safety assessments&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;Building Block Arguments
+The paper presents a detailed analysis of specific arguments within each category (
+&lt;figure class=&#34;paper-figure&#34;&gt;
+  &lt;div class=&#34;figure-wrapper&#34;&gt;
+    &lt;div class=&#34;figure-container&#34; onclick=&#34;toggleExpand(this)&#34;&gt;
+      &lt;div class=&#34;image-wrapper&#34;&gt;
+        &lt;img src=&#34;fig3.png&#34; &gt;
+      &lt;/div&gt;
+      
+      &lt;figcaption&gt;&lt;strong&gt;Figure 3:&lt;/strong&gt; building block arguments for making safety cases. See section 5 for detailed descriptions of each building block argument and justifications for their labels. The arguments that rank highest on practicality, strength, and scalability are monitoring, externalized reasoning, and testbeds.&lt;/figcaption&gt;
+      
+    &lt;/div&gt;
+    
+    &lt;div class=&#34;static-clone&#34;&gt;
+      &lt;div class=&#34;image-wrapper&#34;&gt;
+        &lt;img src=&#34;fig3.png&#34; &gt;
+      &lt;/div&gt;
+      
+      &lt;figcaption&gt;&lt;strong&gt;Figure 3:&lt;/strong&gt; building block arguments for making safety cases. See section 5 for detailed descriptions of each building block argument and justifications for their labels. The arguments that rank highest on practicality, strength, and scalability are monitoring, externalized reasoning, and testbeds.&lt;/figcaption&gt;
+      
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/figure&gt;
+
+&lt;script&gt;
+function toggleExpand(element) {
+    const figure = element.closest(&#39;.paper-figure&#39;);
+    const body = document.body;
+    
+    
+    if (figure.classList.contains(&#39;subfigure-content&#39;)) {
+        return;
+    }
+    
+    figure.classList.toggle(&#39;expanded&#39;);
+    
+    if (figure.classList.contains(&#39;expanded&#39;)) {
+        body.classList.add(&#39;has-expanded-figure&#39;);
+    } else {
+        body.classList.remove(&#39;has-expanded-figure&#39;);
+    }
+    
+    
+    const handleEscape = (e) =&gt; {
+        if (e.key === &#39;Escape&#39; &amp;&amp; figure.classList.contains(&#39;expanded&#39;)) {
+            toggleExpand(element);
+            document.removeEventListener(&#39;keydown&#39;, handleEscape);
+        }
+    };
+    
+    
+    const handleClickOutside = (e) =&gt; {
+        if (figure.classList.contains(&#39;expanded&#39;) &amp;&amp; !element.contains(e.target)) {
+            toggleExpand(element);
+            document.removeEventListener(&#39;click&#39;, handleClickOutside);
+        }
+    };
+    
+    if (figure.classList.contains(&#39;expanded&#39;)) {
+        document.addEventListener(&#39;keydown&#39;, handleEscape);
+        setTimeout(() =&gt; {
+            document.addEventListener(&#39;click&#39;, handleClickOutside);
+        }, 100);
+    }
+}
+
+
+document.addEventListener(&#39;DOMContentLoaded&#39;, () =&gt; {
+    const subfigureGroups = document.querySelectorAll(&#39;.subfigures&#39;);
+    subfigureGroups.forEach(group =&gt; {
+        group.addEventListener(&#39;click&#39;, (e) =&gt; {
+            if (e.target.closest(&#39;.subfigure-content&#39;)) {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                
+                const expandedView = document.createElement(&#39;div&#39;);
+                expandedView.className = &#39;subfigures-expanded&#39;;
+                expandedView.innerHTML = group.innerHTML;
+                
+                
+                const closeBtn = document.createElement(&#39;button&#39;);
+                closeBtn.className = &#39;close-expanded&#39;;
+                closeBtn.innerHTML = &#39;×&#39;;
+                closeBtn.onclick = () =&gt; {
+                    expandedView.remove();
+                    document.body.classList.remove(&#39;has-expanded-figure&#39;);
+                };
+                expandedView.appendChild(closeBtn);
+                
+                document.body.appendChild(expandedView);
+                document.body.classList.add(&#39;has-expanded-figure&#39;);
+                
+                
+                const handleEscape = (e) =&gt; {
+                    if (e.key === &#39;Escape&#39;) {
+                        expandedView.remove();
+                        document.body.classList.remove(&#39;has-expanded-figure&#39;);
+                        document.removeEventListener(&#39;keydown&#39;, handleEscape);
+                    }
+                };
+                document.addEventListener(&#39;keydown&#39;, handleEscape);
+            }
+        });
+    });
+});
+&lt;/script&gt; 
+Figure 3), rating them on:&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;Practicality: How soon they could be implemented&lt;/li&gt;
+&lt;li&gt;Maximum strength: Potential confidence in safety&lt;/li&gt;
+&lt;li&gt;Scalability: Applicability to more advanced AI systems&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol start=&#34;4&#34;&gt;
+&lt;li&gt;
+&lt;p&gt;Holistic Safety Case Construction
+The authors demonstrate how to combine these arguments into a complete safety case using Goal Structuring Notation (GSN) (
+&lt;figure class=&#34;paper-figure&#34;&gt;
+  &lt;div class=&#34;figure-wrapper&#34;&gt;
+    &lt;div class=&#34;figure-container&#34; onclick=&#34;toggleExpand(this)&#34;&gt;
+      &lt;div class=&#34;image-wrapper&#34;&gt;
+        &lt;img src=&#34;fig8.png&#34; &gt;
+      &lt;/div&gt;
+      
+      &lt;figcaption&gt;&lt;strong&gt;Figure 8:&lt;/strong&gt; Caption: The diagram above illustrates an example monitoring scheme where a watchdog model (right) monitors the agent model (left). In this setup, a control argument could be constructed by conservatively assuming that the agent and its users are pursuing their best strategy for causing a catastrophe (untrustworthy). The watchdog is assumed to be reliable, which must be justified with a trustworthiness argument.&lt;/figcaption&gt;
+      
+    &lt;/div&gt;
+    
+    &lt;div class=&#34;static-clone&#34;&gt;
+      &lt;div class=&#34;image-wrapper&#34;&gt;
+        &lt;img src=&#34;fig8.png&#34; &gt;
+      &lt;/div&gt;
+      
+      &lt;figcaption&gt;&lt;strong&gt;Figure 8:&lt;/strong&gt; Caption: The diagram above illustrates an example monitoring scheme where a watchdog model (right) monitors the agent model (left). In this setup, a control argument could be constructed by conservatively assuming that the agent and its users are pursuing their best strategy for causing a catastrophe (untrustworthy). The watchdog is assumed to be reliable, which must be justified with a trustworthiness argument.&lt;/figcaption&gt;
+      
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/figure&gt;
+
+&lt;script&gt;
+function toggleExpand(element) {
+    const figure = element.closest(&#39;.paper-figure&#39;);
+    const body = document.body;
+    
+    
+    if (figure.classList.contains(&#39;subfigure-content&#39;)) {
+        return;
+    }
+    
+    figure.classList.toggle(&#39;expanded&#39;);
+    
+    if (figure.classList.contains(&#39;expanded&#39;)) {
+        body.classList.add(&#39;has-expanded-figure&#39;);
+    } else {
+        body.classList.remove(&#39;has-expanded-figure&#39;);
+    }
+    
+    
+    const handleEscape = (e) =&gt; {
+        if (e.key === &#39;Escape&#39; &amp;&amp; figure.classList.contains(&#39;expanded&#39;)) {
+            toggleExpand(element);
+            document.removeEventListener(&#39;keydown&#39;, handleEscape);
+        }
+    };
+    
+    
+    const handleClickOutside = (e) =&gt; {
+        if (figure.classList.contains(&#39;expanded&#39;) &amp;&amp; !element.contains(e.target)) {
+            toggleExpand(element);
+            document.removeEventListener(&#39;click&#39;, handleClickOutside);
+        }
+    };
+    
+    if (figure.classList.contains(&#39;expanded&#39;)) {
+        document.addEventListener(&#39;keydown&#39;, handleEscape);
+        setTimeout(() =&gt; {
+            document.addEventListener(&#39;click&#39;, handleClickOutside);
+        }, 100);
+    }
+}
+
+
+document.addEventListener(&#39;DOMContentLoaded&#39;, () =&gt; {
+    const subfigureGroups = document.querySelectorAll(&#39;.subfigures&#39;);
+    subfigureGroups.forEach(group =&gt; {
+        group.addEventListener(&#39;click&#39;, (e) =&gt; {
+            if (e.target.closest(&#39;.subfigure-content&#39;)) {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                
+                const expandedView = document.createElement(&#39;div&#39;);
+                expandedView.className = &#39;subfigures-expanded&#39;;
+                expandedView.innerHTML = group.innerHTML;
+                
+                
+                const closeBtn = document.createElement(&#39;button&#39;);
+                closeBtn.className = &#39;close-expanded&#39;;
+                closeBtn.innerHTML = &#39;×&#39;;
+                closeBtn.onclick = () =&gt; {
+                    expandedView.remove();
+                    document.body.classList.remove(&#39;has-expanded-figure&#39;);
+                };
+                expandedView.appendChild(closeBtn);
+                
+                document.body.appendChild(expandedView);
+                document.body.classList.add(&#39;has-expanded-figure&#39;);
+                
+                
+                const handleEscape = (e) =&gt; {
+                    if (e.key === &#39;Escape&#39;) {
+                        expandedView.remove();
+                        document.body.classList.remove(&#39;has-expanded-figure&#39;);
+                        document.removeEventListener(&#39;keydown&#39;, handleEscape);
+                    }
+                };
+                document.addEventListener(&#39;keydown&#39;, handleEscape);
+            }
+        });
+    });
+});
+&lt;/script&gt; 
+Figure 8,
+&lt;figure class=&#34;paper-figure&#34;&gt;
+  &lt;div class=&#34;figure-wrapper&#34;&gt;
+    &lt;div class=&#34;figure-container&#34; onclick=&#34;toggleExpand(this)&#34;&gt;
+      &lt;div class=&#34;image-wrapper&#34;&gt;
+        &lt;img src=&#34;fig9.png&#34; &gt;
+      &lt;/div&gt;
+      
+      &lt;figcaption&gt;&lt;strong&gt;Figure 9:&lt;/strong&gt; the diagram above depicts a potential setup where three different models would need to behave badly to cause a catastrophe.&lt;/figcaption&gt;
+      
+    &lt;/div&gt;
+    
+    &lt;div class=&#34;static-clone&#34;&gt;
+      &lt;div class=&#34;image-wrapper&#34;&gt;
+        &lt;img src=&#34;fig9.png&#34; &gt;
+      &lt;/div&gt;
+      
+      &lt;figcaption&gt;&lt;strong&gt;Figure 9:&lt;/strong&gt; the diagram above depicts a potential setup where three different models would need to behave badly to cause a catastrophe.&lt;/figcaption&gt;
+      
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/figure&gt;
+
+&lt;script&gt;
+function toggleExpand(element) {
+    const figure = element.closest(&#39;.paper-figure&#39;);
+    const body = document.body;
+    
+    
+    if (figure.classList.contains(&#39;subfigure-content&#39;)) {
+        return;
+    }
+    
+    figure.classList.toggle(&#39;expanded&#39;);
+    
+    if (figure.classList.contains(&#39;expanded&#39;)) {
+        body.classList.add(&#39;has-expanded-figure&#39;);
+    } else {
+        body.classList.remove(&#39;has-expanded-figure&#39;);
+    }
+    
+    
+    const handleEscape = (e) =&gt; {
+        if (e.key === &#39;Escape&#39; &amp;&amp; figure.classList.contains(&#39;expanded&#39;)) {
+            toggleExpand(element);
+            document.removeEventListener(&#39;keydown&#39;, handleEscape);
+        }
+    };
+    
+    
+    const handleClickOutside = (e) =&gt; {
+        if (figure.classList.contains(&#39;expanded&#39;) &amp;&amp; !element.contains(e.target)) {
+            toggleExpand(element);
+            document.removeEventListener(&#39;click&#39;, handleClickOutside);
+        }
+    };
+    
+    if (figure.classList.contains(&#39;expanded&#39;)) {
+        document.addEventListener(&#39;keydown&#39;, handleEscape);
+        setTimeout(() =&gt; {
+            document.addEventListener(&#39;click&#39;, handleClickOutside);
+        }, 100);
+    }
+}
+
+
+document.addEventListener(&#39;DOMContentLoaded&#39;, () =&gt; {
+    const subfigureGroups = document.querySelectorAll(&#39;.subfigures&#39;);
+    subfigureGroups.forEach(group =&gt; {
+        group.addEventListener(&#39;click&#39;, (e) =&gt; {
+            if (e.target.closest(&#39;.subfigure-content&#39;)) {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                
+                const expandedView = document.createElement(&#39;div&#39;);
+                expandedView.className = &#39;subfigures-expanded&#39;;
+                expandedView.innerHTML = group.innerHTML;
+                
+                
+                const closeBtn = document.createElement(&#39;button&#39;);
+                closeBtn.className = &#39;close-expanded&#39;;
+                closeBtn.innerHTML = &#39;×&#39;;
+                closeBtn.onclick = () =&gt; {
+                    expandedView.remove();
+                    document.body.classList.remove(&#39;has-expanded-figure&#39;);
+                };
+                expandedView.appendChild(closeBtn);
+                
+                document.body.appendChild(expandedView);
+                document.body.classList.add(&#39;has-expanded-figure&#39;);
+                
+                
+                const handleEscape = (e) =&gt; {
+                    if (e.key === &#39;Escape&#39;) {
+                        expandedView.remove();
+                        document.body.classList.remove(&#39;has-expanded-figure&#39;);
+                        document.removeEventListener(&#39;keydown&#39;, handleEscape);
+                    }
+                };
+                document.addEventListener(&#39;keydown&#39;, handleEscape);
+            }
+        });
+    });
+});
+&lt;/script&gt; 
+Figure 9).&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Safetywashing: Do AI Safety Benchmarks Actually Measure Safety Progress?</title>
+      <link>http://localhost:1313/posts/paper_50c337cb047be63614342f5d2e9e492762b7cc5c/</link>
+      <pubDate>Wed, 13 Nov 2024 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/posts/paper_50c337cb047be63614342f5d2e9e492762b7cc5c/</guid>
+      <description>&lt;h1 id=&#34;summary&#34; class=&#34;header-anchor-wrapper&#34;&gt;Summary
+  &lt;a href=&#34;#summary&#34; class=&#34;header-anchor-link&#34;&gt;
+    &lt;svg width=&#34;16px&#34; height=&#34;16px&#34; viewBox=&#34;0 0 24 24&#34;&gt;
+&lt;svg
+    xmlns=&#34;http://www.w3.org/2000/svg&#34;
+    width=&#34;24&#34; height=&#34;24&#34; viewBox=&#34;0 0 24 24&#34; fill=&#34;none&#34;
+    stroke=&#34;currentColor&#34; stroke-width=&#34;2&#34; stroke-linecap=&#34;round&#34;
+    stroke-linejoin=&#34;round&#34;&gt;
+    &lt;line x1=&#34;4&#34; y1=&#34;9&#34; x2=&#34;20&#34; y2=&#34;9&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;4&#34; y1=&#34;15&#34; x2=&#34;20&#34; y2=&#34;15&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;10&#34; y1=&#34;3&#34; x2=&#34;8&#34; y2=&#34;21&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;16&#34; y1=&#34;3&#34; x2=&#34;14&#34; y2=&#34;21&#34;&gt;&lt;/line&gt;
+&lt;/svg&gt;
+
+&lt;/svg&gt;
+  &lt;/a&gt;
+&lt;/h1&gt;
+
+&lt;p&gt;This comprehensive paper examines the relationship between AI safety benchmarks and general model capabilities, introducing the concept of &amp;ldquo;safetywashing&amp;rdquo; - where capability improvements are misrepresented as safety advancements. The authors conduct an extensive meta-analysis across multiple safety domains and dozens of models to determine whether common safety benchmarks actually measure properties distinct from general capabilities.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>The Elephant in the Room - Why AI Safety Demands Diverse Teams</title>
+      <link>http://localhost:1313/posts/paper_ce2bfded08db31acfb92a82625fe353fdf9549be/</link>
+      <pubDate>Wed, 13 Nov 2024 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/posts/paper_ce2bfded08db31acfb92a82625fe353fdf9549be/</guid>
+      <description>&lt;h1 id=&#34;summary&#34; class=&#34;header-anchor-wrapper&#34;&gt;Summary
+  &lt;a href=&#34;#summary&#34; class=&#34;header-anchor-link&#34;&gt;
+    &lt;svg width=&#34;16px&#34; height=&#34;16px&#34; viewBox=&#34;0 0 24 24&#34;&gt;
+&lt;svg
+    xmlns=&#34;http://www.w3.org/2000/svg&#34;
+    width=&#34;24&#34; height=&#34;24&#34; viewBox=&#34;0 0 24 24&#34; fill=&#34;none&#34;
+    stroke=&#34;currentColor&#34; stroke-width=&#34;2&#34; stroke-linecap=&#34;round&#34;
+    stroke-linejoin=&#34;round&#34;&gt;
+    &lt;line x1=&#34;4&#34; y1=&#34;9&#34; x2=&#34;20&#34; y2=&#34;9&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;4&#34; y1=&#34;15&#34; x2=&#34;20&#34; y2=&#34;15&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;10&#34; y1=&#34;3&#34; x2=&#34;8&#34; y2=&#34;21&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;16&#34; y1=&#34;3&#34; x2=&#34;14&#34; y2=&#34;21&#34;&gt;&lt;/line&gt;
+&lt;/svg&gt;
+
+&lt;/svg&gt;
+  &lt;/a&gt;
+&lt;/h1&gt;
+
+&lt;p&gt;This paper, &amp;ldquo;The Elephant in the Room - Why AI Safety Demands Diverse Teams&amp;rdquo; by David Rostcheck and Lara Scheibling, presents a compelling argument for treating AI alignment as a social science problem rather than purely a technical one. Here are the key points:&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>The Role of AI Safety Institutes in Contributing to International Standards for Frontier AI Safety</title>
+      <link>http://localhost:1313/posts/paper_cf54ca4ea0e1899ddb2d0ee3e0f21c8097f44bbc/</link>
+      <pubDate>Wed, 13 Nov 2024 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/posts/paper_cf54ca4ea0e1899ddb2d0ee3e0f21c8097f44bbc/</guid>
+      <description>&lt;h1 id=&#34;summary&#34; class=&#34;header-anchor-wrapper&#34;&gt;Summary
+  &lt;a href=&#34;#summary&#34; class=&#34;header-anchor-link&#34;&gt;
+    &lt;svg width=&#34;16px&#34; height=&#34;16px&#34; viewBox=&#34;0 0 24 24&#34;&gt;
+&lt;svg
+    xmlns=&#34;http://www.w3.org/2000/svg&#34;
+    width=&#34;24&#34; height=&#34;24&#34; viewBox=&#34;0 0 24 24&#34; fill=&#34;none&#34;
+    stroke=&#34;currentColor&#34; stroke-width=&#34;2&#34; stroke-linecap=&#34;round&#34;
+    stroke-linejoin=&#34;round&#34;&gt;
+    &lt;line x1=&#34;4&#34; y1=&#34;9&#34; x2=&#34;20&#34; y2=&#34;9&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;4&#34; y1=&#34;15&#34; x2=&#34;20&#34; y2=&#34;15&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;10&#34; y1=&#34;3&#34; x2=&#34;8&#34; y2=&#34;21&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;16&#34; y1=&#34;3&#34; x2=&#34;14&#34; y2=&#34;21&#34;&gt;&lt;/line&gt;
+&lt;/svg&gt;
+
+&lt;/svg&gt;
+  &lt;/a&gt;
+&lt;/h1&gt;
+
+&lt;p&gt;This paper examines the potential role of AI Safety Institutes (AISIs) in developing international standards for frontier AI safety. The authors propose three distinct but complementary models for AISI involvement in standard-setting processes, analyzing their respective strengths and limitations.&lt;/p&gt;
+&lt;p&gt;Key Points:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;Context and Motivation&lt;/strong&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;International standards are crucial for ensuring safe development and deployment of frontier AI systems&lt;/li&gt;
+&lt;li&gt;AISIs are well-positioned to contribute due to their technical expertise, international engagement mandate, and convening power&lt;/li&gt;
+&lt;li&gt;Current standardization processes face challenges in keeping pace with rapid AI development&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;&lt;strong&gt;Three Proposed Models&lt;/strong&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;The paper presents three models for AISI involvement in standard-setting:&lt;/p&gt;</description>
+    </item>
+    
     <item>
       <title>Bilinear MLPs enable weight-based mechanistic interpretability</title>
       <link>http://localhost:1313/posts/paper_1ac2d6f203b3bdd3503357b0839c24a485d6ce1d/</link>
@@ -134,90 +881,6 @@
     </item>
     
     <item>
-      <title>Interpreting Attention Layer Outputs with Sparse Autoencoders</title>
-      <link>http://localhost:1313/posts/paper_efbe48e4c17a097f4feaec8cf9dec40218a27a87/</link>
-      <pubDate>Mon, 11 Nov 2024 00:00:00 +0000</pubDate>
-      
-      <guid>http://localhost:1313/posts/paper_efbe48e4c17a097f4feaec8cf9dec40218a27a87/</guid>
-      <description>&lt;h1 id=&#34;summary&#34; class=&#34;header-anchor-wrapper&#34;&gt;Summary
-  &lt;a href=&#34;#summary&#34; class=&#34;header-anchor-link&#34;&gt;
-    &lt;svg width=&#34;16px&#34; height=&#34;16px&#34; viewBox=&#34;0 0 24 24&#34;&gt;
-&lt;svg
-    xmlns=&#34;http://www.w3.org/2000/svg&#34;
-    width=&#34;24&#34; height=&#34;24&#34; viewBox=&#34;0 0 24 24&#34; fill=&#34;none&#34;
-    stroke=&#34;currentColor&#34; stroke-width=&#34;2&#34; stroke-linecap=&#34;round&#34;
-    stroke-linejoin=&#34;round&#34;&gt;
-    &lt;line x1=&#34;4&#34; y1=&#34;9&#34; x2=&#34;20&#34; y2=&#34;9&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;4&#34; y1=&#34;15&#34; x2=&#34;20&#34; y2=&#34;15&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;10&#34; y1=&#34;3&#34; x2=&#34;8&#34; y2=&#34;21&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;16&#34; y1=&#34;3&#34; x2=&#34;14&#34; y2=&#34;21&#34;&gt;&lt;/line&gt;
-&lt;/svg&gt;
-
-&lt;/svg&gt;
-  &lt;/a&gt;
-&lt;/h1&gt;
-
-&lt;p&gt;This paper presents a novel approach to interpreting attention mechanisms in transformer models using Sparse Autoencoders (SAEs). The authors demonstrate that SAEs can effectively decompose attention layer outputs into interpretable features, providing new insights into how attention layers process information.&lt;/p&gt;
-&lt;figure class=&#34;paper-figure&#34;&gt;
-  &lt;div class=&#34;figure-wrapper&#34;&gt;
-    &lt;div class=&#34;figure-container&#34; onclick=&#34;toggleExpand(this)&#34;&gt;
-      &lt;div class=&#34;image-wrapper&#34;&gt;
-        &lt;img src=&#34;fig1.png&#34; &gt;
-      &lt;/div&gt;
-      
-      &lt;figcaption&gt;&lt;strong&gt;Figure 1:&lt;/strong&gt; Overview. We train Sparse Autoencoders (SAEs) on \ $\textbf{z}_{\text{cat}}\ $ , the attention layer outputs pre-linear, concatenated across all heads. The SAEs extract linear directions that correspond to concepts in the model, giving us insight into what attention layers learn in practice. Further, we uncover what information was used to compute these features with direct feature attribution (DFA, Section 2).&lt;/figcaption&gt;
-      
-    &lt;/div&gt;
-    
-    &lt;div class=&#34;static-clone&#34;&gt;
-      &lt;div class=&#34;image-wrapper&#34;&gt;
-        &lt;img src=&#34;fig1.png&#34; &gt;
-      &lt;/div&gt;
-      
-      &lt;figcaption&gt;&lt;strong&gt;Figure 1:&lt;/strong&gt; Overview. We train Sparse Autoencoders (SAEs) on \ $\textbf{z}_{\text{cat}}\ $ , the attention layer outputs pre-linear, concatenated across all heads. The SAEs extract linear directions that correspond to concepts in the model, giving us insight into what attention layers learn in practice. Further, we uncover what information was used to compute these features with direct feature attribution (DFA, Section 2).&lt;/figcaption&gt;
-      
-    &lt;/div&gt;
-  &lt;/div&gt;
-&lt;/figure&gt;
-
-&lt;script&gt;
-function toggleExpand(element) {
-    const figure = element.closest(&#39;.paper-figure&#39;);
-    const body = document.body;
-    
-    figure.classList.toggle(&#39;expanded&#39;);
-    
-    if (figure.classList.contains(&#39;expanded&#39;)) {
-        body.classList.add(&#39;has-expanded-figure&#39;);
-    } else {
-        body.classList.remove(&#39;has-expanded-figure&#39;);
-    }
-    
-    
-    const handleEscape = (e) =&gt; {
-        if (e.key === &#39;Escape&#39; &amp;&amp; figure.classList.contains(&#39;expanded&#39;)) {
-            toggleExpand(element);
-            document.removeEventListener(&#39;keydown&#39;, handleEscape);
-        }
-    };
-    
-    
-    const handleClickOutside = (e) =&gt; {
-        if (figure.classList.contains(&#39;expanded&#39;) &amp;&amp; !element.contains(e.target)) {
-            toggleExpand(element);
-            document.removeEventListener(&#39;click&#39;, handleClickOutside);
-        }
-    };
-    
-    if (figure.classList.contains(&#39;expanded&#39;)) {
-        document.addEventListener(&#39;keydown&#39;, handleEscape);
-        setTimeout(() =&gt; {
-            document.addEventListener(&#39;click&#39;, handleClickOutside);
-        }, 100);
-    }
-}
-&lt;/script&gt; 
-&lt;p&gt;Figure 1 The key contributions include:&lt;/p&gt;</description>
-    </item>
-    
-    <item>
       <title>Llama Scope: Extracting Millions of Features from Llama-3.1-8B with Sparse Autoencoders</title>
       <link>http://localhost:1313/posts/paper_2454c15f9708dc337a2ed849e897f99c43b8f6cb/</link>
       <pubDate>Mon, 11 Nov 2024 00:00:00 +0000</pubDate>
@@ -290,6 +953,11 @@ function toggleExpand(element) {
     const figure = element.closest(&#39;.paper-figure&#39;);
     const body = document.body;
     
+    
+    if (figure.classList.contains(&#39;subfigure-content&#39;)) {
+        return;
+    }
+    
     figure.classList.toggle(&#39;expanded&#39;);
     
     if (figure.classList.contains(&#39;expanded&#39;)) {
@@ -321,6 +989,47 @@ function toggleExpand(element) {
         }, 100);
     }
 }
+
+
+document.addEventListener(&#39;DOMContentLoaded&#39;, () =&gt; {
+    const subfigureGroups = document.querySelectorAll(&#39;.subfigures&#39;);
+    subfigureGroups.forEach(group =&gt; {
+        group.addEventListener(&#39;click&#39;, (e) =&gt; {
+            if (e.target.closest(&#39;.subfigure-content&#39;)) {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                
+                const expandedView = document.createElement(&#39;div&#39;);
+                expandedView.className = &#39;subfigures-expanded&#39;;
+                expandedView.innerHTML = group.innerHTML;
+                
+                
+                const closeBtn = document.createElement(&#39;button&#39;);
+                closeBtn.className = &#39;close-expanded&#39;;
+                closeBtn.innerHTML = &#39;×&#39;;
+                closeBtn.onclick = () =&gt; {
+                    expandedView.remove();
+                    document.body.classList.remove(&#39;has-expanded-figure&#39;);
+                };
+                expandedView.appendChild(closeBtn);
+                
+                document.body.appendChild(expandedView);
+                document.body.classList.add(&#39;has-expanded-figure&#39;);
+                
+                
+                const handleEscape = (e) =&gt; {
+                    if (e.key === &#39;Escape&#39;) {
+                        expandedView.remove();
+                        document.body.classList.remove(&#39;has-expanded-figure&#39;);
+                        document.removeEventListener(&#39;keydown&#39;, handleEscape);
+                    }
+                };
+                document.addEventListener(&#39;keydown&#39;, handleEscape);
+            }
+        });
+    });
+});
 &lt;/script&gt; 
 &lt;p&gt;Figure 1 The paper begins by contrasting mechanistic interpretability with other interpretability paradigms: - Behavioral: Analyzes input-output relationships - Attributional: Quantifies individual input feature influences - Concept-based: Identifies high-level representations - Mechanistic: Uncovers precise causal mechanisms from inputs to outputs The authors establish several core concepts and hypotheses:&lt;/p&gt;</description>
     </item>
@@ -401,6 +1110,11 @@ function toggleExpand(element) {
     const figure = element.closest(&#39;.paper-figure&#39;);
     const body = document.body;
     
+    
+    if (figure.classList.contains(&#39;subfigure-content&#39;)) {
+        return;
+    }
+    
     figure.classList.toggle(&#39;expanded&#39;);
     
     if (figure.classList.contains(&#39;expanded&#39;)) {
@@ -432,6 +1146,47 @@ function toggleExpand(element) {
         }, 100);
     }
 }
+
+
+document.addEventListener(&#39;DOMContentLoaded&#39;, () =&gt; {
+    const subfigureGroups = document.querySelectorAll(&#39;.subfigures&#39;);
+    subfigureGroups.forEach(group =&gt; {
+        group.addEventListener(&#39;click&#39;, (e) =&gt; {
+            if (e.target.closest(&#39;.subfigure-content&#39;)) {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                
+                const expandedView = document.createElement(&#39;div&#39;);
+                expandedView.className = &#39;subfigures-expanded&#39;;
+                expandedView.innerHTML = group.innerHTML;
+                
+                
+                const closeBtn = document.createElement(&#39;button&#39;);
+                closeBtn.className = &#39;close-expanded&#39;;
+                closeBtn.innerHTML = &#39;×&#39;;
+                closeBtn.onclick = () =&gt; {
+                    expandedView.remove();
+                    document.body.classList.remove(&#39;has-expanded-figure&#39;);
+                };
+                expandedView.appendChild(closeBtn);
+                
+                document.body.appendChild(expandedView);
+                document.body.classList.add(&#39;has-expanded-figure&#39;);
+                
+                
+                const handleEscape = (e) =&gt; {
+                    if (e.key === &#39;Escape&#39;) {
+                        expandedView.remove();
+                        document.body.classList.remove(&#39;has-expanded-figure&#39;);
+                        document.removeEventListener(&#39;keydown&#39;, handleEscape);
+                    }
+                };
+                document.addEventListener(&#39;keydown&#39;, handleEscape);
+            }
+        });
+    });
+});
 &lt;/script&gt; 
 &lt;p&gt;Figure 1 - Knowledge Enrichment Hallucinations: Occur when lower-layer MLPs fail to retrieve sufficient subject attribute knowledge - Answer Extraction Hallucinations: Happen when upper-layer attention heads fail to select the correct object attribute&lt;/p&gt;</description>
     </item>

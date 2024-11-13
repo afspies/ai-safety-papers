@@ -20,32 +20,19 @@ weight: 1
 This paper introduces an important advancement in neural network interpretability by analyzing bilinear MLPs, which are a variant of Gated Linear Units (GLUs) without element-wise nonlinearity. The authors demonstrate that these bilinear MLPs can achieve competitive performance while being significantly more interpretable than traditional MLPs. Key contributions: 
 
 1. **Theoretical Framework** The authors show that bilinear MLPs can be fully expressed using linear operations with a third-order tensor, making them amenable to mathematical analysis. 
-
-{{< figure src="fig1.png" caption="**Figure 1:** A) Two ways to represent a bilinear layer, via an elementwise product or the bilinear tensor. B) Diagram of the eigendecomposition technique. Multiplying the bilinear tensor by a desired output direction \ ${\\mathbf{u}}\ $ produces an interaction matrix \ ${\\mathbf{Q}}\ $ that can be decomposed into a set of eigenvectors \ ${\\mathbf{v}}\ $ and associated eigenvalues \ $\\lambda_{i}.\$" >}}
-
-Figure 1 illustrates how bilinear layers can be represented either through elementwise products or using the bilinear tensor. 
+{{< figure src="fig1.png" caption="**Figure 1:**  **A)** Two ways to represent a bilinear layer, via an elementwise product or the bilinear tensor.  **B)** Diagram of the eigendecomposition technique. Multiplying the bilinear tensor by a desired output direction \${\\bm{u}}\$ produces an interaction matrix \${\\bm{Q}}\$ that can be decomposed into a set of eigenvectors \${\\bm{v}}\$ and associated eigenvalues \$\\lambda_{i}.\$" >}} Figure 1 illustrates how bilinear layers can be represented either through elementwise products or using the bilinear tensor. 
 
 2. **Eigendecomposition Analysis** A major contribution is the introduction of eigendecomposition techniques to analyze bilinear MLP weights. 
-
-*[See Figure 2 in the original paper]*
-
- demonstrates how eigenvector activations work and shows examples of interpretable patterns learned for image classification tasks. The eigenvectors often correspond to meaningful features like edge detectors or class-specific patterns. 
+{{< subfigures caption="**Figure 2:**  **A)** Eigenvector activations are quadratic in the input and have a large magnitude if an input aligns with the positive (blue) regions or the negative (red) regions, but not both.  **B)** Top eigenvectors for single-layer MNIST and Fashion-MNIST models, revealing the most significant patterns learned for each class. In MNIST, eigenvectors represent components of the target class, while Fashion-MNIST eigenvectors function as edge detectors. Best viewed in color." >}}
+{{< subfigure src="fig2_a.png" caption="**(a)**" >}}{{< subfigure src="fig2_b.png" caption="**(b)**" >}}
+{{< /subfigures >}} demonstrates how eigenvector activations work and shows examples of interpretable patterns learned for image classification tasks. The eigenvectors often correspond to meaningful features like edge detectors or class-specific patterns. 
 
 3. **Image Classification Insights** The authors apply their methods to MNIST and Fashion-MNIST classification tasks, revealing that: - Models learn interpretable low-rank structure - Regularization improves feature interpretability - Top eigenvectors capture meaningful patterns 
-
-{{< figure src="fig3.png" caption="**Figure 3:** The top four positive (top) and negative (bottom) eigenvectors for the digit 5, ordered from left to right by importance. Their eigenvalues are highlighted on the left. Only 20 positive and 20 negative eigenvalues (out of 512) are shown on the left images. Eigenvectors tend to represent semantically and spatially coherent structures." >}}
-
-Figure 3 shows how different eigenvalues contribute to digit classification. 
+{{< figure src="fig3.png" caption="**Figure 3:** The top four positive (top) and negative (bottom) eigenvectors for the digit 5, ordered from left to right by importance. Their eigenvalues are highlighted on the left. Only 20 positive and 20 negative eigenvalues (out of 512) are shown on the left images. Eigenvectors tend to represent semantically and spatially coherent structures." >}} Figure 3 shows how different eigenvalues contribute to digit classification. 
 
 4. **Language Model Analysis** The researchers analyze a 6-layer transformer with bilinear MLPs trained on TinyStories. 
-
-{{< figure src="fig8.png" caption="**Figure 8:** The sentiment negation circuit for computing the not-good and not-bad output features. A) The interaction submatrix containing the top 15 interactions. B) The top interacting features projected onto the top positive and negative eigenvectors using cosine similarity, with the symbols for different clusters matching the labels in A. Clusters coincide with the projection of meaningful directions such as the difference in “bad” vs “good” token unembeddings and the MLP’s input activations for input tokens “[BOS] not”. C) The not-good feature activation compared to its approximation by the top two eigenvectors." >}}
-
-Figure 8 demonstrates a discovered sentiment negation circuit, showing how the model learns to flip sentiment based on negation words. 
-
-{{< figure src="fig9.png" caption="**Figure 9:** Activation correlations with low-rank approximations. A) Average correlation over output features computed over all inputs before the SAE’s non-linearity (TopK) is applied or only on inputs where the feature is active. B) The distribution of active-only correlations for approximations using the top two eigenvectors. C) Scatter plots for a random set of nine output features. Approximations use the top two eigenvectors." >}}
-
-Figure 9 shows that many output features can be well-approximated by low-rank matrices. Key findings: 
+{{< figure src="fig8.png" caption="**Figure 8:** The sentiment negation circuit for computing the not-good and not-bad output features.  **A)** The interaction submatrix containing the top 15 interactions.  **B)** The top interacting features projected onto the top positive and negative eigenvectors using cosine similarity, with the symbols for different clusters matching the labels in A. Clusters coincide with the projection of meaningful directions such as the difference in “bad” vs “good” token unembeddings and the MLP’s input activations for input tokens “[BOS] not”.  **C)** The not-good feature activation compared to its approximation by the top two eigenvectors." >}} Figure 8 demonstrates a discovered sentiment negation circuit, showing how the model learns to flip sentiment based on negation words. 
+{{< figure src="fig9.png" caption="**Figure 9:** Activation correlations with low-rank approximations.  **A)** Average correlation over output features computed over all inputs before the SAE’s non-linearity (Top **K)** is applied or only on inputs where the feature is active.  **B)** The distribution of active-only correlations for approximations using the top two eigenvectors.  **C)** Scatter plots for a random set of nine output features. Approximations use the top two eigenvectors." >}} Figure 9 shows that many output features can be well-approximated by low-rank matrices. Key findings: 
 
 1. Bilinear MLPs offer similar performance to traditional MLPs while being more interpretable 
 

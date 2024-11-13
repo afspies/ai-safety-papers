@@ -1,0 +1,22 @@
+{{ $caption := .Get "caption" }}
+<figure class="paper-figure subfigures-container">
+  <div class="figure-wrapper">
+    <div class="figure-container" onclick="toggleExpand(this)">
+      <div class="subfigures">
+        {{ .Inner }}
+      </div>
+      {{ with $caption }}
+      <figcaption>{{ . | markdownify }}</figcaption>
+      {{ end }}
+    </div>
+    <!-- Static clone that maintains space -->
+    <div class="static-clone">
+      <div class="subfigures">
+        {{ .Inner }}
+      </div>
+      {{ with $caption }}
+      <figcaption>{{ . | markdownify }}</figcaption>
+      {{ end }}
+    </div>
+  </div>
+</figure> 
