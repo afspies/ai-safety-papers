@@ -7,6 +7,514 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language><atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>Holographic Quantum-Foam Blurring, and Localization of Gamma-Ray Burst   GRB221009A</title>
+      <link>http://localhost:1313/en/posts/paper_07c33e0aaaa7b00c6a40bacf6a95fc3129e91e8f/</link>
+      <pubDate>Fri, 14 Mar 2025 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/en/posts/paper_07c33e0aaaa7b00c6a40bacf6a95fc3129e91e8f/</guid>
+      <description>&lt;div class=&#34;paper-meta&#34;&gt;
+  &lt;div class=&#34;paper-meta-item&#34;&gt;
+    &lt;span class=&#34;paper-meta-label&#34;&gt;Authors:&lt;/span&gt;
+    &lt;div class=&#34;paper-authors&#34;&gt;
+      Eric Steinbring
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class=&#34;paper-meta-item&#34;&gt;
+    &lt;span class=&#34;paper-meta-label&#34;&gt;Published:&lt;/span&gt;
+    &lt;span&gt;Unknown&lt;/span&gt;
+  &lt;/div&gt;
+  &lt;div class=&#34;paper-meta-item&#34;&gt;
+    &lt;span class=&#34;paper-meta-label&#34;&gt;Original Paper:&lt;/span&gt;
+    &lt;a href=&#34;https://arxiv.org/abs/2311.10168&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;View Paper&lt;/a&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;h1 id=&#34;summary&#34; class=&#34;header-anchor-wrapper&#34;&gt;Summary
+  &lt;a href=&#34;#summary&#34; class=&#34;header-anchor-link&#34;&gt;
+    &lt;svg width=&#34;16px&#34; height=&#34;16px&#34; viewBox=&#34;0 0 24 24&#34;&gt;
+&lt;svg
+    xmlns=&#34;http://www.w3.org/2000/svg&#34;
+    width=&#34;24&#34; height=&#34;24&#34; viewBox=&#34;0 0 24 24&#34; fill=&#34;none&#34;
+    stroke=&#34;currentColor&#34; stroke-width=&#34;2&#34; stroke-linecap=&#34;round&#34;
+    stroke-linejoin=&#34;round&#34;&gt;
+    &lt;line x1=&#34;4&#34; y1=&#34;9&#34; x2=&#34;20&#34; y2=&#34;9&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;4&#34; y1=&#34;15&#34; x2=&#34;20&#34; y2=&#34;15&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;10&#34; y1=&#34;3&#34; x2=&#34;8&#34; y2=&#34;21&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;16&#34; y1=&#34;3&#34; x2=&#34;14&#34; y2=&#34;21&#34;&gt;&lt;/line&gt;
+&lt;/svg&gt;
+
+&lt;/svg&gt;
+  &lt;/a&gt;
+&lt;/h1&gt;
+
+&lt;p&gt;This paper discusses Holographic Quantum-Foam Blurring, and Localization of Gamma-Ray Burst   GRB221009A.&lt;/p&gt;
+&lt;p&gt;The authors propose a novel approach to address important challenges in the field.&lt;/p&gt;
+&lt;p&gt;&lt;figure class=&#34;paper-figure&#34;&gt;
+  &lt;div class=&#34;figure-wrapper&#34;&gt;
+    &lt;div class=&#34;figure-container&#34; onclick=&#34;toggleExpand(this)&#34;&gt;
+      &lt;div class=&#34;image-wrapper&#34;&gt;
+        &lt;img src=&#34;fig1.png&#34; &gt;
+      &lt;/div&gt;
+      
+      &lt;figcaption&gt;&lt;strong&gt;Figure 1:&lt;/strong&gt; Angular localization (or equivalent wavefront phase dispersion) of GRB221009A: Fermi LAT and GBM; Swift BAT, XRT and UVOT; or other space- and ground-based facilities. FoVs and energy-sensitivity ranges of instruments are indicated by thin black outlines, and scaled LAT PSF is that measured from AGNs (dot-dashed curve; see Appendix A); gray-shaded regions are instrument resolutions, with increasingly dark shading indicating diffraction: Fermi LAT ( $D=1.8~{}{\rm m}$ ), darker, HST ( $D=2.4~{}{\rm m}$ ) and darkest JWST ( $D=6.5~{}{\rm m}$ ). Maximal limits imposed by foam-induced blurring (orange-shaded regions; $\alpha=0.650$ and $z=4.61$ ) and combination with instrument viewing angles (blue) are shown; their average $\Phi$ (gray curves, $\alpha=0.667$ and $z=1.41$ ) and minima (thick white curve above Theta, thick black below; $\alpha=0.735$ and $z=0.151$ ) follows in Section 2; apparent source sizes (dashed horizontal lines, calculated for $z=0.151$ ) and localization/resolution (horizontal dot-dashed); for details of all other available data, which are shown here as density contours, see Section 3.&lt;/figcaption&gt;
+      
+    &lt;/div&gt;
+    
+    &lt;div class=&#34;static-clone&#34;&gt;
+      &lt;div class=&#34;image-wrapper&#34;&gt;
+        &lt;img src=&#34;fig1.png&#34; &gt;
+      &lt;/div&gt;
+      
+      &lt;figcaption&gt;&lt;strong&gt;Figure 1:&lt;/strong&gt; Angular localization (or equivalent wavefront phase dispersion) of GRB221009A: Fermi LAT and GBM; Swift BAT, XRT and UVOT; or other space- and ground-based facilities. FoVs and energy-sensitivity ranges of instruments are indicated by thin black outlines, and scaled LAT PSF is that measured from AGNs (dot-dashed curve; see Appendix A); gray-shaded regions are instrument resolutions, with increasingly dark shading indicating diffraction: Fermi LAT ( $D=1.8~{}{\rm m}$ ), darker, HST ( $D=2.4~{}{\rm m}$ ) and darkest JWST ( $D=6.5~{}{\rm m}$ ). Maximal limits imposed by foam-induced blurring (orange-shaded regions; $\alpha=0.650$ and $z=4.61$ ) and combination with instrument viewing angles (blue) are shown; their average $\Phi$ (gray curves, $\alpha=0.667$ and $z=1.41$ ) and minima (thick white curve above Theta, thick black below; $\alpha=0.735$ and $z=0.151$ ) follows in Section 2; apparent source sizes (dashed horizontal lines, calculated for $z=0.151$ ) and localization/resolution (horizontal dot-dashed); for details of all other available data, which are shown here as density contours, see Section 3.&lt;/figcaption&gt;
+      
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/figure&gt;
+
+&lt;script&gt;
+function toggleExpand(element) {
+    const figure = element.closest(&#39;.paper-figure&#39;);
+    const body = document.body;
+    
+    
+    if (figure.classList.contains(&#39;subfigure-content&#39;)) {
+        return;
+    }
+    
+    figure.classList.toggle(&#39;expanded&#39;);
+    
+    if (figure.classList.contains(&#39;expanded&#39;)) {
+        body.classList.add(&#39;has-expanded-figure&#39;);
+    } else {
+        body.classList.remove(&#39;has-expanded-figure&#39;);
+    }
+    
+    
+    const handleEscape = (e) =&gt; {
+        if (e.key === &#39;Escape&#39; &amp;&amp; figure.classList.contains(&#39;expanded&#39;)) {
+            toggleExpand(element);
+            document.removeEventListener(&#39;keydown&#39;, handleEscape);
+        }
+    };
+    
+    
+    const handleClickOutside = (e) =&gt; {
+        if (figure.classList.contains(&#39;expanded&#39;) &amp;&amp; !element.contains(e.target)) {
+            toggleExpand(element);
+            document.removeEventListener(&#39;click&#39;, handleClickOutside);
+        }
+    };
+    
+    if (figure.classList.contains(&#39;expanded&#39;)) {
+        document.addEventListener(&#39;keydown&#39;, handleEscape);
+        setTimeout(() =&gt; {
+            document.addEventListener(&#39;click&#39;, handleClickOutside);
+        }, 100);
+    }
+}
+
+
+document.addEventListener(&#39;DOMContentLoaded&#39;, () =&gt; {
+    const subfigureGroups = document.querySelectorAll(&#39;.subfigures&#39;);
+    subfigureGroups.forEach(group =&gt; {
+        group.addEventListener(&#39;click&#39;, (e) =&gt; {
+            if (e.target.closest(&#39;.subfigure-content&#39;)) {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                
+                const expandedView = document.createElement(&#39;div&#39;);
+                expandedView.className = &#39;subfigures-expanded&#39;;
+                expandedView.innerHTML = group.innerHTML;
+                
+                
+                const closeBtn = document.createElement(&#39;button&#39;);
+                closeBtn.className = &#39;close-expanded&#39;;
+                closeBtn.innerHTML = &#39;×&#39;;
+                closeBtn.onclick = () =&gt; {
+                    expandedView.remove();
+                    document.body.classList.remove(&#39;has-expanded-figure&#39;);
+                };
+                expandedView.appendChild(closeBtn);
+                
+                document.body.appendChild(expandedView);
+                document.body.classList.add(&#39;has-expanded-figure&#39;);
+                
+                
+                const handleEscape = (e) =&gt; {
+                    if (e.key === &#39;Escape&#39;) {
+                        expandedView.remove();
+                        document.body.classList.remove(&#39;has-expanded-figure&#39;);
+                        document.removeEventListener(&#39;keydown&#39;, handleEscape);
+                    }
+                };
+                document.addEventListener(&#39;keydown&#39;, handleEscape);
+            }
+        });
+    });
+});
+&lt;/script&gt; 
+Figure 1 shows the main architecture of their proposed method.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Holographic Quantum-Foam Blurring, and Localization of Gamma-Ray Burst   GRB221009A</title>
+      <link>http://localhost:1313/posts/paper_07c33e0aaaa7b00c6a40bacf6a95fc3129e91e8f/</link>
+      <pubDate>Fri, 14 Mar 2025 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/posts/paper_07c33e0aaaa7b00c6a40bacf6a95fc3129e91e8f/</guid>
+      <description>&lt;div class=&#34;paper-meta&#34;&gt;
+  &lt;div class=&#34;paper-meta-item&#34;&gt;
+    &lt;span class=&#34;paper-meta-label&#34;&gt;Authors:&lt;/span&gt;
+    &lt;div class=&#34;paper-authors&#34;&gt;
+      Eric Steinbring
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class=&#34;paper-meta-item&#34;&gt;
+    &lt;span class=&#34;paper-meta-label&#34;&gt;Published:&lt;/span&gt;
+    &lt;span&gt;Unknown&lt;/span&gt;
+  &lt;/div&gt;
+  &lt;div class=&#34;paper-meta-item&#34;&gt;
+    &lt;span class=&#34;paper-meta-label&#34;&gt;Original Paper:&lt;/span&gt;
+    &lt;a href=&#34;https://arxiv.org/abs/2311.10168&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;View Paper&lt;/a&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;h1 id=&#34;summary&#34; class=&#34;header-anchor-wrapper&#34;&gt;Summary
+  &lt;a href=&#34;#summary&#34; class=&#34;header-anchor-link&#34;&gt;
+    &lt;svg width=&#34;16px&#34; height=&#34;16px&#34; viewBox=&#34;0 0 24 24&#34;&gt;
+&lt;svg
+    xmlns=&#34;http://www.w3.org/2000/svg&#34;
+    width=&#34;24&#34; height=&#34;24&#34; viewBox=&#34;0 0 24 24&#34; fill=&#34;none&#34;
+    stroke=&#34;currentColor&#34; stroke-width=&#34;2&#34; stroke-linecap=&#34;round&#34;
+    stroke-linejoin=&#34;round&#34;&gt;
+    &lt;line x1=&#34;4&#34; y1=&#34;9&#34; x2=&#34;20&#34; y2=&#34;9&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;4&#34; y1=&#34;15&#34; x2=&#34;20&#34; y2=&#34;15&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;10&#34; y1=&#34;3&#34; x2=&#34;8&#34; y2=&#34;21&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;16&#34; y1=&#34;3&#34; x2=&#34;14&#34; y2=&#34;21&#34;&gt;&lt;/line&gt;
+&lt;/svg&gt;
+
+&lt;/svg&gt;
+  &lt;/a&gt;
+&lt;/h1&gt;
+
+&lt;p&gt;This paper discusses Holographic Quantum-Foam Blurring, and Localization of Gamma-Ray Burst   GRB221009A.&lt;/p&gt;
+&lt;p&gt;The authors propose a novel approach to address important challenges in the field.&lt;/p&gt;
+&lt;p&gt;&lt;figure class=&#34;paper-figure&#34;&gt;
+  &lt;div class=&#34;figure-wrapper&#34;&gt;
+    &lt;div class=&#34;figure-container&#34; onclick=&#34;toggleExpand(this)&#34;&gt;
+      &lt;div class=&#34;image-wrapper&#34;&gt;
+        &lt;img src=&#34;fig1.png&#34; &gt;
+      &lt;/div&gt;
+      
+      &lt;figcaption&gt;&lt;strong&gt;Figure 1:&lt;/strong&gt; Angular localization (or equivalent wavefront phase dispersion) of GRB221009A: Fermi LAT and GBM; Swift BAT, XRT and UVOT; or other space- and ground-based facilities. FoVs and energy-sensitivity ranges of instruments are indicated by thin black outlines, and scaled LAT PSF is that measured from AGNs (dot-dashed curve; see Appendix A); gray-shaded regions are instrument resolutions, with increasingly dark shading indicating diffraction: Fermi LAT ( $D=1.8~{}{\rm m}$ ), darker, HST ( $D=2.4~{}{\rm m}$ ) and darkest JWST ( $D=6.5~{}{\rm m}$ ). Maximal limits imposed by foam-induced blurring (orange-shaded regions; $\alpha=0.650$ and $z=4.61$ ) and combination with instrument viewing angles (blue) are shown; their average $\Phi$ (gray curves, $\alpha=0.667$ and $z=1.41$ ) and minima (thick white curve above Theta, thick black below; $\alpha=0.735$ and $z=0.151$ ) follows in Section 2; apparent source sizes (dashed horizontal lines, calculated for $z=0.151$ ) and localization/resolution (horizontal dot-dashed); for details of all other available data, which are shown here as density contours, see Section 3.&lt;/figcaption&gt;
+      
+    &lt;/div&gt;
+    
+    &lt;div class=&#34;static-clone&#34;&gt;
+      &lt;div class=&#34;image-wrapper&#34;&gt;
+        &lt;img src=&#34;fig1.png&#34; &gt;
+      &lt;/div&gt;
+      
+      &lt;figcaption&gt;&lt;strong&gt;Figure 1:&lt;/strong&gt; Angular localization (or equivalent wavefront phase dispersion) of GRB221009A: Fermi LAT and GBM; Swift BAT, XRT and UVOT; or other space- and ground-based facilities. FoVs and energy-sensitivity ranges of instruments are indicated by thin black outlines, and scaled LAT PSF is that measured from AGNs (dot-dashed curve; see Appendix A); gray-shaded regions are instrument resolutions, with increasingly dark shading indicating diffraction: Fermi LAT ( $D=1.8~{}{\rm m}$ ), darker, HST ( $D=2.4~{}{\rm m}$ ) and darkest JWST ( $D=6.5~{}{\rm m}$ ). Maximal limits imposed by foam-induced blurring (orange-shaded regions; $\alpha=0.650$ and $z=4.61$ ) and combination with instrument viewing angles (blue) are shown; their average $\Phi$ (gray curves, $\alpha=0.667$ and $z=1.41$ ) and minima (thick white curve above Theta, thick black below; $\alpha=0.735$ and $z=0.151$ ) follows in Section 2; apparent source sizes (dashed horizontal lines, calculated for $z=0.151$ ) and localization/resolution (horizontal dot-dashed); for details of all other available data, which are shown here as density contours, see Section 3.&lt;/figcaption&gt;
+      
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/figure&gt;
+
+&lt;script&gt;
+function toggleExpand(element) {
+    const figure = element.closest(&#39;.paper-figure&#39;);
+    const body = document.body;
+    
+    
+    if (figure.classList.contains(&#39;subfigure-content&#39;)) {
+        return;
+    }
+    
+    figure.classList.toggle(&#39;expanded&#39;);
+    
+    if (figure.classList.contains(&#39;expanded&#39;)) {
+        body.classList.add(&#39;has-expanded-figure&#39;);
+    } else {
+        body.classList.remove(&#39;has-expanded-figure&#39;);
+    }
+    
+    
+    const handleEscape = (e) =&gt; {
+        if (e.key === &#39;Escape&#39; &amp;&amp; figure.classList.contains(&#39;expanded&#39;)) {
+            toggleExpand(element);
+            document.removeEventListener(&#39;keydown&#39;, handleEscape);
+        }
+    };
+    
+    
+    const handleClickOutside = (e) =&gt; {
+        if (figure.classList.contains(&#39;expanded&#39;) &amp;&amp; !element.contains(e.target)) {
+            toggleExpand(element);
+            document.removeEventListener(&#39;click&#39;, handleClickOutside);
+        }
+    };
+    
+    if (figure.classList.contains(&#39;expanded&#39;)) {
+        document.addEventListener(&#39;keydown&#39;, handleEscape);
+        setTimeout(() =&gt; {
+            document.addEventListener(&#39;click&#39;, handleClickOutside);
+        }, 100);
+    }
+}
+
+
+document.addEventListener(&#39;DOMContentLoaded&#39;, () =&gt; {
+    const subfigureGroups = document.querySelectorAll(&#39;.subfigures&#39;);
+    subfigureGroups.forEach(group =&gt; {
+        group.addEventListener(&#39;click&#39;, (e) =&gt; {
+            if (e.target.closest(&#39;.subfigure-content&#39;)) {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                
+                const expandedView = document.createElement(&#39;div&#39;);
+                expandedView.className = &#39;subfigures-expanded&#39;;
+                expandedView.innerHTML = group.innerHTML;
+                
+                
+                const closeBtn = document.createElement(&#39;button&#39;);
+                closeBtn.className = &#39;close-expanded&#39;;
+                closeBtn.innerHTML = &#39;×&#39;;
+                closeBtn.onclick = () =&gt; {
+                    expandedView.remove();
+                    document.body.classList.remove(&#39;has-expanded-figure&#39;);
+                };
+                expandedView.appendChild(closeBtn);
+                
+                document.body.appendChild(expandedView);
+                document.body.classList.add(&#39;has-expanded-figure&#39;);
+                
+                
+                const handleEscape = (e) =&gt; {
+                    if (e.key === &#39;Escape&#39;) {
+                        expandedView.remove();
+                        document.body.classList.remove(&#39;has-expanded-figure&#39;);
+                        document.removeEventListener(&#39;keydown&#39;, handleEscape);
+                    }
+                };
+                document.addEventListener(&#39;keydown&#39;, handleEscape);
+            }
+        });
+    });
+});
+&lt;/script&gt; 
+Figure 1 shows the main architecture of their proposed method.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Locating and Editing Factual Associations in GPT</title>
+      <link>http://localhost:1313/en/posts/paper_ce641b1fe35a2a64268a305380dd404e231eec02/</link>
+      <pubDate>Fri, 14 Mar 2025 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/en/posts/paper_ce641b1fe35a2a64268a305380dd404e231eec02/</guid>
+      <description>&lt;div class=&#34;paper-meta&#34;&gt;
+  &lt;div class=&#34;paper-meta-item&#34;&gt;
+    &lt;span class=&#34;paper-meta-label&#34;&gt;Authors:&lt;/span&gt;
+    &lt;div class=&#34;paper-authors&#34;&gt;
+      Kevin Meng, David Bau, Alex Andonian, Yonatan Belinkov
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class=&#34;paper-meta-item&#34;&gt;
+    &lt;span class=&#34;paper-meta-label&#34;&gt;Published:&lt;/span&gt;
+    &lt;span&gt;Unknown&lt;/span&gt;
+  &lt;/div&gt;
+  &lt;div class=&#34;paper-meta-item&#34;&gt;
+    &lt;span class=&#34;paper-meta-label&#34;&gt;Original Paper:&lt;/span&gt;
+    &lt;a href=&#34;https://arxiv.org/abs/2202.05262&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;View Paper&lt;/a&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;h1 id=&#34;paper-summary&#34; class=&#34;header-anchor-wrapper&#34;&gt;Paper Summary
+  &lt;a href=&#34;#paper-summary&#34; class=&#34;header-anchor-link&#34;&gt;
+    &lt;svg width=&#34;16px&#34; height=&#34;16px&#34; viewBox=&#34;0 0 24 24&#34;&gt;
+&lt;svg
+    xmlns=&#34;http://www.w3.org/2000/svg&#34;
+    width=&#34;24&#34; height=&#34;24&#34; viewBox=&#34;0 0 24 24&#34; fill=&#34;none&#34;
+    stroke=&#34;currentColor&#34; stroke-width=&#34;2&#34; stroke-linecap=&#34;round&#34;
+    stroke-linejoin=&#34;round&#34;&gt;
+    &lt;line x1=&#34;4&#34; y1=&#34;9&#34; x2=&#34;20&#34; y2=&#34;9&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;4&#34; y1=&#34;15&#34; x2=&#34;20&#34; y2=&#34;15&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;10&#34; y1=&#34;3&#34; x2=&#34;8&#34; y2=&#34;21&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;16&#34; y1=&#34;3&#34; x2=&#34;14&#34; y2=&#34;21&#34;&gt;&lt;/line&gt;
+&lt;/svg&gt;
+
+&lt;/svg&gt;
+  &lt;/a&gt;
+&lt;/h1&gt;
+
+&lt;p&gt;This paper presents a novel method for understanding and editing factual knowledge in GPT language models through targeted interventions in middle-layer MLPs. The authors combine causal tracing analysis with a rank-one editing technique (ROME) to identify and modify specific network components responsible for storing factual associations, addressing the challenge of precisely editing model knowledge while maintaining model integrity.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Locating and Editing Factual Associations in GPT</title>
+      <link>http://localhost:1313/posts/paper_ce641b1fe35a2a64268a305380dd404e231eec02/</link>
+      <pubDate>Fri, 14 Mar 2025 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/posts/paper_ce641b1fe35a2a64268a305380dd404e231eec02/</guid>
+      <description>&lt;div class=&#34;paper-meta&#34;&gt;
+  &lt;div class=&#34;paper-meta-item&#34;&gt;
+    &lt;span class=&#34;paper-meta-label&#34;&gt;Authors:&lt;/span&gt;
+    &lt;div class=&#34;paper-authors&#34;&gt;
+      Kevin Meng, David Bau, Alex Andonian, Yonatan Belinkov
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class=&#34;paper-meta-item&#34;&gt;
+    &lt;span class=&#34;paper-meta-label&#34;&gt;Published:&lt;/span&gt;
+    &lt;span&gt;Unknown&lt;/span&gt;
+  &lt;/div&gt;
+  &lt;div class=&#34;paper-meta-item&#34;&gt;
+    &lt;span class=&#34;paper-meta-label&#34;&gt;Original Paper:&lt;/span&gt;
+    &lt;a href=&#34;https://arxiv.org/abs/2202.05262&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;View Paper&lt;/a&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;h1 id=&#34;paper-summary&#34; class=&#34;header-anchor-wrapper&#34;&gt;Paper Summary
+  &lt;a href=&#34;#paper-summary&#34; class=&#34;header-anchor-link&#34;&gt;
+    &lt;svg width=&#34;16px&#34; height=&#34;16px&#34; viewBox=&#34;0 0 24 24&#34;&gt;
+&lt;svg
+    xmlns=&#34;http://www.w3.org/2000/svg&#34;
+    width=&#34;24&#34; height=&#34;24&#34; viewBox=&#34;0 0 24 24&#34; fill=&#34;none&#34;
+    stroke=&#34;currentColor&#34; stroke-width=&#34;2&#34; stroke-linecap=&#34;round&#34;
+    stroke-linejoin=&#34;round&#34;&gt;
+    &lt;line x1=&#34;4&#34; y1=&#34;9&#34; x2=&#34;20&#34; y2=&#34;9&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;4&#34; y1=&#34;15&#34; x2=&#34;20&#34; y2=&#34;15&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;10&#34; y1=&#34;3&#34; x2=&#34;8&#34; y2=&#34;21&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;16&#34; y1=&#34;3&#34; x2=&#34;14&#34; y2=&#34;21&#34;&gt;&lt;/line&gt;
+&lt;/svg&gt;
+
+&lt;/svg&gt;
+  &lt;/a&gt;
+&lt;/h1&gt;
+
+&lt;p&gt;This paper presents a novel method for understanding and editing factual knowledge in GPT language models through targeted interventions in middle-layer MLPs. The authors combine causal tracing analysis with a rank-one editing technique (ROME) to identify and modify specific network components responsible for storing factual associations, addressing the challenge of precisely editing model knowledge while maintaining model integrity.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Training Compute-Optimal Large Language Models</title>
+      <link>http://localhost:1313/en/posts/paper_ac31afbbba5e18bbce9108f53def04efee7f486b/</link>
+      <pubDate>Fri, 14 Mar 2025 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/en/posts/paper_ac31afbbba5e18bbce9108f53def04efee7f486b/</guid>
+      <description>&lt;div class=&#34;paper-meta&#34;&gt;
+  &lt;div class=&#34;paper-meta-item&#34;&gt;
+    &lt;span class=&#34;paper-meta-label&#34;&gt;Authors:&lt;/span&gt;
+    &lt;div class=&#34;paper-authors&#34;&gt;
+      Jordan Hoffmann, Sebastian Borgeaud, Arthur Mensch, Elena Buchatskaya, Trevor Cai, Eliza Rutherford, Diego de Las Casas, Lisa Anne Hendricks, Johannes Welbl, Aidan Clark, Tom Hennigan, Eric Noland, Katie Millican, George van den Driessche, Bogdan Damoc, Aurelia Guy, Simon Osindero, Karen Simonyan, Erich Elsen, Jack W. Rae, Oriol Vinyals, Laurent Sifre
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class=&#34;paper-meta-item&#34;&gt;
+    &lt;span class=&#34;paper-meta-label&#34;&gt;Published:&lt;/span&gt;
+    &lt;span&gt;Unknown&lt;/span&gt;
+  &lt;/div&gt;
+  &lt;div class=&#34;paper-meta-item&#34;&gt;
+    &lt;span class=&#34;paper-meta-label&#34;&gt;Original Paper:&lt;/span&gt;
+    &lt;a href=&#34;https://arxiv.org/abs/2203.15556&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;View Paper&lt;/a&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;h1 id=&#34;summary&#34; class=&#34;header-anchor-wrapper&#34;&gt;Summary
+  &lt;a href=&#34;#summary&#34; class=&#34;header-anchor-link&#34;&gt;
+    &lt;svg width=&#34;16px&#34; height=&#34;16px&#34; viewBox=&#34;0 0 24 24&#34;&gt;
+&lt;svg
+    xmlns=&#34;http://www.w3.org/2000/svg&#34;
+    width=&#34;24&#34; height=&#34;24&#34; viewBox=&#34;0 0 24 24&#34; fill=&#34;none&#34;
+    stroke=&#34;currentColor&#34; stroke-width=&#34;2&#34; stroke-linecap=&#34;round&#34;
+    stroke-linejoin=&#34;round&#34;&gt;
+    &lt;line x1=&#34;4&#34; y1=&#34;9&#34; x2=&#34;20&#34; y2=&#34;9&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;4&#34; y1=&#34;15&#34; x2=&#34;20&#34; y2=&#34;15&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;10&#34; y1=&#34;3&#34; x2=&#34;8&#34; y2=&#34;21&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;16&#34; y1=&#34;3&#34; x2=&#34;14&#34; y2=&#34;21&#34;&gt;&lt;/line&gt;
+&lt;/svg&gt;
+
+&lt;/svg&gt;
+  &lt;/a&gt;
+&lt;/h1&gt;
+
+&lt;p&gt;This paper discusses Training Compute-Optimal Large Language Models.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Training Compute-Optimal Large Language Models</title>
+      <link>http://localhost:1313/posts/paper_ac31afbbba5e18bbce9108f53def04efee7f486b/</link>
+      <pubDate>Fri, 14 Mar 2025 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/posts/paper_ac31afbbba5e18bbce9108f53def04efee7f486b/</guid>
+      <description>&lt;div class=&#34;paper-meta&#34;&gt;
+  &lt;div class=&#34;paper-meta-item&#34;&gt;
+    &lt;span class=&#34;paper-meta-label&#34;&gt;Authors:&lt;/span&gt;
+    &lt;div class=&#34;paper-authors&#34;&gt;
+      Jordan Hoffmann, Sebastian Borgeaud, Arthur Mensch, Elena Buchatskaya, Trevor Cai, Eliza Rutherford, Diego de Las Casas, Lisa Anne Hendricks, Johannes Welbl, Aidan Clark, Tom Hennigan, Eric Noland, Katie Millican, George van den Driessche, Bogdan Damoc, Aurelia Guy, Simon Osindero, Karen Simonyan, Erich Elsen, Jack W. Rae, Oriol Vinyals, Laurent Sifre
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class=&#34;paper-meta-item&#34;&gt;
+    &lt;span class=&#34;paper-meta-label&#34;&gt;Published:&lt;/span&gt;
+    &lt;span&gt;Unknown&lt;/span&gt;
+  &lt;/div&gt;
+  &lt;div class=&#34;paper-meta-item&#34;&gt;
+    &lt;span class=&#34;paper-meta-label&#34;&gt;Original Paper:&lt;/span&gt;
+    &lt;a href=&#34;https://arxiv.org/abs/2203.15556&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;View Paper&lt;/a&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;h1 id=&#34;summary&#34; class=&#34;header-anchor-wrapper&#34;&gt;Summary
+  &lt;a href=&#34;#summary&#34; class=&#34;header-anchor-link&#34;&gt;
+    &lt;svg width=&#34;16px&#34; height=&#34;16px&#34; viewBox=&#34;0 0 24 24&#34;&gt;
+&lt;svg
+    xmlns=&#34;http://www.w3.org/2000/svg&#34;
+    width=&#34;24&#34; height=&#34;24&#34; viewBox=&#34;0 0 24 24&#34; fill=&#34;none&#34;
+    stroke=&#34;currentColor&#34; stroke-width=&#34;2&#34; stroke-linecap=&#34;round&#34;
+    stroke-linejoin=&#34;round&#34;&gt;
+    &lt;line x1=&#34;4&#34; y1=&#34;9&#34; x2=&#34;20&#34; y2=&#34;9&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;4&#34; y1=&#34;15&#34; x2=&#34;20&#34; y2=&#34;15&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;10&#34; y1=&#34;3&#34; x2=&#34;8&#34; y2=&#34;21&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;16&#34; y1=&#34;3&#34; x2=&#34;14&#34; y2=&#34;21&#34;&gt;&lt;/line&gt;
+&lt;/svg&gt;
+
+&lt;/svg&gt;
+  &lt;/a&gt;
+&lt;/h1&gt;
+
+&lt;p&gt;This paper discusses Training Compute-Optimal Large Language Models.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Towards evaluations-based safety cases for AI scheming</title>
+      <link>http://localhost:1313/en/posts/paper_be60e58e175c8940e2608aa699ded1818d83ef45/</link>
+      <pubDate>Sun, 17 Nov 2024 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/en/posts/paper_be60e58e175c8940e2608aa699ded1818d83ef45/</guid>
+      <description>&lt;h1 id=&#34;summary&#34; class=&#34;header-anchor-wrapper&#34;&gt;Summary
+  &lt;a href=&#34;#summary&#34; class=&#34;header-anchor-link&#34;&gt;
+    &lt;svg width=&#34;16px&#34; height=&#34;16px&#34; viewBox=&#34;0 0 24 24&#34;&gt;
+&lt;svg
+    xmlns=&#34;http://www.w3.org/2000/svg&#34;
+    width=&#34;24&#34; height=&#34;24&#34; viewBox=&#34;0 0 24 24&#34; fill=&#34;none&#34;
+    stroke=&#34;currentColor&#34; stroke-width=&#34;2&#34; stroke-linecap=&#34;round&#34;
+    stroke-linejoin=&#34;round&#34;&gt;
+    &lt;line x1=&#34;4&#34; y1=&#34;9&#34; x2=&#34;20&#34; y2=&#34;9&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;4&#34; y1=&#34;15&#34; x2=&#34;20&#34; y2=&#34;15&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;10&#34; y1=&#34;3&#34; x2=&#34;8&#34; y2=&#34;21&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;16&#34; y1=&#34;3&#34; x2=&#34;14&#34; y2=&#34;21&#34;&gt;&lt;/line&gt;
+&lt;/svg&gt;
+
+&lt;/svg&gt;
+  &lt;/a&gt;
+&lt;/h1&gt;
+
+&lt;p&gt;This paper presents a framework for developing safety cases to address the risk of AI systems engaging in &amp;ldquo;scheming&amp;rdquo; - the covert pursuit of misaligned goals. The authors, primarily from Apollo Research and other institutions, propose structured arguments and evaluation methods to demonstrate that AI systems are unlikely to cause catastrophic outcomes through scheming behavior.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Towards evaluations-based safety cases for AI scheming</title>
+      <link>http://localhost:1313/posts/paper_be60e58e175c8940e2608aa699ded1818d83ef45/</link>
+      <pubDate>Sun, 17 Nov 2024 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/posts/paper_be60e58e175c8940e2608aa699ded1818d83ef45/</guid>
+      <description>&lt;h1 id=&#34;summary&#34; class=&#34;header-anchor-wrapper&#34;&gt;Summary
+  &lt;a href=&#34;#summary&#34; class=&#34;header-anchor-link&#34;&gt;
+    &lt;svg width=&#34;16px&#34; height=&#34;16px&#34; viewBox=&#34;0 0 24 24&#34;&gt;
+&lt;svg
+    xmlns=&#34;http://www.w3.org/2000/svg&#34;
+    width=&#34;24&#34; height=&#34;24&#34; viewBox=&#34;0 0 24 24&#34; fill=&#34;none&#34;
+    stroke=&#34;currentColor&#34; stroke-width=&#34;2&#34; stroke-linecap=&#34;round&#34;
+    stroke-linejoin=&#34;round&#34;&gt;
+    &lt;line x1=&#34;4&#34; y1=&#34;9&#34; x2=&#34;20&#34; y2=&#34;9&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;4&#34; y1=&#34;15&#34; x2=&#34;20&#34; y2=&#34;15&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;10&#34; y1=&#34;3&#34; x2=&#34;8&#34; y2=&#34;21&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;16&#34; y1=&#34;3&#34; x2=&#34;14&#34; y2=&#34;21&#34;&gt;&lt;/line&gt;
+&lt;/svg&gt;
+
+&lt;/svg&gt;
+  &lt;/a&gt;
+&lt;/h1&gt;
+
+&lt;p&gt;This paper presents a framework for developing safety cases to address the risk of AI systems engaging in &amp;ldquo;scheming&amp;rdquo; - the covert pursuit of misaligned goals. The authors, primarily from Apollo Research and other institutions, propose structured arguments and evaluation methods to demonstrate that AI systems are unlikely to cause catastrophic outcomes through scheming behavior.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
       <title>AI Safety: A Climb To Armageddon?</title>
       <link>http://localhost:1313/en/posts/paper_14d97aae72f493900b0de0044431e4f596d69120/</link>
       <pubDate>Wed, 13 Nov 2024 00:00:00 +0000</pubDate>

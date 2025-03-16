@@ -1,14 +1,48 @@
+/* Main content styling */
+:root {
+    --primary-color: #2563eb;
+    --secondary-color: #4b5563;
+    --light-bg: #f9fafb;
+    --dark-bg: #1f2937;
+    --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --font-heading: "Georgia", "Times New Roman", serif;
+    --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+body {
+    font-family: var(--font-body);
+    line-height: 1.65;
+}
+
+.post-content h1, .post-content h2, .post-content h3 {
+    font-family: var(--font-heading);
+    margin-top: 2.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.post-content p {
+    margin-bottom: 1.5rem;
+}
+
+/* Figure styling */
 .subfigures {
     display: flex;
     flex-wrap: wrap;
-    gap: 1.5rem;
+    gap: 2rem;
     justify-content: center;
-    margin: 2rem 0;
+    margin: 2.5rem 0;
+    background: var(--light-bg);
+    padding: 2rem;
+    border-radius: 0.5rem;
+}
+
+html[data-theme="dark"] .subfigures {
+    background: var(--dark-bg);
 }
 
 .subfigure {
-    flex: 1 1 300px;
-    min-width: 0;  /* Allow shrinking below min-content */
+    flex: 1 1 350px;
+    min-width: 0;
     max-width: 100%;
     margin: 0;
 }
@@ -16,27 +50,148 @@
 .subfigure figure {
     margin: 0;
     width: 100%;
+    transition: transform 0.2s ease;
+}
+
+.subfigure figure:hover {
+    transform: scale(1.02);
 }
 
 .subfigure img {
     width: 100%;
     height: auto;
     object-fit: contain;
+    border-radius: 0.375rem;
+    box-shadow: var(--card-shadow);
 }
 
 .figure-caption {
     text-align: center;
-    margin: 1rem 0 2rem;
+    margin: 1.25rem 0 2rem;
     font-weight: 500;
+    color: var(--secondary-color);
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+/* Single figure styling */
+.post-content figure {
+    margin: 2.5rem 0;
+}
+
+.post-content figure img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    border-radius: 0.375rem;
+    box-shadow: var(--card-shadow);
+}
+
+.post-content figure figcaption {
+    margin: 1.25rem 0;
+    text-align: center;
+    color: var(--secondary-color);
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+/* Bookcase layout improvements */
+.bookcase-layout {
+    gap: 2rem;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+}
+
+.bookcase-item {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    min-height: 450px;
+}
+
+.bookcase-item:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+}
+
+.bookcase-item figcaption {
+    font-family: var(--font-heading);
+    font-size: 1.2rem;
+    line-height: 1.4;
+    padding: 1.25rem 1rem;
+    font-weight: 600;
+}
+
+.bookcase-item figure {
+    height: 320px;
+}
+
+.bookcase-item-hover .hover-text {
+    font-family: var(--font-body);
+    background: rgba(255, 255, 255, 0.95);
+    padding: 1.25rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    line-height: 1.6;
+}
+
+html[data-theme="dark"] .bookcase-item-hover .hover-text {
+    background: rgba(31, 41, 55, 0.95);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+}
+
+/* Paper metadata display */
+.paper-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.5rem;
+    margin: 2rem 0;
+    padding: 1.5rem;
+    background: var(--light-bg);
+    border-radius: 0.5rem;
+    font-size: 0.9rem;
+}
+
+html[data-theme="dark"] .paper-meta {
+    background: var(--dark-bg);
+}
+
+.paper-meta-item {
+    display: flex;
+    align-items: baseline;
+}
+
+.paper-meta-label {
+    font-weight: 600;
+    margin-right: 0.5rem;
+    color: var(--secondary-color);
+}
+
+.paper-authors {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
 }
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
     .subfigures {
-        gap: 1rem;
+        gap: 1.5rem;
+        padding: 1.5rem;
     }
     
     .subfigure {
         flex-basis: 100%;  /* Stack vertically on mobile */
+    }
+    
+    .post-content figure {
+        margin: 2rem 0;
+    }
+    
+    .bookcase-item {
+        min-height: 420px;
+    }
+    
+    .bookcase-item figure {
+        height: 280px;
     }
 } 

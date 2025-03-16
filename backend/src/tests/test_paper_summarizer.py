@@ -70,15 +70,18 @@ class TestPaperSummarizer(unittest.TestCase):
         # Set up mock response from Claude
         mock_response = MagicMock()
         mock_response.content = [{
-            "text": """---SUMMARY---
+            "text": """<SUMMARY>
             This paper presents a novel approach to AI safety.
-            <fig_0_0> shows the system architecture.
-            The results, demonstrated in <fig_1_0>, indicate improved safety metrics.
-            ---FIGURES---
-            fig_0_0
-            fig_1_0
-            ---THUMBNAIL---
-            fig_0_0"""
+            <FIGURE_ID>0</FIGURE_ID> shows the system architecture.
+            The results, demonstrated in <FIGURE_ID>1</FIGURE_ID>, indicate improved safety metrics.
+            </SUMMARY>
+            <FIGURES>
+            0
+            1
+            </FIGURES>
+            <THUMBNAIL>
+            0
+            </THUMBNAIL>"""
         }]
         mock_anthropic.return_value.messages.create.return_value = mock_response
 
@@ -87,8 +90,8 @@ class TestPaperSummarizer(unittest.TestCase):
 
         # Verify the summary content
         self.assertIn("novel approach to AI safety", summary)
-        self.assertEqual(figures, ["fig_0_0", "fig_1_0"])
-        self.assertEqual(thumbnail, "fig_0_0")
+        self.assertEqual(figures, ["0", "1"])
+        self.assertEqual(thumbnail, "0")
         
         # Verify that the API was called with correct content
         mock_anthropic.return_value.messages.create.assert_called_once()
@@ -109,11 +112,14 @@ class TestPaperSummarizer(unittest.TestCase):
 
         mock_response = MagicMock()
         mock_response.content = [{
-            "text": """---SUMMARY---
+            "text": """<SUMMARY>
             This paper presents a novel approach to AI safety.
-            ---FIGURES---
-            ---THUMBNAIL---
-            NONE"""
+            </SUMMARY>
+            <FIGURES>
+            </FIGURES>
+            <THUMBNAIL>
+            NONE
+            </THUMBNAIL>"""
         }]
         mock_anthropic.return_value.messages.create.return_value = mock_response
 
