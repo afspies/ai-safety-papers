@@ -10,6 +10,7 @@ abstract: "As artificial intelligence systems grow more powerful, there has been
 tldr: "A comprehensive meta-analysis of AI safety benchmarks is conducted, empirically analyzing their correlation with general capabilities across dozens of models and providing a survey of existing directions in AI safety, to provide a more rigorous framework for AI safety research."
 added_date: 2024-11-13
 bookcase_cover_src: '/posts/paper_50c337cb047be63614342f5d2e9e492762b7cc5c/thumbnail.png'
+highlight: false
 math: true
 katex: true
 weight: 1

@@ -6,6 +6,11 @@
     </div>
 {{ end }}
 
+{{ $highlightedPosts := where .Site.RegularPages "Params.highlight" true }}
+{{ if $highlightedPosts }}
+    {{- partial "highlighted-papers.html" (dict "highlighted" $highlightedPosts) -}}
+{{ end }}
+
 {{ partial "postcard/layout.html" (dict "pages" .Site.RegularPages "ctx" .) }}
 
 {{ end }}

@@ -5,7 +5,13 @@
   weight = 1
 
 [[navbar]]
+  identifier = "highlighted"
+  name = "Highlighted"
+  url = "/highlighted/"
+  weight = 2
+
+[[navbar]]
   identifier = "about"
   name = "About"
   url = "/about/"
-  weight = 2
+  weight = 3

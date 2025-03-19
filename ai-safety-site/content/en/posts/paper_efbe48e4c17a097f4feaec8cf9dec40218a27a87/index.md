@@ -10,6 +10,7 @@ abstract: "Decomposing model activations into interpretable components is a key 
 tldr: "The mystery of why models have so many seemingly redundant induction heads is explored, SAEs are used to motivate the hypothesis that some are long-prefix whereas others are short-prefix, and SAEs find a sparse, interpretable decomposition are shown."
 added_date: 2024-11-13
 bookcase_cover_src: '/posts/paper_efbe48e4c17a097f4feaec8cf9dec40218a27a87/thumbnail.png'
+highlight: false
 math: true
 katex: true
 weight: 1

@@ -10,6 +10,7 @@ abstract: "Gamma-ray burst GRB221009A was of unprecedented brightness in gamma-r
 tldr: ""
 added_date: 2025-03-14
 bookcase_cover_src: '/posts/paper_07c33e0aaaa7b00c6a40bacf6a95fc3129e91e8f/thumbnail.png'
+highlight: false
 math: true
 katex: true
 weight: 1

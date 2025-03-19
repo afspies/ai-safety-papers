@@ -10,6 +10,7 @@ abstract: "Understanding AI systems' inner workings is critical for ensuring val
 tldr: "This review explores mechanistic interpretability: reverse engineering the computational mechanisms and representations learned by neural networks into human-understandable algorithms and concepts to provide a granular, causal understanding of AI systems' inner workings."
 added_date: 2024-11-11
 bookcase_cover_src: '/posts/paper_8b750488d139f9beba0815ff8f46ebe15ebb3e58/thumbnail.png'
+highlight: false
 math: true
 katex: true
 weight: 1

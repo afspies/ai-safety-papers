@@ -10,6 +10,7 @@ abstract: "A mechanistic understanding of how MLPs do computation in deep neural
 tldr: "The results demonstrate that bilinear layers serve as an interpretable drop-in replacement for current activation functions and that weight-based interpretability is viable for understanding deep-learning models."
 added_date: 2024-11-11
 bookcase_cover_src: '/posts/paper_1ac2d6f203b3bdd3503357b0839c24a485d6ce1d/thumbnail.png'
+highlight: false
 math: true
 katex: true
 weight: 1

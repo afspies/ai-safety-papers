@@ -9,6 +9,7 @@ paper_url: "https://arxiv.org/pdf/2410.06074.pdf"
 abstract: "We propose Scalable Mechanistic Neural Network (S-MNN), an enhanced neural network framework designed for scientific machine learning applications involving long temporal sequences. By reformulating the original Mechanistic Neural Network (MNN) (Pervez et al., 2024), we reduce the computational time and space complexities from cubic and quadratic with respect to the sequence length, respectively, to linear. This significant improvement enables efficient modeling of long-term dynamics without sacrificing accuracy or interpretability. Extensive experiments demonstrate that S-MNN matches the original MNN in precision while substantially reducing computational resources. Consequently, S-MNN can drop-in replace the original MNN in applications, providing a practical and efficient tool for integrating mechanistic bottlenecks into neural network models of complex dynamical systems."
 added_date: 2024-11-11
 bookcase_cover_src: '/posts/paper_8d42985327b6d112134d96cdd6def5ff9edee92a/thumbnail.png'
+highlight: false
 math: true
 katex: true
 weight: 1

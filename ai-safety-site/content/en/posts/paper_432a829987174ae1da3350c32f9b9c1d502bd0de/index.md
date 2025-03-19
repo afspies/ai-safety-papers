@@ -10,6 +10,7 @@ abstract: "Mechanistic interpretability aims to reverse engineer the computation
 tldr: "A set of axioms are given that formally characterize a mechanistic interpretation as a description that approximately captures the semantics of the neural network under analysis in a compositional manner and are able to reverse engineer the algorithm learned by the model."
 added_date: 2024-11-13
 bookcase_cover_src: '/posts/paper_432a829987174ae1da3350c32f9b9c1d502bd0de/thumbnail.png'
+highlight: false
 math: true
 katex: true
 weight: 1

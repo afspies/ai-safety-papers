@@ -10,6 +10,7 @@ abstract: "We consider that existing approaches to AI\"safety\"and\"alignment\"m
 tldr: "It is suggested that an alternative and better approach to the problem may be to treat alignment as a social science problem, since the social sciences enjoy a rich toolkit of models for understanding and aligning motivation and behavior, much of which could be repurposed to problems involving AI models."
 added_date: 2024-11-13
 bookcase_cover_src: '/posts/paper_ce2bfded08db31acfb92a82625fe353fdf9549be/thumbnail.png'
+highlight: false
 math: true
 katex: true
 weight: 1

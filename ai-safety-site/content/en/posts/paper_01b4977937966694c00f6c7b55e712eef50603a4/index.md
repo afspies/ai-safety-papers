@@ -10,6 +10,7 @@ abstract: "State-of-the-art language models (LMs) sometimes generate non-factual
 tldr: "A novel hallucination mitigation method is proposed through targeted restoration of the LM's internal fact recall pipeline, demonstrating superior performance compared to baselines."
 added_date: 2024-11-11
 bookcase_cover_src: '/posts/paper_01b4977937966694c00f6c7b55e712eef50603a4/thumbnail.png'
+highlight: false
 math: true
 katex: true
 weight: 1

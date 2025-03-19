@@ -10,6 +10,7 @@ abstract: "Activation patching is a popular mechanistic interpretability techniq
 tldr: "What evidence patching experiments provide about circuits, and on the choice of metric and associated pitfalls, are focused on."
 added_date: 2024-11-11
 bookcase_cover_src: '/posts/paper_a0b775b9ff82ce1fb7dd34d53a7d09f70b171895/thumbnail.png'
+highlight: false
 math: true
 katex: true
 weight: 1

@@ -10,6 +10,7 @@ abstract: "Identifying the features learned by neural networks is a core challen
 tldr: "End-to-end (e2e) sparse dictionary learning is proposed, a method for training SAEs that ensures the features learned are functionally important by minimizing the KL divergence between the output distributions of the original model and the model with SAE activations inserted."
 added_date: 2024-11-11
 bookcase_cover_src: '/posts/paper_02ad427b0d20fb976741e332f69c2fd00c751164/thumbnail.png'
+highlight: false
 math: true
 katex: true
 weight: 1

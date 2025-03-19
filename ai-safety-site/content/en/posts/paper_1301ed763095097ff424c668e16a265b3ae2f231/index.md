@@ -9,6 +9,7 @@ paper_url: "https://arxiv.org/pdf/2402.12201.pdf"
 abstract: "Sparse dictionary learning has been a rapidly growing technique in mechanistic interpretability to attack superposition and extract more human-understandable features from model activations. We ask a further question based on the extracted more monosemantic features: How do we recognize circuits connecting the enormous amount of dictionary features? We propose a circuit discovery framework alternative to activation patching. Our framework suffers less from out-of-distribution and proves to be more efficient in terms of asymptotic complexity. The basic unit in our framework is dictionary features decomposed from all modules writing to the residual stream, including embedding, attention output and MLP output. Starting from any logit, dictionary feature or attention score, we manage to trace down to lower-level dictionary features of all tokens and compute their contribution to these more interpretable and local model behaviors. We dig in a small transformer trained on a synthetic task named Othello and find a number of human-understandable fine-grained circuits inside of it."
 added_date: 2024-11-11
 bookcase_cover_src: '/posts/paper_1301ed763095097ff424c668e16a265b3ae2f231/thumbnail.png'
+highlight: false
 math: true
 katex: true
 weight: 1

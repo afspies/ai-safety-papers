@@ -9,6 +9,7 @@ paper_url: "https://arxiv.org/pdf/2410.20526.pdf"
 abstract: "Sparse Autoencoders (SAEs) have emerged as a powerful unsupervised method for extracting sparse representations from language models, yet scalable training remains a significant challenge. We introduce a suite of 256 SAEs, trained on each layer and sublayer of the Llama-3.1-8B-Base model, with 32K and 128K features. Modifications to a state-of-the-art SAE variant, Top-K SAEs, are evaluated across multiple dimensions. In particular, we assess the generalizability of SAEs trained on base models to longer contexts and fine-tuned models. Additionally, we analyze the geometry of learned SAE latents, confirming that \\emph{feature splitting} enables the discovery of new features. The Llama Scope SAE checkpoints are publicly available at~\\url{https://huggingface.co/fnlp/Llama-Scope}, alongside our scalable training, interpretation, and visualization tools at \\url{https://github.com/OpenMOSS/Language-Model-SAEs}. These contributions aim to advance the open-source Sparse Autoencoder ecosystem and support mechanistic interpretability research by reducing the need for redundant SAE training."
 added_date: 2024-11-11
 bookcase_cover_src: '/posts/paper_2454c15f9708dc337a2ed849e897f99c43b8f6cb/thumbnail.png'
+highlight: false
 math: true
 katex: true
 weight: 1

@@ -10,6 +10,7 @@ abstract: "As AI systems become more advanced, companies and regulators will mak
 tldr: "This work proposes a framework for organizing a safety case and discusses four categories of arguments to justify safety: total inability to cause a catastrophe, sufficiently strong control measures, trustworthiness despite capability to cause harm, and -- if AI systems become much more powerful -- deference to credible AI advisors."
 added_date: 2024-11-13
 bookcase_cover_src: '/posts/paper_26839456e694aa593a2cdea9c0442f2e8861aed3/thumbnail.png'
+highlight: false
 math: true
 katex: true
 weight: 1

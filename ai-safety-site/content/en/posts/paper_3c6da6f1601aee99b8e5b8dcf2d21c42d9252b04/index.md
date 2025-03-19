@@ -10,6 +10,7 @@ abstract: "A key goal in mechanistic interpretability is circuit analysis: findi
 tldr: "This work introduces a novel method for using transcoders to perform weights-based circuit analysis through MLP sublayers, and suggests that transcoders can prove effective in decomposing model computations involving MLPs into interpretable circuits."
 added_date: 2024-11-11
 bookcase_cover_src: '/posts/paper_3c6da6f1601aee99b8e5b8dcf2d21c42d9252b04/thumbnail.png'
+highlight: false
 math: true
 katex: true
 weight: 1

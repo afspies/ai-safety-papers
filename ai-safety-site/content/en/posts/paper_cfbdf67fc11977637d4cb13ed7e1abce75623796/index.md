@@ -10,6 +10,7 @@ abstract: "Planning, as the core module of agents, is crucial in various fields 
 tldr: "This research analyzes the look-ahead planning mechanisms of LLMs, facilitating future research on LLMs performing planning tasks and finding that the output of MHSA in the middle layers at the last token can directly decode the decision to some extent."
 added_date: 2024-11-11
 bookcase_cover_src: '/posts/paper_cfbdf67fc11977637d4cb13ed7e1abce75623796/thumbnail.png'
+highlight: false
 math: true
 katex: true
 weight: 1

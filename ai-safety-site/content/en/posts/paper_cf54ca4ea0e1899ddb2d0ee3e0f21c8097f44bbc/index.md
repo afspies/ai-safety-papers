@@ -10,6 +10,7 @@ abstract: "International standards are crucial for ensuring that frontier AI sys
 tldr: "This paper proposes and evaluates three models for AISI involvement and offers a multi-track system solution in which the central role of AISIs guarantees coherence among the different tracks and consistency in their AI safety focus."
 added_date: 2024-11-13
 bookcase_cover_src: '/posts/paper_cf54ca4ea0e1899ddb2d0ee3e0f21c8097f44bbc/thumbnail.png'
+highlight: false
 math: true
 katex: true
 weight: 1

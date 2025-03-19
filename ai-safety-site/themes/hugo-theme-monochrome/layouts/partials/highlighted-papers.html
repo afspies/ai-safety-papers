@@ -1,0 +1,217 @@
+{{ $highlighted := .highlighted }}
+
+<div class="content-margin">
+    <div class="my-8">
+        <div class="highlighted-header">
+            <h1>Highlighted Papers</h1>
+            <div class="gold-accent"></div>
+        </div>
+    </div>
+    <div class="highlighted-papers-container">
+        <div class="highlighted-papers-scroll" id="highlightedScroll">
+            {{ range $highlighted }}
+                <a href="{{ .RelPermalink }}" class="highlighted-paper">
+                    <figure class="golden-glow">
+                        <img src="{{ .Params.bookcase_cover_src | absURL }}" class="highlighted-paper-img-light">
+                        <img src="{{ .Params.bookcase_cover_src_dark | default .Params.bookcase_cover_src | absURL }}" class="highlighted-paper-img-dark">
+                        <div class="shine"></div>
+                    </figure>
+                    <div class="highlighted-paper-title">
+                        <span>{{ .Title }}</span>
+                    </div>
+                </a>
+            {{ end }}
+            <!-- Duplicate the items for infinite scroll effect -->
+            {{ range $highlighted }}
+                <a href="{{ .RelPermalink }}" class="highlighted-paper duplicate">
+                    <figure class="golden-glow">
+                        <img src="{{ .Params.bookcase_cover_src | absURL }}" class="highlighted-paper-img-light">
+                        <img src="{{ .Params.bookcase_cover_src_dark | default .Params.bookcase_cover_src | absURL }}" class="highlighted-paper-img-dark">
+                        <div class="shine"></div>
+                    </figure>
+                    <div class="highlighted-paper-title">
+                        <span>{{ .Title }}</span>
+                    </div>
+                </a>
+            {{ end }}
+        </div>
+    </div>
+</div>
+
+<style>
+.highlighted-header {
+    position: relative;
+    margin-bottom: 1.5rem;
+}
+
+.gold-accent {
+    position: absolute;
+    height: 3px;
+    width: 60px;
+    background: linear-gradient(90deg, #D4AF37, #FFD700, #FFC72C, #D4AF37);
+    bottom: -10px;
+    left: 0;
+}
+
+.highlighted-papers-container {
+    margin-bottom: 2rem;
+    overflow: hidden;
+    position: relative;
+}
+
+.highlighted-papers-container::before,
+.highlighted-papers-container::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    width: 50px;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.highlighted-papers-container::before {
+    left: 0;
+    background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%);
+}
+
+.highlighted-papers-container::after {
+    right: 0;
+    background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%);
+}
+
+@media (prefers-color-scheme: dark) {
+    .highlighted-papers-container::before {
+        background: linear-gradient(90deg, rgba(30,30,30,1) 0%, rgba(30,30,30,0) 100%);
+    }
+    .highlighted-papers-container::after {
+        background: linear-gradient(90deg, rgba(30,30,30,0) 0%, rgba(30,30,30,1) 100%);
+    }
+}
+
+.highlighted-papers-scroll {
+    display: flex;
+    overflow-x: auto;
+    padding-bottom: 1rem;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    gap: 1.5rem;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+    animation: autoScroll 60s linear infinite;
+}
+
+.highlighted-papers-scroll::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+}
+
+@keyframes autoScroll {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(calc(-200px * {{ len $highlighted }} - 1.5rem * {{ len $highlighted }}));
+    }
+}
+
+.highlighted-papers-scroll:hover {
+    animation-play-state: paused;
+}
+
+.highlighted-paper {
+    flex: 0 0 auto;
+    width: 200px;
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.2s;
+}
+
+.highlighted-paper.duplicate {
+    display: flex;
+}
+
+.highlighted-paper:hover {
+    transform: translateY(-5px);
+}
+
+.highlighted-paper figure {
+    height: 260px;
+    width: 200px;
+    overflow: hidden;
+    margin: 0;
+    border-radius: 4px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+.golden-glow {
+    border: 1px solid rgba(212, 175, 55, 0.5);
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.15);
+}
+
+.shine {
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(
+        to right,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.3) 50%,
+        rgba(255, 255, 255, 0) 100%
+    );
+    transform: skewX(-25deg);
+    animation: shine 3s infinite;
+    animation-delay: calc(var(--animation-order, 0) * 0.5s);
+}
+
+@keyframes shine {
+    0% {
+        left: -100%;
+    }
+    20%, 100% {
+        left: 200%;
+    }
+}
+
+.highlighted-paper:nth-child(1) figure .shine { --animation-order: 1; }
+.highlighted-paper:nth-child(2) figure .shine { --animation-order: 2; }
+.highlighted-paper:nth-child(3) figure .shine { --animation-order: 3; }
+.highlighted-paper:nth-child(4) figure .shine { --animation-order: 4; }
+.highlighted-paper:nth-child(5) figure .shine { --animation-order: 5; }
+
+.highlighted-paper-img-light,
+.highlighted-paper-img-dark {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+.highlighted-paper-img-dark {
+    display: none;
+}
+
+@media (prefers-color-scheme: dark) {
+    .highlighted-paper-img-light {
+        display: none;
+    }
+    .highlighted-paper-img-dark {
+        display: block;
+    }
+    .golden-glow {
+        border: 1px solid rgba(212, 175, 55, 0.3);
+        box-shadow: 0 0 15px rgba(255, 215, 0, 0.1);
+    }
+}
+
+.highlighted-paper-title {
+    margin-top: 0.5rem;
+    font-weight: 500;
+    text-align: center;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+</style>

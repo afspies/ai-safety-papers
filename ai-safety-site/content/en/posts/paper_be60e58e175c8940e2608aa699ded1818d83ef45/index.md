@@ -10,6 +10,7 @@ abstract: "We sketch how developers of frontier AI systems could construct a str
 tldr: "This report proposes three arguments that safety cases could use in relation to scheming, and sketches how evidence could be gathered from empirical evaluations, and what assumptions would need to be met to provide strong assurance."
 added_date: 2024-11-17
 bookcase_cover_src: '/posts/paper_be60e58e175c8940e2608aa699ded1818d83ef45/thumbnail.png'
+highlight: true
 math: true
 katex: true
 weight: 1

@@ -9,6 +9,7 @@ paper_url: "https://arxiv.org/pdf/2411.00867.pdf"
 abstract: "This paper explores the mechanistic interpretability of reinforcement learning (RL) agents through an analysis of a neural network trained on procedural maze environments. By dissecting the network's inner workings, we identified fundamental features like maze walls and pathways, forming the basis of the model's decision-making process. A significant observation was the goal misgeneralization, where the RL agent developed biases towards certain navigation strategies, such as consistently moving towards the top right corner, even in the absence of explicit goals. Using techniques like saliency mapping and feature mapping, we visualized these biases. We furthered this exploration with the development of novel tools for interactively exploring layer activations."
 added_date: 2024-11-11
 bookcase_cover_src: '/posts/paper_a800bac1609408eb955625b7ce0df234d48d3845/thumbnail.png'
+highlight: true
 math: true
 katex: true
 weight: 1

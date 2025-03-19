@@ -10,6 +10,7 @@ abstract: "This paper presents an argument that certain AI safety measures, rath
 tldr: "An argument that certain AI safety measures, rather than mitigating existential risk, may instead exacerbate it is presented, forcing a re-examination of core assumptions around AI safety and points to several avenues for further research."
 added_date: 2024-11-13
 bookcase_cover_src: '/posts/paper_14d97aae72f493900b0de0044431e4f596d69120/thumbnail.png'
+highlight: false
 math: true
 katex: true
 weight: 1

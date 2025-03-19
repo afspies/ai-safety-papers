@@ -6,7 +6,48 @@
     <description>Recent content in Posts on AI Safety Papers</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Fri, 14 Mar 2025 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 16 Mar 2025 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Locating and Editing Factual Associations in GPT</title>
+      <link>http://localhost:1313/posts/paper_ce641b1fe35a2a64268a305380dd404e231eec02/</link>
+      <pubDate>Sun, 16 Mar 2025 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/posts/paper_ce641b1fe35a2a64268a305380dd404e231eec02/</guid>
+      <description>&lt;div class=&#34;paper-meta&#34;&gt;
+  &lt;div class=&#34;paper-meta-item&#34;&gt;
+    &lt;span class=&#34;paper-meta-label&#34;&gt;Authors:&lt;/span&gt;
+    &lt;div class=&#34;paper-authors&#34;&gt;
+      Kevin Meng, David Bau, Alex Andonian, Yonatan Belinkov
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class=&#34;paper-meta-item&#34;&gt;
+    &lt;span class=&#34;paper-meta-label&#34;&gt;Published:&lt;/span&gt;
+    &lt;span&gt;Unknown&lt;/span&gt;
+  &lt;/div&gt;
+  &lt;div class=&#34;paper-meta-item&#34;&gt;
+    &lt;span class=&#34;paper-meta-label&#34;&gt;Original Paper:&lt;/span&gt;
+    &lt;a href=&#34;https://arxiv.org/abs/2202.05262&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;View Paper&lt;/a&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;h1 id=&#34;paper-summary&#34; class=&#34;header-anchor-wrapper&#34;&gt;Paper Summary
+  &lt;a href=&#34;#paper-summary&#34; class=&#34;header-anchor-link&#34;&gt;
+    &lt;svg width=&#34;16px&#34; height=&#34;16px&#34; viewBox=&#34;0 0 24 24&#34;&gt;
+&lt;svg
+    xmlns=&#34;http://www.w3.org/2000/svg&#34;
+    width=&#34;24&#34; height=&#34;24&#34; viewBox=&#34;0 0 24 24&#34; fill=&#34;none&#34;
+    stroke=&#34;currentColor&#34; stroke-width=&#34;2&#34; stroke-linecap=&#34;round&#34;
+    stroke-linejoin=&#34;round&#34;&gt;
+    &lt;line x1=&#34;4&#34; y1=&#34;9&#34; x2=&#34;20&#34; y2=&#34;9&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;4&#34; y1=&#34;15&#34; x2=&#34;20&#34; y2=&#34;15&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;10&#34; y1=&#34;3&#34; x2=&#34;8&#34; y2=&#34;21&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;16&#34; y1=&#34;3&#34; x2=&#34;14&#34; y2=&#34;21&#34;&gt;&lt;/line&gt;
+&lt;/svg&gt;
+
+&lt;/svg&gt;
+  &lt;/a&gt;
+&lt;/h1&gt;
+
+&lt;p&gt;This paper presents a novel method for understanding and editing factual knowledge in GPT language models through targeted interventions in middle-layer MLPs. The authors combine causal tracing analysis with a rank-one editing technique (ROME) to identify and modify specific network components responsible for storing factual associations, addressing the challenge of precisely editing model knowledge while maintaining model integrity.&lt;/p&gt;</description>
+    </item>
+    
     <item>
       <title>Holographic Quantum-Foam Blurring, and Localization of Gamma-Ray Burst   GRB221009A</title>
       <link>http://localhost:1313/posts/paper_07c33e0aaaa7b00c6a40bacf6a95fc3129e91e8f/</link>
@@ -153,47 +194,6 @@ document.addEventListener(&#39;DOMContentLoaded&#39;, () =&gt; {
 });
 &lt;/script&gt; 
 Figure 1 shows the main architecture of their proposed method.&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Locating and Editing Factual Associations in GPT</title>
-      <link>http://localhost:1313/posts/paper_ce641b1fe35a2a64268a305380dd404e231eec02/</link>
-      <pubDate>Fri, 14 Mar 2025 00:00:00 +0000</pubDate>
-      
-      <guid>http://localhost:1313/posts/paper_ce641b1fe35a2a64268a305380dd404e231eec02/</guid>
-      <description>&lt;div class=&#34;paper-meta&#34;&gt;
-  &lt;div class=&#34;paper-meta-item&#34;&gt;
-    &lt;span class=&#34;paper-meta-label&#34;&gt;Authors:&lt;/span&gt;
-    &lt;div class=&#34;paper-authors&#34;&gt;
-      Kevin Meng, David Bau, Alex Andonian, Yonatan Belinkov
-    &lt;/div&gt;
-  &lt;/div&gt;
-  &lt;div class=&#34;paper-meta-item&#34;&gt;
-    &lt;span class=&#34;paper-meta-label&#34;&gt;Published:&lt;/span&gt;
-    &lt;span&gt;Unknown&lt;/span&gt;
-  &lt;/div&gt;
-  &lt;div class=&#34;paper-meta-item&#34;&gt;
-    &lt;span class=&#34;paper-meta-label&#34;&gt;Original Paper:&lt;/span&gt;
-    &lt;a href=&#34;https://arxiv.org/abs/2202.05262&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;View Paper&lt;/a&gt;
-  &lt;/div&gt;
-&lt;/div&gt;
-
-&lt;h1 id=&#34;paper-summary&#34; class=&#34;header-anchor-wrapper&#34;&gt;Paper Summary
-  &lt;a href=&#34;#paper-summary&#34; class=&#34;header-anchor-link&#34;&gt;
-    &lt;svg width=&#34;16px&#34; height=&#34;16px&#34; viewBox=&#34;0 0 24 24&#34;&gt;
-&lt;svg
-    xmlns=&#34;http://www.w3.org/2000/svg&#34;
-    width=&#34;24&#34; height=&#34;24&#34; viewBox=&#34;0 0 24 24&#34; fill=&#34;none&#34;
-    stroke=&#34;currentColor&#34; stroke-width=&#34;2&#34; stroke-linecap=&#34;round&#34;
-    stroke-linejoin=&#34;round&#34;&gt;
-    &lt;line x1=&#34;4&#34; y1=&#34;9&#34; x2=&#34;20&#34; y2=&#34;9&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;4&#34; y1=&#34;15&#34; x2=&#34;20&#34; y2=&#34;15&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;10&#34; y1=&#34;3&#34; x2=&#34;8&#34; y2=&#34;21&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;16&#34; y1=&#34;3&#34; x2=&#34;14&#34; y2=&#34;21&#34;&gt;&lt;/line&gt;
-&lt;/svg&gt;
-
-&lt;/svg&gt;
-  &lt;/a&gt;
-&lt;/h1&gt;
-
-&lt;p&gt;This paper presents a novel method for understanding and editing factual knowledge in GPT language models through targeted interventions in middle-layer MLPs. The authors combine causal tracing analysis with a rank-one editing technique (ROME) to identify and modify specific network components responsible for storing factual associations, addressing the challenge of precisely editing model knowledge while maintaining model integrity.&lt;/p&gt;</description>
     </item>
     
     <item>

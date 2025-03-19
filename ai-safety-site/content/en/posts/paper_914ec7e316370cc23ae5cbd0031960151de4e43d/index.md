@@ -10,6 +10,7 @@ abstract: "Fueled by the popularity of the transformer architecture in deep lear
 tldr: ""
 added_date: 2024-11-11
 bookcase_cover_src: '/posts/paper_914ec7e316370cc23ae5cbd0031960151de4e43d/thumbnail.png'
+highlight: false
 math: true
 katex: true
 weight: 1

@@ -10,6 +10,7 @@ abstract: "We investigate the optimal model size and number of tokens for traini
 tldr: ""
 added_date: 2025-03-14
 bookcase_cover_src: '/posts/paper_ac31afbbba5e18bbce9108f53def04efee7f486b/thumbnail.png'
+highlight: false
 math: true
 katex: true
 weight: 1
