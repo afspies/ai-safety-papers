@@ -100,6 +100,9 @@ def create_post_markdown(post: Post) -> str:
     tags_yaml = ""
     if tags:
         tags_yaml = "tags: [" + ", ".join([f'"{tag.strip()}"' for tag in tags]) + "]\n"
+        
+    # Add highlight status
+    highlight = hasattr(article, 'highlight') and article.highlight
 
     frontmatter = f"""---
 title: "{escape_yaml(article.title)}"
@@ -113,6 +116,7 @@ abstract: "{escape_yaml(abstract)}"
 tldr: "{escape_yaml(tldr)}"
 added_date: {datetime.now().strftime('%Y-%m-%d')}
 bookcase_cover_src: '/posts/paper_{article.uid}/thumbnail.png'
+highlight: {str(highlight).lower()}
 {tags_yaml}math: true
 katex: true
 weight: 1
