@@ -2,3 +2,13 @@ website:
   content_path: "ai-safety-site/content/en"
 
 data_dir: "data"
+
+semantic_scholar:
+  api_key: "your_semantic_scholar_api_key_here"
+
+anthropic:
+  api_key: "your_anthropic_api_key_here"
+
+supabase:
+  url: "your_supabase_url_here"
+  key: "your_supabase_key_here"
