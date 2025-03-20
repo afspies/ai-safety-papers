@@ -2,18 +2,18 @@ import sys
 import os
 import time
 import logging
-from utils.config_loader import load_config
-from api.semantic_scholar import SemanticScholarAPI
-from sheets.sheets_db import SheetsDB
+from backend.src.utils.config_loader import load_config
+from backend.src.api.semantic_scholar import SemanticScholarAPI
+from backend.src.models.supabase import SupabaseDB
 from datetime import datetime
 import argparse
-from summarizer.paper_summarizer import PaperSummarizer
-from models.article import Article
+from backend.src.summarizer.paper_summarizer import PaperSummarizer
+from backend.src.models.article import Article
 import shutil
 from pathlib import Path
 import re
 import json
-from markdown.post_generator import create_post_markdown
+from backend.src.markdown.post_generator import create_post_markdown
 
 # Add the project root to the Python path
 project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
@@ -26,7 +26,7 @@ DEBUG_MODE = True  # Set this to False to disable debug logs
 logger = logging.getLogger(__name__)
 
 def setup_logging():
-    log_level = logging.DEBUG if DEBUG_MODE else logging.INFO
+    log_level = logging.DEBUG
     logging.basicConfig(level=log_level, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
     
     # Filter out noisy loggers
@@ -49,11 +49,21 @@ def main():
     parser.add_argument("--reprocess", choices=['figures', 'summary', 'markdown', 'info', 'all'], 
                        help="Reprocess specific parts of existing papers: figures, summary, markdown, info (re-query API), or all")
     parser.add_argument("--paper-id", help="Specific paper ID to reprocess (optional)")
+    parser.add_argument("--api", action="store_true", help="Run as API server instead of processing pipeline")
     args = parser.parse_args()
     
     try:
         config = load_config()
         logger.debug("Configuration loaded successfully")
+        
+        # If API mode is requested, start the FastAPI server
+        if args.api:
+            logger.info("Starting in API server mode")
+            # Set environment variable for API mode
+            os.environ['API_MODE'] = 'true'
+            from backend.src.api.server import start
+            start()
+            return
         
         api_key = config['semantic_scholar']['api_key']
         if not api_key or api_key == "your_semantic_scholar_api_key_here":
@@ -62,20 +72,16 @@ def main():
         semantic_scholar_api = SemanticScholarAPI(api_key)
         logger.debug("Semantic Scholar API initialized")
         
-        sheets_db = SheetsDB(
-            config['google_sheets']['spreadsheet_id'],
-            config['google_sheets']['range_name'],
-            config['google_sheets']['credentials_file']
-        )
-        logger.debug("Google Sheets DB initialized")
+        db = SupabaseDB()
+        logger.debug("Supabase DB initialized")
 
         while True:
             logger.info("Starting new processing cycle")
             # Fetch and process new papers
-            process_new_papers(semantic_scholar_api, sheets_db, ignore_date_range=args.ignore_date_range, months=args.months)
+            process_new_papers(semantic_scholar_api, db, ignore_date_range=args.ignore_date_range, months=args.months)
 
             # Check for manually flagged papers
-            process_flagged_papers(sheets_db, args)
+            process_flagged_papers(db, args)
 
             logger.info("Processing cycle completed. Waiting for next cycle.")
             # Wait for the next cycle (e.g., every 24 hours)
@@ -84,14 +90,15 @@ def main():
         logger.error(f"An error occurred during initialization: {e}")
         sys.exit(1)
 
-def process_new_papers(api: SemanticScholarAPI, db: SheetsDB, ignore_date_range: bool = False, months: int = 1):
+def process_new_papers(api: SemanticScholarAPI, db: SupabaseDB, ignore_date_range: bool = False, months: int = 1):
     logger.info(f"Processing new papers (ignore_date_range: {ignore_date_range}, months: {months})")
     
     # Get existing paper IDs from the database first
     existing_papers = set()
     try:
-        all_records = db.worksheet.get_all_records()
-        existing_papers = {row['Paper ID'] for row in all_records if row['Paper ID']}
+        # For Supabase, get all papers and extract IDs
+        papers = db.get_papers()
+        existing_papers = {paper.uid for paper in papers}
         logger.debug(f"Found {len(existing_papers)} existing papers in database")
     except Exception as e:
         logger.error(f"Error loading existing papers: {e}")
@@ -153,7 +160,7 @@ def process_new_papers(api: SemanticScholarAPI, db: SheetsDB, ignore_date_range:
             }
             
             # Add entry to database
-            db.add_entry(entry)
+            db.add_paper(entry)
             logger.debug(f"Successfully processed paper: {paper['paperId']}")
             
         except Exception as e:
@@ -163,7 +170,7 @@ def process_new_papers(api: SemanticScholarAPI, db: SheetsDB, ignore_date_range:
     
     logger.debug(f"Processed {len(all_papers)} new papers in total")
 
-def process_flagged_papers(db: SheetsDB, args):
+def process_flagged_papers(db: SupabaseDB, args):
     logger.info("Starting process_flagged_papers")
     
     try:
@@ -184,7 +191,9 @@ def process_flagged_papers(db: SheetsDB, args):
                 logger.error(f"Paper with ID {args.paper_id} not found")
                 return
         else:
-            papers_to_post = db.get_papers_to_post()
+            # Get all papers to post but limit to 10 for testing
+            papers_to_post = db.get_papers_to_post()[:10]
+            logger.info(f"Limiting to 10 papers for testing")
             
         logger.debug(f"Found {len(papers_to_post)} papers to process")
         
@@ -220,7 +229,7 @@ def process_flagged_papers(db: SheetsDB, args):
                                 'tldr': updated_info.get('tldr', paper.get('tldr')),
                             })
                             # Update the database entry
-                            db.update_entry(paper)
+                            db.update_paper(paper)
                             logger.info(f"Updated paper info for {paper['id']}")
                     except Exception as e:
                         logger.error(f"Failed to update paper info for {paper['id']}: {e}")
@@ -315,6 +324,11 @@ def create_article_instance(paper: dict) -> Article:
         if tldr_text:
             article.set_tldr(tldr_text)
             logger.debug(f"Set TLDR for article {article.uid}: {tldr_text[:100]}...")
+    
+    # Set highlight status
+    if 'highlight' in paper:
+        article.highlight = paper['highlight']
+        logger.debug(f"Set highlight status for article {article.uid}: {article.highlight}")
     
     return article
 
