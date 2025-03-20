@@ -1,0 +1,7 @@
+tunnel: 75d9491c-449a-422f-b165-c1917bdb3941
+credentials-file: /Users/alex/.cloudflared/75d9491c-449a-422f-b165-c1917bdb3941.json
+
+ingress:
+  - hostname: api.afspies.com
+    service: http://localhost:8000
+  - service: http_status:404
