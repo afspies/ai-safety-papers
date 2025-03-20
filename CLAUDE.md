@@ -1,9 +1,10 @@
 # AI Safety Papers Project Guidelines
 
 ## Build & Test Commands
-- Python backend: `cd backend/src && python main.py`
+- Python backend (using conda): `cd backend && conda activate ai-safety-papers && PYTHONPATH=/Users/alex/Desktop/playground/ai-safety-papers python src/main.py`
+- Run server (using manage.py): `cd backend && conda activate ai-safety-papers && python manage.py start`
 - Run Hugo site: `cd ai-safety-site && hugo server`
-- Run specific test: `cd backend && python -m pytest src/tests/test_filename.py::test_function -v`
+- Run specific test: `cd backend && conda activate ai-safety-papers && PYTHONPATH=/Users/alex/Desktop/playground/ai-safety-papers python -m pytest src/tests/test_filename.py::test_function -v`
 - Install dependencies: `pip install -r backend/requirements.txt && pip install -r ai-safety-site/site-requirements.txt`
 
 ## Code Style Guidelines

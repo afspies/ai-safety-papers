@@ -11,12 +11,18 @@ class SemanticScholarAPI:
     MAX_RETRIES = 5
     INITIAL_BACKOFF = 1  # Initial backoff time in seconds
 
-    def __init__(self, api_key: str, development_mode: bool = False):
+    def __init__(self, api_key: str = None, development_mode: bool = False):
         self.logger = logging.getLogger(__name__)
         self.session = requests.Session()
-        self.session.headers.update({"x-api-key": api_key})
-        masked_key = f"{api_key[:4]}...{api_key[-4:]}" if len(api_key) > 8 else "****"
-        self.logger.debug(f"Initializing SemanticScholarAPI with key: {masked_key}")
+        
+        # Set up API key if provided (it's now optional)
+        if api_key and api_key not in ["your_semantic_scholar_api_key_here", "${SEMANTIC_SCHOLAR_API_KEY}"]:
+            self.session.headers.update({"x-api-key": api_key})
+            masked_key = f"{api_key[:4]}...{api_key[-4:]}" if len(api_key) > 8 else "****"
+            self.logger.debug(f"Initializing SemanticScholarAPI with key: {masked_key}")
+        else:
+            self.logger.info("Initializing SemanticScholarAPI without API key (using free tier)")
+            
         self.development_mode = development_mode
         
         if development_mode:
@@ -26,8 +32,8 @@ class SemanticScholarAPI:
             
         self.last_request_time = {}
         self.rate_limit_delay = {
-            'default': 0.1,  # 10 requests per second
-            'limited': 1.0   # 1 request per second
+            'default': 0.5,  # 2 requests per second for free tier
+            'limited': 2.0   # 0.5 requests per second for bulk operations
         }
 
     def _make_request(self, method: str, endpoint: str, **kwargs) -> Dict:

@@ -134,7 +134,7 @@ def start_server():
         # Set up the environment to fix import issues
         env = os.environ.copy()
         env['PYTHONPATH'] = str(PROJECT_ROOT)
-        env['DEVELOPMENT_MODE'] = 'true'  # Set development mode to bypass API key checks
+        # Use real API keys and production mode
         server_process = subprocess.Popen(
             [sys.executable, 'src/main.py', '--api'],
             stdout=subprocess.PIPE,

@@ -86,16 +86,22 @@ def main():
             db = MockSupabaseDB()
             logger.debug("Mock Supabase DB initialized for development")
         else:
-            # Production mode - validate API keys
-            api_key = config['semantic_scholar']['api_key']
-            if not api_key or api_key == "your_semantic_scholar_api_key_here":
-                raise ValueError("Semantic Scholar API key is not set in the config file")
+            # Production mode - initialize with or without API key
+            api_key = config.get('semantic_scholar', {}).get('api_key')
             
+            # API key is now optional for Semantic Scholar
             semantic_scholar_api = SemanticScholarAPI(api_key)
             logger.debug("Semantic Scholar API initialized")
             
-            db = SupabaseDB()
-            logger.debug("Supabase DB initialized")
+            # Supabase still requires credentials
+            if not config.get('supabase', {}).get('url') or not config.get('supabase', {}).get('key'):
+                logger.warning("Supabase credentials not found. Using mock database.")
+                from backend.src.api.routers import MockSupabaseDB
+                db = MockSupabaseDB()
+                logger.debug("Mock Supabase DB initialized due to missing credentials")
+            else:
+                db = SupabaseDB()
+                logger.debug("Supabase DB initialized")
 
         while True:
             logger.info("Starting new processing cycle")

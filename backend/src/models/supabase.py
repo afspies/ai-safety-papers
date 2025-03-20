@@ -26,7 +26,7 @@ class SupabaseDB:
         
         # If no parameters are provided, attempt to load from config
         if not all([url, key]):
-            from utils.config_loader import load_config
+            from backend.src.utils.config_loader import load_config
             config = load_config()
             url = os.environ.get("SUPABASE_URL") or config.get('supabase', {}).get('url')
             key = os.environ.get("SUPABASE_KEY") or config.get('supabase', {}).get('key')
