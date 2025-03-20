@@ -8,8 +8,10 @@ import re
 from backend.src.models.article import Article
 
 class PaperSummarizer:
-    def __init__(self, api_key: str):
-        self.client = anthropic.Anthropic(api_key=api_key)
+    def __init__(self, api_key: str, development_mode: bool = False):
+        if not development_mode:
+            self.client = anthropic.Anthropic(api_key=api_key)
+        self.development_mode = development_mode
         self.logger = logging.getLogger(__name__)
 
     def summarize(self, article: Article) -> Tuple[str, List[str], Optional[str]]:
@@ -41,6 +43,12 @@ class PaperSummarizer:
             except Exception as e:
                 self.logger.warning(f"Error loading existing summary: {e}. Generating new summary.")
 
+        # In development mode, generate mock summary
+        if self.development_mode:
+            self.logger.info(f"Development mode: Generating mock summary for article {article.uid}")
+            return self._generate_mock_summary(article)
+
+        # Production mode - continue with actual API call
         if not article.pdf_path or not article.pdf_path.exists():
             self.logger.error("PDF path not set or file does not exist")
             raise ValueError("PDF file not available")
@@ -199,3 +207,78 @@ Important guidelines:
         except Exception as e:
             self.logger.error(f"Error generating summary: {e}")
             raise
+            
+    def _generate_mock_summary(self, article: Article) -> Tuple[str, List[str], str]:
+        """Generate a mock summary for development mode."""
+        import hashlib
+        import random
+        
+        # Create deterministic random seed based on article ID
+        seed = int(hashlib.md5(article.uid.encode()).hexdigest(), 16) % (10**8)
+        random.seed(seed)
+        
+        # Create a list of figure numbers (1-4)
+        figures = [str(i) for i in range(1, random.randint(3, 5))]
+        
+        # Select a thumbnail figure (usually the first one)
+        thumbnail = figures[0] if figures else "1"
+        
+        # Create a data directory if it doesn't exist
+        article.data_folder.mkdir(parents=True, exist_ok=True)
+        
+        # Generate a mock detailed summary
+        summary = f"""# Paper Summary
+
+This paper presents a novel approach to AI safety in large language models. The authors use a multi-agent framework to address the challenge of ensuring robust alignment in generative AI systems. Their work makes several important contributions:
+
+## Key Contributions
+- Development of a new evaluation framework for measuring safety across diverse scenarios
+- Introduction of a hierarchical oversight mechanism that improves alignment without sacrificing performance
+- Empirical demonstration that their approach reduces harmful outputs by 78% compared to baseline models
+- Release of a comprehensive benchmark dataset for evaluating safety measures in language models
+
+## Problem Statement and Background
+Current approaches to AI safety often trade off performance for safety, resulting in models that are either unsafe or significantly less capable. <FIGURE_ID>{figures[0]}</FIGURE_ID> illustrates this trade-off, showing how existing methods create a Pareto frontier where improvements in safety correspond to decreases in model capabilities. The authors argue that this trade-off is not fundamental but rather a limitation of current methodologies that focus primarily on output filtering and fine-tuning with human feedback.
+
+Traditional methods have focused on reinforcement learning from human feedback (RLHF) and rule-based filtering. While these approaches show promise, they struggle with complex scenarios where harmful content might be contextually appropriate (such as in educational contexts) or where harmful requests are subtly disguised.
+
+## Methods
+The authors propose a hierarchical oversight framework that combines multiple complementary safety mechanisms. <FIGURE_ID>{figures[1] if len(figures) > 1 else figures[0]}</FIGURE_ID> shows the architecture of this framework, which consists of three main components: a base language model, a set of specialized safety evaluators, and a meta-controller that mediates between them. The specialized evaluators focus on different aspects of safety, including factuality, bias, toxicity, and potential for misuse.
+
+The meta-controller is trained to recognize when to defer to specific evaluators based on context and request type. This allows the system to apply appropriate safety measures without unnecessarily restricting the model in contexts where certain types of content are appropriate. The authors utilize a multi-agent training procedure where the safety evaluators and meta-controller are iteratively improved through adversarial examples and feedback.
+
+{f"<FIGURE_ID>{figures[2]}</FIGURE_ID> demonstrates their training methodology, showing how the system improves over time through exposure to increasingly sophisticated adversarial prompts. The training curves indicate that the most significant improvements occur in the first 1000 iterations, with diminishing returns thereafter." if len(figures) > 2 else ""}
+
+## Results
+The authors evaluated their approach on a comprehensive benchmark that included both standard safety datasets and novel adversarial examples designed to circumvent typical safety measures. {f"<FIGURE_ID>{figures[3]}</FIGURE_ID>" if len(figures) > 3 else f"<FIGURE_ID>{figures[-1]}</FIGURE_ID>"} presents the main results, showing that their hierarchical approach reduced harmful outputs by 78% compared to baseline models, while maintaining 96% of performance on standard capability benchmarks.
+
+Notably, the system showed particular strength in handling contextually complex scenarios where rule-based approaches typically fail. For example, it could appropriately discuss harmful topics in educational contexts while refusing similar requests when the intent appeared harmful. Ablation studies confirmed that the meta-controller was critical to this performance, as removing it resulted in a 45% increase in false positive safety interventions.
+
+## Implications and Limitations
+This work demonstrates that the trade-off between safety and capability can be significantly mitigated through more nuanced, context-aware approaches to AI safety. The hierarchical framework provides a promising direction for future research, particularly as models continue to increase in capability and potential for misuse.
+
+However, the authors acknowledge several limitations. Their approach requires significant computational resources for training the multiple components. Additionally, while their method shows robust performance against current adversarial techniques, they emphasize that safety is an ongoing challenge requiring continuous updates as new evasion strategies emerge. Finally, they note that their evaluation, while comprehensive, still cannot capture the full range of potential real-world harmful uses.
+
+## Related Work and Future Directions
+This research builds upon previous work in RLHF, constitutional AI, and multi-agent systems, but distinguishes itself through the hierarchical integration of specialized safety evaluators. Future work could extend this approach by incorporating more diverse evaluators, improving the meta-controller's ability to explain its decisions, and developing more efficient training methods to reduce computational requirements. The authors also suggest that similar hierarchical approaches could be beneficial for other AI alignment challenges beyond safety, such as truthfulness and helpfulness.
+"""
+        
+        # Create the summary data directory if needed
+        summary_path = article.data_folder / "summary.json"
+        summary_path.parent.mkdir(parents=True, exist_ok=True)
+        
+        # Save the mock summary
+        summary_data = {
+            'summary': summary,
+            'display_figures': figures,
+            'thumbnail_figure': thumbnail
+        }
+        
+        try:
+            with open(summary_path, 'w', encoding='utf-8') as f:
+                json.dump(summary_data, f, indent=4, ensure_ascii=False)
+            self.logger.info(f"Saved mock summary for article {article.uid}")
+        except Exception as e:
+            self.logger.error(f"Error saving mock summary: {e}")
+        
+        return summary, figures, thumbnail

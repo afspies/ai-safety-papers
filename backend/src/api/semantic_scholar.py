@@ -11,13 +11,19 @@ class SemanticScholarAPI:
     MAX_RETRIES = 5
     INITIAL_BACKOFF = 1  # Initial backoff time in seconds
 
-    def __init__(self, api_key: str):
+    def __init__(self, api_key: str, development_mode: bool = False):
         self.logger = logging.getLogger(__name__)
         self.session = requests.Session()
         self.session.headers.update({"x-api-key": api_key})
         masked_key = f"{api_key[:4]}...{api_key[-4:]}" if len(api_key) > 8 else "****"
         self.logger.debug(f"Initializing SemanticScholarAPI with key: {masked_key}")
-        self.logger.debug("SemanticScholarAPI initialized")
+        self.development_mode = development_mode
+        
+        if development_mode:
+            self.logger.info("SemanticScholarAPI initialized in development mode - will return mock data")
+        else:
+            self.logger.debug("SemanticScholarAPI initialized in normal mode")
+            
         self.last_request_time = {}
         self.rate_limit_delay = {
             'default': 0.1,  # 10 requests per second
@@ -96,6 +102,15 @@ class SemanticScholarAPI:
 
     def search_papers(self, query: str, limit: int = 100, year_range: str = None) -> List[Dict]:
         self.logger.info(f"Searching papers with query: {query}")
+        
+        # In development mode, return mock data
+        if self.development_mode:
+            self.logger.info("Development mode: Returning mock paper data")
+            mock_papers = self._get_mock_papers(query, limit)
+            self.logger.debug(f"Generated {len(mock_papers)} mock papers")
+            return mock_papers
+        
+        # Normal API flow
         params = {
             "query": query,
             "limit": limit,
@@ -160,15 +175,168 @@ class SemanticScholarAPI:
             self.logger.error(f"Error in search_papers: {str(e)}")
             self.logger.exception("Full traceback:")
             return []
+            
+    def _get_mock_papers(self, query: str, limit: int = 5) -> List[Dict]:
+        """Generate mock paper data for development mode."""
+        import random
+        import uuid
+        from datetime import datetime, timedelta
+        
+        # Generate a deterministic but unique set of papers for the query
+        papers = []
+        
+        # Common AI safety paper titles for different queries
+        title_templates = {
+            "AI Safety": [
+                "Evaluating {aspect} in Large Language Models: A {approach} Approach",
+                "A Framework for {aspect} Alignment in Generative AI",
+                "Towards Safer {system} Systems: {approach} for Risk Mitigation",
+                "{approach} Methods for Assessing {aspect} in {system}",
+                "Understanding and Preventing {aspect} in {system} through {approach}"
+            ],
+            "Mechanistic Interpretability": [
+                "Interpreting {component} in {architecture} through {technique}",
+                "A {technique} Approach to Mechanistic Interpretability in {architecture}",
+                "Understanding {component} Representations in {architecture}",
+                "Revealing {component} Structure through {technique} Analysis",
+                "{technique} for Analyzing {component} Behavior in {system}"
+            ]
+        }
+        
+        # Components for generating realistic titles
+        aspects = ["Safety", "Alignment", "Robustness", "Generalization", "Fairness", "Transparency", "Reliability"]
+        approaches = ["Empirical", "Theoretical", "Causal", "Bayesian", "Game-Theoretic", "Adversarial", "Multi-Agent"]
+        systems = ["Large Language Models", "Reinforcement Learning", "Neural Networks", "Multi-Modal", "Foundation Models", "Transformer"]
+        components = ["Attention Heads", "Neurons", "Activations", "Embeddings", "Weight Matrices", "Circuit", "Modules"]
+        architectures = ["Transformers", "GPT-style Models", "Diffusion Models", "Neural Networks", "Deep Learning Systems"]
+        techniques = ["Causal Mediation", "Feature Attribution", "Activation Patching", "Matrix Factorization", "Influence Functions"]
+        
+        # Choose the right template set
+        if "Mechanistic Interpretability" in query:
+            templates = title_templates.get("Mechanistic Interpretability")
+        else:
+            templates = title_templates.get("AI Safety")
+            
+        if not templates:
+            templates = title_templates.get("AI Safety")  # Default fallback
+            
+        # Generate papers
+        for i in range(min(limit, 5)):  # Generate up to 5 mock papers
+            # Generate a deterministic ID based on the query and index
+            paper_id = str(uuid.uuid5(uuid.NAMESPACE_DNS, f"{query}_{i}"))
+            
+            # Create a random publication date within the last year
+            days_ago = random.randint(1, 365)
+            pub_date = (datetime.now() - timedelta(days=days_ago)).strftime('%Y-%m-%d')
+            
+            # Generate title
+            template = random.choice(templates)
+            title = template.format(
+                aspect=random.choice(aspects),
+                approach=random.choice(approaches),
+                system=random.choice(systems),
+                component=random.choice(components),
+                architecture=random.choice(architectures),
+                technique=random.choice(techniques)
+            )
+            
+            # Generate authors (2-4 authors)
+            first_names = ["Alex", "Sam", "Jordan", "Taylor", "Morgan", "Jamie", "Casey", "Riley"]
+            last_names = ["Smith", "Johnson", "Williams", "Brown", "Jones", "Garcia", "Miller", "Davis"]
+            num_authors = random.randint(2, 4)
+            authors = []
+            for _ in range(num_authors):
+                author_name = f"{random.choice(first_names)} {random.choice(last_names)}"
+                authors.append({"name": author_name})
+            
+            # Generate abstract
+            abstract = f"This paper presents a novel approach to {random.choice(aspects).lower()} in {random.choice(systems).lower()}. " \
+                       f"We propose a {random.choice(approaches).lower()} method for assessing and improving model behavior. " \
+                       f"Our experiments show promising results on benchmark datasets."
+            
+            # Create URL (prefer arxiv-style URLs for easier processing)
+            arxiv_id = f"2303.{random.randint(10000, 99999)}"
+            
+            # Create a paper object
+            paper = {
+                "paperId": paper_id,
+                "title": title,
+                "authors": authors,
+                "year": int(pub_date.split('-')[0]),
+                "abstract": abstract,
+                "url": f"https://arxiv.org/abs/{arxiv_id}",
+                "venue": random.choice(["arXiv", "ICLR", "NeurIPS", "ICML", "AAAI"]),
+                "publicationDate": pub_date,
+                "tldr": {"text": abstract[:100] + "..."},
+                "externalIds": {"ArXiv": arxiv_id},
+                "isOpenAccess": True
+            }
+            
+            papers.append(paper)
+        
+        return papers
 
     def fetch_paper_details_batch(self, paper_ids: List[str]) -> List[Dict]:
         self.logger.info(f"Fetching details for {len(paper_ids)} papers")
+        
+        # In development mode, return mock data
+        if self.development_mode:
+            self.logger.info("Development mode: Returning mock paper details")
+            return [self._get_mock_paper_details(paper_id) for paper_id in paper_ids]
+        
+        # Normal API flow
         params = {
             "fields": "paperId,title,authors,year,abstract,url,venue,publicationDate"
         }
         data = self._make_request("POST", "paper/batch", json={"ids": paper_ids}, params=params)
         self.logger.debug(f"Successfully fetched details for {len(data)} papers")
         return data
+        
+    def _get_mock_paper_details(self, paper_id: str) -> Dict:
+        """Generate mock paper details for a specific paper ID."""
+        # Generate deterministic paper details based on the paper ID
+        import random
+        import hashlib
+        
+        # Use the paper ID to seed the random generator for deterministic output
+        seed = int(hashlib.md5(paper_id.encode()).hexdigest(), 16) % (10**8)
+        random.seed(seed)
+        
+        # Generate mock data similar to _get_mock_papers but for a specific ID
+        aspects = ["Safety", "Alignment", "Robustness", "Generalization", "Fairness", "Transparency", "Reliability"]
+        approaches = ["Empirical", "Theoretical", "Causal", "Bayesian", "Game-Theoretic", "Adversarial", "Multi-Agent"]
+        systems = ["Large Language Models", "Reinforcement Learning", "Neural Networks", "Multi-Modal", "Foundation Models", "Transformer"]
+        
+        title = f"A {random.choice(approaches)} Approach to {random.choice(aspects)} in {random.choice(systems)}"
+        
+        first_names = ["Alex", "Sam", "Jordan", "Taylor", "Morgan", "Jamie", "Casey", "Riley"]
+        last_names = ["Smith", "Johnson", "Williams", "Brown", "Jones", "Garcia", "Miller", "Davis"]
+        num_authors = random.randint(2, 4)
+        authors = []
+        for _ in range(num_authors):
+            author_name = f"{random.choice(first_names)} {random.choice(last_names)}"
+            authors.append({"name": author_name})
+        
+        abstract = f"This paper presents a novel approach to {random.choice(aspects).lower()} in {random.choice(systems).lower()}. " \
+                   f"We propose a {random.choice(approaches).lower()} method for assessing and improving model behavior. " \
+                   f"Our experiments show promising results on benchmark datasets."
+        
+        from datetime import datetime, timedelta
+        days_ago = random.randint(1, 365)
+        pub_date = (datetime.now() - timedelta(days=days_ago)).strftime('%Y-%m-%d')
+        
+        arxiv_id = f"2303.{random.randint(10000, 99999)}"
+        
+        return {
+            "paperId": paper_id,
+            "title": title,
+            "authors": authors,
+            "year": int(pub_date.split('-')[0]),
+            "abstract": abstract,
+            "url": f"https://arxiv.org/abs/{arxiv_id}",
+            "venue": random.choice(["arXiv", "ICLR", "NeurIPS", "ICML", "AAAI"]),
+            "publicationDate": pub_date
+        }
 
     def get_relevant_papers(self, query: str, months: int = 1, limit: int = 100, ignore_date_range: bool = False) -> List[Dict]:
         self.logger.info(f"Fetching relevant papers for the last {months} months (ignore_date_range: {ignore_date_range})")

@@ -49,7 +49,44 @@ This is the backend for the AI Safety Papers project. It handles fetching, proce
 
 ## Usage
 
-### Run as API server
+### Server Management
+Use the provided management script to control the backend server and Cloudflared tunnel:
+
+```bash
+# Start the backend server and Cloudflared tunnel
+python manage.py start
+
+# Stop the backend server and Cloudflared tunnel
+python manage.py stop
+
+# Restart the backend server and Cloudflared tunnel
+python manage.py restart
+
+# Check the status of the server and tunnel
+python manage.py status
+```
+
+The management script:
+- Properly tracks running processes with PID files
+- Handles graceful shutdown of services
+- Supports development mode with mock API clients
+- Ensures consistent environment variables
+- Provides clear logging and error handling
+
+#### Development Mode
+The server can run in development mode without requiring valid API keys or credentials:
+
+```bash
+# Set development mode environment variable
+export DEVELOPMENT_MODE=true
+
+# Start the server in development mode
+python manage.py start
+```
+
+This mode uses mock clients for Supabase and other external services, allowing you to test the API endpoints without connecting to real services.
+
+### Run API Server Manually
 ```bash
 python src/main.py --api
 ```

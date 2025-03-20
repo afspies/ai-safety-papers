@@ -61,19 +61,41 @@ def main():
             logger.info("Starting in API server mode")
             # Set environment variable for API mode
             os.environ['API_MODE'] = 'true'
-            from backend.src.api.server import start
-            start()
-            return
+            
+            # Check for development mode to bypass API key checks
+            if os.environ.get('DEVELOPMENT_MODE') == 'true':
+                logger.info("Running in development mode - bypassing API key checks")
+                # Directly start the FastAPI server without initializing API clients
+                from backend.src.api.server import start
+                start()
+                return
+            else:
+                from backend.src.api.server import start
+                start()
+                return
         
-        api_key = config['semantic_scholar']['api_key']
-        if not api_key or api_key == "your_semantic_scholar_api_key_here":
-            raise ValueError("Semantic Scholar API key is not set in the config file")
-        
-        semantic_scholar_api = SemanticScholarAPI(api_key)
-        logger.debug("Semantic Scholar API initialized")
-        
-        db = SupabaseDB()
-        logger.debug("Supabase DB initialized")
+        # Check if we're in development mode
+        if os.environ.get('DEVELOPMENT_MODE') == 'true':
+            logger.info("Running in development mode - using mock API clients")
+            # Use development/mock API client
+            semantic_scholar_api = SemanticScholarAPI(config['semantic_scholar']['api_key'], development_mode=True)
+            logger.debug("Mock Semantic Scholar API initialized for development")
+            
+            # Use mock database client
+            from backend.src.api.routers import MockSupabaseDB
+            db = MockSupabaseDB()
+            logger.debug("Mock Supabase DB initialized for development")
+        else:
+            # Production mode - validate API keys
+            api_key = config['semantic_scholar']['api_key']
+            if not api_key or api_key == "your_semantic_scholar_api_key_here":
+                raise ValueError("Semantic Scholar API key is not set in the config file")
+            
+            semantic_scholar_api = SemanticScholarAPI(api_key)
+            logger.debug("Semantic Scholar API initialized")
+            
+            db = SupabaseDB()
+            logger.debug("Supabase DB initialized")
 
         while True:
             logger.info("Starting new processing cycle")
@@ -180,16 +202,22 @@ def process_flagged_papers(db: SupabaseDB, args):
         # Initialize API if needed for reprocessing info
         semantic_scholar_api = None
         if args.reprocess in ['info', 'all']:
-            api_key = config['semantic_scholar']['api_key']
-            semantic_scholar_api = SemanticScholarAPI(api_key)
-            logger.debug("Initialized Semantic Scholar API for reprocessing")
+            # Check if we're in development mode
+            if os.environ.get('DEVELOPMENT_MODE') == 'true':
+                semantic_scholar_api = SemanticScholarAPI(config['semantic_scholar']['api_key'], development_mode=True)
+                logger.debug("Initialized mock Semantic Scholar API for development")
+            else:
+                api_key = config['semantic_scholar']['api_key']
+                semantic_scholar_api = SemanticScholarAPI(api_key)
+                logger.debug("Initialized Semantic Scholar API for reprocessing")
         
         # Get papers based on command line args
         if args.paper_id:
-            papers_to_post = [db.get_paper_by_id(args.paper_id)]
-            if not papers_to_post[0]:
+            paper_obj = db.get_paper_by_id(args.paper_id)
+            if not paper_obj:
                 logger.error(f"Paper with ID {args.paper_id} not found")
                 return
+            papers_to_post = [paper_obj]
         else:
             # Get all papers to post but limit to 10 for testing
             papers_to_post = db.get_papers_to_post()[:10]
@@ -206,36 +234,47 @@ def process_flagged_papers(db: SupabaseDB, args):
         posts_path.mkdir(parents=True, exist_ok=True)
         
         logger.debug("Initializing PaperSummarizer...")
-        summarizer = PaperSummarizer(config['anthropic']['api_key'])
-        logger.debug("PaperSummarizer initialized successfully")
+        # In development mode, use a mock summarizer
+        if os.environ.get('DEVELOPMENT_MODE') == 'true':
+            summarizer = PaperSummarizer(config['anthropic']['api_key'], development_mode=True)
+            logger.debug("Mock PaperSummarizer initialized for development")
+        else:
+            summarizer = PaperSummarizer(config['anthropic']['api_key'])
+            logger.debug("PaperSummarizer initialized successfully")
         
         for i, paper in enumerate(papers_to_post):
-            logger.info(f"Processing paper {i+1}/{len(papers_to_post)}: {paper.get('id', 'unknown id')}")
+            paper_id = paper.uid if hasattr(paper, 'uid') else getattr(paper, 'id', 'unknown id')
+            logger.info(f"Processing paper {i+1}/{len(papers_to_post)}: {paper_id}")
             try:
                 # Reprocess paper info if requested
                 if args.reprocess in ['info', 'all']:
                     try:
-                        logger.debug(f"Re-querying API for paper {paper['id']}")
-                        updated_info = semantic_scholar_api.fetch_paper_details_batch([paper['id']])[0]
+                        logger.debug(f"Re-querying API for paper {paper_id}")
+                        updated_info = semantic_scholar_api.fetch_paper_details_batch([paper_id])[0]
                         if updated_info:
-                            # Update paper info while preserving existing fields
-                            paper.update({
-                                'title': updated_info.get('title', paper['title']),
+                            # Create paper data dictionary for updating
+                            paper_data = {
+                                'id': paper_id,
+                                'title': updated_info.get('title', paper.title if hasattr(paper, 'title') else ''),
                                 'authors': [a.get('name', '') for a in updated_info.get('authors', [])],
-                                'year': updated_info.get('year', paper['year']),
-                                'abstract': updated_info.get('abstract', paper['abstract']),
-                                'url': updated_info.get('url', paper['url']),
-                                'venue': updated_info.get('venue', paper['venue']),
-                                'tldr': updated_info.get('tldr', paper.get('tldr')),
-                            })
+                                'year': updated_info.get('year'),
+                                'abstract': updated_info.get('abstract', paper.abstract if hasattr(paper, 'abstract') else ''),
+                                'url': updated_info.get('url', paper.url if hasattr(paper, 'url') else ''),
+                                'venue': updated_info.get('venue', paper.venue if hasattr(paper, 'venue') else ''),
+                                'tldr': updated_info.get('tldr', paper.tldr if hasattr(paper, 'tldr') else ''),
+                            }
                             # Update the database entry
-                            db.update_paper(paper)
-                            logger.info(f"Updated paper info for {paper['id']}")
+                            db.update_paper(paper_data)
+                            logger.info(f"Updated paper info for {paper_id}")
                     except Exception as e:
-                        logger.error(f"Failed to update paper info for {paper['id']}: {e}")
+                        logger.error(f"Failed to update paper info for {paper_id}: {e}")
                 
-                # Create article instance
-                article = create_article_instance(paper)
+                # We may already have an Article instance
+                if isinstance(paper, Article):
+                    article = paper
+                else:
+                    # Create article instance from dictionary or data object
+                    article = create_article_instance(paper)
                 
                 # Set up data paths
                 paper_dir = Path(config['data_dir']) / article.uid
@@ -272,7 +311,7 @@ def process_flagged_papers(db: SupabaseDB, args):
                 article.set_displayed_figures(internal_display_figures)
                 
                 # Set thumbnail source
-                if thumbnail_figure and thumbnail_figure.isdigit():
+                if thumbnail_figure and str(thumbnail_figure).isdigit():
                     for fig_id in article.figures:
                         if fig_id.startswith(f"fig_0_{thumbnail_figure}_"):
                             label_match = re.search(r'_(fig\d+|tab\d+|unk)$', fig_id)
@@ -292,12 +331,12 @@ def process_flagged_papers(db: SupabaseDB, args):
                 
                 # Only mark as posted if this is a new paper
                 if not args.reprocess:
-                    db.mark_as_posted(paper['id'])
+                    db.mark_as_posted(article.uid)
                     
-                logger.info(f"Successfully processed paper: {paper['id']}")
+                logger.info(f"Successfully processed paper: {article.uid}")
                 
             except Exception as e:
-                logger.error(f"Error processing paper {paper.get('id', 'unknown id')}: {e}")
+                logger.error(f"Error processing paper {paper_id}: {e}")
                 logger.exception("Full traceback:")
                 continue
                 
@@ -349,8 +388,22 @@ def create_website_post(article: Article, summary: str, posts_path: Path):
     else:
         logger.warning(f"No thumbnail found for article {article.uid}")
     
+    # Create a Post object for markdown generation
+    from backend.src.models.post import Post
+    post = Post(article, summary, post_dir)
+    
+    # Process figures for the post
+    figures = {}
+    for fig_id, fig_path in article.figures.items():
+        from backend.src.models.figure import Figure
+        figure = Figure(fig_id)
+        figure.load_from_path(fig_path)
+        figures[fig_id] = figure
+    
+    post.figures = figures
+    
     # Create markdown post with updated figure references
-    post_content = create_post_markdown(article, summary, post_dir)
+    post_content = create_post_markdown(post)
     markdown_path = post_dir / "index.md"
     logger.debug(f"Writing markdown content to {markdown_path}")
     with open(markdown_path, "w", encoding="utf-8") as f:
