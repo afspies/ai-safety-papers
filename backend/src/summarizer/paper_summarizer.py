@@ -1,11 +1,12 @@
 import anthropic
-from typing import Tuple, List, Optional
+from typing import Tuple, List, Optional, Dict, Any
 import json
 from pathlib import Path
 import logging
 import base64
 import re
-from backend.src.models.article import Article
+from src.models.article import Article
+from src.models.supabase import SupabaseDB
 
 class PaperSummarizer:
     def __init__(self, api_key: str, development_mode: bool = False):
@@ -17,7 +18,7 @@ class PaperSummarizer:
     def summarize(self, article: Article) -> Tuple[str, List[str], Optional[str]]:
         """
         Summarize the paper and return the summary, list of figures to display, and thumbnail figure.
-        Checks for existing summary before generating a new one.
+        Checks for existing summary in Supabase before generating a new one.
         
         Args:
             article: An Article instance with a PDF path set
@@ -28,13 +29,41 @@ class PaperSummarizer:
             - List of figure IDs to display
             - Figure ID to use as thumbnail (or None for default)
         """
-        # Check for existing summary
+        # Check for existing summary in Supabase first
+        try:
+            db = SupabaseDB()
+            summary_data = db.get_summary(article.uid)
+            if summary_data:
+                self.logger.info(f"Found existing summary in Supabase for article {article.uid}")
+                return (
+                    summary_data['summary'],
+                    summary_data['display_figures'],
+                    summary_data.get('thumbnail_figure')
+                )
+        except Exception as e:
+            self.logger.warning(f"Error checking Supabase for summary: {e}. Continuing with local check.")
+            
+        # Check for existing summary in local storage
         summary_path = article.data_folder / "summary.json"
         if summary_path.exists():
-            self.logger.info(f"Found existing summary for article {article.uid}")
+            self.logger.info(f"Found existing summary in local storage for article {article.uid}")
             try:
                 with open(summary_path, 'r', encoding='utf-8') as f:
                     summary_data = json.load(f)
+                    
+                # Store in Supabase for future use
+                try:
+                    db = SupabaseDB()
+                    db.add_summary(
+                        article.uid, 
+                        summary_data['summary'], 
+                        summary_data['display_figures'], 
+                        summary_data.get('thumbnail_figure')
+                    )
+                    self.logger.info(f"Migrated local summary to Supabase for article {article.uid}")
+                except Exception as e:
+                    self.logger.warning(f"Error migrating summary to Supabase: {e}")
+                    
                 return (
                     summary_data['summary'],
                     summary_data['display_figures'],
@@ -195,12 +224,27 @@ Important guidelines:
                 'thumbnail_figure': thumbnail
             }
 
+            # Save to local storage as backup
             try:
                 with open(summary_path, 'w', encoding='utf-8') as f:
                     json.dump(summary_data, f, indent=4, ensure_ascii=False)
-                self.logger.info(f"Saved summary for article {article.uid}")
+                self.logger.info(f"Saved summary to local storage for article {article.uid}")
             except Exception as e:
-                self.logger.error(f"Error saving summary: {e}")
+                self.logger.error(f"Error saving summary to local storage: {e}")
+                
+            # Save to Supabase
+            try:
+                db = SupabaseDB()
+                db.add_summary(
+                    article.uid, 
+                    summary, 
+                    figures, 
+                    thumbnail
+                )
+                self.logger.info(f"Saved summary to Supabase for article {article.uid}")
+            except Exception as e:
+                self.logger.error(f"Error saving summary to Supabase: {e}")
+                # Continue anyway - local storage was used as backup
 
             return summary, figures, thumbnail
 

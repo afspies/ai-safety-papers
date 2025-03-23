@@ -14,3 +14,5 @@ supabase>=1.0.3
 python-dotenv>=1.0.0
 psycopg2-binary>=2.9.6
 psutil>=5.9.0
+boto3>=1.37.16
+pillow>=11.0.0

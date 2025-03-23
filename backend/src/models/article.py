@@ -1,9 +1,7 @@
 from pathlib import Path
-from typing import Dict, List, Optional, Union, Any
+from typing import Dict, List, Optional, Any
 from datetime import datetime
 import logging
-import json
-import os
 import shutil
 import requests
 from urllib.parse import urlparse
@@ -90,22 +88,6 @@ class Article:
             if self.pdf_path.exists():
                 logger.debug(f"PDF already exists for {self.uid}")
                 return True
-            
-            # Check if we're in development mode
-            if os.environ.get('DEVELOPMENT_MODE') == 'true':
-                logger.info(f"Development mode: Creating dummy PDF for {self.uid}")
-                # Create a dummy PDF file
-                sample_pdf_path = Path(__file__).parent.parent / "tests" / "test_data" / "paper.pdf"
-                if sample_pdf_path.exists():
-                    shutil.copy2(sample_pdf_path, self.pdf_path)
-                    logger.debug(f"Created dummy PDF for {self.uid} from sample")
-                    return True
-                else:
-                    # Create an empty PDF file
-                    with open(self.pdf_path, 'wb') as f:
-                        f.write(b'%PDF-1.4\n%%EOF\n')
-                    logger.debug(f"Created empty dummy PDF for {self.uid}")
-                    return True
                 
             # If it's an arXiv URL, adapt for PDF download
             if 'arxiv.org' in self.url:
@@ -136,109 +118,6 @@ class Article:
         except Exception as e:
             logger.error(f"Error downloading PDF for {self.uid}: {e}")
             return False
-    
-    def process_figures(self) -> bool:
-        """Process figures for this article."""
-        if not self.pdf_path or not self.data_folder:
-            logger.error(f"Cannot process figures: PDF path or data folder not set for {self.uid}")
-            return False
-            
-        try:
-            # Create output directory for figures
-            figures_dir = self.data_folder / "figures"
-            figures_dir.mkdir(parents=True, exist_ok=True)
-            
-            # Check if we're in development mode
-            if os.environ.get('DEVELOPMENT_MODE') == 'true':
-                logger.info(f"Development mode: Creating mock figures for {self.uid}")
-                # Create mock figures
-                self._create_mock_figures(figures_dir)
-                logger.debug(f"Created mock figures for {self.uid}")
-                return True
-            
-            # Normal processing mode - use figure extractor
-            from utils.figure_extractor_manager import FigureExtractorManager
-            
-            # Initialize figure extractor manager
-            extractor_manager = FigureExtractorManager()
-            
-            # Extract figures
-            self.figures = extractor_manager.extract_figures(self.pdf_path, figures_dir)
-            
-            if not self.figures:
-                logger.warning(f"No figures extracted for {self.uid}")
-                return False
-                
-            logger.debug(f"Extracted {len(self.figures)} figures for {self.uid}")
-            return True
-            
-        except Exception as e:
-            logger.error(f"Error processing figures for {self.uid}: {e}")
-            return False
-            
-    def _create_mock_figures(self, figures_dir: Path) -> None:
-        """Create mock figures for development mode."""
-        import matplotlib.pyplot as plt
-        import numpy as np
-        import hashlib
-        import random
-        
-        # Create a deterministic seed based on the article ID
-        seed = int(hashlib.md5(self.uid.encode()).hexdigest(), 16) % (10**8)
-        random.seed(seed)
-        np.random.seed(seed)
-        
-        # Create 3-4 mock figures
-        num_figures = random.randint(3, 4)
-        for i in range(1, num_figures + 1):
-            fig_id = f"fig_0_{i}_fig{i}"
-            self.figures[fig_id] = {"caption": f"Figure {i}: Mock figure for development mode"}
-            
-            # Create a different type of plot for each figure
-            plt.figure(figsize=(8, 6))
-            
-            if i == 1:
-                # Line plot
-                x = np.linspace(0, 10, 100)
-                y = np.sin(x) + np.random.normal(0, 0.1, 100)
-                plt.plot(x, y)
-                plt.title(f"Figure {i}: Safety vs. Performance Trade-off")
-                plt.xlabel("Safety Measures")
-                plt.ylabel("Model Performance")
-                plt.grid(True)
-            elif i == 2:
-                # Bar chart
-                categories = ['Model A', 'Model B', 'Model C', 'Model D']
-                values = np.random.rand(4) * 100
-                plt.bar(categories, values)
-                plt.title(f"Figure {i}: Comparison of Model Performance")
-                plt.ylabel("Accuracy (%)")
-                plt.ylim([0, 100])
-            elif i == 3:
-                # Scatter plot
-                x = np.random.rand(50)
-                y = x + np.random.normal(0, 0.1, 50)
-                sizes = np.random.rand(50) * 100
-                plt.scatter(x, y, s=sizes, alpha=0.5)
-                plt.title(f"Figure {i}: Relationship between Variables")
-                plt.xlabel("Variable X")
-                plt.ylabel("Variable Y")
-                plt.grid(True)
-            else:
-                # Heatmap
-                data = np.random.rand(10, 10)
-                plt.imshow(data, cmap='viridis')
-                plt.colorbar()
-                plt.title(f"Figure {i}: Attention Pattern Visualization")
-            
-            # Save the figure
-            fig_path = figures_dir / f"{fig_id}.png"
-            plt.savefig(fig_path)
-            plt.close()
-            
-        # Save figures metadata
-        with open(figures_dir / "figures.json", "w") as f:
-            json.dump(self.figures, f, indent=2)
     
     def create_thumbnail(self) -> Optional[Path]:
         """Create a thumbnail for this article."""

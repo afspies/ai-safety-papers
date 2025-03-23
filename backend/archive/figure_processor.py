@@ -1,11 +1,27 @@
 import logging
 from pathlib import Path
-from typing import Dict, List, Optional, Tuple
+from typing import Dict, List, Optional, Tuple, Any
 from papermage.rasterizers import PDF2ImageRasterizer
 from papermage import Document
 import argparse
 import json
 import re
+from io import BytesIO
+
+# Import R2 client and Supabase DB with fallback paths
+try:
+    from utils.cloudflare_r2 import CloudflareR2Client
+    from models.supabase import SupabaseDB
+    from utils.config_loader import load_config
+except ImportError:
+    try:
+        from src.utils.cloudflare_r2 import CloudflareR2Client
+        from src.models.supabase import SupabaseDB
+        from src.utils.config_loader import load_config
+    except ImportError:
+        from backend.src.utils.cloudflare_r2 import CloudflareR2Client
+        from backend.src.models.supabase import SupabaseDB
+        from backend.src.utils.config_loader import load_config
 
 logger = logging.getLogger(__name__)
 
@@ -108,22 +124,41 @@ def parse_caption_label(caption_text: str) -> Optional[str]:
     
     return None
 
-def extract_figures(doc: Document, output_folder: Path, pdf_path: Path) -> Dict[str, Path]:
+def extract_figures(doc: Document, output_folder: Path, pdf_path: Path, paper_id: str = None, use_r2: bool = True) -> Dict[str, Dict[str, Any]]:
     """
-    Extract figures from a parsed document.
+    Extract figures from a parsed document with optional R2 upload.
     
     Args:
         doc: Parsed papermage Document
-        output_folder: Where to save extracted figures
+        output_folder: Where to save extracted figures locally
         pdf_path: Path to the original PDF file
+        paper_id: Unique ID for the paper (for R2 storage)
+        use_r2: Whether to upload figures to Cloudflare R2
         
     Returns:
-        Dictionary mapping figure IDs to their saved paths
+        Dictionary mapping figure IDs to their metadata
     """
     logger.debug(f"Extracting figures to {output_folder}")
-    figures: Dict[str, Path] = {}
+    figures: Dict[str, Dict[str, Any]] = {}
+    figure_batch = []  # For batch R2 upload
     
     try:
+        # Initialize R2 and Supabase clients if needed
+        r2_client = None
+        supabase_db = None
+        if use_r2 and paper_id:
+            try:
+                config = load_config()
+                r2_enabled = config.get('cloudflare_r2', {}).get('enabled', False)
+                if r2_enabled:
+                    r2_client = CloudflareR2Client()
+                    supabase_db = SupabaseDB()
+                    logger.info(f"R2 and Supabase clients initialized for paper {paper_id}")
+                else:
+                    logger.warning("R2 is disabled in config, using local storage only")
+            except Exception as e:
+                logger.error(f"Failed to initialize R2/Supabase clients: {e}")
+        
         rasterizer = PDF2ImageRasterizer()
         # Rasterize all pages at once
         rasterized_pages = rasterizer.rasterize(str(pdf_path), 300)
@@ -139,9 +174,11 @@ def extract_figures(doc: Document, output_folder: Path, pdf_path: Path) -> Dict[
                 # Find associated caption
                 caption = None
                 caption_label = "unk"
+                caption_text = ""
                 for cap in page.captions:
                     if cap.text:
                         caption = cap
+                        caption_text = cap.text
                         # Try to extract label from caption
                         extracted_label = parse_caption_label(cap.text)
                         if extracted_label:
@@ -156,8 +193,12 @@ def extract_figures(doc: Document, output_folder: Path, pdf_path: Path) -> Dict[
                 # Create figure ID that includes both internal ID and caption label
                 figure_id = f"{internal_id}_{caption_label}"
                 
-                # Save the figure
+                # Get the short ID for R2 storage (just the caption label)
+                short_id = caption_label if caption_label != "unk" else f"fig{fig_num + 1}"
+                
+                # Process the figure
                 figure_path = output_folder / f"{figure_id}.png"
+                
                 try:
                     # Get bounding box of figure + caption
                     fig_bbox = figure.boxes[0]
@@ -182,18 +223,74 @@ def extract_figures(doc: Document, output_folder: Path, pdf_path: Path) -> Dict[
                         int(b * page_img.size[1])
                     ]
                     
-                    # Crop and save figure
+                    # Crop figure
                     fig_img = page_img.crop(bbox)
                     if fig_img.size[0] > 0 and fig_img.size[1] > 0:
+                        # Save locally
                         fig_img.save(figure_path)
-                        figures[figure_id] = figure_path
-                        logger.debug(f"Saved figure to {figure_path}")
+                        
+                        # Store metadata
+                        figures[figure_id] = {
+                            'path': figure_path,
+                            'caption': caption_text,
+                            'short_id': short_id
+                        }
+                        
+                        # Add to R2 batch if enabled
+                        if use_r2 and r2_client and paper_id:
+                            # Convert image to bytes for R2 upload
+                            img_bytes = BytesIO()
+                            fig_img.save(img_bytes, format='PNG')
+                            img_data = img_bytes.getvalue()
+                            
+                            figure_batch.append({
+                                'figure_id': short_id,
+                                'image_data': img_data,
+                                'caption': caption_text,
+                                'content_type': 'image/png'
+                            })
+                        
+                        logger.debug(f"Processed figure {figure_id}")
                     else:
                         logger.warning(f"Invalid figure dimensions for {figure_id}")
                         
                 except Exception as e:
-                    logger.error(f"Failed to save figure {figure_id}: {e}")
+                    logger.error(f"Failed to process figure {figure_id}: {e}")
                     
+        # Upload figures to R2 and Supabase in batch if enabled
+        if use_r2 and r2_client and supabase_db and paper_id and figure_batch:
+            try:
+                logger.info(f"Uploading {len(figure_batch)} figures to R2 for paper {paper_id}")
+                success = supabase_db.add_figures_batch(paper_id, figure_batch)
+                if success:
+                    logger.info(f"Successfully uploaded {len(figure_batch)} figures to R2")
+                    
+                    # Update figure metadata with R2 URLs
+                    for fig_id, fig_data in figures.items():
+                        short_id = fig_data['short_id']
+                        r2_url = supabase_db.get_figure_url(paper_id, short_id)
+                        if r2_url:
+                            figures[fig_id]['r2_url'] = r2_url
+                else:
+                    logger.error(f"Failed to upload figures to R2")
+            except Exception as e:
+                logger.error(f"Error during R2 upload: {e}")
+                
+        # Create figures.json metadata file
+        metadata = {}
+        for fig_id, fig_data in figures.items():
+            metadata[fig_id] = {
+                'path': str(fig_data['path'].relative_to(output_folder)),
+                'caption': fig_data['caption'],
+                'r2_url': fig_data.get('r2_url')
+            }
+            
+        try:
+            with open(output_folder / 'figures.json', 'w', encoding='utf-8') as f:
+                json.dump(metadata, f, indent=2)
+        except Exception as e:
+            logger.error(f"Failed to save figures metadata: {e}")
+            
     except Exception as e:
         logger.error(f"Error during figure extraction: {e}")
         
@@ -203,23 +300,47 @@ def create_thumbnail(
     pdf_path: Path,
     output_path: Path,
     mode: str = 'full',
-    doc: Optional[Document] = None
-) -> Optional[Path]:
+    doc: Optional[Document] = None,
+    paper_id: str = None,
+    use_r2: bool = True
+) -> Dict[str, Any]:
     """
-    Create a thumbnail from the first page of a PDF.
+    Create a thumbnail from the first page of a PDF with optional R2 upload.
     
     Args:
         pdf_path: Path to the PDF file
         output_path: Where to save the thumbnail
         mode: 'full' or 'abstract'
         doc: Optional parsed Document for abstract detection
+        paper_id: Unique ID for the paper (for R2 storage)
+        use_r2: Whether to upload thumbnail to Cloudflare R2
         
     Returns:
-        Path to created thumbnail or None if failed
+        Dictionary with thumbnail metadata
     """
     logger.debug(f"Creating thumbnail from {pdf_path} in {mode} mode")
+    result = {
+        'path': None,
+        'r2_url': None
+    }
     
     try:
+        # Initialize R2 and Supabase clients if needed
+        r2_client = None
+        supabase_db = None
+        if use_r2 and paper_id:
+            try:
+                config = load_config()
+                r2_enabled = config.get('cloudflare_r2', {}).get('enabled', False)
+                if r2_enabled:
+                    r2_client = CloudflareR2Client()
+                    supabase_db = SupabaseDB()
+                    logger.info(f"R2 and Supabase clients initialized for thumbnail (paper {paper_id})")
+                else:
+                    logger.warning("R2 is disabled in config, using local storage only")
+            except Exception as e:
+                logger.error(f"Failed to initialize R2/Supabase clients: {e}")
+        
         logger.debug("Initializing PDF rasterizer...")
         rasterizer = PDF2ImageRasterizer()
         logger.debug("Rasterizing first page...")
@@ -271,14 +392,50 @@ def create_thumbnail(
         cropped.save(output_path)
         logger.debug(f"Saved thumbnail to {output_path}")
         
-        return output_path
+        result['path'] = output_path
+        
+        # Upload to R2 if enabled
+        if use_r2 and r2_client and paper_id:
+            try:
+                # Get file data
+                img_bytes = BytesIO()
+                cropped.save(img_bytes, format='PNG')
+                img_data = img_bytes.getvalue()
+                
+                # Create R2 key
+                thumb_id = f"thumbnail_{mode}"
+                r2_key = f"figures/{paper_id}/{thumb_id}.png"
+                
+                # Upload to R2
+                logger.info(f"Uploading thumbnail to R2 for paper {paper_id}")
+                r2_url = r2_client.upload_file(img_data, r2_key, content_type="image/png")
+                if r2_url:
+                    logger.info(f"Successfully uploaded thumbnail to R2: {r2_url}")
+                    
+                    # Save reference in Supabase if available
+                    if supabase_db:
+                        supabase_db.add_figure(
+                            paper_id=paper_id,
+                            figure_id=thumb_id,
+                            image_data=img_data,
+                            caption=f"Thumbnail ({mode} mode)",
+                            image_type="image/png"
+                        )
+                    
+                    result['r2_url'] = r2_url
+                else:
+                    logger.error("Failed to upload thumbnail to R2")
+            except Exception as e:
+                logger.error(f"Error during thumbnail R2 upload: {e}")
+        
+        return result
         
     except Exception as e:
         logger.error(f"Failed to create thumbnail: {e}")
-        return None
+        return result
 
-def test_figure_processing(pdf_path: str, output_dir: str):
-    """Test figure processing on a single PDF."""
+def test_figure_processing(pdf_path: str, output_dir: str, test_r2: bool = True):
+    """Test figure processing on a single PDF with optional R2 upload."""
     setup_logging(True)
     logger.info(f"Testing figure processing on {pdf_path}")
     
@@ -291,28 +448,55 @@ def test_figure_processing(pdf_path: str, output_dir: str):
         figures_dir = output_path / "figures"
         figures_dir.mkdir(exist_ok=True)
         
+        # Generate a test paper ID
+        paper_id = f"test_{Path(pdf_path).stem}"
+        logger.info(f"Using test paper ID: {paper_id}")
+        
         # Load or parse document
         pdf_path_obj = Path(pdf_path)
         doc, pdf_path_obj = load_or_parse_document(pdf_path_obj, output_path)
         logger.info(f"Successfully loaded/parsed document with {len(doc.pages)} pages")
         
-        # Extract figures
-        figures = extract_figures(doc, figures_dir, pdf_path_obj)
+        # Extract figures with optional R2 upload
+        figures = extract_figures(
+            doc, 
+            figures_dir, 
+            pdf_path_obj, 
+            paper_id=paper_id, 
+            use_r2=test_r2
+        )
         logger.info(f"Extracted {len(figures)} figures")
         
-        # Create thumbnails in both modes
+        # Print R2 URLs if available
+        r2_count = sum(1 for fig in figures.values() if fig.get('r2_url'))
+        if r2_count > 0:
+            logger.info(f"Successfully uploaded {r2_count} figures to R2")
+            for fig_id, fig_data in figures.items():
+                if fig_data.get('r2_url'):
+                    logger.info(f"Figure {fig_id}: {fig_data['r2_url']}")
+        
+        # Create thumbnails in both modes with optional R2 upload
         for mode in ['full', 'abstract']:
             thumb_path = output_path / f"thumbnail_{mode}.png"
             result = create_thumbnail(
                 Path(pdf_path),
                 thumb_path,
                 mode=mode,
-                doc=doc
+                doc=doc,
+                paper_id=paper_id,
+                use_r2=test_r2
             )
-            if result:
+            if result['path']:
                 logger.info(f"Created {mode} thumbnail at {thumb_path}")
+                if result.get('r2_url'):
+                    logger.info(f"Uploaded thumbnail to R2: {result['r2_url']}")
             else:
                 logger.error(f"Failed to create {mode} thumbnail")
+        
+        # Print summary
+        logger.info("Figure processing test complete")
+        if test_r2:
+            logger.info(f"R2 integration test results: {r2_count}/{len(figures)} figures uploaded")
                 
     except Exception as e:
         logger.error(f"Test failed: {e}")
@@ -323,6 +507,11 @@ if __name__ == "__main__":
     parser.add_argument("pdf_path", help="Path to PDF file to process")
     parser.add_argument("--output", "-o", default="./test_output",
                        help="Output directory for processed figures")
+    parser.add_argument("--r2", action="store_true", 
+                       help="Test Cloudflare R2 integration")
+    parser.add_argument("--no-r2", dest="r2", action="store_false",
+                       help="Disable Cloudflare R2 integration")
+    parser.set_defaults(r2=True)
     
     args = parser.parse_args()
-    test_figure_processing(args.pdf_path, args.output) 
+    test_figure_processing(args.pdf_path, args.output, test_r2=args.r2) 

@@ -69,8 +69,10 @@ class SemanticScholarAPI:
             if time_since_last_request < delay:
                 time.sleep(delay - time_since_last_request)
 
+        response = None
         for attempt in range(self.MAX_RETRIES):
             try:
+                self.logger.debug(f"Attempt {attempt+1}/{self.MAX_RETRIES}")
                 response = self.session.request(method, url, **kwargs)
                 # Log the response details
                 self.logger.debug(f"Response status code: {response.status_code}")
@@ -88,14 +90,24 @@ class SemanticScholarAPI:
                 self.last_request_time[endpoint] = time.time()
                 return data
             except RequestException as e:
-                if response.status_code == 429:  # Too Many Requests
+                if response and response.status_code == 429:  # Too Many Requests
                     wait_time = backoff * (2 ** attempt)
-                    self.logger.warning(f"Rate limited. Retrying in {wait_time} seconds.")
+                    self.logger.warning(f"Rate limited (429). Retrying in {wait_time} seconds.")
                     time.sleep(wait_time)
+                elif response and response.status_code >= 500:  # Server error
+                    wait_time = backoff * (2 ** attempt)
+                    self.logger.warning(f"Server error ({response.status_code}). Retrying in {wait_time} seconds.")
+                    time.sleep(wait_time)
+                elif response and response.status_code == 404:  # Not found
+                    self.logger.error(f"404 Not Found: {url}")
+                    raise
                 else:
                     self.logger.error(f"Request failed: {e}")
-                    self.logger.error(f"Response status code: {response.status_code}")
-                    self.logger.error(f"Response content: {response.text[:1000]}")  # Log first 1000 chars
+                    if response:
+                        self.logger.error(f"Response status code: {response.status_code}")
+                        self.logger.error(f"Response content: {response.text[:1000]}")  # Log first 1000 chars
+                    else:
+                        self.logger.error("No response object available (possible connection error)")
                     if attempt < self.MAX_RETRIES - 1:
                         wait_time = backoff * (2 ** attempt)
                         self.logger.info(f"Retrying in {wait_time} seconds...")
@@ -343,6 +355,75 @@ class SemanticScholarAPI:
             "venue": random.choice(["arXiv", "ICLR", "NeurIPS", "ICML", "AAAI"]),
             "publicationDate": pub_date
         }
+
+    def get_paper_by_id(self, paper_id: str) -> Dict:
+        """
+        Fetch a paper by its ID directly from Semantic Scholar.
+        
+        Args:
+            paper_id: The paper ID to fetch
+            
+        Returns:
+            Dict containing the paper details, or None if not found
+        """
+        self.logger.info(f"Fetching paper with ID: {paper_id}")
+        
+        # In development mode, return mock data
+        if self.development_mode:
+            self.logger.info("Development mode: Returning mock paper data")
+            return self._get_mock_paper_details(paper_id)
+        
+        # Normal API flow
+        try:
+            params = {
+                "fields": "paperId,title,authors,year,abstract,url,venue,publicationDate,tldr,embedding,isOpenAccess,openAccessPdf,externalIds"
+            }
+            
+            # Direct endpoint for a single paper
+            data = self._make_request("GET", f"paper/{paper_id}", params=params)
+            
+            if not data:
+                self.logger.error(f"No data returned for paper ID: {paper_id}")
+                return None
+                
+            # Process paper to ensure we have the best available URL
+            if data is None:
+                return None
+                
+            # Log TLDR information for debugging
+            if 'tldr' in data:
+                self.logger.debug(f"Found TLDR for paper {data.get('paperId')}: {data['tldr']}")
+            else:
+                self.logger.debug(f"No TLDR found for paper {data.get('paperId')}")
+            
+            # Start with the default URL
+            best_url = data.get('url', '')
+            
+            # Check for open access PDF URL first
+            if data.get('openAccessPdf', None) is not None and data['openAccessPdf'].get('url'):
+                best_url = data['openAccessPdf']['url']
+            # Check for ArXiv ID regardless of isOpenAccess status
+            elif data.get('externalIds', {}).get('ArXiv'):
+                arxiv_id = data['externalIds']['ArXiv']
+                best_url = f"https://arxiv.org/pdf/{arxiv_id}.pdf"
+            # If no ArXiv, but paper is marked as open access, might have other sources
+            elif data.get('isOpenAccess'):
+                # Could add other open access sources here if needed
+                pass
+            
+            # Update the paper URL and log the change
+            if best_url != data.get('url'):
+                self.logger.debug(f"Updated URL for paper {data['paperId']}: {best_url}")
+                if 'arxiv.org' in best_url:
+                    self.logger.debug(f"Using ArXiv URL for paper {data['paperId']}")
+            data['url'] = best_url
+            
+            return data
+            
+        except Exception as e:
+            self.logger.error(f"Error in get_paper_by_id: {str(e)}")
+            self.logger.exception("Full traceback:")
+            return None
 
     def get_relevant_papers(self, query: str, months: int = 1, limit: int = 100, ignore_date_range: bool = False) -> List[Dict]:
         self.logger.info(f"Fetching relevant papers for the last {months} months (ignore_date_range: {ignore_date_range})")

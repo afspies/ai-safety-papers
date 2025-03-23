@@ -12,3 +12,12 @@ anthropic:
 supabase:
   url: "${SUPABASE_URL}"
   key: "${SUPABASE_KEY}"
+  
+# Cloudflare R2 storage settings
+cloudflare_r2:
+  enabled: true
+  account_id: "${R2_ACCOUNT_ID}"
+  access_key_id: "${R2_ACCESS_KEY_ID}"
+  access_key_secret: "${R2_ACCESS_KEY_SECRET}"
+  bucket_name: "ai-safety-papers"
+  public_url_prefix: "https://assets.afspies.com/figures"

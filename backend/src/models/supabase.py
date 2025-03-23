@@ -2,12 +2,15 @@
 Supabase database client and schema for AI Safety Papers.
 """
 import os
+import json
 import logging
 from typing import List, Dict, Any, Optional
 from pathlib import Path
 from datetime import datetime
-from supabase import create_client, Client
 
+from supabase import create_client, Client
+from src.utils.config_loader import load_config
+from src.utils.cloudflare_r2 import CloudflareR2Client
 # Configure logging
 logger = logging.getLogger(__name__)
 
@@ -26,7 +29,7 @@ class SupabaseDB:
         
         # If no parameters are provided, attempt to load from config
         if not all([url, key]):
-            from backend.src.utils.config_loader import load_config
+                
             config = load_config()
             url = os.environ.get("SUPABASE_URL") or config.get('supabase', {}).get('url')
             key = os.environ.get("SUPABASE_KEY") or config.get('supabase', {}).get('key')
@@ -35,7 +38,18 @@ class SupabaseDB:
             raise ValueError("Supabase URL and API key are required")
             
         self.client = create_client(url, key)
-        self.logger.info("Initialized Supabase client")
+        
+        # Initialize R2 client once
+        try:
+            from src.utils.cloudflare_r2 import CloudflareR2Client
+        except ImportError:
+            try:
+                from utils.cloudflare_r2 import CloudflareR2Client
+            except ImportError:
+                from backend.src.utils.cloudflare_r2 import CloudflareR2Client
+            
+        self.r2_client = CloudflareR2Client()
+        self.logger.info("Initialized Supabase client and R2 client")
     
     def add_paper(self, paper: Dict[str, Any]) -> Dict[str, Any]:
         """
@@ -299,3 +313,290 @@ class SupabaseDB:
         except Exception as e:
             self.logger.error(f"Error converting row to article: {e}")
             return None
+            
+    # Summary management methods
+    def add_summary(self, paper_id: str, summary: str, display_figures: List[str], thumbnail_figure: Optional[str] = None) -> bool:
+        """
+        Add or update a paper summary.
+        
+        Args:
+            paper_id: Paper ID
+            summary: Text summary
+            display_figures: List of figure IDs to display
+            thumbnail_figure: Optional thumbnail figure ID
+            
+        Returns:
+            True if successful, False otherwise
+        """
+        try:
+            # Check if summary already exists
+            existing = self.client.table('paper_summaries').select('id').eq('id', paper_id).execute()
+            
+            if existing.data:
+                # Update existing summary
+                result = self.client.table('paper_summaries').update({
+                    'summary': summary,
+                    'display_figures': display_figures,
+                    'thumbnail_figure': thumbnail_figure,
+                    'updated_at': datetime.now().isoformat()
+                }).eq('id', paper_id).execute()
+            else:
+                # Insert new summary
+                result = self.client.table('paper_summaries').insert({
+                    'id': paper_id,
+                    'summary': summary,
+                    'display_figures': display_figures,
+                    'thumbnail_figure': thumbnail_figure
+                }).execute()
+                
+            self.logger.debug(f"Saved summary for paper {paper_id}")
+            return True
+        except Exception as e:
+            self.logger.error(f"Error saving summary for paper {paper_id}: {e}")
+            return False
+    
+    def get_summary(self, paper_id: str) -> Optional[Dict[str, Any]]:
+        """
+        Get a paper summary.
+        
+        Args:
+            paper_id: Paper ID
+            
+        Returns:
+            Summary data if found, None otherwise
+        """
+        try:
+            result = self.client.table('paper_summaries').select('*').eq('id', paper_id).execute()
+            
+            if not result.data:
+                self.logger.warning(f"Summary for paper {paper_id} not found")
+                return None
+                
+            return {
+                'summary': result.data[0]['summary'],
+                'display_figures': result.data[0]['display_figures'],
+                'thumbnail_figure': result.data[0]['thumbnail_figure']
+            }
+        except Exception as e:
+            self.logger.error(f"Error getting summary for paper {paper_id}: {e}")
+            return None
+            
+    # Figure management methods with Cloudflare R2 integration
+    def add_figure(self, paper_id: str, figure_id: str, image_data: bytes, caption: str = "", image_type: str = "image/png") -> bool:
+        """
+        Add or update a figure with Cloudflare R2 storage.
+        
+        Args:
+            paper_id: Paper ID
+            figure_id: Figure ID (e.g. "fig1", "fig2_a")
+            image_data: Raw image data as bytes
+            caption: Optional figure caption
+            image_type: Image MIME type (default: image/png)
+            
+        Returns:
+            True if successful, False otherwise
+        """
+        try:
+            # Use the initialized R2 client
+            # Create a key with paper_id and figure_id
+            r2_key = f"figures/{paper_id}/{figure_id}.png"
+            r2_url = self.r2_client.upload_file(image_data, r2_key, content_type=image_type)
+            
+            if not r2_url:
+                self.logger.error(f"Failed to upload figure {figure_id} to R2")
+                return False
+                
+            # Check if figure already exists in Supabase
+            existing = self.client.table('paper_figures').select('id').eq('paper_id', paper_id).eq('figure_id', figure_id).execute()
+            
+            if existing.data:
+                # Update existing figure
+                result = self.client.table('paper_figures').update({
+                    'caption': caption,
+                    'r2_url': r2_url
+                }).eq('paper_id', paper_id).eq('figure_id', figure_id).execute()
+            else:
+                # Insert new figure
+                result = self.client.table('paper_figures').insert({
+                    'paper_id': paper_id,
+                    'figure_id': figure_id,
+                    'caption': caption,
+                    'r2_url': r2_url
+                }).execute()
+                
+            self.logger.debug(f"Saved figure {figure_id} for paper {paper_id}")
+            return True
+        except Exception as e:
+            self.logger.error(f"Error saving figure {figure_id} for paper {paper_id}: {e}")
+            return False
+        
+    def get_figure_url(self, paper_id: str, figure_id: str) -> Optional[str]:
+        """
+        Get the R2 URL for a figure.
+        
+        Args:
+            paper_id: Paper ID
+            figure_id: Figure ID
+            
+        Returns:
+            R2 URL if found, None otherwise. Will attempt to upload from local storage if not found in R2.
+        """
+        try:
+            # Try Supabase first
+            result = self.client.table('paper_figures').select('r2_url').eq('paper_id', paper_id).eq('figure_id', figure_id).execute()
+            
+            if result.data and result.data[0]['r2_url']:
+                return result.data[0]['r2_url']
+                
+            # Fall back to local storage
+            # Try to import from different possible module paths
+            try:
+                from utils.config_loader import load_config
+            except ImportError:
+                try:
+                    from src.utils.config_loader import load_config
+                except ImportError:
+                    from backend.src.utils.config_loader import load_config
+                    
+            try:
+                from utils.cloudflare_r2 import CloudflareR2Client
+            except ImportError:
+                try:
+                    from src.utils.cloudflare_r2 import CloudflareR2Client
+                except ImportError:
+                    from backend.src.utils.cloudflare_r2 import CloudflareR2Client
+            
+            config = load_config()
+            data_dir = Path(config['data_dir'])
+            
+            fig_path = data_dir / paper_id / "figures" / f"{figure_id}.png"
+            if fig_path.exists():
+                # Upload to R2 and store in Supabase
+                with open(fig_path, 'rb') as f:
+                    image_data = f.read()
+                    
+                # Get captions if available
+                caption = ""
+                meta_path = data_dir / paper_id / "figures" / "figures.json"
+                if meta_path.exists():
+                    try:
+                        with open(meta_path, 'r') as f:
+                            figures_meta = json.load(f)
+                            caption = figures_meta.get(figure_id, {}).get('caption', '')
+                    except:
+                        pass
+                
+                # Add to Supabase/R2
+                self.add_figure(paper_id, figure_id, image_data, caption)
+                
+                # Try again to get the URL
+                result = self.client.table('paper_figures').select('r2_url').eq('paper_id', paper_id).eq('figure_id', figure_id).execute()
+                if result.data and result.data[0]['r2_url']:
+                    return result.data[0]['r2_url']
+                
+            self.logger.warning(f"Figure {figure_id} for paper {paper_id} not found in Supabase/R2 or local storage")
+            return None
+        except Exception as e:
+            self.logger.error(f"Error getting figure URL for {figure_id} (paper {paper_id}): {e}")
+            # Try local fallback
+            try:
+                # Check if we have a direct path to serve
+                # Try to import from different possible module paths
+                try:
+                    from utils.config_loader import load_config
+                except ImportError:
+                    try:
+                        from src.utils.config_loader import load_config
+                    except ImportError:
+                        from backend.src.utils.config_loader import load_config
+                
+                config = load_config()
+                data_dir = Path(config['data_dir'])
+                
+                fig_path = data_dir / paper_id / "figures" / f"{figure_id}.png"
+                if fig_path.exists():
+                    # Return a local URL if we can't access R2
+                    return f"/local_figures/{paper_id}/{figure_id}.png"
+            except Exception as local_e:
+                self.logger.error(f"Error getting figure from local storage: {local_e}")
+            return None
+            
+    def get_paper_figures(self, paper_id: str) -> List[Dict[str, Any]]:
+        """
+        Get all figures for a paper.
+        
+        Args:
+            paper_id: Paper ID
+            
+        Returns:
+            List of figure data with URLs
+        """
+        try:
+            result = self.client.table('paper_figures').select('figure_id,caption,r2_url').eq('paper_id', paper_id).execute()
+            
+            figures = []
+            for row in result.data:
+                figures.append({
+                    'figure_id': row['figure_id'],
+                    'caption': row['caption'],
+                    'url': row['r2_url']
+                })
+                
+            self.logger.debug(f"Retrieved {len(figures)} figures for paper {paper_id}")
+            return figures
+        except Exception as e:
+            self.logger.error(f"Error getting figures for paper {paper_id}: {e}")
+            return []
+            
+    def add_figures_batch(self, paper_id: str, figures: List[Dict[str, Any]]) -> bool:
+        """
+        Batch upload multiple figures to R2 and store URLs in Supabase.
+        
+        Args:
+            paper_id: Paper ID
+            figures: List of figure data dicts with figure_id, image_data, caption, content_type
+            
+        Returns:
+            True if successful, False otherwise
+        """
+        try:
+            # Use the initialized R2 client (no need to import or create a new one)
+            
+            # Track successful uploads
+            supabase_batch = []
+            
+            for fig in figures:
+                try:
+                    # Upload to R2
+                    fig_id = fig['figure_id']
+                    image_data = fig['image_data']
+                    caption = fig.get('caption', '')
+                    content_type = fig.get('content_type', 'image/png')
+                    
+                    # Create R2 key
+                    r2_key = f"figures/{paper_id}/{fig_id}.png"
+                    
+                    # Upload file
+                    r2_url = self.r2_client.upload_file(image_data, r2_key, content_type)
+                    
+                    if r2_url:
+                        # Add to batch for Supabase
+                        supabase_batch.append({
+                            'paper_id': paper_id,
+                            'figure_id': fig_id,
+                            'caption': caption,
+                            'r2_url': r2_url
+                        })
+                except Exception as fig_e:
+                    self.logger.error(f"Error processing figure {fig.get('figure_id', 'unknown')}: {fig_e}")
+                    continue
+            
+            # Insert all successful uploads to Supabase
+            if supabase_batch:
+                result = self.client.table('paper_figures').upsert(supabase_batch).execute()
+                self.logger.debug(f"Added {len(supabase_batch)} figures in batch for paper {paper_id}")
+                return True
+            return False
+        except Exception as e:
+            self.logger.error(f"Error batch adding figures for paper {paper_id}: {e}")
+            return False

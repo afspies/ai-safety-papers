@@ -2,12 +2,11 @@ from typing import Dict, List, Optional, Any, Type
 from pathlib import Path
 import logging
 import json
-from datetime import datetime
 import re
 import shutil
 
-from backend.src.models.article import Article
-from backend.src.models.figure import Figure, FigureExtractor
+from src.models.article import Article
+from src.models.figure import Figure 
 
 logger = logging.getLogger(__name__)
 
@@ -41,26 +40,19 @@ class Post:
         """Get a figure by ID."""
         return self.figures.get(figure_id)
         
-    def extract_figures(self, extractor: FigureExtractor, source_path: Path, force: bool = False) -> bool:
+    def extract_figures(self, extractor: "FigureExtractor", source_path: Path, force: bool = False) -> bool:
         """
         Extract figures using the provided extractor.
-        
+
         Args:
             extractor: FigureExtractor implementation
-            source_path: Path to the source file
+            source_path: Path to the source file (pdf extraction) or arxiv url (ar5iv extraction)
             force: Whether to force extraction even if figures already exist
             
         Returns:
             True if extraction was successful
         """
         figures_dir = self.article.data_folder / "figures"
-        
-        # Check if figures already exist
-        metadata_path = figures_dir / "figures_metadata.json"
-        if metadata_path.exists() and not force:
-            logger.info(f"Figures already exist for {self.article.uid}. Loading metadata.")
-            self.figures = FigureExtractor.load_metadata(metadata_path, figures_dir)
-            return True
             
         # Create figures directory
         figures_dir.mkdir(parents=True, exist_ok=True)
@@ -114,9 +106,9 @@ class Post:
                 if figure and figure.path:
                     # Copy figure to post directory
                     figure.save_to_directory(post_dir)
-                else:
+                elif "https://assets.afspies.com/figures/" not in fig_id:
                     logger.warning(f"Figure {fig_id_clean} not found or has no path")
-    
+                    
     def set_thumbnail(self) -> bool:
         """
         Set the thumbnail for the post.

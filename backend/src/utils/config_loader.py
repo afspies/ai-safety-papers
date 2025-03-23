@@ -16,7 +16,13 @@ def load_config() -> Dict:
     # Load environment variables from .env files
     project_root = Path(__file__).parent.parent.parent.parent
     
-    # Try to load from both project root and backend directory
+    # Load from home directory first
+    home_env_path = Path.home() / ".env"
+    if home_env_path.exists():
+        logger.info(f"Loading environment variables from {home_env_path}")
+        load_dotenv(home_env_path)
+    
+    # Then try to load from both project root and backend directory
     load_dotenv(project_root / ".env")
     load_dotenv(project_root / "backend" / ".env")
     
