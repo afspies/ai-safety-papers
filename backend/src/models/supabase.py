@@ -9,8 +9,9 @@ from pathlib import Path
 from datetime import datetime
 
 from supabase import create_client, Client
-from src.utils.config_loader import load_config
 from src.utils.cloudflare_r2 import CloudflareR2Client
+from src.utils.config_loader import load_config
+                
 # Configure logging
 logger = logging.getLogger(__name__)
 
@@ -39,14 +40,6 @@ class SupabaseDB:
             
         self.client = create_client(url, key)
         
-        # Initialize R2 client once
-        try:
-            from src.utils.cloudflare_r2 import CloudflareR2Client
-        except ImportError:
-            try:
-                from utils.cloudflare_r2 import CloudflareR2Client
-            except ImportError:
-                from backend.src.utils.cloudflare_r2 import CloudflareR2Client
             
         self.r2_client = CloudflareR2Client()
         self.logger.info("Initialized Supabase client and R2 client")
@@ -430,51 +423,40 @@ class SupabaseDB:
             self.logger.error(f"Error saving figure {figure_id} for paper {paper_id}: {e}")
             return False
         
-    def get_figure_url(self, paper_id: str, figure_id: str) -> Optional[str]:
+    def get_figure_info(self, paper_id: str, figure_id: str) -> Optional[Dict[str, Any]]:
         """
-        Get the R2 URL for a figure.
+        Get the figure information including R2 URL and local path.
         
         Args:
             paper_id: Paper ID
             figure_id: Figure ID
             
         Returns:
-            R2 URL if found, None otherwise. Will attempt to upload from local storage if not found in R2.
+            Dict with 'remote_path', 'local_path', and 'caption' keys if found, None otherwise.
+            Will attempt to upload from local storage if not found in R2.
         """
         try:
-            # Try Supabase first
-            result = self.client.table('paper_figures').select('r2_url').eq('paper_id', paper_id).eq('figure_id', figure_id).execute()
+            # Get config for local path construction
+            config = load_config()
+            data_dir = Path(config.get('data_dir', 'data'))
+            
+            # Construct local path
+            local_path = data_dir / paper_id / "figures" / f"{figure_id}.png"
+            local_path_str = str(local_path)
+            
+            # Try Supabase first for remote path
+            result = self.client.table('paper_figures').select('r2_url,caption').eq('paper_id', paper_id).eq('figure_id', figure_id).execute()
             
             if result.data and result.data[0]['r2_url']:
-                return result.data[0]['r2_url']
+                return {
+                    'remote_path': result.data[0]['r2_url'],
+                    'local_path': local_path_str,
+                    'caption': result.data[0].get('caption', ''),
+                    'exists_locally': local_path.exists()
+                }
                 
-            # Fall back to local storage
-            # Try to import from different possible module paths
-            try:
-                from utils.config_loader import load_config
-            except ImportError:
-                try:
-                    from src.utils.config_loader import load_config
-                except ImportError:
-                    from backend.src.utils.config_loader import load_config
-                    
-            try:
-                from utils.cloudflare_r2 import CloudflareR2Client
-            except ImportError:
-                try:
-                    from src.utils.cloudflare_r2 import CloudflareR2Client
-                except ImportError:
-                    from backend.src.utils.cloudflare_r2 import CloudflareR2Client
-            
-            config = load_config()
-            data_dir = Path(config['data_dir'])
-            
-            fig_path = data_dir / paper_id / "figures" / f"{figure_id}.png"
-            if fig_path.exists():
-                # Upload to R2 and store in Supabase
-                with open(fig_path, 'rb') as f:
-                    image_data = f.read()
-                    
+            # Fall back to local storage only if it exists
+            if local_path.exists():
                 # Get captions if available
                 caption = ""
                 meta_path = data_dir / paper_id / "figures" / "figures.json"
@@ -486,37 +468,45 @@ class SupabaseDB:
                     except:
                         pass
                 
+                # Try to upload to R2 and get remote URL
+                with open(local_path, 'rb') as f:
+                    image_data = f.read()
+                
                 # Add to Supabase/R2
                 self.add_figure(paper_id, figure_id, image_data, caption)
                 
-                # Try again to get the URL
+                # Try again to get the remote URL
                 result = self.client.table('paper_figures').select('r2_url').eq('paper_id', paper_id).eq('figure_id', figure_id).execute()
-                if result.data and result.data[0]['r2_url']:
-                    return result.data[0]['r2_url']
+                remote_path = result.data[0]['r2_url'] if result.data else None
+                
+                # Return both paths
+                return {
+                    'remote_path': remote_path,
+                    'local_path': local_path_str,
+                    'caption': caption,
+                    'exists_locally': True
+                }
                 
             self.logger.warning(f"Figure {figure_id} for paper {paper_id} not found in Supabase/R2 or local storage")
             return None
         except Exception as e:
-            self.logger.error(f"Error getting figure URL for {figure_id} (paper {paper_id}): {e}")
+            self.logger.error(f"Error getting figure info for {figure_id} (paper {paper_id}): {e}")
             # Try local fallback
             try:
-                # Check if we have a direct path to serve
-                # Try to import from different possible module paths
-                try:
-                    from utils.config_loader import load_config
-                except ImportError:
-                    try:
-                        from src.utils.config_loader import load_config
-                    except ImportError:
-                        from backend.src.utils.config_loader import load_config
-                
                 config = load_config()
                 data_dir = Path(config['data_dir'])
                 
                 fig_path = data_dir / paper_id / "figures" / f"{figure_id}.png"
+                local_path_str = str(fig_path)
+                
                 if fig_path.exists():
-                    # Return a local URL if we can't access R2
-                    return f"/local_figures/{paper_id}/{figure_id}.png"
+                    # Return paths with only local path available
+                    return {
+                        'remote_path': None,
+                        'local_path': local_path_str,
+                        'caption': "",
+                        'exists_locally': True
+                    }
             except Exception as local_e:
                 self.logger.error(f"Error getting figure from local storage: {local_e}")
             return None
@@ -529,17 +519,24 @@ class SupabaseDB:
             paper_id: Paper ID
             
         Returns:
-            List of figure data with URLs
+            List of figure data with remote URLs and paths
         """
         try:
             result = self.client.table('paper_figures').select('figure_id,caption,r2_url').eq('paper_id', paper_id).execute()
             
+            config = load_config()
+            data_dir = Path(config.get('data_dir', 'data'))
+            
             figures = []
             for row in result.data:
+                # Construct local path
+                local_path = str(data_dir / paper_id / "figures" / f"{row['figure_id']}.png")
+                
                 figures.append({
                     'figure_id': row['figure_id'],
                     'caption': row['caption'],
-                    'url': row['r2_url']
+                    'remote_path': row['r2_url'],
+                    'local_path': local_path
                 })
                 
             self.logger.debug(f"Retrieved {len(figures)} figures for paper {paper_id}")

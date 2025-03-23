@@ -6,10 +6,8 @@ from pathlib import Path
 import os
 import json
 
-from backend.src.models.article import Article
-from backend.src.models.post import Post
-from backend.src.models.supabase import SupabaseDB
-from backend.src.api.schemas import PaperSummary, PaperDetail, FigureSchema
+from src.models.supabase import SupabaseDB
+from src.api.schemas import PaperSummary, PaperDetail, FigureSchema
 
 # Initialize router
 router = APIRouter(tags=["papers"])
@@ -19,140 +17,8 @@ logger = logging.getLogger(__name__)
 import os
 
 # Check if in development mode
-if os.environ.get('DEVELOPMENT_MODE') == 'true':
-    # Create a mock SupabaseDB for development
-    from backend.src.models.supabase import SupabaseDB
-    from backend.src.models.article import Article
-    
-    class MockSupabaseDB(SupabaseDB):
-        def __init__(self):
-            logger.info("Initializing mock SupabaseDB for development")
-            # Skip actual connection to Supabase
-            self.papers = []  # In-memory storage for development
-            self.highlighted_papers = []  # In-memory storage for highlighted papers
-            self.logger = logging.getLogger(__name__)
-            
-        def get_papers(self):
-            # Convert stored papers to Article objects
-            return [self._paper_dict_to_article(paper) for paper in self.papers]
-            
-        def get_highlighted_papers(self):
-            # Return highlighted papers
-            return [self._paper_dict_to_article(paper) for paper in self.highlighted_papers]
-            
-        def get_paper_by_id(self, paper_id):
-            # Find paper by ID
-            for paper in self.papers:
-                if paper.get('id') == paper_id:
-                    return self._paper_dict_to_article(paper)
-            return None
-            
-        def add_paper(self, paper_data):
-            # Add paper to in-memory storage
-            self.papers.append(paper_data)
-            logger.info(f"Added paper to mock DB: {paper_data.get('id')}")
-            return True
-            
-        def mark_as_posted(self, paper_id):
-            # Mark paper as posted
-            for paper in self.papers:
-                if paper.get('id') == paper_id:
-                    paper['posted'] = True
-                    logger.info(f"Marked paper as posted: {paper_id}")
-                    return True
-            return False
-            
-        def get_papers_to_post(self):
-            # Return papers that need to be posted (not yet posted)
-            return [self._paper_dict_to_article(paper) for paper in self.papers if not paper.get('posted', False)]
-            
-        def mark_as_highlighted(self, paper_id, is_highlighted=True):
-            # Mark paper as highlighted
-            for paper in self.papers:
-                if paper.get('id') == paper_id:
-                    paper['highlight'] = is_highlighted
-                    if is_highlighted:
-                        # Add to highlighted papers if not already there
-                        if paper not in self.highlighted_papers:
-                            self.highlighted_papers.append(paper)
-                    else:
-                        # Remove from highlighted papers
-                        self.highlighted_papers = [p for p in self.highlighted_papers if p.get('id') != paper_id]
-                    logger.info(f"Marked paper highlight status as {is_highlighted}: {paper_id}")
-                    return True
-            return False
-            
-        def update_paper(self, paper_data):
-            # Update existing paper
-            for i, paper in enumerate(self.papers):
-                if paper.get('id') == paper_data.get('id'):
-                    self.papers[i] = paper_data
-                    logger.info(f"Updated paper in mock DB: {paper_data.get('id')}")
-                    return True
-            # If not found, add it
-            return self.add_paper(paper_data)
-            
-        def _paper_dict_to_article(self, paper_dict):
-            # Convert a paper dictionary to an Article object
-            if isinstance(paper_dict, Article):
-                return paper_dict
-                
-            article = Article(
-                uid=paper_dict.get('id'),
-                title=paper_dict.get('title', ''),
-                url=paper_dict.get('url', '')
-            )
-            
-            # Set additional properties
-            if paper_dict.get('authors'):
-                article.set_authors(paper_dict['authors'])
-            if paper_dict.get('abstract'):
-                article.set_abstract(paper_dict['abstract'])
-            if paper_dict.get('venue'):
-                article.venue = paper_dict['venue']
-            if paper_dict.get('submitted_date'):
-                article.submitted_date = paper_dict['submitted_date']
-            if paper_dict.get('tldr'):
-                if isinstance(paper_dict['tldr'], dict):
-                    article.set_tldr(paper_dict['tldr'].get('text', ''))
-                else:
-                    article.set_tldr(paper_dict['tldr'])
-            if paper_dict.get('highlight'):
-                article.set_highlight(paper_dict['highlight'])
-            if paper_dict.get('tags'):
-                article.tags = paper_dict['tags']
-                
-            return article
-            
-        # Add mock implementations for summary and figures
-        def get_summary(self, paper_id):
-            # Return a mock summary
-            self.logger.info(f"Getting mock summary for paper {paper_id}")
-            return {
-                'summary': "This is a mock summary for testing purposes.",
-                'display_figures': [],
-                'thumbnail_figure': None
-            }
-            
-        def get_paper_figures(self, paper_id):
-            # Return empty figures list
-            self.logger.info(f"Getting mock figures for paper {paper_id}")
-            return []
-            
-        def get_figure_url(self, paper_id, figure_id):
-            # Return a mock figure URL
-            return f"/static/posts/paper_{paper_id}/thumbnail.png"
-            
-        def add_figure(self, paper_id, figure_id, image_data, caption="", image_type="image/png"):
-            # Mock implementation - just log it
-            self.logger.info(f"Mock adding figure {figure_id} for paper {paper_id}")
-            return True
-    
-    supabase_db = MockSupabaseDB()
-    logger.info("Created mock SupabaseDB instance for development mode")
-else:
-    supabase_db = SupabaseDB()
-    logger.info("Created shared SupabaseDB instance")
+supabase_db = SupabaseDB()
+logger.info("Created shared SupabaseDB instance")
 
 def get_db():
     """Dependency to get the database connection."""

@@ -90,6 +90,8 @@ class Article:
                 return True
                 
             # If it's an arXiv URL, adapt for PDF download
+            print("Downloading PDF for:")
+            print(self.url)
             if 'arxiv.org' in self.url:
                 parsed_url = urlparse(self.url)
                 path_parts = parsed_url.path.strip('/').split('/')

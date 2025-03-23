@@ -36,9 +36,20 @@ class Post:
             
         return content_path / "posts" / f"paper_{self.article.uid}"
         
-    def get_figure(self, figure_id: str) -> Optional[Figure]:
+    def get_figure(self, figure_id: str, download: bool = False) -> Optional[Figure]:
         """Get a figure by ID."""
-        return self.figures.get(figure_id)
+        figure =  self.figures.get(figure_id)
+        if figure and download:
+            figure_id = figure.id
+            local_fig_path = self.article.data_folder / "figures" / f"{figure_id}.png"
+            if not local_fig_path.exists():
+                # download figure from r2
+                r2_path = figure.path
+                if r2_path:
+                    from src.utils.cloudflare_r2 import CloudflareR2Client
+                    r2_client = CloudflareR2Client()
+                    r2_client.download_file(r2_path, local_fig_path)
+        return figure
         
     def extract_figures(self, extractor: "FigureExtractor", source_path: Path, force: bool = False) -> bool:
         """
@@ -103,12 +114,17 @@ class Post:
                 fig_id_clean = f"fig{fig_id}" if fig_id.isdigit() else fig_id
                 figure = self.get_figure(fig_id_clean)
                 
-                if figure and figure.path:
-                    # Copy figure to post directory
-                    figure.save_to_directory(post_dir)
-                elif "https://assets.afspies.com/figures/" not in fig_id:
-                    logger.warning(f"Figure {fig_id_clean} not found or has no path")
-                    
+                if figure:
+                    if figure.path and "https:" not in str(figure.path):
+                        # Check that figure exists
+                        if figure.path.exists():
+                            # Copy figure to post directory
+                            figure.save_to_directory(post_dir)
+                        else:
+                            logger.warning(f"Figure {fig_id_clean} not found")
+                else:
+                    logger.warning(f"Figure {fig_id_clean} not found")
+
     def set_thumbnail(self) -> bool:
         """
         Set the thumbnail for the post.
@@ -140,7 +156,7 @@ class Post:
         else:
             # Handle regular figure
             fig_id = f"fig{self.thumbnail_figure}" if self.thumbnail_figure.isdigit() else self.thumbnail_figure
-            figure = self.get_figure(fig_id)
+            figure = self.get_figure(fig_id, download=True)
             
             if figure and figure.path:
                 # Create a copy named thumbnail.png

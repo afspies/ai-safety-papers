@@ -55,8 +55,9 @@ class FigureExtractorManager:
                     # Add figures to post object
                     for fig_data in figures:
                         figure = Figure(fig_data['figure_id'])
-                        figure.r2_url = fig_data['url']
                         figure.caption = fig_data['caption']
+                        figure.remote_path = fig_data['remote_path']
+                        figure.local_path = fig_data['local_path']
                         post.figures[fig_data['figure_id']] = figure
                     return True
             except Exception as e:
@@ -88,8 +89,16 @@ class FigureExtractorManager:
             self.logger.info(f"Ar5iv extraction failed, trying PDF extraction")
             success = post.extract_figures(self.extractors[1], pdf_path, force)
         
-        # If extraction was successful, upload figures to R2 and store in Supabase
+        # If extraction was successful using local extractors, set the local path
         if success:
+            figures_dir = post.article.data_folder / "figures"
+            for fig_id, figure in post.figures.items():
+                fig_path = figures_dir / f"{fig_id}.png"
+                if fig_path.exists():
+                    figure.local_path = str(fig_path)  # Set the local path
+                    figure.remote_path = None  # No remote path yet
+            
+            # Try to store in R2
             try:
                 self.store_figures_in_r2(post)
             except Exception as e:
@@ -156,7 +165,15 @@ class FigureExtractorManager:
             # Upload figures in batch
             if figures_batch:
                 result = self.db.add_figures_batch(paper_id, figures_batch)
-                self.logger.info(f"Stored {len(figures_batch)} figures in R2/Supabase for paper {paper_id}")
+                if result:
+                    # Update figure objects with remote paths
+                    figures = self.db.get_paper_figures(paper_id)
+                    for fig_data in figures:
+                        fig_id = fig_data['figure_id']
+                        if fig_id in post.figures:
+                            post.figures[fig_id].remote_path = fig_data['remote_path']
+                
+                    self.logger.info(f"Stored {len(figures_batch)} figures in R2/Supabase for paper {paper_id}")
                 return result
             else:
                 self.logger.warning(f"No figures to upload for paper {paper_id}")
@@ -182,31 +199,40 @@ class FigureExtractorManager:
         Returns:
             True if processing was successful
         """
-        try:
-            # Set display figures if provided
-            if requested_figures:
-                post.display_figures = requested_figures
+        # Set display figures if provided
+        if requested_figures:
+            post.display_figures = requested_figures
+        
+        # If no display figures are set, try to get all available figures
+        if not post.display_figures and post.figures:
+            post.display_figures = list(post.figures.keys())
+        
+        # Process display figures - ensure paths are properly set
+        if post.display_figures:
+            # Verify all figures have proper paths
+            for fig_id in post.display_figures:
+                if fig_id in post.figures:
+                    figure = post.figures[fig_id]
+                    # If missing paths, try to get them from the database
+                    if not hasattr(figure, 'remote_path') or not hasattr(figure, 'local_path'):
+                        if self.db:
+                            fig_info = self.db.get_figure_info(post.article.uid, fig_id)
+                            if fig_info:
+                                figure.remote_path = fig_info['remote_path']
+                                figure.local_path = fig_info['local_path']
+                                figure.caption = fig_info.get('caption', '') or figure.caption
             
-            # If no display figures are set, try to get all available figures
-            if not post.display_figures and post.figures:
-                post.display_figures = list(post.figures.keys())
+            post.process_display_figures()
             
-            # Process display figures
-            if post.display_figures:
-                post.process_display_figures()
-                
-                # Set thumbnail if not already set
-                if not post.thumbnail_figure and post.display_figures:
-                    post.thumbnail_figure = post.display_figures[0]
-                
-                # Process thumbnail
-                post.set_thumbnail()
-                
-                return True
-            else:
-                self.logger.warning("No display figures to process")
-                return False
-                
-        except Exception as e:
-            self.logger.error(f"Error processing post figures: {e}")
+            # Set thumbnail if not already set
+            if not post.thumbnail_figure and post.display_figures:
+                post.thumbnail_figure = post.display_figures[0]
+            
+            # Process thumbnail
+            post.set_thumbnail()
+            
+            return True
+        else:
+            self.logger.warning("No display figures to process")
             return False
+            

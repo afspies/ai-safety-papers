@@ -55,24 +55,19 @@ def main():
     logger.info("Configuration loaded")
     
     # Initialize Supabase client
-    if not args.use_mock_supabase:
-        try:
-            db = SupabaseDB()
-            logger.info("Supabase DB initialized")
-        except Exception as e:
-            logger.error(f"Failed to initialize Supabase: {e}")
-            return
-    else:
-        logger.warning("Running in mock DB mode (no Supabase)")
-        db = MockSupabaseDB()
-        logger.info("Mock Supabase DB initialized")
-    
+    try:
+        db = SupabaseDB()
+        logger.info("Supabase DB initialized")
+    except Exception as e:
+        logger.error(f"Failed to initialize Supabase: {e}")
+        return
+
     # Create API clients - use development mode to avoid rate limiting
     semantic_scholar_api = SemanticScholarAPI(api_key=None, development_mode=False)
     logger.info("Semantic Scholar API initialized in development mode")
     
     # Initialize summarizer in development mode
-    paper_summarizer = PaperSummarizer(api_key="dummy_key", development_mode=False)
+    paper_summarizer = PaperSummarizer(db=db)
     
     # Get papers to process
     papers_to_process = []
@@ -183,6 +178,7 @@ def main():
                 
                 # Call the summarize method
                 try:
+                    article.download_pdf()
                     summary_result = paper_summarizer.summarize(article)
                     
                     if isinstance(summary_result, tuple) and len(summary_result) >= 3:
@@ -258,11 +254,11 @@ def main():
                 
                 try:
                     # If using Supabase, generate markdown with R2 URLs
-                    if not args.use_mock_supabase and isinstance(db, SupabaseDB) and post.display_figures:
+                    if args.use_mock_supabase and isinstance(db, SupabaseDB) and post.display_figures:
                         # Get figure URLs from Supabase
                         figure_urls = {}
                         for fig_id in post.display_figures:
-                            url = db.get_figure_url(paper_id, fig_id)
+                            url = db.get_figure_info(paper_id, fig_id)['remote_path']
                             if url:
                                 figure_urls[fig_id] = url
                             elif fig_id in post.figures and hasattr(post.figures[fig_id], 'r2_url') and post.figures[fig_id].r2_url:
