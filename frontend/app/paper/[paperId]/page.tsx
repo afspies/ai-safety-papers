@@ -17,11 +17,13 @@ interface PaperPageProps {
   }
 }
 
-export default function PaperPage({ params }: PaperPageProps) {
+export default async function PaperPage({ params }: PaperPageProps) {
+  // Make params awaitable
+  const { paperId } = await params;
   return (
     <div className="bg-white">
       <Suspense fallback={<Loading />}>
-        <PaperContent paperId={params.paperId} />
+        <PaperContent paperId={paperId} />
       </Suspense>
     </div>
   )
@@ -59,10 +61,10 @@ async function PaperContent({ paperId }: { paperId: string }) {
     }
 
     return (
-      <article className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 font-serif">
-        {/* Paper header - Distill style */}
-        <header className="mb-12 text-center">
-          <div className="mb-6">
+      <article className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 font-serif">
+        {/* Paper header - Academic style */}
+        <header className="mb-10 text-center">
+          <div className="mb-4">
             {paper.tags && paper.tags.length > 0 ? (
               paper.tags.map((tag) => (
                 <span key={tag} className="paper-tag">
@@ -74,9 +76,9 @@ async function PaperContent({ paperId }: { paperId: string }) {
             )}
           </div>
 
-          <h1 className="paper-title">{paper.title}</h1>
+          <h1 className="paper-title text-2xl md:text-3xl font-bold mb-4">{paper.title}</h1>
 
-          <div className="paper-authors">
+          <div className="paper-authors text-lg mb-2">
             {paper.authors && paper.authors.length > 0 ? (
               paper.authors.map((author, index) => (
                 <span key={index}>
@@ -89,41 +91,41 @@ async function PaperContent({ paperId }: { paperId: string }) {
             )}
           </div>
 
-          <div className="paper-metadata">
+          <div className="paper-metadata text-sm text-gray-600 mb-6">
             {paper.venue && <span>{paper.venue}</span>}
             {paper.venue && formattedDate !== "Unknown date" && <span> • </span>}
             <span>{formattedDate}</span>
           </div>
 
-          <div className="mt-8 max-w-2xl mx-auto border-t border-gray-200 pt-8">
-            <h2 className="text-xl font-semibold mb-4">Abstract</h2>
-            <p className="text-gray-700 italic">{paper.abstract}</p>
+          <div className="mt-6 max-w-4xl mx-auto border-t border-gray-200 pt-6">
+            <h2 className="text-xl font-semibold mb-3">Abstract</h2>
+            <p className="text-gray-700 leading-snug">{paper.abstract}</p>
           </div>
         </header>
 
         {/* Main content */}
-        <div className="max-w-2xl mx-auto">
+        <div className="max-w-4xl mx-auto">
           {paper.summary && (
-            <section className="mb-12">
-              <h2 className="paper-section-title">Summary</h2>
-              <div className="paper-content">
-                <SimpleHTMLMarkdown content={paper.summary} />
+            <section className="mb-10">
+              <h2 className="paper-section-title text-xl font-bold mb-4 border-b border-gray-200 pb-2">Summary</h2>
+              <div className="paper-content leading-snug">
+                <SimpleHTMLMarkdown content={paper.summary} className="leading-tight" />
               </div>
             </section>
           )}
 
           {paper.figures && paper.figures.length > 0 && (
-            <section className="mb-12">
-              <h2 className="paper-section-title">Figures</h2>
-              <div className="space-y-8 mt-6">
+            <section className="mb-10">
+              <h2 className="paper-section-title text-xl font-bold mb-4 border-b border-gray-200 pb-2">Figures</h2>
+              <div className="space-y-6 mt-4">
                 {paper.figures.map((figure, index) => (
-                  <figure key={figure.id || `fig-${index}`} className="bg-gray-50 p-6 rounded-lg">
+                  <figure key={figure.id || `fig-${index}`} className="bg-white border border-gray-200 rounded-md shadow-sm p-4">
                     <ExpandableImage
                       src={figure.url || "/placeholder.svg"}
                       alt={figure.caption || "Figure"}
-                      className="mb-4"
+                      className="mb-3"
                     />
-                    <figcaption className="text-sm text-gray-600 italic text-center">
+                    <figcaption className="text-sm text-gray-700 text-center font-serif">
                       {figure.caption || "Figure"}
                     </figcaption>
                   </figure>
@@ -132,7 +134,7 @@ async function PaperContent({ paperId }: { paperId: string }) {
             </section>
           )}
 
-          <div className="mt-12 pt-6 border-t border-gray-200 flex justify-between items-center">
+          <div className="mt-10 pt-4 border-t border-gray-200 flex justify-between items-center">
             <Link href="/" className="text-blue-600 hover:text-blue-800 transition-colors">
               ← Back to papers
             </Link>

@@ -2,7 +2,6 @@
 
 import { useState } from "react"
 import FigureModal from "./figure-modal"
-import { Maximize2 } from "lucide-react"
 
 interface ExpandableFigureProps {
   src: string
@@ -12,26 +11,33 @@ interface ExpandableFigureProps {
 
 export default function ExpandableFigure({ src, alt, className = "" }: ExpandableFigureProps) {
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const [isHovered, setIsHovered] = useState(false)
 
   return (
     <>
-      <div className={`relative group ${className}`}>
-        <img
-          src={src || "/placeholder.svg"}
-          alt={alt}
-          className="max-w-full h-auto rounded-md cursor-pointer hover:opacity-95 transition-opacity"
-          onClick={() => setIsModalOpen(true)}
-        />
+      <style jsx>{`
+        .neon-glow:hover {
+          box-shadow: 0 0 10px 2px rgba(66, 153, 225, 0.6), 0 0 15px 5px rgba(99, 102, 241, 0.4);
+          transition: box-shadow 0.3s ease;
+        }
+      `}</style>
+      <div 
+        className={`relative group bg-white border border-gray-200 rounded-md hover:shadow-md transition-all duration-300 p-3 ${className} cursor-pointer flex flex-col items-center neon-glow`}
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+        onClick={() => setIsModalOpen(true)}
+      >
+        <div className="overflow-hidden transition-all duration-300 flex justify-center w-full">
+          <img
+            src={src || "/placeholder.svg"}
+            alt={alt}
+            className={`max-w-full h-auto transition-all duration-300 transform ${
+              isHovered ? "scale-102" : ""
+            }`}
+          />
+        </div>
 
-        <button
-          className="absolute top-2 right-2 p-1.5 bg-white/80 hover:bg-white rounded-full shadow-sm opacity-0 group-hover:opacity-100 transition-opacity"
-          onClick={() => setIsModalOpen(true)}
-          aria-label="Expand figure"
-        >
-          <Maximize2 className="h-4 w-4 text-gray-700" />
-        </button>
-
-        {alt && <p className="text-center text-sm text-gray-600 mt-2 italic">{alt}</p>}
+        {alt && <p className="text-center text-sm text-gray-700 mt-3 font-serif w-full">{alt}</p>}
       </div>
 
       <FigureModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} src={src} alt={alt} />
