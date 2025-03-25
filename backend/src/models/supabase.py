@@ -4,6 +4,7 @@ Supabase database client and schema for AI Safety Papers.
 import os
 import json
 import logging
+import re
 from typing import List, Dict, Any, Optional
 from pathlib import Path
 from datetime import datetime
@@ -80,7 +81,8 @@ class SupabaseDB:
                 'mech_int_relevance': paper.get('mech_int_relevance', 0),
                 'embedding_model': paper.get('embedding_model', ''),
                 'embedding_vector': paper.get('embedding_vector', []),
-                'tags': paper.get('tags', [])
+                'tags': paper.get('tags', []),
+                'appendix_page_number': paper.get('appendix_page_number')
             }).execute()
             
             self.logger.debug(f"Added paper {paper['id']}")
@@ -116,7 +118,8 @@ class SupabaseDB:
                 'mech_int_relevance': paper.get('mech_int_relevance'),
                 'embedding_model': paper.get('embedding_model'),
                 'embedding_vector': paper.get('embedding_vector'),
-                'tags': paper.get('tags')
+                'tags': paper.get('tags'),
+                'appendix_page_number': paper.get('appendix_page_number')
             }).eq('id', paper['id']).execute()
             
             self.logger.debug(f"Updated paper {paper['id']}")
@@ -300,7 +303,8 @@ class SupabaseDB:
                 'tldr': row['tldr'],
                 'submitted_date': row['submitted_date'],
                 'highlight': row['highlight'],
-                'tags': row.get('tags', [])
+                'tags': row.get('tags', []),
+                'appendix_page_number': row.get('appendix_page_number')
             }
             return article
         except Exception as e:
@@ -308,7 +312,8 @@ class SupabaseDB:
             return None
             
     # Summary management methods
-    def add_summary(self, paper_id: str, summary: str, display_figures: List[str], thumbnail_figure: Optional[str] = None) -> bool:
+    def add_summary(self, paper_id: str, summary: str, display_figures: List[str], 
+                    thumbnail_figure: Optional[str] = None, markdown_summary: str = "") -> bool:
         """
         Add or update a paper summary.
         
@@ -317,6 +322,7 @@ class SupabaseDB:
             summary: Text summary
             display_figures: List of figure IDs to display
             thumbnail_figure: Optional thumbnail figure ID
+            markdown_summary: Markdown version of the summary with image URLs
             
         Returns:
             True if successful, False otherwise
@@ -331,6 +337,7 @@ class SupabaseDB:
                     'summary': summary,
                     'display_figures': display_figures,
                     'thumbnail_figure': thumbnail_figure,
+                    'markdown_summary': markdown_summary,
                     'updated_at': datetime.now().isoformat()
                 }).eq('id', paper_id).execute()
             else:
@@ -339,7 +346,8 @@ class SupabaseDB:
                     'id': paper_id,
                     'summary': summary,
                     'display_figures': display_figures,
-                    'thumbnail_figure': thumbnail_figure
+                    'thumbnail_figure': thumbnail_figure,
+                    'markdown_summary': markdown_summary
                 }).execute()
                 
             self.logger.debug(f"Saved summary for paper {paper_id}")
@@ -368,7 +376,8 @@ class SupabaseDB:
             return {
                 'summary': result.data[0]['summary'],
                 'display_figures': result.data[0]['display_figures'],
-                'thumbnail_figure': result.data[0]['thumbnail_figure']
+                'thumbnail_figure': result.data[0]['thumbnail_figure'],
+                'markdown_summary': result.data[0].get('markdown_summary', '')
             }
         except Exception as e:
             self.logger.error(f"Error getting summary for paper {paper_id}: {e}")
@@ -440,51 +449,100 @@ class SupabaseDB:
             config = load_config()
             data_dir = Path(config.get('data_dir', 'data'))
             
+            # Log the figure ID we're looking for
+            self.logger.info(f"Looking for figure info: paper_id={paper_id}, figure_id={figure_id}")
+            
+            # Ensure correct figure ID format
+            if figure_id.isdigit():
+                figure_id = f"fig{figure_id}"
+            
             # Construct local path
             local_path = data_dir / paper_id / "figures" / f"{figure_id}.png"
             local_path_str = str(local_path)
+            
+            # Also check for subfigures
+            is_subfigure = False
+            subfigure_paths = []
+            if not "_" in figure_id:
+                # This might be a main figure with subfigures
+                subfig_base = local_path.parent / f"{figure_id}_"
+                subfig_pattern = f"{subfig_base.name}*"
+                for subfig_path in local_path.parent.glob(subfig_pattern):
+                    is_subfigure = True
+                    subfigure_paths.append(subfig_path)
+                    self.logger.info(f"Found subfigure: {subfig_path}")
             
             # Try Supabase first for remote path
             result = self.client.table('paper_figures').select('r2_url,caption').eq('paper_id', paper_id).eq('figure_id', figure_id).execute()
             
             if result.data and result.data[0]['r2_url']:
+                self.logger.info(f"Found R2 URL for {figure_id} in Supabase")
                 return {
                     'remote_path': result.data[0]['r2_url'],
                     'local_path': local_path_str,
                     'caption': result.data[0].get('caption', ''),
-                    'exists_locally': local_path.exists()
+                    'exists_locally': local_path.exists(),
+                    'has_subfigures': is_subfigure,
+                    'subfigure_paths': [str(p) for p in subfigure_paths]
                 }
                 
             # Fall back to local storage only if it exists
-            if local_path.exists():
+            if local_path.exists() or is_subfigure:
+                self.logger.info(f"Figure found in local storage: main={local_path.exists()}, subfigures={is_subfigure}")
+                
                 # Get captions if available
                 caption = ""
                 meta_path = data_dir / paper_id / "figures" / "figures.json"
+                alt_meta_path = data_dir / paper_id / "figures" / "figures_metadata.json"
+                
                 if meta_path.exists():
                     try:
                         with open(meta_path, 'r') as f:
                             figures_meta = json.load(f)
                             caption = figures_meta.get(figure_id, {}).get('caption', '')
-                    except:
-                        pass
+                    except Exception as meta_err:
+                        self.logger.warning(f"Error reading figures.json: {meta_err}")
+                elif alt_meta_path.exists():
+                    try:
+                        with open(alt_meta_path, 'r') as f:
+                            figures_meta = json.load(f)
+                            caption = figures_meta.get(figure_id, {}).get('caption', '')
+                    except Exception as meta_err:
+                        self.logger.warning(f"Error reading figures_metadata.json: {meta_err}")
                 
-                # Try to upload to R2 and get remote URL
-                with open(local_path, 'rb') as f:
-                    image_data = f.read()
+                # Process main figure if it exists
+                if local_path.exists():
+                    # Try to upload to R2 and get remote URL
+                    with open(local_path, 'rb') as f:
+                        image_data = f.read()
+                    
+                    # Add to Supabase/R2
+                    self.logger.info(f"Uploading main figure {figure_id} to R2")
+                    self.add_figure(paper_id, figure_id, image_data, caption)
                 
-                # Add to Supabase/R2
-                self.add_figure(paper_id, figure_id, image_data, caption)
+                # Process subfigures if they exist
+                for subfig_path in subfigure_paths:
+                    subfig_id = subfig_path.stem
+                    subfig_caption = figures_meta.get(subfig_id, {}).get('caption', '') if 'figures_meta' in locals() else ""
+                    
+                    with open(subfig_path, 'rb') as f:
+                        subfig_data = f.read()
+                    
+                    self.logger.info(f"Uploading subfigure {subfig_id} to R2")
+                    self.add_figure(paper_id, subfig_id, subfig_data, subfig_caption)
                 
-                # Try again to get the remote URL
+                # Try again to get the remote URL after uploading
                 result = self.client.table('paper_figures').select('r2_url').eq('paper_id', paper_id).eq('figure_id', figure_id).execute()
                 remote_path = result.data[0]['r2_url'] if result.data else None
                 
-                # Return both paths
+                # Return paths with subfigure info
                 return {
                     'remote_path': remote_path,
                     'local_path': local_path_str,
                     'caption': caption,
-                    'exists_locally': True
+                    'exists_locally': local_path.exists(),
+                    'has_subfigures': is_subfigure,
+                    'subfigure_paths': [str(p) for p in subfigure_paths]
                 }
                 
             self.logger.warning(f"Figure {figure_id} for paper {paper_id} not found in Supabase/R2 or local storage")
@@ -500,6 +558,7 @@ class SupabaseDB:
                 local_path_str = str(fig_path)
                 
                 if fig_path.exists():
+                    self.logger.info(f"Found figure in local storage fallback: {fig_path}")
                     # Return paths with only local path available
                     return {
                         'remote_path': None,
@@ -597,3 +656,60 @@ class SupabaseDB:
         except Exception as e:
             self.logger.error(f"Error batch adding figures for paper {paper_id}: {e}")
             return False
+
+    def get_figure_url(self, paper_id: str, figure_id: str) -> Optional[str]:
+        """
+        Get the public URL for a figure.
+        
+        Args:
+            paper_id: Paper ID
+            figure_id: Figure ID
+            
+        Returns:
+            Public URL if found, None otherwise
+        """
+        try:
+            # Ensure proper figure ID format (add "fig" prefix if needed)
+            if figure_id.isdigit():
+                figure_id = f"fig{figure_id}"
+            elif re.match(r'^\d+$', figure_id.split('_')[0]):
+                # Handle potential subfigure IDs like "7_a" that need "fig" prefix
+                parts = figure_id.split('_')
+                figure_id = f"fig{parts[0]}"
+                if len(parts) > 1:
+                    figure_id += f"_{parts[1]}"
+            
+            self.logger.info(f"Looking for figure URL: paper_id={paper_id}, figure_id={figure_id}")
+            
+            # Query the paper_figures table for the r2_url
+            result = self.client.table('paper_figures').select('r2_url').eq('paper_id', paper_id).eq('figure_id', figure_id).execute()
+            
+            if not result.data or not result.data[0]['r2_url']:
+                # Check for subfigures if this is a main figure ID
+                if not "_" in figure_id:
+                    self.logger.info(f"Checking if {figure_id} has subfigures...")
+                    # Look for subfigures like fig7_a, fig7_b
+                    subfig_pattern = f"{figure_id}_"
+                    subfig_result = self.client.table('paper_figures').select('figure_id,r2_url').eq('paper_id', paper_id).ilike('figure_id', f"{subfig_pattern}%").execute()
+                    
+                    if subfig_result.data:
+                        subfig_ids = [sf['figure_id'] for sf in subfig_result.data]
+                        self.logger.info(f"Found subfigures for {figure_id}: {subfig_ids}")
+                        # Since this is a composite figure, we still need the main figure's URL
+                    
+                # Try to get figure info which may attempt to upload from local storage
+                self.logger.info(f"Main figure URL not found, trying to get figure info from local storage: {figure_id}")
+                figure_info = self.get_figure_info(paper_id, figure_id)
+                if figure_info and figure_info.get('remote_path'):
+                    self.logger.info(f"Found URL from figure_info: {figure_info['remote_path']}")
+                    return figure_info['remote_path']
+                
+                # Also check for local files with the proper figure ID format
+                self.logger.warning(f"Figure URL not found for {figure_id} (paper {paper_id})")
+                return None
+            
+            self.logger.info(f"Found figure URL for {figure_id}: {result.data[0]['r2_url']}")
+            return result.data[0]['r2_url']
+        except Exception as e:
+            self.logger.error(f"Error getting figure URL for {figure_id} (paper {paper_id}): {e}")
+            return None

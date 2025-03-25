@@ -176,9 +176,6 @@ weight: 1
     # Process figure references in the text - handle XML tags
     figure_pattern = r'<FIGURE_ID>(\d+)(\.([a-z]))?\</FIGURE_ID>'
     
-    # After processing tagged references, look for plain figure references like "Figure 19"
-    plain_figure_pattern = r'(?<!<)Figure (\d+)(?!\.\d)'
-    
     for match in re.finditer(figure_pattern, full_content):
         full_match = match.group(0)
         fig_num = match.group(1)
@@ -252,35 +249,6 @@ weight: 1
             replacement = f"Figure {fig_num}"
         
         full_content = full_content.replace(full_match, replacement)
-    
-    # Now process plain figure references (Figure N) after processing XML tags
-    for match in re.finditer(plain_figure_pattern, full_content):
-        full_match = match.group(0)
-        fig_num = match.group(1)
-        
-        # Skip if we've already processed this figure
-        fig_key = f"{fig_num}"
-        if fig_key in processed_figures:
-            continue
-            
-        processed_figures.add(fig_key)
-        
-        fig_id = f"fig{fig_num}"
-        
-        # Get figure from post's figures dictionary
-        figure = post.get_figure(fig_id)
-        
-        if figure:
-            # Handle regular figure
-            formatted_caption = format_caption(fig_id, figure.caption)
-            replacement = f"""
-
-{{{{< figure src="{fig_id}.png" caption="{escape_caption(formatted_caption)}" >}}}}
-
-{full_match}"""
-            full_content = full_content.replace(full_match, replacement)
-        else:
-            logger.warning(f"Figure {fig_id} not found in post figures")
     
     # Clean up any multiple consecutive blank lines
     full_content = re.sub(r'\n{3,}', '\n\n', full_content)

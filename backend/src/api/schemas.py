@@ -31,12 +31,14 @@ class PaperDetail(BaseModel):
     uid: str
     title: str
     authors: List[str]
-    abstract: str
-    tldr: str
-    summary: str
-    url: str
+    abstract: str = ""
+    tldr: str = ""
+    summary: str = ""  # This will now contain the markdown summary
+    raw_summary: str = ""  # Optional field for the raw summary with figure tags
+    markdown_summary: str = ""  # Kept for backward compatibility
+    url: str = ""
     venue: str = ""
     submitted_date: Optional[datetime] = None
     highlight: bool = False
-    tags: List[str] = Field(default_factory=list)
-    figures: List[FigureSchema] = Field(default_factory=list)
+    tags: List[str] = []
+    figures: List[FigureSchema] = []

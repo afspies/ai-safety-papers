@@ -92,6 +92,8 @@ class Post:
         post_dir = self.post_dir
         post_dir.mkdir(parents=True, exist_ok=True)
         
+        processed_main_figures = set()  # Track main figures we've processed
+        
         for fig_id in self.display_figures:
             # Check if it's a subfigure reference (e.g., "2.a")
             subfig_match = re.match(r'(\d+)\.([a-z])', fig_id)
@@ -109,17 +111,39 @@ class Post:
                 subfig_path = self.article.data_folder / "figures" / f"{main_id}_{subfig_id}.png"
                 if subfig_path.exists():
                     shutil.copy2(subfig_path, post_dir / f"{main_id}_{subfig_id}.png")
+                    
+                # Also process the main figure if we haven't already
+                if main_id not in processed_main_figures:
+                    processed_main_figures.add(main_id)
+                    figure = self.get_figure(main_id)
+                    if figure and figure.path and "https:" not in str(figure.path):
+                        if figure.path.exists():
+                            figure.save_to_directory(post_dir)
+                        else:
+                            logger.warning(f"Figure {main_id} path does not exist")
             else:
                 # Handle regular figure
                 fig_id_clean = f"fig{fig_id}" if fig_id.isdigit() else fig_id
                 figure = self.get_figure(fig_id_clean)
                 
                 if figure:
+                    # Track that we've processed this main figure
+                    processed_main_figures.add(fig_id_clean)
+                    
                     if figure.path and "https:" not in str(figure.path):
                         # Check that figure exists
                         if figure.path.exists():
                             # Copy figure to post directory
                             figure.save_to_directory(post_dir)
+                            
+                            # If this figure has subfigures, process them too
+                            if figure.has_subfigures:
+                                for subfig in figure.subfigures:
+                                    subfig_id = subfig.get('id')
+                                    if subfig_id:
+                                        subfig_path = self.article.data_folder / "figures" / f"{fig_id_clean}_{subfig_id}.png"
+                                        if subfig_path.exists():
+                                            shutil.copy2(subfig_path, post_dir / f"{fig_id_clean}_{subfig_id}.png")
                         else:
                             logger.warning(f"Figure {fig_id_clean} not found")
                 else:

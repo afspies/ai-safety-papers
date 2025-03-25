@@ -71,6 +71,11 @@ async def get_papers(
                 except Exception as thumb_err:
                     logger.warning(f"Error getting thumbnail for {article.uid}: {thumb_err}")
                 
+                # Make sure tags is always a list and never None
+                article_tags = getattr(article, 'tags', [])
+                if article_tags is None:
+                    article_tags = []
+                
                 # Create PaperSummary
                 summary = PaperSummary(
                     uid=article.uid,
@@ -81,7 +86,7 @@ async def get_papers(
                     thumbnail_url=thumbnail_url,
                     submitted_date=article.submitted_date,
                     highlight=article.highlight,
-                    tags=getattr(article, 'tags', [])
+                    tags=article_tags  # Use our safely processed tags
                 )
                 result.append(summary)
             except Exception as article_error:
@@ -125,6 +130,11 @@ async def get_highlighted_papers(
             except Exception as thumb_err:
                 logger.warning(f"Error getting thumbnail for {article.uid}: {thumb_err}")
                 
+            # Make sure tags is always a list and never None
+            article_tags = getattr(article, 'tags', [])
+            if article_tags is None:
+                article_tags = []
+            
             # Create PaperSummary
             summary = PaperSummary(
                 uid=article.uid,
@@ -135,7 +145,7 @@ async def get_highlighted_papers(
                 thumbnail_url=thumbnail_url,
                 submitted_date=article.submitted_date,
                 highlight=article.highlight,
-                tags=article.tags
+                tags=article_tags  # Use our safely processed tags
             )
             result.append(summary)
             
@@ -166,7 +176,7 @@ async def get_paper_detail(
         # Handle both Article and dict responses from get_paper_by_id
         if not hasattr(article, 'uid'):
             # If we got a dictionary, convert it to an Article
-            from backend.src.models.article import Article
+            from src.models.article import Article
             article_dict = article  # Rename for clarity
             article = Article(
                 uid=article_dict['id'],
@@ -175,7 +185,8 @@ async def get_paper_detail(
                 authors=article_dict['authors'],
                 abstract=article_dict.get('abstract', ''),
                 venue=article_dict.get('venue', ''),
-                submitted_date=article_dict.get('submitted_date')
+                submitted_date=article_dict.get('submitted_date'),
+                appendix_page_number=article_dict.get('appendix_page_number')  # Make sure to include this
             )
             if article_dict.get('tldr'):
                 if isinstance(article_dict['tldr'], dict):
@@ -188,12 +199,36 @@ async def get_paper_detail(
         # Get summary from Supabase
         summary_data = db.get_summary(paper_id)
         paper_summary = article.abstract
+        raw_summary = ""  # Store the original summary
+        markdown_summary = ""  # Default empty
         display_figures = []
         
         if summary_data:
             logger.info(f"Found summary for paper {paper_id}")
-            paper_summary = summary_data['summary']
+            raw_summary = summary_data['summary']  # Store the original summary with figure tags
+            markdown_summary = summary_data.get('markdown_summary', '')
             display_figures = summary_data['display_figures']
+            
+            # If markdown_summary doesn't exist, generate it now
+            if not markdown_summary and raw_summary:
+                from src.summarizer.paper_summarizer import PaperSummarizer
+                summarizer = PaperSummarizer(db=db)
+                markdown_summary = summarizer.post_process_summary_to_markdown(paper_id, raw_summary)
+                
+                # Update the database with the generated markdown
+                db.add_summary(
+                    paper_id,
+                    raw_summary,
+                    display_figures,
+                    summary_data.get('thumbnail_figure'),
+                    markdown_summary
+                )
+            
+            # Use markdown summary as the paper_summary (this is the key change)
+            if markdown_summary:
+                paper_summary = markdown_summary
+            else:
+                paper_summary = raw_summary
         
         # Get figures from Supabase
         figures_data = db.get_paper_figures(paper_id)
@@ -209,6 +244,11 @@ async def get_paper_detail(
                     has_subfigures=False  # Default
                 ))
                 
+        # Make sure tags is always a list and never None
+        article_tags = getattr(article, 'tags', [])
+        if article_tags is None:
+            article_tags = []
+        
         # Create the response
         return PaperDetail(
             uid=article.uid,
@@ -216,12 +256,14 @@ async def get_paper_detail(
             authors=article.authors,
             abstract=article.abstract,
             tldr=article.tldr,
-            summary=paper_summary,
+            summary=paper_summary,  # This now contains the markdown summary
+            raw_summary=raw_summary,  # Optionally keep the raw summary as a separate field
+            markdown_summary=markdown_summary,  # Keep this field for backward compatibility
             url=article.url,
             venue=article.venue,
             submitted_date=article.submitted_date,
             highlight=article.highlight,
-            tags=getattr(article, 'tags', []),
+            tags=article_tags,
             figures=figures
         )
     except HTTPException:
@@ -246,7 +288,7 @@ async def get_figure(paper_id: str, figure_id: str, db: SupabaseDB = Depends(get
         
         if not public_url:
             # Try to fall back to local storage if needed
-            from backend.src.utils.config_loader import load_config
+            from src.utils.config_loader import load_config
             config = load_config()
             data_dir = Path(config['data_dir'])
             
@@ -301,75 +343,4 @@ async def get_paper_figures(paper_id: str, db: SupabaseDB = Depends(get_db)):
     except Exception as e:
         logger.error(f"Error getting figures for paper {paper_id}: {e}")
         raise HTTPException(status_code=500, detail=str(e))
-
-# Add a development-only endpoint to populate test data
-if os.environ.get('DEVELOPMENT_MODE') == 'true':
-    @router.post("/dev/add-test-papers")
-    async def add_test_papers(db: SupabaseDB = Depends(get_db)):
-        """
-        Development-only endpoint to add test papers to the database.
-        Only available when DEVELOPMENT_MODE=true.
-        """
-        try:
-            # Sample papers for testing
-            sample_papers = [
-                {
-                    'id': 'sample-paper-1',
-                    'title': 'AI Safety: Test Paper 1',
-                    'authors': ['John Doe', 'Jane Smith'],
-                    'abstract': 'This is a test paper about AI safety.',
-                    'url': 'https://example.com/paper1',
-                    'venue': 'AI Safety Conference 2025',
-                    'submitted_date': '2025-01-01',
-                    'tldr': 'A brief summary of test paper 1.',
-                    'highlight': True,
-                    'tags': ['ai-safety', 'test'],
-                    'posted': True
-                },
-                {
-                    'id': 'sample-paper-2',
-                    'title': 'AI Safety: Test Paper 2',
-                    'authors': ['Bob Johnson', 'Alice Brown'],
-                    'abstract': 'Another test paper about AI safety.',
-                    'url': 'https://example.com/paper2',
-                    'venue': 'AI Safety Conference 2025',
-                    'submitted_date': '2025-02-01',
-                    'tldr': 'A brief summary of test paper 2.',
-                    'highlight': False,
-                    'tags': ['ai-safety', 'test'],
-                    'posted': True
-                }
-            ]
             
-            # Add papers to database
-            added_count = 0
-            for paper in sample_papers:
-                if db.add_paper(paper):
-                    added_count += 1
-            
-            # Mark the first paper as highlighted
-            db.mark_as_highlighted('sample-paper-1', True)
-            
-            return {"message": f"Added {added_count} test papers to database"}
-        except Exception as e:
-            logger.error(f"Error adding test papers: {e}")
-            raise HTTPException(status_code=500, detail=str(e))
-            
-    @router.post("/dev/add-custom-paper")
-    async def add_custom_paper(paper: Dict[str, Any] = Body(...), db: SupabaseDB = Depends(get_db)):
-        """
-        Development-only endpoint to add a custom paper to the database.
-        Only available when DEVELOPMENT_MODE=true.
-        """
-        try:
-            # Add paper to database
-            if db.add_paper(paper):
-                # Mark as highlighted if needed
-                if paper.get('highlight'):
-                    db.mark_as_highlighted(paper['id'], True)
-                return {"message": f"Added custom paper {paper.get('id', 'unknown')} to database"}
-            else:
-                raise HTTPException(status_code=500, detail="Failed to add paper to database")
-        except Exception as e:
-            logger.error(f"Error adding custom paper: {e}")
-            raise HTTPException(status_code=500, detail=str(e))

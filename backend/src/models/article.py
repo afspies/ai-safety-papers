@@ -22,7 +22,8 @@ class Article:
         data_folder: Optional[Path] = None,
         website_content_path: Optional[Path] = None,
         venue: str = "",
-        submitted_date: Optional[datetime] = None
+        submitted_date: Optional[datetime] = None,
+        appendix_page_number: Optional[int] = None
     ):
         self.uid = uid
         self.title = title
@@ -40,6 +41,9 @@ class Article:
         self.figures: Dict[str, Any] = {}  # Figures extracted from the paper
         self.display_figures: List[str] = []  # Figures to display in post
         self.thumbnail_source: str = "full"  # Source for thumbnail image
+        self.appendix_page_number = appendix_page_number
+        self.body_pdf_path: Optional[Path] = None  # Path to body-only PDF
+        self.appendix_pdf_path: Optional[Path] = None  # Path to appendix-only PDF
         
     def set_authors(self, authors: List[str]) -> None:
         """Set the paper authors."""

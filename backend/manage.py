@@ -32,9 +32,16 @@ PROJECT_ROOT = BACKEND_DIR.parent
 CLOUDFLARED_CONFIG = BACKEND_DIR / "config" / "cloudflared" / "config.yml"
 PID_FILE = BACKEND_DIR / ".server.pid"
 TUNNEL_PID_FILE = BACKEND_DIR / ".tunnel.pid"
+# Add log directory and log file paths
+LOGS_DIR = BACKEND_DIR / "logs"
+SERVER_LOG_FILE = LOGS_DIR / "server.log"
+TUNNEL_LOG_FILE = LOGS_DIR / "tunnel.log"
 
 def check_requirements():
     """Check if required tools are installed."""
+    # Ensure logs directory exists
+    LOGS_DIR.mkdir(exist_ok=True)
+    
     try:
         subprocess.run(["cloudflared", "version"], capture_output=True, check=True)
     except (subprocess.SubprocessError, FileNotFoundError):
@@ -129,19 +136,28 @@ def start_server():
     # Start the server
     logger.info("Starting backend server...")
     try:
-        # Change to the project root directory and start the server
-        os.chdir(BACKEND_DIR)
+        # Change to the project root directory instead of backend
+        os.chdir(PROJECT_ROOT)
         # Set up the environment to fix import issues
         env = os.environ.copy()
-        env['PYTHONPATH'] = str(PROJECT_ROOT)
-        # Use real API keys and production mode
-        server_process = subprocess.Popen(
-            [sys.executable, 'src/main.py', '--api'],
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE,
-            preexec_fn=os.setsid,
-            env=env
-        )
+        # Add both project root and backend directory to PYTHONPATH
+        env['PYTHONPATH'] = f"{str(PROJECT_ROOT)}:{str(BACKEND_DIR)}"
+        
+        # Open log file for writing
+        with open(SERVER_LOG_FILE, 'a') as log_file:
+            # Add a timestamp header for this run
+            log_file.write(f"\n\n{'='*50}\n")
+            log_file.write(f"SERVER STARTED AT {time.strftime('%Y-%m-%d %H:%M:%S')}\n")
+            log_file.write(f"{'='*50}\n\n")
+            
+            # Use real API keys and production mode
+            server_process = subprocess.Popen(
+                [sys.executable, str(BACKEND_DIR / 'src/main.py'), '--api'],
+                stdout=log_file,
+                stderr=log_file,
+                preexec_fn=os.setsid,
+                env=env
+            )
         
         # Write the PID to the PID file
         write_pid(PID_FILE, server_process.pid)
@@ -151,11 +167,13 @@ def start_server():
         
         if server_process.poll() is None:  # Process is still running
             logger.info(f"Server started with PID {server_process.pid}")
+            logger.info(f"Server logs are being saved to {SERVER_LOG_FILE}")
             return server_process.pid
         else:
             # Process terminated early
-            stdout, stderr = server_process.communicate()
-            logger.error(f"Server failed to start: {stderr.decode()}")
+            with open(SERVER_LOG_FILE, 'r') as log_file:
+                log_content = log_file.read()
+            logger.error(f"Server failed to start. Check logs at {SERVER_LOG_FILE}")
             return None
     except Exception as e:
         logger.error(f"Failed to start server: {e}")
@@ -178,16 +196,23 @@ def start_tunnel():
     if os.environ.get('DEVELOPMENT_MODE') == 'true':
         logger.info("Development mode: Starting local tunnel proxy to localhost:8000")
         try:
-            # Use a simple cloudflared tunnel to localhost without credentials
-            env = os.environ.copy()
-            env['PYTHONPATH'] = str(PROJECT_ROOT)
-            tunnel_process = subprocess.Popen(
-                ['cloudflared', 'tunnel', '--url', 'http://localhost:8000'],
-                stdout=subprocess.PIPE,
-                stderr=subprocess.PIPE,
-                preexec_fn=os.setsid,
-                env=env
-            )
+            # Open log file for writing
+            with open(TUNNEL_LOG_FILE, 'a') as log_file:
+                # Add a timestamp header for this run
+                log_file.write(f"\n\n{'='*50}\n")
+                log_file.write(f"DEVELOPMENT TUNNEL STARTED AT {time.strftime('%Y-%m-%d %H:%M:%S')}\n")
+                log_file.write(f"{'='*50}\n\n")
+                
+                # Use a simple cloudflared tunnel to localhost without credentials
+                env = os.environ.copy()
+                env['PYTHONPATH'] = str(PROJECT_ROOT)
+                tunnel_process = subprocess.Popen(
+                    ['cloudflared', 'tunnel', '--url', 'http://localhost:8000'],
+                    stdout=log_file,
+                    stderr=log_file,
+                    preexec_fn=os.setsid,
+                    env=env
+                )
             
             # Write the PID to the PID file
             write_pid(TUNNEL_PID_FILE, tunnel_process.pid)
@@ -197,6 +222,7 @@ def start_tunnel():
             
             if tunnel_process.poll() is None:  # Process is still running
                 logger.info(f"Development tunnel started with PID {tunnel_process.pid}")
+                logger.info(f"Tunnel logs are being saved to {TUNNEL_LOG_FILE}")
                 return tunnel_process.pid
             else:
                 # Process terminated early but we don't fail in development mode
@@ -228,16 +254,23 @@ def start_tunnel():
         # Start the actual tunnel for production
         logger.info("Starting Cloudflared tunnel...")
         try:
-            # Use the same environment variables for consistency
-            env = os.environ.copy()
-            env['PYTHONPATH'] = str(PROJECT_ROOT)
-            tunnel_process = subprocess.Popen(
-                ['cloudflared', 'tunnel', '--config', str(CLOUDFLARED_CONFIG), 'run'],
-                stdout=subprocess.PIPE,
-                stderr=subprocess.PIPE,
-                preexec_fn=os.setsid,
-                env=env
-            )
+            # Open log file for writing
+            with open(TUNNEL_LOG_FILE, 'a') as log_file:
+                # Add a timestamp header for this run
+                log_file.write(f"\n\n{'='*50}\n")
+                log_file.write(f"PRODUCTION TUNNEL STARTED AT {time.strftime('%Y-%m-%d %H:%M:%S')}\n")
+                log_file.write(f"{'='*50}\n\n")
+                
+                # Use the same environment variables for consistency
+                env = os.environ.copy()
+                env['PYTHONPATH'] = str(PROJECT_ROOT)
+                tunnel_process = subprocess.Popen(
+                    ['cloudflared', 'tunnel', '--config', str(CLOUDFLARED_CONFIG), 'run'],
+                    stdout=log_file,
+                    stderr=log_file,
+                    preexec_fn=os.setsid,
+                    env=env
+                )
             
             # Write the PID to the PID file
             write_pid(TUNNEL_PID_FILE, tunnel_process.pid)
@@ -247,11 +280,13 @@ def start_tunnel():
             
             if tunnel_process.poll() is None:  # Process is still running
                 logger.info(f"Tunnel started with PID {tunnel_process.pid}")
+                logger.info(f"Tunnel logs are being saved to {TUNNEL_LOG_FILE}")
                 return tunnel_process.pid
             else:
                 # Process terminated early
-                stdout, stderr = tunnel_process.communicate()
-                logger.error(f"Tunnel failed to start: {stderr.decode()}")
+                with open(TUNNEL_LOG_FILE, 'r') as log_file:
+                    log_content = log_file.read()
+                logger.error(f"Tunnel failed to start. Check logs at {TUNNEL_LOG_FILE}")
                 return None
         except Exception as e:
             logger.error(f"Failed to start tunnel: {e}")
