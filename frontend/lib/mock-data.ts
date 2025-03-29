@@ -106,10 +106,11 @@ The paper suggests concrete research directions for each problem to make AI syst
     submitted_date: createDate("2016-06-21"),
     highlight: true,
     tags: ["AI Safety", "Machine Learning", "Alignment"],
+    thumbnail_url: "/placeholder.svg?height=200&width=300",
     figures: [
       {
         id: "fig1",
-        caption: "Figure 1: Illustration of the reward hacking problem",
+        caption: "Figure 1: Illustration of the reward hacking problem. The agent maximizes reward according to $R(s, a) = \\sum_{i=0}^{n} \\gamma^i r_i$ where $\\gamma$ is the discount factor.",
         url: "/placeholder.svg?height=400&width=600",
         has_subfigures: false,
         subfigures: [],
@@ -146,6 +147,7 @@ The paper proposes several research directions for addressing these challenges, 
     submitted_date: createDate("2022-03-15"),
     highlight: true,
     tags: ["Alignment", "Deep Learning", "AI Safety"],
+    thumbnail_url: "/placeholder.svg?height=200&width=300",
     figures: [
       {
         id: "fig1",
@@ -179,6 +181,7 @@ The authors present experimental results showing that reward modeling can succes
     submitted_date: createDate("2018-11-19"),
     highlight: false,
     tags: ["Reward Modeling", "Reinforcement Learning", "AI Safety"],
+    thumbnail_url: "/placeholder.svg?height=200&width=300",
     figures: [
       {
         id: "fig1",
@@ -220,6 +223,7 @@ The authors acknowledge several challenges with this approach, including the pot
     submitted_date: createDate("2018-05-02"),
     highlight: true,
     tags: ["Debate", "Alignment", "AI Safety"],
+    thumbnail_url: "/placeholder.svg?height=200&width=300",
     figures: [
       {
         id: "fig1",
@@ -253,6 +257,7 @@ The authors also discuss potential approaches to mitigating risks from mesa-opti
     submitted_date: createDate("2019-06-10"),
     highlight: false,
     tags: ["Mesa-optimization", "AI Safety", "Alignment"],
+    thumbnail_url: "/placeholder.svg?height=200&width=300",
     figures: [
       {
         id: "fig1",
@@ -289,6 +294,7 @@ The paper also discusses potential challenges, such as defining truthfulness in 
     submitted_date: createDate("2020-12-05"),
     highlight: false,
     tags: ["Truthfulness", "AI Safety", "Governance"],
+    thumbnail_url: "/placeholder.svg?height=200&width=300",
     figures: [
       {
         id: "fig1",

@@ -65,8 +65,8 @@ export default function Navbar() {
 
   // Check if a link is active
   const isActive = (path: string) => {
-    if (path === "/" && pathname !== "/highlights") {
-      return true
+    if (path === "/") {
+      return pathname === "/"
     }
     return pathname === path
   }
@@ -111,14 +111,14 @@ export default function Navbar() {
                 Home
               </Link>
               <Link
-                href="/highlights"
+                href="/about"
                 className={`inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium ${
-                  isActive("/highlights")
+                  isActive("/about")
                     ? "border-blue-500 text-gray-900"
                     : "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700"
                 }`}
               >
-                Highlights
+                About
               </Link>
             </div>
           </div>
@@ -159,15 +159,15 @@ export default function Navbar() {
             Home
           </Link>
           <Link
-            href="/highlights"
+            href="/about"
             className={`block px-3 py-2 rounded-md text-base font-medium ${
-              isActive("/highlights")
+              isActive("/about")
                 ? "bg-blue-50 text-blue-700"
                 : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
             }`}
             onClick={() => setIsMenuOpen(false)}
           >
-            Highlights
+            About
           </Link>
         </div>
       </div>

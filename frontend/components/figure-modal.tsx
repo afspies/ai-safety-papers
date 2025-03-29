@@ -2,15 +2,20 @@
 
 import { useEffect, useState } from "react"
 import { X } from "lucide-react"
+import { marked } from "marked"
+import DOMPurify from "dompurify"
+import katex from "katex"
+import "katex/dist/katex.min.css"
 
 interface FigureModalProps {
   isOpen: boolean
   onClose: () => void
   src: string
   alt: string
+  caption?: string
 }
 
-export default function FigureModal({ isOpen, onClose, src, alt }: FigureModalProps) {
+export default function FigureModal({ isOpen, onClose, src, alt, caption }: FigureModalProps) {
   const [mounted, setMounted] = useState(false)
   const [isAnimating, setIsAnimating] = useState(false)
 
@@ -37,6 +42,27 @@ export default function FigureModal({ isOpen, onClose, src, alt }: FigureModalPr
       document.body.style.overflow = "auto"
     }
   }, [isOpen, onClose])
+
+  // Convert markdown to HTML with LaTeX support
+  const renderMarkdown = (text: string) => {
+    if (!text) return "";
+    
+    // Process LaTeX expressions before markdown rendering
+    const processedText = text.replace(/\$([^\$]+)\$/g, (match, latex) => {
+      try {
+        return katex.renderToString(latex, { 
+          throwOnError: false,
+          output: 'html'
+        });
+      } catch (e) {
+        console.error("KaTeX error:", e);
+        return match; // Return the original text if KaTeX fails
+      }
+    });
+    
+    const sanitizedHtml = DOMPurify.sanitize(marked.parse(processedText, { async: false }));
+    return sanitizedHtml;
+  };
 
   if (!mounted) return null
 
@@ -71,9 +97,18 @@ export default function FigureModal({ isOpen, onClose, src, alt }: FigureModalPr
             <img src={src || "/placeholder.svg"} alt={alt} className="w-full h-auto object-contain rounded-md" />
           </div>
 
-          {alt && (
+          {(caption || alt) && (
             <div className="p-4 bg-white mt-2">
-              <p className="text-sm text-gray-700 text-center font-serif">{alt}</p>
+              <div className={`text-sm text-gray-700 font-serif ${!caption ? "text-center" : ""}`}>
+                {caption ? (
+                  <div>
+                    <b>{alt}:</b>{" "}
+                    <span dangerouslySetInnerHTML={{ __html: renderMarkdown(caption) }} />
+                  </div>
+                ) : (
+                  <p><b>{alt}</b></p>
+                )}
+              </div>
             </div>
           )}
         </div>

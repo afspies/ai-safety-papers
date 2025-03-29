@@ -36,6 +36,11 @@ h6 {
   overflow: hidden;
 }
 
+/* Paper card hover effects */
+.shadow-blue-400 {
+  box-shadow: 0 10px 25px -5px rgba(96, 165, 250, 0.5);
+}
+
 /* Academic styling */
 .paper-title {
   font-size: 2.5rem;
@@ -250,5 +255,87 @@ h6 {
 
 .markdown-content tr:nth-child(even) {
   background-color: #f7fafc;
+}
+
+/* Golden glow for highlighted papers */
+@keyframes golden-pulse {
+  0% {
+    box-shadow: 0 4px 6px rgba(212, 175, 55, 0.3), 0 0 8px 2px rgba(184, 134, 11, 0.2), 
+                inset 0 0 3px 1px rgba(255, 185, 15, 0.1);
+    border-color: rgba(184, 134, 11, 0.4);
+  }
+  25% {
+    box-shadow: 4px 0 8px rgba(212, 175, 55, 0.35), 0 0 10px 3px rgba(184, 134, 11, 0.25), 
+                inset 0 0 3px 1px rgba(255, 185, 15, 0.15);
+    border-color: rgba(184, 134, 11, 0.5);
+  }
+  50% {
+    box-shadow: 0 -4px 10px rgba(212, 175, 55, 0.4), 0 0 12px 4px rgba(184, 134, 11, 0.3), 
+                inset 0 0 4px 1px rgba(255, 185, 15, 0.2);
+    border-color: rgba(184, 134, 11, 0.6);
+  }
+  75% {
+    box-shadow: -4px 0 8px rgba(212, 175, 55, 0.35), 0 0 10px 3px rgba(184, 134, 11, 0.25), 
+                inset 0 0 3px 1px rgba(255, 185, 15, 0.15);
+    border-color: rgba(184, 134, 11, 0.5);
+  }
+  100% {
+    box-shadow: 0 4px 6px rgba(212, 175, 55, 0.3), 0 0 8px 2px rgba(184, 134, 11, 0.2), 
+                inset 0 0 3px 1px rgba(255, 185, 15, 0.1);
+    border-color: rgba(184, 134, 11, 0.4);
+  }
+}
+
+.golden-glow {
+  animation: golden-pulse 4s ease-in-out infinite;
+  position: relative;
+  border: 1px solid rgba(184, 134, 11, 0.3);
+  overflow: hidden;
+}
+
+.golden-glow::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 215, 0, 0.03) 0%,
+    rgba(218, 165, 32, 0.05) 50%,
+    rgba(184, 134, 11, 0.03) 100%
+  );
+  background-size: 200% 200%;
+  animation: shimmer 6s ease-in-out infinite alternate;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 0% 0%;
+  }
+  25% {
+    background-position: 50% 25%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  75% {
+    background-position: 50% 75%;
+  }
+  100% {
+    background-position: 0% 100%;
+  }
+}
+
+/* Hide scrollbar but keep functionality */
+.scrollbar-hide {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none; /* Chrome, Safari and Opera */
 }
 

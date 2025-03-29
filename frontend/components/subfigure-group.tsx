@@ -2,25 +2,47 @@
 
 import { useState } from "react"
 import FigureModal from "./figure-modal"
+import { marked } from "marked"
+import DOMPurify from "dompurify"
+import katex from "katex"
+import "katex/dist/katex.min.css"
 
 interface Subfigure {
   src: string
   alt: string
   index: string | number
+  caption?: string
+  parent_caption?: string
 }
 
 interface SubfigureGroupProps {
   subfigures: Subfigure[]
   groupTitle: string
   className?: string
+  caption?: string
 }
 
-export default function SubfigureGroup({ subfigures, groupTitle, className = "" }: SubfigureGroupProps) {
+export default function SubfigureGroup({ subfigures, groupTitle, className = "", caption }: SubfigureGroupProps) {
   const [selectedFigure, setSelectedFigure] = useState<Subfigure | null>(null)
   const [showAllFigures, setShowAllFigures] = useState(false)
   const [hoverGroup, setHoverGroup] = useState(false)
 
   if (!subfigures.length) return null
+
+  // Check if we have a parent_caption from the subfigures
+  // First try to get parent_caption from the first subfigure that has one
+  let parentCaption = subfigures.find(fig => fig.parent_caption)?.parent_caption || caption;
+  
+  // If we still don't have a parent caption and we have a caption prop, use that
+  if (!parentCaption && caption) {
+    parentCaption = caption;
+  }
+
+  // Extract figure number from groupTitle
+  const figureNumber = groupTitle.replace(/[^\d]/g, '');
+
+  // Display the parent caption with some debugging info if not shown
+  {console.log("SubfigureGroup parentCaption", parentCaption, "subfigures[0].parent_caption", subfigures[0]?.parent_caption)}
 
   // Function to handle expanding all subfigures
   const handleExpandAll = (e: React.MouseEvent) => {
@@ -29,6 +51,27 @@ export default function SubfigureGroup({ subfigures, groupTitle, className = "" 
       setShowAllFigures(true);
       e.stopPropagation();
     }
+  };
+  
+  // Convert markdown to HTML with LaTeX support
+  const renderMarkdown = (text: string) => {
+    if (!text) return "";
+    
+    // Process LaTeX expressions before markdown rendering
+    const processedText = text.replace(/\$([^\$]+)\$/g, (match, latex) => {
+      try {
+        return katex.renderToString(latex, { 
+          throwOnError: false,
+          output: 'html'
+        });
+      } catch (e) {
+        console.error("KaTeX error:", e);
+        return match; // Return the original text if KaTeX fails
+      }
+    });
+    
+    const sanitizedHtml = DOMPurify.sanitize(marked.parse(processedText, { async: false }));
+    return sanitizedHtml;
   };
 
   return (
@@ -42,6 +85,16 @@ export default function SubfigureGroup({ subfigures, groupTitle, className = "" 
           box-shadow: 0 0 8px 1px rgba(66, 153, 225, 0.5), 0 0 12px 3px rgba(99, 102, 241, 0.3);
           transition: box-shadow 0.3s ease;
         }
+        .subfigure-container {
+          max-height: 350px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+        .subfigure-container img {
+          max-height: 300px;
+          object-fit: contain;
+        }
       `}</style>
       <div 
         className={`bg-white border border-gray-200 rounded-md transition-all duration-300 p-4 mb-6 ${className} cursor-pointer neon-glow-group`}
@@ -49,9 +102,7 @@ export default function SubfigureGroup({ subfigures, groupTitle, className = "" 
         onMouseLeave={() => setHoverGroup(false)}
         onClick={handleExpandAll}
       >
-        <h4 className="text-base font-semibold mb-4 font-serif text-center">{groupTitle}</h4>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 mb-4">
           {subfigures.map((subfigure) => (
             <div 
               key={subfigure.index} 
@@ -61,20 +112,42 @@ export default function SubfigureGroup({ subfigures, groupTitle, className = "" 
                 setSelectedFigure(subfigure);
               }}
             >
-              <div className="overflow-hidden transition-all duration-300">
+              <div className="overflow-hidden transition-all duration-300 subfigure-container">
                 <img
                   src={subfigure.src || "/placeholder.svg"}
                   alt={subfigure.alt}
-                  className={`max-w-full h-auto transition-all duration-300 transform ${
+                  className={`max-w-full transition-all duration-300 transform ${
                     hoverGroup ? "scale-102" : ""
                   }`}
                 />
               </div>
 
-              <p className="text-center text-sm text-gray-700 mt-3 font-serif">{subfigure.alt}</p>
+              <div className={`text-sm text-gray-700 mt-3 font-serif ${!subfigure.caption ? "text-center" : ""}`}>
+                {subfigure.caption ? (
+                  <div>
+                    <b>{subfigure.alt}:</b>{" "}
+                    <span dangerouslySetInnerHTML={{ __html: renderMarkdown(subfigure.caption) }} />
+                  </div>
+                ) : (
+                  <p><b>{subfigure.alt}</b></p>
+                )}
+              </div>
             </div>
           ))}
         </div>
+        
+        {/* Caption below subfigures */}
+        {parentCaption && (
+          <p className="text-sm text-gray-700 mt-3 font-serif">
+            <b>Figure {figureNumber}:</b>{" "}
+            <span dangerouslySetInnerHTML={{ __html: renderMarkdown(parentCaption) }} />
+          </p>
+        )}
+        {!parentCaption && subfigures[0]?.parent_caption && (
+          <p className="text-sm text-gray-700 mt-3 font-serif text-red-500">
+            DEBUG: Parent caption exists but not showing: {subfigures[0].parent_caption}
+          </p>
+        )}
       </div>
 
       {/* Modal for individual subfigure */}
@@ -84,6 +157,7 @@ export default function SubfigureGroup({ subfigures, groupTitle, className = "" 
           onClose={() => setSelectedFigure(null)}
           src={selectedFigure.src}
           alt={selectedFigure.alt}
+          caption={selectedFigure.caption || selectedFigure.parent_caption}
         />
       )}
 
@@ -104,8 +178,6 @@ export default function SubfigureGroup({ subfigures, groupTitle, className = "" 
             >
               X
             </button>
-
-            <h3 className="text-lg font-semibold mb-6 text-center">{groupTitle}</h3>
             
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 overflow-auto max-h-[80vh] p-4">
               {subfigures.map((subfigure) => (
@@ -115,10 +187,32 @@ export default function SubfigureGroup({ subfigures, groupTitle, className = "" 
                     alt={subfigure.alt} 
                     className="w-full h-auto object-contain"
                   />
-                  <p className="text-center text-sm text-gray-700 mt-3 font-serif p-2">{subfigure.alt}</p>
+                  <div className={`text-sm text-gray-700 mt-3 font-serif p-2 ${!subfigure.caption ? "text-center" : ""}`}>
+                    {subfigure.caption ? (
+                      <div>
+                        <b>{subfigure.alt}:</b>{" "}
+                        <span dangerouslySetInnerHTML={{ __html: renderMarkdown(subfigure.caption) }} />
+                      </div>
+                    ) : (
+                      <p><b>{subfigure.alt}</b></p>
+                    )}
+                  </div>
                 </div>
               ))}
             </div>
+            
+            {/* Caption below subfigures in modal */}
+            {parentCaption && (
+              <p className="text-sm text-gray-700 mt-6 font-serif">
+                <b>Figure {figureNumber}:</b>{" "}
+                <span dangerouslySetInnerHTML={{ __html: renderMarkdown(parentCaption) }} />
+              </p>
+            )}
+            {!parentCaption && subfigures[0]?.parent_caption && (
+              <p className="text-sm text-gray-700 mt-6 font-serif text-red-500">
+                DEBUG: Parent caption exists but not showing: {subfigures[0].parent_caption}
+              </p>
+            )}
           </div>
         </div>
       )}

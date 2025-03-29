@@ -11,15 +11,16 @@ interface ExpandableImageProps {
   className?: string
   width?: number
   height?: number
+  caption?: string
 }
 
-export default function ExpandableImage({ src, alt, className = "", width, height }: ExpandableImageProps) {
+export default function ExpandableImage({ src, alt, className = "", width, height, caption }: ExpandableImageProps) {
   const [isModalOpen, setIsModalOpen] = useState(false)
 
   return (
     <>
       <div className={`relative group ${className}`}>
-        <div className="relative w-full h-64 cursor-pointer" onClick={() => setIsModalOpen(true)}>
+        <div className="relative w-full h-48 cursor-pointer" onClick={() => setIsModalOpen(true)}>
           <Image
             src={src || "/placeholder.svg"}
             alt={alt}
@@ -37,7 +38,7 @@ export default function ExpandableImage({ src, alt, className = "", width, heigh
         </div>
       </div>
 
-      <FigureModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} src={src} alt={alt} />
+      <FigureModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} src={src} alt={alt} caption={caption} />
     </>
   )
 }

@@ -17,6 +17,7 @@ export interface FigureSchema {
   has_subfigures?: boolean
   subfigures?: any[]
   type?: string
+  parent_caption?: string
 }
 
 export interface PaperDetail extends PaperSummary {
