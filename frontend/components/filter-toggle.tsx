@@ -31,9 +31,6 @@ export default function FilterToggle() {
   
   return (
     <div className="flex items-center">
-      <span className="mr-3 text-sm font-medium text-gray-700">
-        {isHighlighted ? "Showing highlighted papers" : "Showing all papers"}
-      </span>
       <button
         type="button"
         className={`relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 ${
@@ -51,7 +48,7 @@ export default function FilterToggle() {
           }`}
         />
       </button>
-      <span className="ml-3 text-sm font-medium text-gray-700">
+      <span className="ml-3 text-sm font-medium text-gray-700 button-radius py-1 px-2">
         Highlights only
       </span>
     </div>

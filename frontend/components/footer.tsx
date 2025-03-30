@@ -7,7 +7,7 @@ export default function Footer() {
         <div className="flex flex-col md:flex-row justify-between items-center">
           <div className="mb-4 md:mb-0">
             <h2 className="text-xl font-bold">AI Safety Papers</h2>
-            <p className="text-gray-300">A collection of research papers on AI safety</p>
+            <p className="text-gray-300">A curated selection of research papers on AI safety</p>
           </div>
           <div>
             <p className="text-gray-300">© {new Date().getFullYear()} AI Safety Papers</p>

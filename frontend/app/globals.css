@@ -2,9 +2,28 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Search highlighting */
+mark {
+  background-color: rgba(252, 211, 77, 0.4); /* Amber/yellow with transparency */
+  color: inherit;
+  padding: 0 1px;
+  border-radius: 2px;
+  font-weight: 500;
+  @apply transition-colors;
+}
+
+mark:hover {
+  background-color: rgba(252, 211, 77, 0.6); /* Slightly darker on hover */
+}
+
 :root {
   --foreground-rgb: 0, 0, 0;
-  --background-rgb: 255, 255, 255;
+  --background-rgb: 247, 250, 252;
+  
+  /* Border radius variables */
+  --border-radius-search: 12px;
+  --border-radius-button: 8px;
+  --border-radius-card: 10px;
 }
 
 body {
@@ -337,5 +356,29 @@ h6 {
 
 .scrollbar-hide::-webkit-scrollbar {
   display: none; /* Chrome, Safari and Opera */
+}
+
+/* Responsive utilities */
+@media (max-width: 768px) {
+  .paper-card-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Custom component classes */
+.search-bar-radius {
+  border-radius: var(--border-radius-search);
+}
+
+.search-input-radius {
+  border-radius: var(--border-radius-search);
+}
+
+.button-radius {
+  border-radius: var(--border-radius-button);
+}
+
+.card-radius {
+  border-radius: var(--border-radius-card);
 }
 

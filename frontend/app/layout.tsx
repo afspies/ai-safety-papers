@@ -21,7 +21,7 @@ const merriweather = Merriweather({
 
 export const metadata: Metadata = {
   title: "AI Safety Papers",
-  description: "A collection of research papers on AI safety",
+  description: "A curated selection of research papers on AI safety",
     generator: 'v0.dev'
 }
 
