@@ -118,8 +118,8 @@ class SemanticScholarAPI:
         self.logger.error("Max retries reached. Unable to complete request.")
         raise Exception("Max retries reached")
 
-    def search_papers(self, query: str, limit: int = 100, year_range: str = None) -> List[Dict]:
-        self.logger.info(f"Searching papers with query: {query}")
+    def search_papers(self, query: str, limit: int = 100, year_range: str = None, offset: int = 0) -> List[Dict]:
+        self.logger.info(f"Searching papers with query: {query}, limit: {limit}, offset: {offset}")
         
         # In development mode, return mock data
         if self.development_mode:
@@ -132,6 +132,7 @@ class SemanticScholarAPI:
         params = {
             "query": query,
             "limit": limit,
+            "offset": offset,
             "fields": "paperId,title,authors,year,abstract,url,venue,publicationDate,tldr,embedding,isOpenAccess,openAccessPdf,externalIds",
             "fieldsOfStudy": "Computer Science"
         }
@@ -425,14 +426,14 @@ class SemanticScholarAPI:
             self.logger.exception("Full traceback:")
             return None
 
-    def get_relevant_papers(self, query: str, months: int = 1, limit: int = 100, ignore_date_range: bool = False) -> List[Dict]:
-        self.logger.info(f"Fetching relevant papers for the last {months} months (ignore_date_range: {ignore_date_range})")
+    def get_relevant_papers(self, query: str, months: int = 1, limit: int = 100, ignore_date_range: bool = False, offset: int = 0) -> List[Dict]:
+        self.logger.info(f"Fetching relevant papers for the last {months} months (ignore_date_range: {ignore_date_range}, offset: {offset})")
         
         current_date = datetime.now().date()
         start_date = current_date - timedelta(days=30*months)
         year_range = f"{start_date.year}-{current_date.year}"
         
-        papers = self.search_papers(query, limit=limit, year_range=None if ignore_date_range else year_range)
+        papers = self.search_papers(query, limit=limit, year_range=None if ignore_date_range else year_range, offset=offset)
         
         self.logger.debug(f"Total papers before filtering: {len(papers)}")
         

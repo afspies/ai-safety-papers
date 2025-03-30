@@ -2,44 +2,73 @@
 title: "Transformers Use Causal World Models in Maze-Solving Tasks"
 description: "Recent studies in interpretability have explored the inner workings of transformer models trained on tasks across various domains, often discovering that these networks naturally develop highly struct..."
 authors: ["Alex F Spies", "William Edwards", "Michael I. Ivanitskiy", "Adrians Skapars", "Tilman Rauker", "Katsumi Inoue", "Alessandra Russo", "Murray Shanahan"]
-date: 2025-03-25
+date: 2025-03-30
 paper_url: "https://arxiv.org/pdf/2412.11867.pdf"
 ---
 
 # Transformers Use Causal World Models in Maze-Solving Tasks
 
-# Paper Summary  
+## Core Insight
+Transformer models trained on maze-solving tasks develop causal world models (WMs) in their residual streams, where **Figure 1**
 
-This paper presents a novel deep learning framework for high-resolution 3D reconstruction from sparse 2D medical images. The authors propose a hybrid architecture combining convolutional neural networks (CNNs) with implicit neural representations (INRs) to address the challenge of volumetric reconstruction with limited input views in computational medical imaging. Their work advances the field by enabling accurate tissue modeling for surgical planning and diagnostics.  
+![Figure 1](https://assets.afspies.com/figures/0cef8529957d1185a2c900f221b9e6a4e5b40c21/fig1.png)
 
-## Key Contributions  
-- **Hybrid architecture**: Introduces a CNN-INR fusion model that leverages local texture features (<FIGURE_ID>2.a</FIGURE_ID>) and global shape priors (<FIGURE_ID>3.b</FIGURE_ID>) for robust reconstruction.  
-- **Self-supervised training**: Uses a multi-view consistency loss (<FIGURE_ID>4</FIGURE_ID>) to overcome the scarcity of 3D ground truth data.  
-- **Clinical validation**: Demonstrates sub-millimeter accuracy on cardiac MRI datasets (<FIGURE_ID>5.c</FIGURE_ID>), outperforming traditional interpolation methods by 34%.  
-- **Computational efficiency**: Achieves real-time inference (under 0.5s/volume) through a lightweight INR parameterization (<FIGURE_ID>1</FIGURE_ID>).  
+ demonstrates how these models construct, represent, and utilize structured internal representations of maze connectivity that causally influence their path-finding behavior.
 
-## Problem Statement and Background  
-High-resolution 3D reconstruction from sparse 2D scans remains a critical challenge in medical imaging due to information loss between slices and artifacts from conventional interpolation. While deep learning has shown promise, existing methods either require dense input views or fail to preserve fine anatomical details. The authors identify two key gaps: (1) lack of physics-aware reconstruction priors and (2) memory inefficiency in voxel-based approaches.  
+## Key Contributions
+- Identified that transformers develop causally relevant world models for maze-solving tasks, with **Figure 3**
 
-## Methods  
-The proposed framework (illustrated in <FIGURE_ID>1</FIGURE_ID>) processes 2D inputs via a CNN encoder to extract multi-scale features, which are then fused with coordinate-based INR queries through cross-attention. <FIGURE_ID>2.a</FIGURE_ID> shows the feature fusion module, where the CNN’s local receptive fields (red) are combined with INR’s continuous coordinate mappings (blue), enabling detail preservation at tissue boundaries.  
+![Figure 3](https://assets.afspies.com/figures/0cef8529957d1185a2c900f221b9e6a4e5b40c21/fig3.png)
 
-Training employs a novel multi-stage curriculum: First, the CNN is pretrained on slice-to-slice prediction, then jointly optimized with the INR using a composite loss (<FIGURE_ID>4</FIGURE_ID>). The loss combines photometric consistency (green curve), gradient smoothness (orange), and a learned perceptual metric (purple), with ablation studies confirming the necessity of all three terms.  
+ and **Figure 4**
 
-## Results  
-Quantitative results in <FIGURE_ID>5.c</FIGURE_ID> demonstrate the method’s superiority, with mean Dice scores of 0.92±0.03 across 5 organs, compared to 0.68±0.07 for linear interpolation. The error heatmaps reveal particular gains in complex structures like trabeculated myocardium, where traditional methods blur fine textures.  
+![Figure 4](https://assets.afspies.com/figures/0cef8529957d1185a2c900f221b9e6a4e5b40c21/fig4.png)
 
-<FIGURE_ID>3.b</FIGURE_ID> provides critical insight into the model’s behavior: The INR’s latent space (right panel) organizes anatomical variations along interpretable axes (e.g., ventricular size), while the CNN features (left) capture patient-specific details. This dual representation enables both generalization and personalization.  
+ showing specialized attention heads that consolidate maze connectivity information at semicolon tokens
+- Demonstrated that Sparse Autoencoders (SAEs) can effectively isolate disentangled world model features without requiring assumptions about feature form, as visualized in **Figure 6**
 
-## Implications and Limitations  
-The work’s clinical impact lies in enabling 3D planning from routine 2D scans, reducing radiation/scan time. However, limitations include dependency on view diversity during training and suboptimal performance on highly anisotropic datasets (e.g., fetal MRI). The authors acknowledge these issues but note that the modular architecture permits future improvements.  
+![Figure 6](https://assets.afspies.com/figures/0cef8529957d1185a2c900f221b9e6a4e5b40c21/fig6.png)
 
-## Related Work and Future Directions  
-The paper situates itself between learning-based SLAM systems (for view consistency) and medical INR works (for shape completion). Future directions include integrating physics-based constraints (e.g., biomechanics) into the INR and extending the framework to 4D (3D+time) reconstruction.
+ where decision trees achieve up to 100% accuracy in identifying connection-specific features
+- Discovered asymmetry in feature interventions where **Figure 9**
 
-## Figures
+![Figure 9](https://assets.afspies.com/figures/0cef8529957d1185a2c900f221b9e6a4e5b40c21/fig9.png)
 
-![1](https://assets.afspies.com/figures/0cef8529957d1185a2c900f221b9e6a4e5b40c21/fig1.png)
+ shows activating features (up to 93% success rate) is consistently more effective than removing them for altering model behavior
+- Found that models with learned positional encodings can reason about mazes with more connections in latent space than they can handle through input tokens, evidenced by successful SAE interventions in **Figure 8**
 
-![4](https://assets.afspies.com/figures/0cef8529957d1185a2c900f221b9e6a4e5b40c21/fig4.png)
+![Figure 8](https://assets.afspies.com/figures/0cef8529957d1185a2c900f221b9e6a4e5b40c21/fig8.png)
 
+
+
+## Methodology
+The researchers trained transformer models on maze-solving tasks using tokenized maze representations (**Figure 2**
+
+![Figure 2](https://assets.afspies.com/figures/0cef8529957d1185a2c900f221b9e6a4e5b40c21/fig2.png)
+
+), then employed two complementary approaches to identify world models: analyzing attention patterns in early layers (**Figure 3**
+
+![Figure 3](https://assets.afspies.com/figures/0cef8529957d1185a2c900f221b9e6a4e5b40c21/fig3.png)
+
+) and training sparse autoencoders on the residual stream (**Figure 1.B**). They validated the causal nature of these representations through targeted interventions on specific features, comparing the consistency between attention-based and SAE-based analyses (**Figure 7**
+
+![Figure 7](https://assets.afspies.com/figures/0cef8529957d1185a2c900f221b9e6a4e5b40c21/fig7.png)
+
+).
+
+## Critical Findings
+- Different positional encoding schemes lead to different world model structures: Stan (learned positional embeddings) used a compositional code requiring two features per connection, while Terry (rotary positional encodings) encoded each connection as a single feature, as shown in **Figure 6**
+
+![Figure 6](https://assets.afspies.com/figures/0cef8529957d1185a2c900f221b9e6a4e5b40c21/fig6.png)
+
+
+- Interventions that activate features were significantly more effective than those removing features, with **Figure 9**
+
+![Figure 9](https://assets.afspies.com/figures/0cef8529957d1185a2c900f221b9e6a4e5b40c21/fig9.png)
+
+ showing success rates of 35-93% for adding connections versus 0-95% for removing them, suggesting transformers rely more on presence than absence of connectivity cues
+- The Stan model could reason about mazes with more connections than encountered during training when features were activated in latent space (35% success rate), but failed completely when the same mazes were provided via input tokens, as demonstrated in **Figure 9.b**
+
+## Limitations & Implications
+- The asymmetry in intervention effectiveness (easier to activate than suppress features) suggests potential challenges for AI safety methods that rely on feature suppression rather than activation
+- The findings provide a foundation for understanding how transformers might be constrained through the features they acquire during training, with implications for steering behavior in more complex AI systems

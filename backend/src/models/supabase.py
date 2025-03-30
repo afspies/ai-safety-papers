@@ -281,6 +281,49 @@ class SupabaseDB:
             self.logger.error(f"Error getting papers to post: {e}")
             return []
     
+    def get_papers_needing_reprocessing(self) -> List[Dict[str, Any]]:
+        """
+        Get papers that need markdown summary reprocessing.
+        This includes papers marked for website inclusion that:
+        1. Have empty display_figures or 
+        2. No markdown_summary
+        Regardless of whether they've been marked as posted.
+        
+        Returns:
+            List of papers needing reprocessing
+        """
+        try:
+            # First get all papers marked for website inclusion
+            result = self.client.table('papers').select('*').eq('include_on_website', True).execute()
+            
+            papers_to_reprocess = []
+            
+            for row in result.data:
+                paper_id = row['id']
+                
+                # Check if this paper has a summary with display figures and markdown summary
+                summary_data = self.get_summary(paper_id)
+                
+                # Paper needs reprocessing if:
+                # 1. No summary data at all
+                # 2. Empty display_figures
+                # 3. No markdown_summary
+                if (not summary_data or 
+                    not summary_data.get('display_figures') or 
+                    not summary_data.get('markdown_summary')):
+                    
+                    papers_to_reprocess.append(self._row_to_article(row))
+                    self.logger.info(f"Paper {paper_id} needs reprocessing: " + 
+                        f"{'No summary' if not summary_data else ''}" +
+                        f"{'Empty display_figures' if summary_data and not summary_data.get('display_figures') else ''}" +
+                        f"{'No markdown_summary' if summary_data and not summary_data.get('markdown_summary') else ''}")
+            
+            self.logger.info(f"Found {len(papers_to_reprocess)} papers that need reprocessing")
+            return papers_to_reprocess
+        except Exception as e:
+            self.logger.error(f"Error getting papers needing reprocessing: {e}")
+            return []
+    
     def _row_to_article(self, row: Dict[str, Any]) -> Dict[str, Any]:
         """
         Convert a database row to an article dict.

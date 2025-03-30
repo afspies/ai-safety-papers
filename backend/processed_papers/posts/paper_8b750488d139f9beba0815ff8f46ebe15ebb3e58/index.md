@@ -2,7 +2,7 @@
 title: "Mechanistic Interpretability for AI Safety - A Review"
 description: "Understanding AI systems' inner workings is critical for ensuring value alignment and safety. This review explores mechanistic interpretability: reverse engineering the computational mechanisms and re..."
 authors: ["Leonard Bereska", "E. Gavves"]
-date: 2025-03-25
+date: 2025-03-28
 paper_url: "https://arxiv.org/pdf/2404.14082.pdf"
 ---
 
@@ -13,9 +13,9 @@ paper_url: "https://arxiv.org/pdf/2404.14082.pdf"
 This paper presents a comprehensive review of mechanistic interpretability for AI safety, exploring approaches to reverse engineer the computational mechanisms and representations learned by neural networks. The authors establish foundational concepts and survey methodologies for causally dissecting model behaviors while assessing the relevance to AI safety. Their work makes several important contributions:
 
 ## Key Contributions
-- <FIGURE_ID>2</FIGURE_ID> Provides a structured framework of core concepts and hypotheses in mechanistic interpretability, including features, circuits, and motifs as fundamental units of analysis. This figure illustrates how features (basic units of representation) combine into circuits (computational mechanisms) that may exhibit universal patterns (motifs) across different models, with implications for understanding emergent behaviors like simulation.
+- **Figure 2** Provides a structured framework of core concepts and hypotheses in mechanistic interpretability, including features, circuits, and motifs as fundamental units of analysis. This figure illustrates how features (basic units of representation) combine into circuits (computational mechanisms) that may exhibit universal patterns (motifs) across different models, with implications for understanding emergent behaviors like simulation.
 - Establishes a taxonomy of interpretability methods categorized by causal nature, learning phase, locality, and comprehensiveness
-- <FIGURE_ID>7</FIGURE_ID> Synthesizes observational and interventional techniques, showing how methods like sparse autoencoders, activation patching, and causal scrubbing can be integrated to provide deeper insights into model behavior
+- **Figure 7** Synthesizes observational and interventional techniques, showing how methods like sparse autoencoders, activation patching, and causal scrubbing can be integrated to provide deeper insights into model behavior
 - Analyzes the potential benefits and risks of mechanistic interpretability for AI safety, including both promising applications and capability acceleration concerns
 
 ## Problem Statement and Background
@@ -54,3 +54,8 @@ Mechanistic interpretability aims to reverse engineer neural networks into human
 <CITE INDEX="1-719,1-720,1-721,1-722,1-723,1-724">A primary goal in scaling mechanistic interpretability is pushing the Pareto frontier between model and task complexity and the coverage of interpretability techniques. While efforts have focused on larger models, it is equally crucial to scale to more complex tasks and provide comprehensive explanations essential for provable safety and enumerative safety by ensuring models won't engage in dangerous behaviors like deception. Future work should aim for thorough reverse engineering, integrating proven modules into larger networks, and capturing sequences encoded in hidden states beyond immediate predictions. Deepening analysis complexity is also key, validating the realism of toy models and extending techniques like path patching to larger language models. The field must move beyond small transformers on algorithmic tasks and limited scenarios to tackle more complex, realistic cases.</CITE>
 
 <CITE INDEX="1-726,1-727,1-728,1-729,1-730">As mechanistic interpretability matures, the field must transition from isolated empirical findings to developing overarching theories and universal reasoning primitives beyond specific circuits, aiming for a comprehensive understanding of AI capabilities. While collecting empirical data remains valuable, establishing motifs, empirical laws, and theories capturing universal model behavior aspects is crucial. This may involve finding more circuits/features, exploring circuits as a lens for memorization/generalization, identifying primitive general reasoning skills, generalizing specific findings to model-agnostic phenomena, and investigating emergent model generality across neural network classes. Identifying universal reasoning patterns and unifying theories is key to advancing interpretability.</CITE>
+
+## Figures
+
+![2](https://assets.afspies.com/figures/8b750488d139f9beba0815ff8f46ebe15ebb3e58/fig2.png)
+

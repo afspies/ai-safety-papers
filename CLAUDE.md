@@ -6,6 +6,16 @@
 - Run Hugo site: `cd ai-safety-site && hugo server`
 - Run specific test: `cd backend && conda activate ai-safety-papers && PYTHONPATH=/Users/alex/Desktop/playground/ai-safety-papers python -m pytest src/tests/test_filename.py::test_function -v`
 - Install dependencies: `pip install -r backend/requirements.txt && pip install -r ai-safety-site/site-requirements.txt`
+- Test API: `cd backend && conda activate ai-safety-papers && PYTHONPATH=/Users/alex/Desktop/playground/ai-safety-papers python test_api.py`
+- Full pipeline test: `cd backend && conda activate ai-safety-papers && export DEVELOPMENT_MODE=true && PYTHONPATH=/Users/alex/Desktop/playground/ai-safety-papers python run_processing.py`
+
+## API Endpoints
+- Root: `GET /` - Returns API info and available endpoints
+- Papers: `GET /api/papers` - Returns list of all papers
+- Highlighted Papers: `GET /api/papers/highlighted` - Returns highlighted papers
+- Paper Details: `GET /api/papers/{paper_id}` - Returns detailed info for specific paper
+- Paper Figures: `GET /api/papers/{paper_id}/figures` - Returns figures for specific paper
+- Figure: `GET /api/papers/{paper_id}/figures/{figure_id}` - Returns specific figure for a paper
 
 ## Code Style Guidelines
 - Python: Follow PEP 8 guidelines
@@ -19,7 +29,17 @@
 ## Project Organization
 - Backend: Paper fetching, summarization, and figure extraction
 - AI-Safety-Site: Hugo static site for displaying summaries
-- Data storage: Google Sheets integration for paper tracking
+- Data storage: Supabase database and Cloudflare R2 for figures
+
+## Progress (March 2025)
+- API server implementation successfully completed
+- Mock database integration for testing is working
+- Papers can be fetched from Semantic Scholar and stored in Supabase
+- Real paper data is properly returned through the API endpoints
+- Figure handling is implemented with Cloudflare R2 integration
+- API now supports both sample test papers and real papers
+- API can handle different paper formats and convert to standardized Article objects
+- API endpoints include proper error handling and documentation
 
 ## Summary Pipeline Improvements (March 2025)
 - Enhanced the paper summarizer prompt for Claude to generate more detailed, structured summaries

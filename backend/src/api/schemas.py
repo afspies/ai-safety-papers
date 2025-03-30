@@ -22,6 +22,7 @@ class FigureSchema(BaseModel):
     caption: str
     url: str
     has_subfigures: bool = False
+    parent_caption: Optional[str] = None
     subfigures: List[Dict[str, Any]] = Field(default_factory=list)
     type: str = "figure"
 
@@ -32,12 +33,12 @@ class PaperDetail(BaseModel):
     title: str
     authors: List[str]
     abstract: str = ""
-    tldr: str = ""
+    tldr: Optional[str] = None
     summary: str = ""  # This will now contain the markdown summary
-    raw_summary: str = ""  # Optional field for the raw summary with figure tags
-    markdown_summary: str = ""  # Kept for backward compatibility
+    raw_summary: Optional[str] = None
+    markdown_summary: Optional[str] = None
     url: str = ""
-    venue: str = ""
+    venue: Optional[str] = None
     submitted_date: Optional[datetime] = None
     highlight: bool = False
     tags: List[str] = []

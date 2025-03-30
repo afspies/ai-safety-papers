@@ -24,6 +24,153 @@ def get_db():
     """Dependency to get the database connection."""
     return supabase_db
 
+def _extract_figure_id(fig_id_raw: str) -> str:
+    """
+    Extract and normalize a figure ID from a raw string.
+    
+    Args:
+        fig_id_raw: Raw figure ID string (e.g., 'figure1', 'fig1_a')
+    
+    Returns:
+        Normalized figure ID (e.g., '1', '1.a')
+    """
+    # First remove prefixes like 'figure', 'fig', 'appendix', etc.
+    cleaned_id = fig_id_raw.replace('figure', '').replace('fig', '').replace('appendix', '').replace('_', '').strip()
+    
+    # Use regex to extract the main figure number and optional subfigure letter
+    import re
+    match = re.search(r'(\d+)(?:[._]?([a-zA-Z]))?', cleaned_id)
+    
+    if match:
+        main_num = match.group(1)
+        subfig_letter = match.group(2)
+        
+        if subfig_letter:
+            fig_id = f"{main_num}.{subfig_letter.lower()}"
+        else:
+            fig_id = main_num
+    else:
+        # Fallback if regex doesn't match
+        fig_id = cleaned_id
+    
+    return fig_id
+
+def _get_figure_with_parent_info(db: SupabaseDB, paper_id: str, fig_data: dict) -> FigureSchema:
+    """
+    Process figure data and add parent figure caption for subfigures.
+    
+    Args:
+        db: SupabaseDB instance
+        paper_id: Paper ID
+        fig_data: Figure data dictionary
+    
+    Returns:
+        Figure schema with parent caption if applicable
+    """
+    fig_id_raw = str(fig_data['figure_id']).lower()
+    fig_id = _extract_figure_id(fig_id_raw)
+    
+    # Check if this is a subfigure (contains a '.')
+    parent_caption = None
+    has_subfigures = False
+    subfigures = []
+    
+    if '.' in fig_id:
+        # This is a subfigure, try to get parent figure info
+        main_num = fig_id.split('.')[0]
+        parent_fig_id = f"fig{main_num}"
+        
+        # First try to get parent figure from database directly
+        parent_result = db.client.table('paper_figures').select('caption').eq('paper_id', paper_id).eq('figure_id', parent_fig_id).execute()
+        if parent_result.data and parent_result.data[0].get('caption'):
+            parent_caption = parent_result.data[0]['caption']
+            logger.info(f"Found parent caption for {fig_id} from database: {parent_caption}")
+        
+        # If parent caption not found in database, try other methods
+        if not parent_caption:
+            # Try to get parent figure from database figures
+            parent_figures = db.get_paper_figures(paper_id)
+            for parent_fig in parent_figures:
+                parent_id = _extract_figure_id(parent_fig['figure_id'])
+                if parent_id == main_num:
+                    parent_caption = parent_fig.get('caption', '')
+                    logger.info(f"Found parent caption for {fig_id} from figures: {parent_caption}")
+                    break
+        
+        # If not found in database, try to get from figures metadata
+        if not parent_caption:
+            try:
+                from src.utils.config_loader import load_config
+                config = load_config()
+                data_dir = Path(config['data_dir'])
+                
+                # Check both possible metadata file names
+                meta_path = data_dir / paper_id / "figures" / "figures_metadata.json"
+                alt_meta_path = data_dir / paper_id / "figures" / "figures.json"
+                
+                if meta_path.exists():
+                    with open(meta_path, 'r') as f:
+                        figures_meta = json.load(f)
+                        parent_fig_key = f"fig{main_num}"
+                        if parent_fig_key in figures_meta:
+                            parent_caption = figures_meta[parent_fig_key].get('caption', '')
+                            has_subfigures = figures_meta[parent_fig_key].get('has_subfigures', False)
+                            subfigures = figures_meta[parent_fig_key].get('subfigures', [])
+                elif alt_meta_path.exists():
+                    with open(alt_meta_path, 'r') as f:
+                        figures_meta = json.load(f)
+                        parent_fig_key = f"fig{main_num}"
+                        if parent_fig_key in figures_meta:
+                            parent_caption = figures_meta[parent_fig_key].get('caption', '')
+                            has_subfigures = figures_meta[parent_fig_key].get('has_subfigures', False)
+                            subfigures = figures_meta[parent_fig_key].get('subfigures', [])
+            except Exception as e:
+                logger.warning(f"Error getting parent figure metadata: {e}")
+                
+        # If parent caption still not found, use fallback
+        if not parent_caption:
+            # Set a default caption for the parent
+            parent_caption = f"Figure {main_num}"
+            logger.info(f"Using fallback parent caption for {fig_id}: {parent_caption}")
+            
+    elif fig_id.isdigit():  
+        # This is a main figure, check if it has subfigures
+        try:
+            from src.utils.config_loader import load_config
+            config = load_config()
+            data_dir = Path(config['data_dir'])
+            
+            # Check both possible metadata file names
+            meta_path = data_dir / paper_id / "figures" / "figures_metadata.json"
+            alt_meta_path = data_dir / paper_id / "figures" / "figures.json"
+            
+            if meta_path.exists():
+                with open(meta_path, 'r') as f:
+                    figures_meta = json.load(f)
+                    fig_key = f"fig{fig_id}"
+                    if fig_key in figures_meta:
+                        has_subfigures = figures_meta[fig_key].get('has_subfigures', False)
+                        subfigures = figures_meta[fig_key].get('subfigures', [])
+            elif alt_meta_path.exists():
+                with open(alt_meta_path, 'r') as f:
+                    figures_meta = json.load(f)
+                    fig_key = f"fig{fig_id}"
+                    if fig_key in figures_meta:
+                        has_subfigures = figures_meta[fig_key].get('has_subfigures', False)
+                        subfigures = figures_meta[fig_key].get('subfigures', [])
+        except Exception as e:
+            logger.warning(f"Error getting figure metadata: {e}")
+    
+    # Create the figure schema
+    return FigureSchema(
+        id=fig_id,
+        caption=fig_data['caption'],
+        parent_caption=parent_caption,
+        url=fig_data['remote_path'],
+        has_subfigures=has_subfigures,
+        subfigures=subfigures,
+        type="figure"
+    )
 
 @router.get("/papers", response_model=List[PaperSummary])
 async def get_papers(
@@ -236,14 +383,12 @@ async def get_paper_detail(
         figures = []
         for fig_data in figures_data:
             # Only include figures that are in the display_figures list (if we have one)
-            if not display_figures or fig_data['figure_id'] in display_figures:
-                figures.append(FigureSchema(
-                    id=fig_data['figure_id'],
-                    caption=fig_data['caption'],
-                    url=fig_data['url'],
-                    has_subfigures=False  # Default
-                ))
-                
+            fig_id = _extract_figure_id(str(fig_data['figure_id']).lower())
+            
+            if display_figures and fig_id in display_figures:
+                figure = _get_figure_with_parent_info(db, paper_id, fig_data)
+                figures.append(figure)
+        
         # Make sure tags is always a list and never None
         article_tags = getattr(article, 'tags', [])
         if article_tags is None:

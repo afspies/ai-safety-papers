@@ -66,6 +66,140 @@ def format_caption(elem_id: str, caption_text: str, is_subfigure: bool = False, 
         logger.warning(f"Error formatting caption: {e}")
         return caption_text
 
+def process_figure_references(markdown: str, post: Post) -> str:
+    """
+    Process all figure references in markdown and append figure markdown.
+    
+    Args:
+        markdown: The input markdown text
+        post: Post object containing the figures data
+        
+    Returns:
+        Processed markdown with figure shortcodes added
+    """
+    # Split markdown into lines for processing
+    lines = markdown.splitlines()
+    processed_lines = []
+    processed_figures = set()
+    
+    # Figure reference pattern - updated to handle both uppercase and lowercase subfigure letters
+    figure_pattern = r'<FIGURE_ID>(\d+)(\.([a-zA-Z]))?\</FIGURE_ID>'
+    
+    for line in lines:
+        processed_lines.append(line)
+        
+        # Find all figure references in this line
+        matches = list(re.finditer(figure_pattern, line))
+        
+        if not matches:
+            continue
+            
+        figure_markdown_lines = []
+        
+        # Process each match and add figure markdown
+        for match in matches:
+            full_match = match.group(0)
+            fig_num = match.group(1)
+            subfig_letter = match.group(3)  # Will be None for main figures
+            
+            # Log the detected reference for debugging
+            logger.info(f"Found figure reference: {full_match} (fig_num={fig_num}, subfig_letter={subfig_letter})")
+            
+            # Normalize subfigure letter to lowercase for internal processing
+            subfig_letter_normalized = subfig_letter.lower() if subfig_letter else None
+            
+            # Create a key for tracking processed figures
+            fig_key = f"{fig_num}"
+            if subfig_letter_normalized:
+                fig_key += f".{subfig_letter_normalized}"
+                
+            # Skip if we've already processed this figure
+            if fig_key in processed_figures:
+                logger.info(f"Skipping already processed figure: {fig_key}")
+                continue
+                
+            processed_figures.add(fig_key)
+            
+            # Generate and add figure markdown
+            fig_id = f"fig{fig_num}"
+            figure = post.get_figure(fig_id)
+            
+            if figure:
+                logger.info(f"Found figure object for {fig_id}")
+                if subfig_letter and figure.has_subfigures:
+                    logger.info(f"Figure has subfigures: {[s['id'] for s in figure.subfigures]}")
+                
+                # Generate figure markdown based on type
+                figure_markdown = generate_figure_markdown(figure, fig_id, subfig_letter_normalized)
+                if figure_markdown:
+                    figure_markdown_lines.append(figure_markdown)
+                else:
+                    logger.warning(f"Failed to generate markdown for {fig_id}{'.'+subfig_letter if subfig_letter else ''}")
+            else:
+                logger.warning(f"Figure {fig_id} not found in post figures")
+        
+        # Add all figures for this line with line breaks
+        if figure_markdown_lines:
+            processed_lines.append("")  # Add empty line before figures
+            processed_lines.extend(figure_markdown_lines)
+            processed_lines.append("")  # Add empty line after figures
+    
+    # Replace the figure references with text references
+    result = "\n".join(processed_lines)
+    
+    # Replace references with plain text - updated to handle both uppercase and lowercase
+    result = re.sub(r'<FIGURE_ID>(\d+)(\.([a-zA-Z]))?\</FIGURE_ID>', lambda m: 
+                  f"Figure {m.group(1)}" + (f".{m.group(3)}" if m.group(3) else ""), 
+                  result)
+    
+    return result
+
+def generate_figure_markdown(figure: Figure, fig_id: str, subfig_letter: str = None) -> str:
+    """Generate markdown for a figure or subfigure."""
+    if not figure:
+        return ""
+        
+    if subfig_letter:
+        # Handle specific subfigure
+        # Try to find the subfigure regardless of case
+        subfig_data = None
+        for subfig in figure.subfigures:
+            if subfig['id'].lower() == subfig_letter.lower():
+                subfig_data = subfig
+                break
+                
+        if subfig_data:
+            subfig_id = f"{fig_id}_{subfig_data['id']}"  # Use original ID from data
+            formatted_caption = format_caption(fig_id, subfig_data['caption'], True, subfig_data['id'])
+            return f'{{{{< figure src="{subfig_id}.png" caption="{escape_caption(formatted_caption)}" >}}}}'
+        else:
+            logger.warning(f"Subfigure {subfig_letter} not found in {fig_id} subfigures: {[s['id'] for s in figure.subfigures if 'id' in s]}")
+            return ""
+        
+    # Handle main figure (with or without subfigures)
+    if figure.has_subfigures:
+        # Generate subfigures shortcode
+        subfigs_content = []
+        for subfig in figure.subfigures:
+            if 'id' not in subfig:
+                logger.warning(f"Subfigure in {fig_id} missing 'id' field: {subfig}")
+                continue
+                
+            subfig_id = f"{fig_id}_{subfig['id']}"
+            formatted_caption = format_caption(fig_id, subfig['caption'], True, subfig['id'])
+            subfigs_content.append(
+                f'{{{{< subfigure src="{subfig_id}.png" caption="{escape_caption(formatted_caption)}" >}}}}'
+            )
+        
+        formatted_main_caption = format_caption(fig_id, figure.caption)
+        return f"""{{{{< subfigures caption="{escape_caption(formatted_main_caption)}" >}}}}
+{''.join(subfigs_content)}
+{{{{< /subfigures >}}}}"""
+    else:
+        # Regular figure
+        formatted_caption = format_caption(fig_id, figure.caption)
+        return f'{{{{< figure src="{fig_id}.png" caption="{escape_caption(formatted_caption)}" >}}}}'
+
 def create_post_markdown(post: Post) -> str:
     """
     Generate markdown content for the post, handling subfigures with improved formatting.
@@ -170,85 +304,8 @@ weight: 1
     # Combine all sections
     full_content = frontmatter + metadata_section + content_section
     
-    # Keep track of figures we've already processed
-    processed_figures = set()
-    
-    # Process figure references in the text - handle XML tags
-    figure_pattern = r'<FIGURE_ID>(\d+)(\.([a-z]))?\</FIGURE_ID>'
-    
-    for match in re.finditer(figure_pattern, full_content):
-        full_match = match.group(0)
-        fig_num = match.group(1)
-        subfig_letter = match.group(3)  # Will be None for main figures
-        
-        # Track which figures we've processed
-        fig_key = f"{fig_num}"
-        if subfig_letter:
-            fig_key += f".{subfig_letter}"
-            
-        if fig_key in processed_figures:
-            # If we've already processed this figure, just replace the tag
-            replacement = f"Figure {fig_num}"
-            if subfig_letter:
-                replacement += f".{subfig_letter}"
-            full_content = full_content.replace(full_match, replacement)
-            continue
-            
-        processed_figures.add(fig_key)
-        
-        fig_id = f"fig{fig_num}"
-        
-        # Get figure from post's figures dictionary
-        figure = post.get_figure(fig_id)
-        
-        if figure:
-            if figure.has_subfigures:
-                if subfig_letter:
-                    # Handle specific subfigure reference with improved formatting
-                    subfig_data = next((s for s in figure.subfigures if s['id'] == subfig_letter), None)
-                    if subfig_data:
-                        subfig_id = f"{fig_id}_{subfig_letter}"
-                        # Generate subfigure shortcode with formatted caption
-                        formatted_caption = format_caption(fig_id, subfig_data['caption'], True, subfig_letter)
-                        replacement = f"""
-
-{{{{< figure src="{subfig_id}.png" caption="{escape_caption(formatted_caption)}" >}}}}
-
-"""
-                    else:
-                        logger.warning(f"Subfigure {subfig_letter} not found in {fig_id}")
-                        replacement = f"Figure {fig_num}({subfig_letter})"
-                else:
-                    # Handle main figure with subfigures using subfigures shortcode
-                    subfigs_content = []
-                    for subfig in figure.subfigures:
-                        subfig_id = f"{fig_id}_{subfig['id']}"
-                        formatted_caption = format_caption(fig_id, subfig['caption'], True, subfig['id'])
-                        subfigs_content.append(
-                            f'{{{{< subfigure src="{subfig_id}.png" caption="{escape_caption(formatted_caption)}" >}}}}'
-                        )
-                    
-                    formatted_main_caption = format_caption(fig_id, figure.caption)
-                    replacement = f"""
-
-{{{{< subfigures caption="{escape_caption(formatted_main_caption)}" >}}}}
-{''.join(subfigs_content)}
-{{{{< /subfigures >}}}}
-
-"""
-            else:
-                # Handle regular figure with improved formatting
-                formatted_caption = format_caption(fig_id, figure.caption)
-                replacement = f"""
-
-{{{{< figure src="{fig_id}.png" caption="{escape_caption(formatted_caption)}" >}}}}
-
-"""
-        else:
-            logger.warning(f"Figure {fig_id} not found in post figures")
-            replacement = f"Figure {fig_num}"
-        
-        full_content = full_content.replace(full_match, replacement)
+    # Process figure references - use the new standalone function
+    full_content = process_figure_references(full_content, post)
     
     # Clean up any multiple consecutive blank lines
     full_content = re.sub(r'\n{3,}', '\n\n', full_content)

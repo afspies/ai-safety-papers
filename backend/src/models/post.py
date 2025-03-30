@@ -192,6 +192,28 @@ class Post:
                     shutil.copy2(source_path, post_dir / "thumbnail.png")
                     return True
                     
+                # HANDLE EDGE CASE: Check if this is a main figure that has subfigures
+                # but no main figure image
+                if figure and figure.has_subfigures and figure.subfigures:
+                    # Use the first subfigure as the thumbnail
+                    first_subfig = figure.subfigures[0]
+                    first_subfig_id = first_subfig.get('id')
+                    if first_subfig_id:
+                        subfig_path = self.article.data_folder / "figures" / f"{fig_id}_{first_subfig_id}.png"
+                        if subfig_path.exists():
+                            logger.info(f"Using first subfigure {fig_id}_{first_subfig_id} as thumbnail for {fig_id}")
+                            shutil.copy2(subfig_path, post_dir / "thumbnail.png")
+                            return True
+                # If no subfigures found in the figure object, try to find subfigures in the figures directory
+                subfig_pattern = f"{fig_id}_[a-z].png"
+                subfig_files = list(self.article.data_folder.glob(f"figures/{subfig_pattern}"))
+                if subfig_files:
+                    # Use the first subfigure (alphabetically sorted)
+                    subfig_files.sort()
+                    logger.info(f"Found subfigures for {fig_id}, using {subfig_files[0].name} as thumbnail")
+                    shutil.copy2(subfig_files[0], post_dir / "thumbnail.png")
+                    return True
+                    
         logger.warning(f"Thumbnail figure {self.thumbnail_figure} not found")
         return False
     
