@@ -2,3 +2,22 @@ website:
   content_path: "ai-safety-site/content/en"
 
 data_dir: "data"
+
+semantic_scholar:
+  api_key: "${SEMANTIC_SCHOLAR_API_KEY}"
+
+anthropic:
+  api_key: "${ANTHROPIC_API_KEY}"
+
+supabase:
+  url: "${SUPABASE_URL}"
+  key: "${SUPABASE_KEY}"
+  
+# Cloudflare R2 storage settings
+cloudflare_r2:
+  enabled: true
+  account_id: "${R2_ACCOUNT_ID}"
+  access_key_id: "${R2_ACCESS_KEY_ID}"
+  access_key_secret: "${R2_ACCESS_KEY_SECRET}"
+  bucket_name: "ai-safety-papers"
+  public_url_prefix: "https://assets.afspies.com/figures"

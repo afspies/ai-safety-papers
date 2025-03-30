@@ -2,12 +2,11 @@ from typing import Dict, List, Optional, Any, Type
 from pathlib import Path
 import logging
 import json
-from datetime import datetime
 import re
 import shutil
 
-from backend.src.models.article import Article
-from backend.src.models.figure import Figure, FigureExtractor
+from src.models.article import Article
+from src.models.figure import Figure 
 
 logger = logging.getLogger(__name__)
 
@@ -37,30 +36,34 @@ class Post:
             
         return content_path / "posts" / f"paper_{self.article.uid}"
         
-    def get_figure(self, figure_id: str) -> Optional[Figure]:
+    def get_figure(self, figure_id: str, download: bool = False) -> Optional[Figure]:
         """Get a figure by ID."""
-        return self.figures.get(figure_id)
+        figure =  self.figures.get(figure_id)
+        if figure and download:
+            figure_id = figure.id
+            local_fig_path = self.article.data_folder / "figures" / f"{figure_id}.png"
+            if not local_fig_path.exists():
+                # download figure from r2
+                r2_path = figure.path
+                if r2_path:
+                    from src.utils.cloudflare_r2 import CloudflareR2Client
+                    r2_client = CloudflareR2Client()
+                    r2_client.download_file(r2_path, local_fig_path)
+        return figure
         
-    def extract_figures(self, extractor: FigureExtractor, source_path: Path, force: bool = False) -> bool:
+    def extract_figures(self, extractor: "FigureExtractor", source_path: Path, force: bool = False) -> bool:
         """
         Extract figures using the provided extractor.
-        
+
         Args:
             extractor: FigureExtractor implementation
-            source_path: Path to the source file
+            source_path: Path to the source file (pdf extraction) or arxiv url (ar5iv extraction)
             force: Whether to force extraction even if figures already exist
             
         Returns:
             True if extraction was successful
         """
         figures_dir = self.article.data_folder / "figures"
-        
-        # Check if figures already exist
-        metadata_path = figures_dir / "figures_metadata.json"
-        if metadata_path.exists() and not force:
-            logger.info(f"Figures already exist for {self.article.uid}. Loading metadata.")
-            self.figures = FigureExtractor.load_metadata(metadata_path, figures_dir)
-            return True
             
         # Create figures directory
         figures_dir.mkdir(parents=True, exist_ok=True)
@@ -89,6 +92,8 @@ class Post:
         post_dir = self.post_dir
         post_dir.mkdir(parents=True, exist_ok=True)
         
+        processed_main_figures = set()  # Track main figures we've processed
+        
         for fig_id in self.display_figures:
             # Check if it's a subfigure reference (e.g., "2.a")
             subfig_match = re.match(r'(\d+)\.([a-z])', fig_id)
@@ -106,17 +111,44 @@ class Post:
                 subfig_path = self.article.data_folder / "figures" / f"{main_id}_{subfig_id}.png"
                 if subfig_path.exists():
                     shutil.copy2(subfig_path, post_dir / f"{main_id}_{subfig_id}.png")
+                    
+                # Also process the main figure if we haven't already
+                if main_id not in processed_main_figures:
+                    processed_main_figures.add(main_id)
+                    figure = self.get_figure(main_id)
+                    if figure and figure.path and "https:" not in str(figure.path):
+                        if figure.path.exists():
+                            figure.save_to_directory(post_dir)
+                        else:
+                            logger.warning(f"Figure {main_id} path does not exist")
             else:
                 # Handle regular figure
                 fig_id_clean = f"fig{fig_id}" if fig_id.isdigit() else fig_id
                 figure = self.get_figure(fig_id_clean)
                 
-                if figure and figure.path:
-                    # Copy figure to post directory
-                    figure.save_to_directory(post_dir)
+                if figure:
+                    # Track that we've processed this main figure
+                    processed_main_figures.add(fig_id_clean)
+                    
+                    if figure.path and "https:" not in str(figure.path):
+                        # Check that figure exists
+                        if figure.path.exists():
+                            # Copy figure to post directory
+                            figure.save_to_directory(post_dir)
+                            
+                            # If this figure has subfigures, process them too
+                            if figure.has_subfigures:
+                                for subfig in figure.subfigures:
+                                    subfig_id = subfig.get('id')
+                                    if subfig_id:
+                                        subfig_path = self.article.data_folder / "figures" / f"{fig_id_clean}_{subfig_id}.png"
+                                        if subfig_path.exists():
+                                            shutil.copy2(subfig_path, post_dir / f"{fig_id_clean}_{subfig_id}.png")
+                        else:
+                            logger.warning(f"Figure {fig_id_clean} not found")
                 else:
-                    logger.warning(f"Figure {fig_id_clean} not found or has no path")
-    
+                    logger.warning(f"Figure {fig_id_clean} not found")
+
     def set_thumbnail(self) -> bool:
         """
         Set the thumbnail for the post.
@@ -148,7 +180,7 @@ class Post:
         else:
             # Handle regular figure
             fig_id = f"fig{self.thumbnail_figure}" if self.thumbnail_figure.isdigit() else self.thumbnail_figure
-            figure = self.get_figure(fig_id)
+            figure = self.get_figure(fig_id, download=True)
             
             if figure and figure.path:
                 # Create a copy named thumbnail.png
@@ -158,6 +190,28 @@ class Post:
                 source_path = self.article.data_folder / "figures" / f"{fig_id}.png"
                 if source_path.exists():
                     shutil.copy2(source_path, post_dir / "thumbnail.png")
+                    return True
+                    
+                # HANDLE EDGE CASE: Check if this is a main figure that has subfigures
+                # but no main figure image
+                if figure and figure.has_subfigures and figure.subfigures:
+                    # Use the first subfigure as the thumbnail
+                    first_subfig = figure.subfigures[0]
+                    first_subfig_id = first_subfig.get('id')
+                    if first_subfig_id:
+                        subfig_path = self.article.data_folder / "figures" / f"{fig_id}_{first_subfig_id}.png"
+                        if subfig_path.exists():
+                            logger.info(f"Using first subfigure {fig_id}_{first_subfig_id} as thumbnail for {fig_id}")
+                            shutil.copy2(subfig_path, post_dir / "thumbnail.png")
+                            return True
+                # If no subfigures found in the figure object, try to find subfigures in the figures directory
+                subfig_pattern = f"{fig_id}_[a-z].png"
+                subfig_files = list(self.article.data_folder.glob(f"figures/{subfig_pattern}"))
+                if subfig_files:
+                    # Use the first subfigure (alphabetically sorted)
+                    subfig_files.sort()
+                    logger.info(f"Found subfigures for {fig_id}, using {subfig_files[0].name} as thumbnail")
+                    shutil.copy2(subfig_files[0], post_dir / "thumbnail.png")
                     return True
                     
         logger.warning(f"Thumbnail figure {self.thumbnail_figure} not found")

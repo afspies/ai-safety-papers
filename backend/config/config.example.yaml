@@ -1,0 +1,44 @@
+# Example configuration file for AI Safety Papers API
+# Copy this file to config.yaml and fill in the values
+
+# Semantic Scholar API settings
+semantic_scholar:
+  api_key: "your_semantic_scholar_api_key_here"
+  
+# Anthropic API settings
+anthropic:
+  api_key: "your_anthropic_api_key_here"
+  
+# Google Sheets integration for paper tracking
+google_sheets:
+  spreadsheet_id: "your_spreadsheet_id_here"
+  range_name: "Sheet1"
+  credentials_file: "google_sheets_credentials.json"
+  
+# Data storage paths
+data_dir: "data"
+  
+# Website content path
+website:
+  content_path: "../ai-safety-site/content/en"
+  static_path: "../ai-safety-site/static"
+  
+# API settings
+api:
+  host: "0.0.0.0"
+  port: 8000
+  cors_origins: ["*"]  # For production, replace with specific origins
+
+# Supabase database settings
+supabase:
+  url: "your_supabase_url_here"
+  key: "your_supabase_key_here"
+
+# Cloudflare R2 storage settings
+cloudflare_r2:
+  enabled: true
+  account_id: "your_cloudflare_account_id"
+  access_key_id: "your_r2_access_key_id"
+  access_key_secret: "your_r2_access_key_secret"
+  bucket_name: "ai-safety-papers"
+  public_url_prefix: "https://assets.afspies.com/figures"  # Public URL for accessing figures
