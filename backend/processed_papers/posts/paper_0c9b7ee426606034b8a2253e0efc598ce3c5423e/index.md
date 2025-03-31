@@ -2,7 +2,7 @@
 title: "Enhancing Automated Interpretability with Output-Centric Feature Descriptions"
 description: "Automated interpretability pipelines generate natural language descriptions for the concepts represented by features in large language models (LLMs), such as plants or the first word in a sentence. Th..."
 authors: ["Yoav Gur-Arieh", "Roy Mayan", "Chen Agassy", "Atticus Geiger", "Mor Geva"]
-date: 2025-03-29
+date: 2025-03-31
 paper_url: "https://arxiv.org/pdf/2501.08319.pdf"
 ---
 

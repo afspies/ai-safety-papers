@@ -37,6 +37,22 @@ LOGS_DIR = BACKEND_DIR / "logs"
 SERVER_LOG_FILE = LOGS_DIR / "server.log"
 TUNNEL_LOG_FILE = LOGS_DIR / "tunnel.log"
 
+def get_python_env():
+    """Get the current Python environment path and executable."""
+    # Get the virtual environment path if it exists
+    venv_path = os.environ.get('VIRTUAL_ENV')
+    if venv_path:
+        # If we're in a virtual environment, use its Python executable
+        if sys.platform == 'win32':
+            python_exe = os.path.join(venv_path, 'Scripts', 'python.exe')
+        else:
+            python_exe = os.path.join(venv_path, 'bin', 'python')
+        if os.path.exists(python_exe):
+            return python_exe
+    
+    # If no virtual environment or executable not found, use current Python
+    return sys.executable
+
 def check_requirements():
     """Check if required tools are installed."""
     # Ensure logs directory exists
@@ -143,6 +159,9 @@ def start_server():
         # Add both project root and backend directory to PYTHONPATH
         env['PYTHONPATH'] = f"{str(PROJECT_ROOT)}:{str(BACKEND_DIR)}"
         
+        # Get the Python executable from the current environment
+        python_exe = get_python_env()
+        
         # Open log file for writing
         with open(SERVER_LOG_FILE, 'a') as log_file:
             # Add a timestamp header for this run
@@ -152,7 +171,7 @@ def start_server():
             
             # Use real API keys and production mode
             server_process = subprocess.Popen(
-                [sys.executable, str(BACKEND_DIR / 'src/main.py'), '--api'],
+                [python_exe, str(BACKEND_DIR / 'src/main.py'), '--api'],
                 stdout=log_file,
                 stderr=log_file,
                 preexec_fn=os.setsid,
