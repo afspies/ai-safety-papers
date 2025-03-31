@@ -18,6 +18,10 @@ import argparse
 import logging
 import psutil
 from pathlib import Path
+from dotenv import load_dotenv
+
+# Load environment variables from ~/.env
+load_dotenv(os.path.expanduser('~/.env'))
 
 # Configure logging
 logging.basicConfig(
@@ -284,7 +288,7 @@ def start_tunnel():
                 env = os.environ.copy()
                 env['PYTHONPATH'] = str(PROJECT_ROOT)
                 tunnel_process = subprocess.Popen(
-                    ['cloudflared', 'tunnel', '--config', str(CLOUDFLARED_CONFIG), 'run'],
+                    ['cloudflared', 'tunnel', '--config', str(CLOUDFLARED_CONFIG), '--credentials-file', os.environ['CLOUDFLARED_CREDENTIALS_FILE'], 'run'],
                     stdout=log_file,
                     stderr=log_file,
                     preexec_fn=os.setsid,
