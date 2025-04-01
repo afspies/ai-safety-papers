@@ -1,6 +1,6 @@
-import { mockPapers, mockPaperDetails } from "./mock-data"
-import type { PaperDetail, PaperSummary } from "./types"
-import { API_BASE_URL, USE_MOCK_DATA } from "./config"
+import { API_BASE_URL, USE_MOCK_DATA } from "./config";
+import { mockPaperDetails, mockPapers } from "./mock-data";
+import type { PaperDetail, PaperSummary } from "./types";
 
 /**
  * Fetches all papers from the API or returns mock data if API_BASE_URL is not set
@@ -12,8 +12,13 @@ export async function getAllPapers(): Promise<PaperSummary[]> {
   }
 
   try {
-    // Fetch from real API
-    const response = await fetch(`${API_BASE_URL}/papers`)
+    const response = await fetch(`${API_BASE_URL}/papers`, {
+      cache: "force-cache",
+      next: {
+        // revalidate every day
+        revalidate: 86400,
+      },
+    });
 
     if (!response.ok) {
       throw new Error(`API error: ${response.status}`)
@@ -70,7 +75,10 @@ export async function getPaperById(paperId: string): Promise<PaperDetail | null>
 
   try {
     // Fetch from real API - FIXED: using "papers" (plural) instead of "paper" (singular)
-    const response = await fetch(`${API_BASE_URL}/papers/${paperId}`)
+    const response = await fetch(
+      `${API_BASE_URL}/papers/${paperId}`,
+      { cache: "force-cache" }
+    )
 
     console.log(`Fetching paper from: ${API_BASE_URL}/papers/${paperId}`)
 
