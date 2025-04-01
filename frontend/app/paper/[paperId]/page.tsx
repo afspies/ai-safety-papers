@@ -45,8 +45,16 @@ export async function generateMetadata(
 
     // Limit description length for SEO
     const description = paper.abstract?.substring(0, 160) + (paper.abstract?.length > 160 ? '...' : '') || 'No abstract available.';
-    // TODO: Use a real image from the paper or a default site image
-    const imageUrl = `${siteUrl}/default-og-image.png`; // Placeholder image
+    
+    // Determine the Open Graph image URL
+    // Use the paper's thumbnail if it's an absolute URL, otherwise fallback to placeholder.jpg
+    let imageUrl = `${siteUrl}/placeholder.jpg`; // Default fallback
+    if (paper.thumbnail_url && (paper.thumbnail_url.startsWith('http://') || paper.thumbnail_url.startsWith('https://'))) {
+      imageUrl = paper.thumbnail_url;
+    } else if (paper.thumbnail_url) {
+      // Optional: Handle relative URLs if you know the base path, but safer to use fallback for OG tags.
+      console.warn(`Paper ${paper.uid} thumbnail_url (${paper.thumbnail_url}) is not absolute. Using fallback for Open Graph.`);
+    }
 
     return {
       title: `${paper.title} | AI Safety Papers`,
@@ -56,28 +64,25 @@ export async function generateMetadata(
       openGraph: {
         title: paper.title,
         description: description,
-        url: `${siteUrl}/paper/${paperId}`,
+        url: `${siteUrl}/paper/${paper.uid}`, // Use paper.uid here
         siteName: 'AI Safety Papers',
-        // TODO: Select a relevant image from the paper's figures or use a default
         images: [
           {
-            url: imageUrl, // Replace with actual image URL if available
+            url: imageUrl, // Use determined image URL
             width: 1200, // Standard OG image width
             height: 630, // Standard OG image height
           },
         ],
         locale: 'en_US',
         type: 'article',
-        // Optional Article specific tags
-        // publishedTime: paper.submitted_date ? new Date(paper.submitted_date).toISOString() : undefined,
-        // authors: paper.authors, // Can list author profile URLs if available
+        publishedTime: paper.submitted_date ? new Date(paper.submitted_date).toISOString() : undefined,
       },
       twitter: {
         card: 'summary_large_image',
         title: paper.title,
         description: description,
-        // TODO: Add twitter:image if different from og:image
-        // images: [imageUrl], // Must be an absolute URL
+        // Twitter uses og:image by default if not specified. 
+        // Add images: [imageUrl] here if you need a specific Twitter image.
       },
     }
   } catch (error) {
