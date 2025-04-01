@@ -493,7 +493,7 @@ export function PaperCard({ paper }: PaperCardProps) {
     <div onClick={handleCardClick}>{cardContent}</div>
   ) : (
     // For desktop: Link component
-    <Link href={`/paper/${paper.uid}`} passHref>
+    <Link href={`/paper/${paper.uid}`} passHref prefetch>
       {cardContent}
     </Link>
   );
