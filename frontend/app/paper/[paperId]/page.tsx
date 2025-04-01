@@ -43,8 +43,8 @@ export async function generateMetadata(
     // Optional: Get parent metadata if needed
     // const previousImages = (await parent).openGraph?.images || []
 
-    // Limit description length for SEO
-    const description = paper.abstract?.substring(0, 160) + (paper.abstract?.length > 160 ? '...' : '') || 'No abstract available.';
+    // Use TLDR for description, limit length for SEO
+    const description = paper.tldr?.substring(0, 160) + (paper.tldr?.length > 160 ? '...' : '') || 'No summary available.';
     
     // Determine the Open Graph image URL
     // Use the paper's thumbnail if it's an absolute URL, otherwise fallback to placeholder.jpg
