@@ -8,6 +8,7 @@ import SimpleHTMLMarkdown from "@/components/simple-html-markdown"
 import PaperLayout from "@/components/paper-layout"
 import { formatAuthors, formatDateFriendly, addOrdinalSuffix } from "@/lib/utils"
 import ExpandableFigure from "@/components/expandable-figure"
+import type { Metadata, ResolvingMetadata } from 'next'
 
 // Set cache control headers for this route
 // Cache for 12 hours, revalidate every hour
@@ -16,6 +17,76 @@ export const revalidate = 3600 // 1 hour in seconds
 interface PaperPageProps {
   params: {
     paperId: string
+  }
+}
+
+// Generate metadata for the page
+export async function generateMetadata(
+  { params }: PaperPageProps,
+  parent: ResolvingMetadata
+): Promise<Metadata> {
+  const paperId = params.paperId
+  const siteUrl = "https://papers.afspies.com" // Your site URL
+
+  try {
+    const paper = await getPaperById(paperId)
+
+    if (!paper) {
+      // Return default metadata or handle not found scenario appropriately
+      // Returning basic metadata to avoid errors, but ideally should align with notFound behavior
+      return {
+        title: 'Paper Not Found',
+        description: 'The requested paper could not be found.',
+      }
+    }
+
+    // Optional: Get parent metadata if needed
+    // const previousImages = (await parent).openGraph?.images || []
+
+    // Limit description length for SEO
+    const description = paper.abstract?.substring(0, 160) + (paper.abstract?.length > 160 ? '...' : '') || 'No abstract available.';
+    // TODO: Use a real image from the paper or a default site image
+    const imageUrl = `${siteUrl}/default-og-image.png`; // Placeholder image
+
+    return {
+      title: `${paper.title} | AI Safety Papers`,
+      description: description,
+      authors: paper.authors ? paper.authors.map(name => ({ name })) : undefined,
+      keywords: paper.tags,
+      openGraph: {
+        title: paper.title,
+        description: description,
+        url: `${siteUrl}/paper/${paperId}`,
+        siteName: 'AI Safety Papers',
+        // TODO: Select a relevant image from the paper's figures or use a default
+        images: [
+          {
+            url: imageUrl, // Replace with actual image URL if available
+            width: 1200, // Standard OG image width
+            height: 630, // Standard OG image height
+          },
+        ],
+        locale: 'en_US',
+        type: 'article',
+        // Optional Article specific tags
+        // publishedTime: paper.submitted_date ? new Date(paper.submitted_date).toISOString() : undefined,
+        // authors: paper.authors, // Can list author profile URLs if available
+      },
+      twitter: {
+        card: 'summary_large_image',
+        title: paper.title,
+        description: description,
+        // TODO: Add twitter:image if different from og:image
+        // images: [imageUrl], // Must be an absolute URL
+      },
+    }
+  } catch (error) {
+    console.error("Error generating metadata for paper:", paperId, error)
+    // Return default metadata in case of error
+    return {
+      title: 'Error Loading Paper | AI Safety Papers',
+      description: 'Could not load metadata for this paper.',
+    }
   }
 }
 
