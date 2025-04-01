@@ -1,5 +1,5 @@
 import type { PaperSummary } from "@/lib/types"
-import PaperCard, { PaperCardProvider } from "./paper-card"
+import { PaperCard, PaperCardProvider } from "./paper-card"
 
 interface PaperGridProps {
   papers: PaperSummary[]

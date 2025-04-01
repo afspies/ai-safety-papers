@@ -1,52 +1,55 @@
-"use client"
+"use client";
 
-import PaperGrid from "@/components/paper-grid"
-import { filterPapersByQuery } from "@/lib/search"
-import { PaperSummary } from "@/lib/types"
-import { useSearchParams } from "next/navigation"
+import PaperGrid from "@/components/paper-grid";
+import { filterPapersByQuery } from "@/lib/search";
+import { PaperSummary } from "@/lib/types";
+import { useSearchParams } from "next/navigation";
+import { useMemo } from "react";
 
 interface AllPapersProps {
-  papers: PaperSummary[]
+  papers: PaperSummary[];
 }
 
-
 export function AllPapers({ papers: allPapers }: AllPapersProps) {
-  const searchParams = useSearchParams()
+  const searchParams = useSearchParams();
+  const sortedPapers = useMemo(() => {
+    // Sort papers by date (newest first)
+    return [...allPapers].sort((a, b) => {
+      if (!a.submitted_date) return 1; // Papers without dates go to the end
+      if (!b.submitted_date) return -1;
 
-  // Sort papers by date (newest first)
-  const sortedPapers = [...allPapers].sort((a, b) => {
-    if (!a.submitted_date) return 1 // Papers without dates go to the end
-    if (!b.submitted_date) return -1
+      const dateA = new Date(a.submitted_date);
+      const dateB = new Date(b.submitted_date);
 
-    const dateA = new Date(a.submitted_date)
-    const dateB = new Date(b.submitted_date)
-
-    return dateB.getTime() - dateA.getTime() // Descending order (newest first)
-  })
+      return dateB.getTime() - dateA.getTime(); // Descending order (newest first)
+    });
+  }, [allPapers]);
 
   // Get search query from URL params - await the searchParams object
-  const highlight = searchParams?.get("highlight")
-  const searchQuery = searchParams?.get("q") || ''
-  const showOnlyHighlighted = highlight === "true"
+  const highlight = searchParams?.get("highlight");
+  const searchQuery = searchParams?.get("q") || "";
+  const showOnlyHighlighted = highlight === "true";
 
-  // Apply filters: first filter by highlight if needed, then by search query
-  let filteredPapers = showOnlyHighlighted
-    ? sortedPapers.filter(paper => paper.highlight)
-    : sortedPapers
+  const filteredPapers = useMemo(() => {
+    const papers = showOnlyHighlighted
+      ? sortedPapers.filter((paper) => paper.highlight)
+      : sortedPapers;
 
-  // Apply search filtering if query exists
-  if (searchQuery) {
-    filteredPapers = filterPapersByQuery(filteredPapers, searchQuery)
-  }
+    if (searchQuery) {
+      return filterPapersByQuery(papers, searchQuery);
+    }
 
-  // Show search results info if search was performed
+    return papers;
+  }, [sortedPapers, searchQuery, showOnlyHighlighted]);
+
   const searchInfo = searchQuery ? (
     <div className="mb-6 text-gray-600">
-      Found {filteredPapers.length} paper{filteredPapers.length !== 1 ? 's' : ''}
+      Found {filteredPapers.length} paper
+      {filteredPapers.length !== 1 ? "s" : ""}
       for "<span className="font-medium">{searchQuery}</span>"
       {showOnlyHighlighted ? " (highlights only)" : ""}
     </div>
-  ) : null
+  ) : null;
 
   return (
     <>
@@ -63,6 +66,5 @@ export function AllPapers({ papers: allPapers }: AllPapersProps) {
         </div>
       )}
     </>
-  )
+  );
 }
-
