@@ -394,6 +394,20 @@ async def get_paper_detail(
         if article_tags is None:
             article_tags = []
         
+        # Get thumbnail URL
+        thumbnail_url = f"/static/posts/paper_{article.uid}/thumbnail.png"  # Default
+        
+        try:
+            # Get thumbnail figure from summary
+            if summary_data and summary_data.get('thumbnail_figure'):
+                # Try to get public URL for thumbnail
+                thumbnail_fig_id = summary_data['thumbnail_figure']
+                public_url = db.get_figure_url(article.uid, thumbnail_fig_id)
+                if public_url:
+                    thumbnail_url = public_url
+        except Exception as thumb_err:
+            logger.warning(f"Error getting thumbnail for {article.uid}: {thumb_err}")
+        
         # Create the response
         return PaperDetail(
             uid=article.uid,
@@ -409,7 +423,8 @@ async def get_paper_detail(
             submitted_date=article.submitted_date,
             highlight=article.highlight,
             tags=article_tags,
-            figures=figures
+            figures=figures,
+            thumbnail_url=thumbnail_url
         )
     except HTTPException:
         raise

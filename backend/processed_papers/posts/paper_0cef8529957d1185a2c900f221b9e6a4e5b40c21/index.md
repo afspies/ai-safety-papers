@@ -2,7 +2,7 @@
 title: "Transformers Use Causal World Models in Maze-Solving Tasks"
 description: "Recent studies in interpretability have explored the inner workings of transformer models trained on tasks across various domains, often discovering that these networks naturally develop highly struct..."
 authors: ["Alex F Spies", "William Edwards", "Michael I. Ivanitskiy", "Adrians Skapars", "Tilman Rauker", "Katsumi Inoue", "Alessandra Russo", "Murray Shanahan"]
-date: 2025-03-31
+date: 2025-04-01
 paper_url: "https://arxiv.org/pdf/2412.11867.pdf"
 ---
 

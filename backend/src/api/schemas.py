@@ -43,3 +43,4 @@ class PaperDetail(BaseModel):
     highlight: bool = False
     tags: List[str] = []
     figures: List[FigureSchema] = []
+    thumbnail_url: Optional[str] = None

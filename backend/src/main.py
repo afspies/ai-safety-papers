@@ -2,18 +2,18 @@ import sys
 import os
 import time
 import logging
-from backend.src.utils.config_loader import load_config
-from backend.src.api.semantic_scholar import SemanticScholarAPI
-from backend.src.models.supabase import SupabaseDB
+from src.utils.config_loader import load_config
+from src.api.semantic_scholar import SemanticScholarAPI
+from src.models.supabase import SupabaseDB
 from datetime import datetime
 import argparse
-from backend.src.summarizer.paper_summarizer import PaperSummarizer
-from backend.src.models.article import Article
+from src.summarizer.paper_summarizer import PaperSummarizer
+from src.models.article import Article
 import shutil
 from pathlib import Path
 import re
 import json
-from backend.src.markdown.post_generator import create_post_markdown
+from src.markdown.post_generator import create_post_markdown
 
 # Add the project root to the Python path
 project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
