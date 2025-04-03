@@ -1,6 +1,7 @@
 "use client"
 
 import type React from "react"
+import Image from "next/image"
 
 import Link from "next/link"
 import { useState, useEffect } from "react"
@@ -94,8 +95,18 @@ export default function Navbar() {
         <div className="flex justify-between h-16">
           <div className="flex">
             <div className="flex-shrink-0 flex items-center">
-              <Link href="/" className="text-xl font-heading font-bold text-gray-900">
-                AI Safety Papers
+              <Link
+                href="/"
+                className="flex items-center space-x-2 text-xl font-heading font-bold text-gray-900"
+              >
+                <Image
+                  src="/logo.png"
+                  alt="AI Safety Papers Logo"
+                  width={24}
+                  height={24}
+                  className="h-6 w-6 relative bottom-[1px]"
+                />
+                <span>AI Safety Papers</span>
               </Link>
             </div>
             {/* Desktop navigation */}

@@ -55,7 +55,7 @@ export default function AboutPage() {
         <section className="mb-12">
           <h2 className="text-2xl font-heading font-semibold mb-4 text-gray-900">What We Offer</h2>
           <ul className="list-disc pl-5 text-gray-700 space-y-2">
-            <li>Curated collection of foundational and cutting-edge AI safety research papers</li>
+            <li>A curated selection of research papers on AI safety and Alignment</li>
             <li>Highlights of particularly important or influential works</li>
             <li>Easy navigation and search functionality</li>
             <li>Regular updates as new significant research emerges</li>

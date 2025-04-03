@@ -280,6 +280,9 @@ export function PaperCard({ paper }: PaperCardProps) {
     paper.tldr
   );
 
+  // Condition to check if we should show the summary instead of the image
+  const showSummaryInsteadOfImage = !paper.thumbnail_url || imageError;
+
   if (!isMounted) {
     return (
       <div
@@ -313,13 +316,19 @@ export function PaperCard({ paper }: PaperCardProps) {
           className="relative flex-1 w-full flex items-center justify-center z-10"
           style={{ height: "calc(100% - 6rem)" }}
         >
-          <Image
-            src={paper.thumbnail_url || "/placeholder.svg"}
-            alt={paper.title}
-            fill
-            className="object-contain p-2"
-            onError={handleImageError}
-          />
+          {showSummaryInsteadOfImage ? (
+            <div className="p-4 text-sm text-gray-600 overflow-y-auto h-full">
+              {tldr}
+            </div>
+          ) : (
+            <Image
+              src={paper.thumbnail_url || "/placeholder.svg"}
+              alt={paper.title}
+              fill
+              className="object-contain p-2"
+              onError={handleImageError}
+            />
+          )}
         </div>
       </div>
     );
@@ -380,15 +389,21 @@ export function PaperCard({ paper }: PaperCardProps) {
             </div>
           </div>
 
-          {/* Image shown when not hovered */}
+          {/* Image or Summary shown when not hovered */}
           <div className="relative w-full h-[12rem] flex items-center justify-center">
-            <Image
-              src={paper.thumbnail_url || "/placeholder.svg"}
-              alt={paper.title}
-              fill
-              className="object-contain p-2"
-              onError={handleImageError}
-            />
+            {showSummaryInsteadOfImage ? (
+              <div className="p-4 text-sm text-gray-600 overflow-y-auto h-full scrollbar-hide">
+                {tldr}
+              </div>
+            ) : (
+              <Image
+                src={paper.thumbnail_url || "/placeholder.svg"}
+                alt={paper.title}
+                fill
+                className="object-contain p-2"
+                onError={handleImageError}
+              />
+            )}
           </div>
         </>
       )}

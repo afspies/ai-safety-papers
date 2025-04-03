@@ -16,7 +16,7 @@ export default async function Home() {
             AI Safety Papers
           </h1>
           <p className="text-xl text-gray-600 text-center max-w-3xl mx-auto">
-            A collection of important research papers on AI safety and alignment
+          A curated selection of research papers on AI safety and Alignment
           </p>
         </div>
       </div>
