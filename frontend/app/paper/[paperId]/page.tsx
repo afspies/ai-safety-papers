@@ -26,7 +26,7 @@ export async function generateMetadata(
   parent: ResolvingMetadata
 ): Promise<Metadata> {
   const paperId = params.paperId
-  const siteUrl = "https://aisafetypapers.org" // Your site URL
+  const siteUrl = "https://www.aisafetypapers.org" // Your site URL
 
   try {
     const paper = await getPaperById(paperId)
