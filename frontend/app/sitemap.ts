@@ -1,7 +1,7 @@
 import { MetadataRoute } from 'next'
 import { getAllPapers } from '@/lib/api' // Assuming this function exists
 
-const siteUrl = 'https://papers.afspies.com'
+const siteUrl = 'https://aisafetypapers.org'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // Fetch all papers to generate routes
