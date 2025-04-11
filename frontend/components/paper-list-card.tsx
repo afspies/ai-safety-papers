@@ -16,7 +16,7 @@ import {
   useState,
 } from "react";
 
-// Create context for tracking global hover state
+// Reuse the same HoverContext from PaperCard to maintain consistent behavior
 const HoverContext = createContext<{
   hoveredId: string | null;
   animatingId: string | null;
@@ -42,20 +42,17 @@ export function PaperCardProvider({ children }: { children: React.ReactNode }) {
   );
 }
 
-interface PaperCardProps {
+interface PaperListCardProps {
   paper: PaperSummary;
 }
 
-export function PaperCard({ paper }: PaperCardProps) {
+export function PaperListCard({ paper }: PaperListCardProps) {
   const router = useRouter();
   const [isHovered, setIsHovered] = useState(false);
   const [isAnimating, setIsAnimating] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
-  const [showTopShadow, setShowTopShadow] = useState(false);
-  const [showBottomShadow, setShowBottomShadow] = useState(true);
   const [imageError, setImageError] = useState(false);
-  const contentRef = useRef<HTMLDivElement>(null);
   const cardRef = useRef<HTMLDivElement>(null);
   const hoverTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const searchParams = useSearchParams();
@@ -94,87 +91,6 @@ export function PaperCard({ paper }: PaperCardProps) {
     };
   }, []);
 
-  // Add click outside handler for mobile
-  useEffect(() => {
-    if (!isMobile || !isHovered) return;
-
-    // Function to handle clicks outside the card
-    const handleClickOutside = (event: MouseEvent | any) => {
-      if (cardRef.current && !cardRef.current.contains(event.target)) {
-        // Reset states when clicking outside
-        setIsAnimating(false);
-        setIsHovered(false);
-        if (hoverContext) {
-          hoverContext.setAnimatingId(null);
-          hoverContext.setHoveredId(null);
-        }
-      }
-    };
-
-    // Add global event listener
-    document.addEventListener("mousedown", handleClickOutside);
-    document.addEventListener("touchstart", handleClickOutside);
-
-    // Set up intersection observer for mobile to close expanded view when scrolling away
-    if (cardRef.current) {
-      const options = {
-        root: null,
-        rootMargin: "0px",
-        threshold: 0.7, // Card must be 70% visible
-      };
-
-      const handleIntersection = (entries: IntersectionObserverEntry[]) => {
-        const entry = entries[0];
-
-        // If card scrolls out of view while expanded, collapse it
-        if (!entry.isIntersecting && isHovered) {
-          setIsAnimating(false);
-          setIsHovered(false);
-          if (hoverContext) {
-            hoverContext.setAnimatingId(null);
-            hoverContext.setHoveredId(null);
-          }
-        }
-      };
-
-      const observer = new IntersectionObserver(handleIntersection, options);
-      observer.observe(cardRef.current);
-
-      return () => {
-        document.removeEventListener("mousedown", handleClickOutside);
-        document.removeEventListener("touchstart", handleClickOutside);
-        observer.disconnect();
-      };
-    }
-
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-      document.removeEventListener("touchstart", handleClickOutside);
-    };
-  }, [isMobile, isHovered, hoverContext, paper.uid]);
-
-  // Handle scroll shadows
-  const handleScroll = () => {
-    if (!contentRef.current) return;
-
-    const { scrollTop, scrollHeight, clientHeight } = contentRef.current;
-    setShowTopShadow(scrollTop > 10);
-    setShowBottomShadow(scrollTop + clientHeight < scrollHeight - 10);
-  };
-
-  useEffect(() => {
-    if (contentRef.current) {
-      handleScroll();
-      contentRef.current.addEventListener("scroll", handleScroll);
-    }
-
-    return () => {
-      if (contentRef.current) {
-        contentRef.current.removeEventListener("scroll", handleScroll);
-      }
-    };
-  }, [isHovered, imageError]);
-
   // Handle image error
   const handleImageError = () => {
     setImageError(true);
@@ -196,7 +112,7 @@ export function PaperCard({ paper }: PaperCardProps) {
       if (hoverContext) {
         hoverContext.setHoveredId(paper.uid);
       }
-    }, 1000); // 1 second delay
+    }, 200); // 200ms delay (shorter than grid view for better UX)
   };
 
   const handleMouseLeave = () => {
@@ -220,25 +136,8 @@ export function PaperCard({ paper }: PaperCardProps) {
   // Handle card click for mobile
   const handleCardClick = (e: MouseEvent) => {
     if (!isMobile) return;
-
     e.preventDefault(); // Prevent default Link behavior
-
-    if (isHovered) {
-      // If already expanded, navigate to the paper page
-      router.push(`/paper/${paper.uid}`);
-    } else {
-      // If not expanded, toggle to expanded view
-      setIsAnimating(true);
-      if (hoverContext) {
-        hoverContext.setAnimatingId(paper.uid);
-      }
-
-      // Immediately show expanded view on mobile (no animation delay)
-      setIsHovered(true);
-      if (hoverContext) {
-        hoverContext.setHoveredId(paper.uid);
-      }
-    }
+    router.push(`/paper/${paper.uid}`);
   };
 
   // Determine card states based on global context
@@ -252,7 +151,7 @@ export function PaperCard({ paper }: PaperCardProps) {
   // Get summary text, falling back to abstract if tldr is not available
   const summaryText = paper.tldr || paper.abstract || "";
 
-  // Create highlighted versions of title, authors, and tldr if search is active
+  // Create highlighted versions of title, authors, and summary if search is active
   const title = searchQuery ? (
     <span
       dangerouslySetInnerHTML={{
@@ -284,15 +183,15 @@ export function PaperCard({ paper }: PaperCardProps) {
   );
 
   // Condition to check if we should show the summary instead of the image
-  const showSummaryInsteadOfImage = !paper.thumbnail_url || imageError;
+  const hasNoThumbnail = !paper.thumbnail_url || imageError;
 
   if (!isMounted) {
     return (
       <div
         className={cn(
-          "bg-white card-radius shadow-sm border border-gray-100 overflow-hidden relative"
+          "bg-white card-radius shadow-sm border border-gray-100 overflow-hidden relative flex"
         )}
-        style={{ height: "18rem" }}
+        style={{ height: "12rem" }}
       >
         {/* Badge for highlighted papers */}
         {paper.highlight && !highlightFilter && (
@@ -302,37 +201,80 @@ export function PaperCard({ paper }: PaperCardProps) {
             </Badge>
           </div>
         )}
-        <div className="p-4 pb-3 relative z-10 border-b border-gray-100 h-[6rem]">
-          <h3 className="text-lg font-heading font-semibold line-clamp-2 mb-1 leading-tight">
-            {title}
-          </h3>
-          <div className="flex justify-between items-center">
-            <p className="text-sm text-gray-600 line-clamp-1">{authors}</p>
-            {formattedDate && (
-              <span className="text-xs text-gray-500 ml-2 whitespace-nowrap">
-                {formattedDate}
-              </span>
+        
+        {/* Layout with or without thumbnail */}
+        {!hasNoThumbnail ? (
+          <>
+            {/* Thumbnail area - 40% width when thumbnail exists */}
+            <div className="w-2/5 relative border-r border-gray-100">
+              <div className="relative w-full h-full">
+                <Image
+                  src={paper.thumbnail_url || "/placeholder.svg"}
+                  alt={paper.title}
+                  fill
+                  className="object-contain p-2"
+                  onError={handleImageError}
+                />
+              </div>
+            </div>
+            
+            {/* Content area - 60% width when thumbnail exists */}
+            <div className="w-3/5 relative">
+              <div 
+                className={`absolute inset-0 p-4 ${isHovered ? 'overflow-y-auto scrollbar-hide' : 'overflow-hidden'}`}
+              >
+                <h3 className={`text-lg font-heading font-semibold mb-1 leading-tight ${!isHovered ? 'line-clamp-2' : ''}`}>
+                  {title}
+                </h3>
+                <div className="flex justify-between items-center mb-2">
+                  <p className={`text-sm text-gray-600 ${!isHovered ? 'line-clamp-1' : ''}`}>{authors}</p>
+                  {formattedDate && (
+                    <span className="text-xs text-gray-500 ml-2 whitespace-nowrap">
+                      {formattedDate}
+                    </span>
+                  )}
+                </div>
+                
+                <p className={`text-sm text-gray-600 ${!isHovered ? 'line-clamp-3' : ''}`}>{summary}</p>
+              </div>
+              
+              {isHovered && (
+                <>
+                  <div className="absolute top-0 left-0 right-0 h-4 bg-gradient-to-b from-white to-transparent pointer-events-none opacity-75 z-10" />
+                  <div className="absolute bottom-0 left-0 right-0 h-4 bg-gradient-to-t from-white to-transparent pointer-events-none opacity-75 z-10" />
+                </>
+              )}
+            </div>
+          </>
+        ) : (
+          /* Full width content when no thumbnail */
+          <div className="w-full relative">
+            <div 
+              className={`absolute inset-0 p-4 ${isHovered ? 'overflow-y-auto scrollbar-hide' : 'overflow-hidden'}`}
+            >
+              <h3 className={`text-lg font-heading font-semibold mb-1 leading-tight ${!isHovered ? 'line-clamp-2' : ''}`}>
+                {title}
+              </h3>
+              <div className="flex justify-between items-center mb-2">
+                <p className={`text-sm text-gray-600 ${!isHovered ? 'line-clamp-1' : ''}`}>{authors}</p>
+                {formattedDate && (
+                  <span className="text-xs text-gray-500 ml-2 whitespace-nowrap">
+                    {formattedDate}
+                  </span>
+                )}
+              </div>
+              
+              <p className={`text-sm text-gray-600 ${!isHovered ? 'line-clamp-5' : ''}`}>{summary}</p>
+            </div>
+            
+            {isHovered && (
+              <>
+                <div className="absolute top-0 left-0 right-0 h-4 bg-gradient-to-b from-white to-transparent pointer-events-none opacity-75 z-10" />
+                <div className="absolute bottom-0 left-0 right-0 h-4 bg-gradient-to-t from-white to-transparent pointer-events-none opacity-75 z-10" />
+              </>
             )}
           </div>
-        </div>
-        <div
-          className="relative flex-1 w-full flex items-center justify-center z-10"
-          style={{ height: "calc(100% - 6rem)" }}
-        >
-          {showSummaryInsteadOfImage ? (
-            <div className="p-4 text-sm text-gray-600 overflow-y-auto h-full">
-              {summary}
-            </div>
-          ) : (
-            <Image
-              src={paper.thumbnail_url || "/placeholder.svg"}
-              alt={paper.title}
-              fill
-              className="object-contain p-2"
-              onError={handleImageError}
-            />
-          )}
-        </div>
+        )}
       </div>
     );
   }
@@ -342,7 +284,7 @@ export function PaperCard({ paper }: PaperCardProps) {
     <div
       ref={cardRef}
       className={cn(
-        "bg-white card-radius overflow-hidden relative",
+        "bg-white card-radius overflow-hidden relative flex",
         // Border and shadow animation states
         isHovered || isAnimating
           ? "border border-blue-400"
@@ -359,46 +301,28 @@ export function PaperCard({ paper }: PaperCardProps) {
         isMobile ? "tap-effect" : ""
       )}
       style={{
-        height: "18rem",
+        height: "12rem",
         transition:
           "border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out",
       }}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      {/* Badge for highlighted papers - only shown when not hovered and not filtered */}
-      {paper.highlight && !isHovered && !highlightFilter && (
-        <div className="absolute bottom-2 right-2 z-30">
+      {/* Badge for highlighted papers */}
+      {paper.highlight && !highlightFilter && (
+        <div className="absolute bottom-2 right-2 z-20">
           <Badge className="bg-blue-500/80 hover:bg-blue-500/90 text-white">
             Highlighted
           </Badge>
         </div>
       )}
-
-      {!isHovered && (
+      
+      {/* Layout with or without thumbnail */}
+      {!hasNoThumbnail ? (
         <>
-          {/* Non-hovered state: Title section with truncated title */}
-          <div className="p-4 pb-3 relative z-10 border-b border-gray-100 h-[6rem]">
-            <h3 className="text-lg font-heading font-semibold line-clamp-2 mb-1 leading-tight">
-              {title}
-            </h3>
-            <div className="flex justify-between items-center">
-              <p className="text-sm text-gray-600 line-clamp-1">{authors}</p>
-              {formattedDate && (
-                <span className="text-xs text-gray-500 ml-2 whitespace-nowrap">
-                  {formattedDate}
-                </span>
-              )}
-            </div>
-          </div>
-
-          {/* Image or Summary shown when not hovered */}
-          <div className="relative w-full h-[12rem] flex items-center justify-center">
-            {showSummaryInsteadOfImage ? (
-              <div className="p-4 text-sm text-gray-600 overflow-y-auto h-full scrollbar-hide">
-                {summary}
-              </div>
-            ) : (
+          {/* Thumbnail area - 40% width when thumbnail exists */}
+          <div className="w-2/5 relative border-r border-gray-100">
+            <div className="relative w-full h-full">
               <Image
                 src={paper.thumbnail_url || "/placeholder.svg"}
                 alt={paper.title}
@@ -406,57 +330,64 @@ export function PaperCard({ paper }: PaperCardProps) {
                 className="object-contain p-2"
                 onError={handleImageError}
               />
+            </div>
+          </div>
+          
+          {/* Content area - 60% width when thumbnail exists */}
+          <div className="w-3/5 relative">
+            <div 
+              className={`absolute inset-0 p-4 ${isHovered ? 'overflow-y-auto scrollbar-hide' : 'overflow-hidden'}`}
+            >
+              <h3 className={`text-lg font-heading font-semibold mb-1 leading-tight ${!isHovered ? 'line-clamp-2' : ''}`}>
+                {title}
+              </h3>
+              <div className="flex justify-between items-center mb-2">
+                <p className={`text-sm text-gray-600 ${!isHovered ? 'line-clamp-1' : ''}`}>{authors}</p>
+                {formattedDate && (
+                  <span className="text-xs text-gray-500 ml-2 whitespace-nowrap">
+                    {formattedDate}
+                  </span>
+                )}
+              </div>
+              
+              <p className={`text-sm text-gray-600 ${!isHovered ? 'line-clamp-3' : ''}`}>{summary}</p>
+            </div>
+            
+            {isHovered && (
+              <>
+                <div className="absolute top-0 left-0 right-0 h-4 bg-gradient-to-b from-white to-transparent pointer-events-none opacity-75 z-10" />
+                <div className="absolute bottom-0 left-0 right-0 h-4 bg-gradient-to-t from-white to-transparent pointer-events-none opacity-75 z-10" />
+              </>
             )}
           </div>
         </>
-      )}
-
-      {/* Scrollable content shown when hovered */}
-      {isHovered && (
-        <div className="relative h-full w-full overflow-hidden">
-          <div
-            ref={contentRef}
-            className="absolute inset-0 p-4 overflow-y-auto scrollbar-hide bg-white"
-            onScroll={handleScroll}
+      ) : (
+        /* Full width content when no thumbnail */
+        <div className="w-full relative">
+          <div 
+            className={`absolute inset-0 p-4 ${isHovered ? 'overflow-y-auto scrollbar-hide' : 'overflow-hidden'}`}
           >
-            {/* Full title */}
-            <h3 className="text-lg font-heading font-semibold mb-1 leading-tight">
+            <h3 className={`text-lg font-heading font-semibold mb-1 leading-tight ${!isHovered ? 'line-clamp-2' : ''}`}>
               {title}
             </h3>
-
-            {/* Authors and date */}
-            <div className="flex justify-between items-center mb-3">
-              <p className="text-sm text-gray-600">{authors}</p>
+            <div className="flex justify-between items-center mb-2">
+              <p className={`text-sm text-gray-600 ${!isHovered ? 'line-clamp-1' : ''}`}>{authors}</p>
               {formattedDate && (
                 <span className="text-xs text-gray-500 ml-2 whitespace-nowrap">
                   {formattedDate}
                 </span>
               )}
             </div>
-
-            {/* Divider */}
-            <div className="border-t border-blue-100 mb-3"></div>
-
-            {/* Summary */}
-            <p className="text-sm">{summary}</p>
+            
+            <p className={`text-sm text-gray-600 ${!isHovered ? 'line-clamp-5' : ''}`}>{summary}</p>
           </div>
-
-          {/* Top shadow for scroll indication */}
-          {showTopShadow && (
-            <div className="absolute top-0 left-0 right-0 h-6 bg-gradient-to-b from-white to-transparent pointer-events-none z-10" />
+          
+          {isHovered && (
+            <>
+              <div className="absolute top-0 left-0 right-0 h-4 bg-gradient-to-b from-white to-transparent pointer-events-none opacity-75 z-10" />
+              <div className="absolute bottom-0 left-0 right-0 h-4 bg-gradient-to-t from-white to-transparent pointer-events-none opacity-75 z-10" />
+            </>
           )}
-
-          {/* Bottom shadow for scroll indication */}
-          {showBottomShadow && (
-            <div className="absolute bottom-0 left-0 right-0 h-6 bg-gradient-to-t from-white to-transparent pointer-events-none z-10" />
-          )}
-        </div>
-      )}
-
-      {/* Add mobile tap instruction if in non-expanded view */}
-      {isMobile && !isHovered && (
-        <div className="absolute bottom-3 left-0 right-0 text-xs text-center text-gray-500">
-          Tap to expand
         </div>
       )}
 
@@ -489,17 +420,28 @@ export function PaperCard({ paper }: PaperCardProps) {
         }
 
         .animate-grow-shadow {
-          animation: grow-shadow 1s ease-in-out forwards;
+          animation: grow-shadow 0.2s ease-in-out forwards;
         }
 
         .animate-fade-out {
-          animation: fade-out 1s ease-in-out forwards;
+          animation: fade-out 0.2s ease-in-out forwards;
         }
 
         /* Mobile tap effect */
         .tap-effect:active {
           transform: scale(0.98);
           transition: transform 0.1s;
+        }
+        
+        /* Hide scrollbar for all browsers */
+        .scrollbar-hide {
+          -ms-overflow-style: none;  /* IE and Edge */
+          scrollbar-width: none;  /* Firefox */
+        }
+        
+        /* Hide scrollbar for Chrome, Safari and Opera */
+        .scrollbar-hide::-webkit-scrollbar {
+          display: none;
         }
       `}</style>
     </div>
@@ -515,4 +457,4 @@ export function PaperCard({ paper }: PaperCardProps) {
       {cardContent}
     </Link>
   );
-}
+} 

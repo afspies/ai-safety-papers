@@ -4,6 +4,7 @@ import SearchDesktop, { SearchMobile } from "@/components/search";
 import { getAllPapers } from "@/lib/api";
 import { Suspense } from "react";
 import FilterToggle from "../components/filter-toggle";
+import ViewToggleWrapper from "../components/view-toggle-wrapper";
 
 export default async function Home() {
   const papers = await getAllPapers();
@@ -31,7 +32,9 @@ export default async function Home() {
                 <h2 className="text-2xl font-heading font-semibold text-gray-900">
                   Papers
                 </h2>
-                <FilterToggle />
+                <div className="flex items-center space-x-3">
+                  <FilterToggle />
+                </div>
               </div>
               <div className="w-full">
                 <SearchMobile />
@@ -45,6 +48,7 @@ export default async function Home() {
               </h2>
               <div className="flex items-center space-x-4">
                 <SearchDesktop />
+                <ViewToggleWrapper />
                 <FilterToggle />
               </div>
             </div>
