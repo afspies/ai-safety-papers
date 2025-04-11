@@ -55,14 +55,14 @@ export default function ViewToggle({ onChange, view }: ViewToggleProps) {
   }
 
   return (
-    <div className="flex items-center rounded-lg border border-gray-200 p-1">
+    <div className="flex items-center card-radius border border-gray-300 py-0.5 px-1">
       <button
         onClick={handleGridClick}
         className={cn(
-          "p-1.5 rounded-md transition-colors",
+          "p-1 transition-colors",
           view === "grid"
-            ? "bg-blue-50 text-blue-600 border-blue-200 border"
-            : "text-gray-600 hover:text-gray-800 hover:bg-gray-50"
+            ? "bg-blue-50 text-blue-600 button-radius"
+            : "text-gray-600 hover:text-gray-800 hover:bg-gray-50 button-radius"
         )}
         aria-label="Grid view"
         title="Grid view"
@@ -72,10 +72,10 @@ export default function ViewToggle({ onChange, view }: ViewToggleProps) {
       <button
         onClick={handleListClick}
         className={cn(
-          "p-1.5 rounded-md transition-colors",
+          "p-1 transition-colors",
           view === "list"
-            ? "bg-blue-50 text-blue-600 border-blue-200 border"
-            : "text-gray-600 hover:text-gray-800 hover:bg-gray-50"
+            ? "bg-blue-50 text-blue-600 button-radius"
+            : "text-gray-600 hover:text-gray-800 hover:bg-gray-50 button-radius"
         )}
         aria-label="List view"
         title="List view"

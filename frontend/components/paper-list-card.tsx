@@ -189,7 +189,7 @@ export function PaperListCard({ paper }: PaperListCardProps) {
     return (
       <div
         className={cn(
-          "bg-white card-radius shadow-sm border border-gray-100 overflow-hidden relative flex"
+          "bg-white card-radius shadow-sm border border-gray-300 overflow-hidden relative flex"
         )}
         style={{ height: "12rem" }}
       >
@@ -206,7 +206,7 @@ export function PaperListCard({ paper }: PaperListCardProps) {
         {!hasNoThumbnail ? (
           <>
             {/* Thumbnail area - 40% width when thumbnail exists */}
-            <div className="w-2/5 relative border-r border-gray-100">
+            <div className="w-2/5 relative border-r border-gray-200">
               <div className="relative w-full h-full">
                 <Image
                   src={paper.thumbnail_url || "/placeholder.svg"}
@@ -288,7 +288,7 @@ export function PaperListCard({ paper }: PaperListCardProps) {
         // Border and shadow animation states
         isHovered || isAnimating
           ? "border border-blue-400"
-          : "border border-gray-100",
+          : "border border-gray-300",
         // Shadow animation states
         isHovered
           ? "card-glow z-20"
@@ -321,7 +321,7 @@ export function PaperListCard({ paper }: PaperListCardProps) {
       {!hasNoThumbnail ? (
         <>
           {/* Thumbnail area - 40% width when thumbnail exists */}
-          <div className="w-2/5 relative border-r border-gray-100">
+          <div className="w-2/5 relative border-r border-gray-200">
             <div className="relative w-full h-full">
               <Image
                 src={paper.thumbnail_url || "/placeholder.svg"}

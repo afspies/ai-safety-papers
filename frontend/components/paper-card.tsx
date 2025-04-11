@@ -290,7 +290,7 @@ export function PaperCard({ paper }: PaperCardProps) {
     return (
       <div
         className={cn(
-          "bg-white card-radius shadow-sm border border-gray-100 overflow-hidden relative"
+          "bg-white card-radius shadow-sm border border-gray-300 overflow-hidden relative"
         )}
         style={{ height: "18rem" }}
       >
@@ -302,7 +302,7 @@ export function PaperCard({ paper }: PaperCardProps) {
             </Badge>
           </div>
         )}
-        <div className="p-4 pb-3 relative z-10 border-b border-gray-100 h-[6rem]">
+        <div className="p-4 pb-3 relative z-10 border-b border-gray-200 h-[6rem]">
           <h3 className="text-lg font-heading font-semibold line-clamp-2 mb-1 leading-tight">
             {title}
           </h3>
@@ -346,7 +346,7 @@ export function PaperCard({ paper }: PaperCardProps) {
         // Border and shadow animation states
         isHovered || isAnimating
           ? "border border-blue-400"
-          : "border border-gray-100",
+          : "border border-gray-300",
         // Shadow animation states
         isHovered
           ? "card-glow z-20"
@@ -378,7 +378,7 @@ export function PaperCard({ paper }: PaperCardProps) {
       {!isHovered && (
         <>
           {/* Non-hovered state: Title section with truncated title */}
-          <div className="p-4 pb-3 relative z-10 border-b border-gray-100 h-[6rem]">
+          <div className="p-4 pb-3 relative z-10 border-b border-gray-200 h-[6rem]">
             <h3 className="text-lg font-heading font-semibold line-clamp-2 mb-1 leading-tight">
               {title}
             </h3>
